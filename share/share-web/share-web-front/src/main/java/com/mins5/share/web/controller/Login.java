@@ -26,7 +26,7 @@ public class Login {
 	public void login(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("-------------------");
 		System.out.println(userService);
-		System.out.println("-------------------");
+		System.out.println("--------test-----------");
 	}
 
 }
