@@ -1,7 +1,7 @@
 package com.mins5.share.common.exception;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-3-1
  */
 public class TransactionException extends RuntimeException {

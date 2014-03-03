@@ -1,7 +1,7 @@
 package com.mins5.share.common.service;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-28
  * @param <T>
  */
