@@ -15,7 +15,7 @@ import com.mins5.share.admin.service.AdminService;
 import com.mins5.share.user.service.UserService;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-3-2
  */
 @Controller

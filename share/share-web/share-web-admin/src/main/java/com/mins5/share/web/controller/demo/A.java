@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-3-3
  */
 @Controller
