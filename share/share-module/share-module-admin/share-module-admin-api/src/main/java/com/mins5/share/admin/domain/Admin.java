@@ -5,7 +5,7 @@ import java.util.Date;
 import com.mins5.share.common.domain.DomainObject;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-27
  */
 public class Admin extends DomainObject {
