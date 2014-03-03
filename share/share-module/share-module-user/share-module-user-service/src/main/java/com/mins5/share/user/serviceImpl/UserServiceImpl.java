@@ -17,7 +17,7 @@ import com.mins5.share.user.domain.User;
 import com.mins5.share.user.service.UserService;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-3-1
  */
 @Service

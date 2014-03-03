@@ -9,7 +9,7 @@ import com.mins5.share.common.dao.CrudDao;
 import com.mins5.share.user.domain.User;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-3-1
  */
 @Service
