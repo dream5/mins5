@@ -3,7 +3,7 @@ package com.mins5.share.common.service;
 import java.io.Serializable;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-28
  */
 public final class VOID implements Serializable {

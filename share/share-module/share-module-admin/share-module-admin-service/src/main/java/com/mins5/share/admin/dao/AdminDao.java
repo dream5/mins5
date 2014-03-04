@@ -6,7 +6,7 @@ import com.mins5.share.admin.domain.Admin;
 import com.mins5.share.common.dao.CrudDao;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-27
  */
 @Service

@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-28
  */
 public abstract class DateUtils {

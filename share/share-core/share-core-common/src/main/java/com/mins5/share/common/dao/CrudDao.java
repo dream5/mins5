@@ -3,7 +3,7 @@ package com.mins5.share.common.dao;
 import com.mins5.share.common.domain.DomainObject;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-28
  * @param <ID>
  * @param <E>

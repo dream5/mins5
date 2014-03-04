@@ -11,7 +11,7 @@ import org.apache.ibatis.type.JdbcType;
 import com.mins5.share.common.enums.GENDER;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-3-1
  */
 public class GenderTypeHandler extends BaseTypeHandler<GENDER> {

@@ -12,7 +12,7 @@ import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-27
  */
 @Service

@@ -6,7 +6,7 @@ import com.mins5.share.common.domain.DomainObject;
 import com.mins5.share.common.enums.GENDER;
 
 /**
- * @author mins5
+ * @author zhoutian
  * @since 2014-2-28
  */
 public class User extends DomainObject {

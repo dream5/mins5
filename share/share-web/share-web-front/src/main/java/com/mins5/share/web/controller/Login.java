@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mins5.share.user.service.UserService;
 
 /**
- * @author mins5
- *
+ * @author zhoutian
+ * @since 2014-3-4
  */
 @Controller
 @Scope("prototype")
