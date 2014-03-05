@@ -24,18 +24,38 @@ import com.mins5.share.common.enums.GENDER;
 @RequestMapping(value = "/a")
 public class A {
 
+	/**
+	 *  跳转到指定页面
+	 * @since 2014-3-6
+	 * @return
+	 */
 	@RequestMapping(value = "/a1")
 	public String a1() {
 		System.out.println("A.a1()");
 		return "demo/a1";
 	}
 
+	/**
+	 * 制定get方式访问
+	 * @since 2014-3-6
+	 * @return
+	 */
 	@RequestMapping(value = "/a2", method = RequestMethod.GET)
 	public String a2() {
 		System.out.println("A.a2()");
 		return "demo/a2";
 	}
 
+	/**
+	 * 获取request、response、session和页面参数方式
+	 * @since 2014-3-6
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@RequestMapping(value = "/a3")
 	public String a3(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, String username, String password) {
@@ -45,6 +65,12 @@ public class A {
 		return "demo/a3";
 	}
 	
+	/**
+	 * 以对象形式获取参数
+	 * @since 2014-3-6
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "/a4")
 	public String a4(TestUser user) {
 		System.out.println("A.a4()");
@@ -53,8 +79,15 @@ public class A {
 		return "demo/a4";
 	}
 
+	/**
+	 * 返回数据到页面
+	 * @since 2014-3-6
+	 * @return
+	 */
 	@RequestMapping(value = "/a5")
 	public ModelAndView a5() {
+		System.out.println("A.a5()");
+		
 		ModelAndView mav = new ModelAndView();
 		
 		TestUser user = new TestUser();
@@ -70,5 +103,27 @@ public class A {
 		mav.addObject("admin", admin);
 		mav.setViewName("demo/a5");
 		return mav;
+	}
+	
+	/**
+	 * 重定向
+	 * @since 2014-3-6
+	 * @return
+	 */
+	@RequestMapping(value = "/a6")
+	public String a6() {
+		System.out.println("A.a6()");
+		return "redirect:a1.html";
+	}
+	
+	/**
+	 * 转发
+	 * @since 2014-3-6
+	 * @return
+	 */
+	@RequestMapping(value = "/a7")
+	public String a7() {
+		System.out.println("A.a7()");
+		return "forward:a1.html";
 	}
 }

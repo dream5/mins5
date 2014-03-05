@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<a href="http://localhost:8080/share-web-admin/a/a1.html">A.a1() - GET</a><br/>
+	<a href="http://localhost:8080/share-web-admin/a/a1.html">A.a1() - GET</a>
 	<form action="http://localhost:8080/share-web-admin/a/a1.html" method="post">
 		<input type="submit" value="A.a1() - POST" />
 	</form>
@@ -29,5 +29,9 @@
 		<input type="submit" value="A.a4() - POST" />
 	</form>
 	<a href="http://localhost:8080/share-web-admin/a/a5.html?username=admin&password=admin123">A.a5() - GET</a>
+	<br/>
+	<a href="http://localhost:8080/share-web-admin/a/a6.html">A.a6() - GET</a>
+	<br/>
+	<a href="http://localhost:8080/share-web-admin/a/a7.html">A.a7() - GET</a>
 </body>
 </html>
