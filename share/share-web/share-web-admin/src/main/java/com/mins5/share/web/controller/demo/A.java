@@ -50,7 +50,6 @@ public class A {
 		System.out.println("A.a4()");
 		System.out.println("user.getUsername() = " + user.getUsername());
 		System.out.println("user.getPassword() = " + user.getPassword());
-		System.out.println(user.getGender());
 		return "demo/a4";
 	}
 
