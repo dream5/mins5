@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.mins5.share.common.enums.GENDER;
 
 /**
  * @author zhoutian
@@ -51,4 +54,22 @@ public class A {
 		return "demo/a4";
 	}
 
+	@RequestMapping(value = "/a5")
+	public ModelAndView a5() {
+		ModelAndView mav = new ModelAndView();
+		
+		TestUser user = new TestUser();
+		user.setUsername("张三");
+		user.setPassword("111111");
+		user.setGender(GENDER.SECRET);
+		
+		TestAdmin admin = new TestAdmin();
+		admin.setUsername("李四");
+		admin.setPassword("222222");
+		
+		mav.addObject("user", user);
+		mav.addObject("admin", admin);
+		mav.setViewName("demo/a5");
+		return mav;
+	}
 }
