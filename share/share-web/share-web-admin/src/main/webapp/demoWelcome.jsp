@@ -28,5 +28,6 @@
 		<input type="hidden" name="password" value="111111" />
 		<input type="submit" value="A.a4() - POST" />
 	</form>
+	<a href="http://localhost:8080/share-web-admin/a/a5.html?username=admin&password=admin123">A.a5() - GET</a>
 </body>
 </html>
