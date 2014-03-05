@@ -15,7 +15,7 @@ public abstract class JsonUtils {
 
 	private static ObjectMapper objectMapper = new ObjectMapper();
 
-	public static String writeObject(Object obj) {
+	public static String writeValue(Object obj) {
 		if (obj == null) {
 			return null;
 		}
