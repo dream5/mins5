@@ -36,7 +36,7 @@ public class A {
 	}
 
 	/**
-	 * 制定get方式访问
+	 * 指定get方式访问
 	 * @since 2014-3-6
 	 * @return
 	 */
