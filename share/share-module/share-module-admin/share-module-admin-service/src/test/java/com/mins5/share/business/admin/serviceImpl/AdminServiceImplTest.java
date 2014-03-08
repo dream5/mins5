@@ -1,4 +1,4 @@
-package com.mins5.share.admin.serviceImpl;
+package com.mins5.share.business.admin.serviceImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mins5.share.admin.domain.Admin;
-import com.mins5.share.admin.service.AdminService;
+import com.mins5.share.business.admin.domain.Admin;
+import com.mins5.share.business.admin.service.AdminService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 
