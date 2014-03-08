@@ -33,6 +33,14 @@
   		<groupId>com.mins5</groupId>
   		<artifactId>share-module-user-service</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>com.mins5</groupId>
+  		<artifactId>share-module-article-api</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.mins5</groupId>
+  		<artifactId>share-module-article-service</artifactId>
+  	</dependency>
 	
 	<dependency>
   		<groupId>javax.servlet</groupId>
