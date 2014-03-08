@@ -1,4 +1,4 @@
-package com.mins5.share.user.domain;
+package com.mins5.share.business.user.domain;
 
 import java.util.Date;
 

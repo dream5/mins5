@@ -1,11 +1,11 @@
-package com.mins5.share.user.service;
+package com.mins5.share.business.user.service;
 
 import java.util.List;
 
+import com.mins5.share.business.user.domain.User;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
-import com.mins5.share.user.domain.User;
 
 /**
  * @author zhoutian
