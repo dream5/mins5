@@ -15,13 +15,15 @@ public class User extends DomainObject {
 
 	private Long userId;
 	
-	private String username;
+	private String nickName;
+	
+	private String realName;
 	
 	private String password;
 	
 	private GENDER gender;
 	
-	private Date createDate;
+	private Date createTime;
 
 	public Long getUserId() {
 		return userId;
@@ -31,12 +33,20 @@ public class User extends DomainObject {
 		this.userId = userId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	public String getPassword() {
@@ -55,19 +65,19 @@ public class User extends DomainObject {
 		this.gender = gender;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username
-				+ ", password=" + password + ", gender=" + gender
-				+ ", createDate=" + createDate + "]";
+		return "User [userId=" + userId + ", nickName=" + nickName
+				+ ", realName=" + realName + ", password=" + password
+				+ ", gender=" + gender + ", createTime=" + createTime + "]";
 	}
-	
+
 }

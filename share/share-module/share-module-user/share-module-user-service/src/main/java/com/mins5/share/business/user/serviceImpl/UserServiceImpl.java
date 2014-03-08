@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
 			returnData.setResultData(user);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
+			e.printStackTrace();
 			log.error("service exception", e);
 			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
 		}
@@ -99,15 +100,15 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 
-	public ReturnData<User> findUserByUsernameAndPassword(String username,
+	public ReturnData<User> findUserByNickNameAndPassword(String nickName,
 			String password) {
 		ReturnData<User> returnData = new ReturnData<User>();
 		try {
-			if(username == null || password == null) {
+			if(nickName == null || password == null) {
 				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnData;
 			}
-			User user = userDao.findByUsernameAndPassword(username, password);
+			User user = userDao.findByNickNameAndPassword(nickName, password);
 			returnData.setResultData(user);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
@@ -117,17 +118,17 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 	
-	public ReturnPageData<List<User>> findUserLikeUsername(String username, int currentPage, int onePageSize) {
+	public ReturnPageData<List<User>> findUserLikeNickName(String nickName, int currentPage, int onePageSize) {
 		ReturnPageData<List<User>> returnPageData = new ReturnPageData<List<User>>(currentPage, onePageSize);
 		try {
-			if(username == null) {
+			if(nickName == null) {
 				returnPageData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnPageData;
 			}
 			
-			int totalResults = userDao.findUserCountLikeUsername(username);
+			int totalResults = userDao.findUserCountLikeNickName(nickName);
 			int startRow = returnPageData.getStartRow();
-			List<User> userList = userDao.findUserLikeUsername(username, startRow, onePageSize);
+			List<User> userList = userDao.findUserLikeNickName(nickName, startRow, onePageSize);
 			if(userList == null) {
 				userList = Collections.emptyList();
 			}
@@ -146,7 +147,7 @@ public class UserServiceImpl implements UserService {
 		if(user == null) {
 			return false;
 		}
-		if(user.getUsername() == null) {
+		if(user.getNickName() == null) {
 			return false;
 		}
 		if(user.getPassword() == null) {
@@ -155,7 +156,7 @@ public class UserServiceImpl implements UserService {
 		if(user.getGender() == null) {
 			return false;
 		}
-		if(user.getCreateDate() == null) {
+		if(user.getCreateTime() == null) {
 			return false;
 		}
 		return true;

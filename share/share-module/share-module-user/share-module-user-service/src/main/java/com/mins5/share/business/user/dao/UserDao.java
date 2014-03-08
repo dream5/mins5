@@ -15,9 +15,9 @@ import com.mins5.share.common.dao.CrudDao;
 @Service
 public interface UserDao extends CrudDao<Long, User> {
 
-	User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+	User findByNickNameAndPassword(@Param("nickName") String nickName, @Param("password") String password);
 	
-	int findUserCountLikeUsername(String username);
+	int findUserCountLikeNickName(String nickName);
 	
-	List<User> findUserLikeUsername(@Param("username") String username, @Param("statRow") int statRow, @Param("onePageSize") int onePageSize);
+	List<User> findUserLikeNickName(@Param("nickName") String nickName, @Param("statRow") int statRow, @Param("onePageSize") int onePageSize);
 }

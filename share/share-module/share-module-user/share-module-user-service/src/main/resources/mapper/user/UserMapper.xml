@@ -6,14 +6,15 @@
 
 	<resultMap type="com.mins5.share.business.user.domain.User" id="UserMap">
 		<id property="userId" column="user_id"/>
-		<result property="username" column="username"/>
+		<result property="nickName" column="nick_name"/>
+		<result property="realName" column="real_name"/>
 		<result property="password" column="password"/>
 		<result property="gender" column="gender"/>
-		<result property="createDate" column="create_date"/>
+		<result property="createTime" column="create_time"/>
 	</resultMap>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="userId">
-		insert into user (username, password, gender, create_date) values (#{username}, #{password}, #{gender}, #{createDate})
+		insert into user (nick_name, real_name, password, gender, create_time) values (#{nickName}, #{realName}, #{password}, #{gender}, #{createTime})
 	</insert>
 	
 	<delete id="deleteById" parameterType="long">
@@ -23,10 +24,11 @@
 	<update id="update">
 		update user
 		<set>
-			<if test="username != null">username = #{username},</if>
+			<if test="nickName != null">nick_name = #{nickName},</if>
+			<if test="realName != null">real_name = #{realName},</if>
 			<if test="password != null">password = #{password},</if>
 			<if test="gender != null">gender = #{gender},</if>
-			<if test="createDate != null">create_date = #{createDate},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
 		</set>
 		where user_id = #{userId}
 	</update>
@@ -35,16 +37,16 @@
 		select * from user where user_id = #{userId}
 	</select>
 	
-	<select id="findByUsernameAndPassword" resultMap="UserMap">
-		select * from user where username = #{username} and password = #{password}
+	<select id="findByNickNameAndPassword" resultMap="UserMap">
+		select * from user where nick_name = #{nickName} and password = #{password}
 	</select>
 	
-	<select id="findUserCountLikeUsername" resultType="int">
-		select count(1) from user where username like concat('%', #{username}, '%');
+	<select id="findUserCountLikeNickName" resultType="int">
+		select count(1) from user where nick_name like concat('%', #{nickName}, '%');
 	</select>
 	
-	<select id="findUserLikeUsername" resultMap="UserMap">
-		select * from user where username like concat('%', #{username}, '%');
+	<select id="findUserLikeNickName" resultMap="UserMap">
+		select * from user where nick_name like concat('%', #{nickName}, '%');
 	</select>
 
 </mapper>
