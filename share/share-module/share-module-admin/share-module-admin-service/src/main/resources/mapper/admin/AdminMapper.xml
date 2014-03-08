@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mins5.share.admin.dao.AdminDao">
+<mapper namespace="com.mins5.share.business.admin.dao.AdminDao">
 
-	<resultMap type="com.mins5.share.admin.domain.Admin" id="Admin">
+	<resultMap type="com.mins5.share.business.admin.domain.Admin" id="Admin">
 		<id property="adminId" column="admin_id"/>
 		<result property="username" column="username"/>
 		<result property="password" column="password"/>
