@@ -1,8 +1,8 @@
-package com.mins5.share.admin.dao;
+package com.mins5.share.business.admin.dao;
 
 import org.springframework.stereotype.Service;
 
-import com.mins5.share.admin.domain.Admin;
+import com.mins5.share.business.admin.domain.Admin;
 import com.mins5.share.common.dao.CrudDao;
 
 /**

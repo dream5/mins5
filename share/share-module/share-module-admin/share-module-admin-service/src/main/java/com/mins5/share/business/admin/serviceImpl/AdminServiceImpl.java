@@ -1,13 +1,13 @@
-package com.mins5.share.admin.serviceImpl;
+package com.mins5.share.business.admin.serviceImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mins5.share.admin.dao.AdminDao;
-import com.mins5.share.admin.domain.Admin;
-import com.mins5.share.admin.service.AdminService;
+import com.mins5.share.business.admin.dao.AdminDao;
+import com.mins5.share.business.admin.domain.Admin;
+import com.mins5.share.business.admin.service.AdminService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 
