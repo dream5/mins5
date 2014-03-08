@@ -14,11 +14,13 @@ public class Admin extends DomainObject {
 
 	private Long adminId;
 	
-	private String username;
+	private String nickName;
+	
+	private String realName;
 	
 	private String password;
 	
-	private Date createDate;
+	private Date createTime;
 
 	public Long getAdminId() {
 		return adminId;
@@ -28,12 +30,20 @@ public class Admin extends DomainObject {
 		this.adminId = adminId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	public String getPassword() {
@@ -44,18 +54,19 @@ public class Admin extends DomainObject {
 		this.password = password;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", username=" + username
-				+ ", password=" + password + ", createDate=" + createDate + "]";
+		return "Admin [adminId=" + adminId + ", nickName=" + nickName
+				+ ", realName=" + realName + ", password=" + password
+				+ ", createTime=" + createTime + "]";
 	}
-	
+
 }
