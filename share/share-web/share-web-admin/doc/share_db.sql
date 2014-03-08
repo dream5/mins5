@@ -124,7 +124,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 create table user
 (
    user_id              int not null auto_increment,
-   nickname             varchar(20) not null,
+   nick_name             varchar(20) not null,
    real_name            varchar(20),
    password             varchar(50) not null,
    gender               char(1) not null,
