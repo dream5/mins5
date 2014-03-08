@@ -1,4 +1,4 @@
-package com.mins5.share.user.serviceImpl;
+package com.mins5.share.business.user.serviceImpl;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,13 +8,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mins5.share.business.user.dao.UserDao;
+import com.mins5.share.business.user.domain.User;
+import com.mins5.share.business.user.service.UserService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
-import com.mins5.share.user.dao.UserDao;
-import com.mins5.share.user.domain.User;
-import com.mins5.share.user.service.UserService;
 
 /**
  * @author zhoutian

@@ -1,4 +1,4 @@
-package com.mins5.share.user.typeHanlder;
+package com.mins5.share.business.user.typeHanlder;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

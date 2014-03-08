@@ -1,4 +1,4 @@
-package com.mins5.share.user.serviceImpl;
+package com.mins5.share.business.user.serviceImpl;
 
 import java.util.Date;
 import java.util.List;
@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.mins5.share.business.user.domain.User;
+import com.mins5.share.business.user.service.UserService;
 import com.mins5.share.common.enums.GENDER;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
-import com.mins5.share.user.domain.User;
-import com.mins5.share.user.service.UserService;
 
 /**
  * @author zhoutian

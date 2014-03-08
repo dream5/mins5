@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd">
 	
-	<context:component-scan base-package="com.mins5.share.user.serviceImpl" />
+	<context:component-scan base-package="com.mins5.share.business.user.serviceImpl" />
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
@@ -39,12 +39,12 @@
   	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
   		<property name="dataSource" ref="dataSource" />
   		<property name="mapperLocations" value="classpath*:mapper/**/*.xml" />
-  		<property name="typeAliasesPackage" value="com.mins5.share.user.domain" />
-  		<property name="typeHandlersPackage" value="com.mins5.share.user.typeHanlder"/>
+  		<property name="typeAliasesPackage" value="com.mins5.share.business.user.domain" />
+  		<property name="typeHandlersPackage" value="com.mins5.share.business.user.typeHanlder"/>
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-  		<property name="basePackage" value="com.mins5.share.user.dao" />
+  		<property name="basePackage" value="com.mins5.share.business.user.dao" />
 	</bean>
 	 
 </beans>

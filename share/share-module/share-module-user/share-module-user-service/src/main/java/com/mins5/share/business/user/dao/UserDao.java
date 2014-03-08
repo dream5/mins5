@@ -1,12 +1,12 @@
-package com.mins5.share.user.dao;
+package com.mins5.share.business.user.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import com.mins5.share.business.user.domain.User;
 import com.mins5.share.common.dao.CrudDao;
-import com.mins5.share.user.domain.User;
 
 /**
  * @author zhoutian
