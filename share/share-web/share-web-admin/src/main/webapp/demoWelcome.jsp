@@ -16,13 +16,13 @@
 	<form action="http://localhost:8080/share-web-admin/a/a2.mins" method="post">
 		<input type="submit" value="A.a2() - POST" />
 	</form>
-	<a href="http://localhost:8080/share-web-admin/a/a3.html?username=admin&password=111111">A.a3() - GET</a>
+	<a href="http://localhost:8080/share-web-admin/a/a3.mins?username=admin&password=111111">A.a3() - GET</a>
 	<form action="http://localhost:8080/share-web-admin/a/a3.mins" method="post">
 		<input type="hidden" name="username" value="张三" />
 		<input type="hidden" name="password" value="111111" />
 		<input type="submit" value="A.a3() - POST" />
 	</form>
-	<a href="http://localhost:8080/share-web-admin/a/a4.html?username=admin&password=111111">A.a4() - GET</a>
+	<a href="http://localhost:8080/share-web-admin/a/a4.mins?username=admin&password=111111">A.a4() - GET</a>
 	<form action="http://localhost:8080/share-web-admin/a/a4.mins" method="post">
 		<input type="hidden" name="username" value="张三" />
 		<input type="hidden" name="password" value="111111" />
