@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mins5.share.admin.service.AdminService;
-import com.mins5.share.user.service.UserService;
+import com.mins5.share.business.admin.service.AdminService;
+import com.mins5.share.business.user.service.UserService;
 
 /**
  * @author zhoutian
