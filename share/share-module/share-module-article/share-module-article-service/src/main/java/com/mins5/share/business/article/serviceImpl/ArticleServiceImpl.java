@@ -1,7 +1,7 @@
 /**
  * 
  */
-package share.mins5.share.business.article.serviceImpl;
+package com.mins5.share.business.article.serviceImpl;
 
 /**
  * @author zhoutian
