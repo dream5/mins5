@@ -10,5 +10,6 @@
   <modules>
   	<module>share-module-admin</module>
   	<module>share-module-user</module>
+  	<module>share-module-article</module>
   </modules>
 </project>
