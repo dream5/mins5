@@ -113,7 +113,7 @@ public class A {
 	@RequestMapping(value = "/a6")
 	public String a6() {
 		System.out.println("A.a6()");
-		return "redirect:a1.html";
+		return "redirect:a1.mins";
 	}
 	
 	/**
@@ -124,6 +124,6 @@ public class A {
 	@RequestMapping(value = "/a7")
 	public String a7() {
 		System.out.println("A.a7()");
-		return "forward:a1.html";
+		return "forward:a1.mins";
 	}
 }
