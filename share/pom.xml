@@ -47,6 +47,16 @@
   			<artifactId>share-module-user-service</artifactId>
   			<version>${project.version}</version>
   		</dependency>
+  		<dependency>
+  			<groupId>com.mins5</groupId>
+  			<artifactId>share-module-article-api</artifactId>
+  			<version>${project.version}</version>
+  		</dependency>
+  		<dependency>
+  			<groupId>com.mins5</groupId>
+  			<artifactId>share-module-article-service</artifactId>
+  			<version>${project.version}</version>
+  		</dependency>
   		
   		<dependency>
   			<groupId>javax.servlet</groupId>
