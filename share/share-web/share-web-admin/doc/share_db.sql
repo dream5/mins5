@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* Database name:  share                                        */
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2014/3/9 0:19:08                             */
+/* Created on:     2014/3/9 0:56:05                             */
 /*==============================================================*/
 
 
@@ -15,107 +15,136 @@ create database share;
 use share;
 
 /*==============================================================*/
-/* Table: ARTICLE                                               */
+/* Table: admin                                                 */
 /*==============================================================*/
-create table ARTICLE
+create table admin
 (
-   ARTICLE_ID           int not null auto_increment,
-   ARTICLE_TITLE        varchar(50) not null,
-   ARTICLE_CONTENT      text not null,
-   ARTICLE_URL          varchar(50),
-   ARTICLE_FROM         varchar(20),
-   ARTICLE_ATHOR        varchar(20) not null,
-   STATUS               char(1) not null comment '0待审核；1 审核通过 ；2已发布；3下架',
-   UPDATE_TIME          datetime not null,
-   CREATE_TIME          datetime not null,
-   IS_ORIGINAL          char(1) not null comment '0否；1是',
-   IS_VALID             char(1) not null comment '0未删除；1删除',
-   primary key (ARTICLE_ID)
+   admin_id             int not null auto_increment,
+   nickname             varchar(20) not null,
+   real_name            varchar(20) not null,
+   password             varchar(50) not null,
+   create_time          datetime not null,
+   primary key (admin_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*==============================================================*/
-/* Table: ARTICLE_HOT                                           */
+/* Table: article                                               */
 /*==============================================================*/
-create table ARTICLE_HOT
+create table article
 (
-   HOT_ID               int not null auto_increment,
-   ARTICLE_ID           int not null,
-   REPRINT_COUNT        int not null default 0,
-   primary key (HOT_ID)
+   article_id           int not null auto_increment,
+   article_title        varchar(50) not null,
+   article_content      text not null,
+   article_url          varchar(50),
+   article_from         varchar(20),
+   article_author       varchar(20) not null,
+   status               char(1) not null comment '0待审核；1 审核通过 ；2已发布；3下架',
+   update_time          datetime not null,
+   create_time          datetime not null,
+   is_original          char(1) not null comment '0否；1是',
+   is_valid             char(1) not null comment '0未删除；1删除',
+   primary key (article_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*==============================================================*/
-/* Table: ARTICLE_KIND                                          */
+/* Table: article_hot                                           */
 /*==============================================================*/
-create table ARTICLE_KIND
+create table article_hot
 (
-   ARTICLE_KIND_ID      int not null auto_increment,
-   KIND_NAME            varchar(30) not null,
-   STATUS               char(1) not null comment '0无效；1有效',
-   UPDATE_TIME          datetime not null,
-   CREATE_TIME          datetime not null,
-   ADMIN_ID             int,
-   PARENT_KIND_ID       int not null default 0,
-   primary key (ARTICLE_KIND_ID)
+   hot_id               int not null auto_increment,
+   article_id           int not null,
+   reprint_count        int not null default 0,
+   primary key (hot_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*==============================================================*/
-/* Table: ARTICLE_KIND_REL                                      */
+/* Table: article_kind                                          */
 /*==============================================================*/
-create table ARTICLE_KIND_REL
+create table article_kind
 (
-   ARTICLE_KIND_REL_ID  int not null auto_increment,
-   ARTICLE_ID           int,
-   ARTICLE_KIND_ID      int not null,
-   STATUS               char(1) not null comment '0无效；1有效',
-   UPDATE_TIME          datetime not null,
-   CREATE_TIME          datetime not null,
-   ADMIN_ID             int,
-   primary key (ARTICLE_KIND_REL_ID)
+   article_kind_id      int not null auto_increment,
+   kind_name            varchar(30) not null,
+   status               char(1) not null comment '0无效；1有效',
+   update_time          datetime not null,
+   create_time          datetime not null,
+   admin_id             int,
+   parent_kind_id       int not null default 0,
+   primary key (article_kind_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*==============================================================*/
-/* Table: ARTICLE_LABEL                                         */
+/* Table: article_kind_rel                                      */
 /*==============================================================*/
-create table ARTICLE_LABEL
+create table article_kind_rel
 (
-   LABEL_ID             int not null auto_increment,
-   LABEL_NAME           varchar(20) not null,
-   STATUS               char(1) not null comment '0启用；1未用',
-   CREATE_TIME          datetime not null,
-   primary key (LABEL_ID)
+   article_kind_rel_id  int not null auto_increment,
+   article_id           int,
+   article_kind_id      int not null,
+   status               char(1) not null comment '0无效；1有效',
+   update_time          datetime not null,
+   create_time          datetime not null,
+   admin_id             int,
+   primary key (article_kind_rel_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*==============================================================*/
-/* Table: ARTICLE_LABEL_REL                                     */
+/* Table: article_label                                         */
 /*==============================================================*/
-create table ARTICLE_LABEL_REL
+create table article_label
 (
-   ARTICLE_LABEL_REL_ID int not null,
-   ARTICLE_ID           int not null,
-   LABEL_ID             int not null,
-   CARETE_TIME          datetime not null,
-   primary key (ARTICLE_LABEL_REL_ID)
+   label_id             int not null auto_increment,
+   label_name           varchar(20) not null,
+   status               char(1) not null comment '0启用；1未用',
+   create_time          datetime not null,
+   primary key (label_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-alter table ARTICLE_HOT add constraint FK_ARTICLE_HOT_REF_ARTICLE foreign key (ARTICLE_ID)
-      references ARTICLE (ARTICLE_ID) on delete restrict on update restrict;
+/*==============================================================*/
+/* Table: article_label_rel                                     */
+/*==============================================================*/
+create table article_label_rel
+(
+   article_label_rel_id int not null,
+   article_id           int not null,
+   label_id             int not null,
+   carete_time          datetime not null,
+   primary key (article_label_rel_id)
+)
+ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-alter table ARTICLE_KIND_REL add constraint FK_ARTICLE_KIND_REL_REF_ARTICLE foreign key (ARTICLE_ID)
-      references ARTICLE (ARTICLE_ID) on delete restrict on update restrict;
+/*==============================================================*/
+/* Table: user                                                  */
+/*==============================================================*/
+create table user
+(
+   user_id              int not null auto_increment,
+   nickname             varchar(20) not null,
+   real_name            varchar(20),
+   password             varchar(50) not null,
+   gender               char(1) not null,
+   create_time          datetime not null,
+   primary key (user_id)
+)
+ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-alter table ARTICLE_KIND_REL add constraint FK_ARTICLE_KIND_REL_REF_ARTICLE_KIND foreign key (ARTICLE_KIND_ID)
-      references ARTICLE_KIND (ARTICLE_KIND_ID) on delete restrict on update restrict;
+alter table article_hot add constraint fk_article_hot_ref_article foreign key (article_id)
+      references article (article_id) on delete restrict on update restrict;
 
-alter table ARTICLE_LABEL_REL add constraint FK_ARTICLE_LABEL_REL_REF_ATRICLE foreign key (ARTICLE_ID)
-      references ARTICLE (ARTICLE_ID) on delete restrict on update restrict;
+alter table article_kind_rel add constraint fk_article_kind_rel_ref_article foreign key (article_id)
+      references article (article_id) on delete restrict on update restrict;
 
-alter table ARTICLE_LABEL_REL add constraint FK_ATRICLE_LABEL_REL_REF_ARTICLE_LABEL foreign key (LABEL_ID)
-      references ARTICLE_LABEL (LABEL_ID) on delete restrict on update restrict;
+alter table article_kind_rel add constraint fk_article_kind_rel_ref_article_kind foreign key (article_kind_id)
+      references article_kind (article_kind_id) on delete restrict on update restrict;
+
+alter table article_label_rel add constraint fk_article_label_rel_ref_atricle foreign key (article_id)
+      references article (article_id) on delete restrict on update restrict;
+
+alter table article_label_rel add constraint fk_atricle_label_rel_ref_article_label foreign key (label_id)
+      references article_label (label_id) on delete restrict on update restrict;
 
