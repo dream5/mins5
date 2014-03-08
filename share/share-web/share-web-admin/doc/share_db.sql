@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* Database name:  share                                        */
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2014/3/9 0:56:05                             */
+/* Created on:     2014/3/9 1:06:38                             */
 /*==============================================================*/
 
 
@@ -20,7 +20,7 @@ use share;
 create table admin
 (
    admin_id             int not null auto_increment,
-   nickname             varchar(20) not null,
+   nick_name            varchar(20) not null,
    real_name            varchar(20) not null,
    password             varchar(50) not null,
    create_time          datetime not null,
@@ -124,7 +124,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 create table user
 (
    user_id              int not null auto_increment,
-   nick_name             varchar(20) not null,
+   nick_name            varchar(20) not null,
    real_name            varchar(20),
    password             varchar(50) not null,
    gender               char(1) not null,
