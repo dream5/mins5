@@ -3,6 +3,12 @@
  */
 package com.mins5.share.web.controller.demo;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -125,5 +131,42 @@ public class A {
 	public String a7() {
 		System.out.println("A.a7()");
 		return "forward:a1.mins";
+	}
+	
+	/**
+	 * freemarker
+	 * @since 2014-3-9
+	 * @return
+	 */
+	@RequestMapping(value = "/f1")
+	public ModelAndView f1() {
+		System.out.println("A.f1()");
+
+		ModelAndView mav = new ModelAndView();
+		
+		TestUser user = new TestUser();
+		user.setUsername("张三");
+		user.setPassword("111111");
+		user.setGender(GENDER.SECRET);
+		
+		List<TestAdmin> adminList = new ArrayList<TestAdmin>();
+		for(int i=1; i<=10; i++) {
+			TestAdmin admin = new TestAdmin();
+			admin.setUsername("李四" + i);
+			admin.setPassword("password" + i);
+			adminList.add(admin);
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("currentTime", new Date());
+		paramMap.put("b1", true);
+		paramMap.put("b2", false);
+		
+		mav.addObject("user", user);
+		mav.addObject("paramMap", paramMap);
+		mav.addObject("adminList", adminList);
+		
+		mav.setViewName("demo/f1");
+		return mav;
 	}
 }
