@@ -6,6 +6,7 @@
 
 	<resultMap type="com.mins5.share.business.user.domain.User" id="UserMap">
 		<id property="userId" column="user_id"/>
+		<result property="userName" column="user_name"/>
 		<result property="nickName" column="nick_name"/>
 		<result property="realName" column="real_name"/>
 		<result property="password" column="password"/>
@@ -14,7 +15,7 @@
 	</resultMap>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="userId">
-		insert into user (nick_name, real_name, password, gender, create_time) values (#{nickName}, #{realName}, #{password}, #{gender}, #{createTime})
+		insert into user (user_name, nick_name, real_name, password, gender, create_time) values (#{userName}, #{nickName}, #{realName}, #{password}, #{gender}, #{createTime})
 	</insert>
 	
 	<delete id="deleteById" parameterType="long">
@@ -24,6 +25,7 @@
 	<update id="update">
 		update user
 		<set>
+			<if test="userName != null">user_name = #{userName},</if>
 			<if test="nickName != null">nick_name = #{nickName},</if>
 			<if test="realName != null">real_name = #{realName},</if>
 			<if test="password != null">password = #{password},</if>
@@ -37,16 +39,16 @@
 		select * from user where user_id = #{userId}
 	</select>
 	
-	<select id="findByNickNameAndPassword" resultMap="UserMap">
-		select * from user where nick_name = #{nickName} and password = #{password}
+	<select id="findByUserNameAndPassword" resultMap="UserMap">
+		select * from user where user_name = #{userName} and password = #{password}
 	</select>
 	
-	<select id="findUserCountLikeNickName" resultType="int">
-		select count(1) from user where nick_name like concat('%', #{nickName}, '%');
+	<select id="findUserCountLikeUserName" resultType="int">
+		select count(1) from user where user_name like concat('%', #{userName}, '%');
 	</select>
 	
-	<select id="findUserLikeNickName" resultMap="UserMap">
-		select * from user where nick_name like concat('%', #{nickName}, '%');
+	<select id="findUserLikeUserName" resultMap="UserMap">
+		select * from user where user_name like concat('%', #{userName}, '%');
 	</select>
 
 </mapper>

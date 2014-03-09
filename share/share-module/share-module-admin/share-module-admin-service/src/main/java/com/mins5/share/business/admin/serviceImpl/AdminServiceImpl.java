@@ -23,6 +23,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao adminDao;
 	
+	@Override
 	public ReturnData<Admin> findAdminById(Long adminId) {
 		ReturnData<Admin> returnData = new ReturnData<Admin>();
 		try {

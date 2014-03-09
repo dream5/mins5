@@ -6,6 +6,7 @@
 
 	<resultMap type="com.mins5.share.business.admin.domain.Admin" id="Admin">
 		<id property="adminId" column="admin_id"/>
+		<result property="userName" column="user_name"/>
 		<result property="nickName" column="nick_name"/>
 		<result property="realName" column="real_name"/>
 		<result property="password" column="password"/>
@@ -13,7 +14,7 @@
 	</resultMap>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="adminId">
-		insert into admin (nick_name, real_name, password, create_time) values (#{nickName}, #{realName}, #{password}, #{createTime})
+		insert into admin (user_name, nick_name, real_name, password, create_time) values (#{nickName}, #{nickName}, #{realName}, #{password}, #{createTime})
 	</insert>
 	
 	<delete id="deleteById" parameterType="long">
@@ -23,6 +24,7 @@
 	<update id="update">
 		update admin
 		<set>
+			<if test="userName != null">user_name = #{user_name},</if>
 			<if test="nickName != null">nick_name = #{nickName},</if>
 			<if test="realName != null">real_name = #{realName},</if>
 			<if test="password != null">password = #{password},</if>
@@ -35,8 +37,8 @@
 		select * from admin where admin_id = #{adminId}
 	</select>
 	
-	<select id="findByNicknameAndPassword" resultMap="Admin">
-		select * from admin where nick_name = #{nickName} and password = #{password}
+	<select id="findByUserNameAndPassword" resultMap="Admin">
+		select * from admin where user_name = #{userName} and password = #{password}
 	</select>
 
 </mapper>

@@ -21,7 +21,7 @@ public interface UserService {
 	
 	ReturnData<User> updateUser(User user);
 	
-	ReturnData<User> findUserByNickNameAndPassword(String nickName, String password);
+	ReturnData<User> findUserByUserNameAndPassword(String userName, String password);
 	
-	ReturnPageData<List<User>> findUserLikeNickName(String nickName, int currentPage, int onePageSize);
+	ReturnPageData<List<User>> findUserLikeUserName(String userName, int currentPage, int onePageSize);
 }

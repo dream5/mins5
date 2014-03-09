@@ -14,6 +14,8 @@ public class Admin extends DomainObject {
 
 	private Long adminId;
 	
+	private String userName;
+	
 	private String nickName;
 	
 	private String realName;
@@ -28,6 +30,14 @@ public class Admin extends DomainObject {
 
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getNickName() {
@@ -64,9 +74,9 @@ public class Admin extends DomainObject {
 
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", nickName=" + nickName
-				+ ", realName=" + realName + ", password=" + password
-				+ ", createTime=" + createTime + "]";
+		return "Admin [adminId=" + adminId + ", userName=" + userName
+				+ ", nickName=" + nickName + ", realName=" + realName
+				+ ", password=" + password + ", createTime=" + createTime + "]";
 	}
 
 }

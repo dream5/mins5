@@ -15,6 +15,8 @@ public class User extends DomainObject {
 
 	private Long userId;
 	
+	private String userName;
+	
 	private String nickName;
 	
 	private String realName;
@@ -31,6 +33,14 @@ public class User extends DomainObject {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getNickName() {
@@ -75,9 +85,10 @@ public class User extends DomainObject {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", nickName=" + nickName
-				+ ", realName=" + realName + ", password=" + password
-				+ ", gender=" + gender + ", createTime=" + createTime + "]";
+		return "User [userId=" + userId + ", userName=" + userName
+				+ ", nickName=" + nickName + ", realName=" + realName
+				+ ", password=" + password + ", gender=" + gender
+				+ ", createTime=" + createTime + "]";
 	}
 
 }

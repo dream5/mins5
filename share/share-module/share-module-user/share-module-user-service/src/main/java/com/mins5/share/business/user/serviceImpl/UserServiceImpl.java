@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
+	@Override
 	public ReturnData<User> findUserById(Long userId) {
 		ReturnData<User> returnData = new ReturnData<User>();
 		try {
@@ -45,6 +46,7 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 
+	@Override
 	public ReturnData<User> saveUser(User user) {
 		ReturnData<User> returnData = new ReturnData<User>();
 		try {
@@ -67,6 +69,7 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 
+	@Override
 	public ReturnData<VOID> deleteUserById(Long userId) {
 		ReturnData<VOID> returnData = new ReturnData<VOID>();
 		try {
@@ -83,6 +86,7 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 
+	@Override
 	public ReturnData<User> updateUser(User user) {
 		ReturnData<User> returnData = new ReturnData<User>();
 		try {
@@ -100,15 +104,16 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 
-	public ReturnData<User> findUserByNickNameAndPassword(String nickName,
+	@Override
+	public ReturnData<User> findUserByUserNameAndPassword(String userName,
 			String password) {
 		ReturnData<User> returnData = new ReturnData<User>();
 		try {
-			if(nickName == null || password == null) {
+			if(userName == null || password == null) {
 				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnData;
 			}
-			User user = userDao.findByNickNameAndPassword(nickName, password);
+			User user = userDao.findByUserNameAndPassword(userName, password);
 			returnData.setResultData(user);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
@@ -118,17 +123,18 @@ public class UserServiceImpl implements UserService {
 		return returnData;
 	}
 	
-	public ReturnPageData<List<User>> findUserLikeNickName(String nickName, int currentPage, int onePageSize) {
+	@Override
+	public ReturnPageData<List<User>> findUserLikeUserName(String userName, int currentPage, int onePageSize) {
 		ReturnPageData<List<User>> returnPageData = new ReturnPageData<List<User>>(currentPage, onePageSize);
 		try {
-			if(nickName == null) {
+			if(userName == null) {
 				returnPageData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnPageData;
 			}
 			
-			int totalResults = userDao.findUserCountLikeNickName(nickName);
+			int totalResults = userDao.findUserCountLikeUserName(userName);
 			int startRow = returnPageData.getStartRow();
-			List<User> userList = userDao.findUserLikeNickName(nickName, startRow, onePageSize);
+			List<User> userList = userDao.findUserLikeUserName(userName, startRow, onePageSize);
 			if(userList == null) {
 				userList = Collections.emptyList();
 			}
@@ -147,7 +153,7 @@ public class UserServiceImpl implements UserService {
 		if(user == null) {
 			return false;
 		}
-		if(user.getNickName() == null) {
+		if(user.getUserName() == null) {
 			return false;
 		}
 		if(user.getPassword() == null) {

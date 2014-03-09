@@ -43,7 +43,8 @@ public class UserServiceImplTest {
 		user.setCreateTime(new Date());
 		user.setGender(GENDER.SECRET);
 		user.setPassword("123456");
-		user.setNickName("单元测试");
+		user.setNickName("单元测试昵称");
+		user.setUserName("单元测试用户名");
 		ReturnData<User> returnData = userService.saveUser(user);
 		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnData.getReturnCode());
 	}
@@ -62,25 +63,26 @@ public class UserServiceImplTest {
 		user.setCreateTime(new Date());
 		user.setGender(GENDER.FEMALE);
 		user.setPassword("111111");
-		user.setNickName("单元测试修改");
+		user.setNickName("单元测试修改昵称");
+		user.setUserName("单元测试修改用户名");
 		ReturnData<User> returnData = userService.updateUser(user);
 		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnData.getReturnCode());
 	}
 
 	@Test
 	public void testFindUserByUsernameAndPassword() {
-		String nickName = "超级管理员";
+		String userName = "超级管理员";
 		String password = "123456";
-		ReturnData<User> returnData = userService.findUserByNickNameAndPassword(nickName, password);
+		ReturnData<User> returnData = userService.findUserByUserNameAndPassword(userName, password);
 		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnData.getReturnCode());
 	}
 	
 	@Test
 	public void testFindUserLikeUsername() {
-		String nickName = "超级管理员";
+		String userName = "超级管理员";
 		int currentPage = 1;
 		int onePageSize = 10;
-		ReturnPageData<List<User>> returnPageData = userService.findUserLikeNickName(nickName, currentPage, onePageSize);
+		ReturnPageData<List<User>> returnPageData = userService.findUserLikeUserName(userName, currentPage, onePageSize);
 		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnPageData.getReturnCode());
 	}
 
