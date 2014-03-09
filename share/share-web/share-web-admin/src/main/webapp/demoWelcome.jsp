@@ -33,5 +33,8 @@
 	<a href="http://localhost:8080/share-web-admin/a/a6.mins">A.a6() - GET</a>
 	<br/>
 	<a href="http://localhost:8080/share-web-admin/a/a7.mins">A.a7() - GET</a>
+	<br/>
+	---------------------------------------
+	<a href="http://localhost:8080/share-web-admin/a/f1.mins">A.f1() - GET</a>
 </body>
 </html>
