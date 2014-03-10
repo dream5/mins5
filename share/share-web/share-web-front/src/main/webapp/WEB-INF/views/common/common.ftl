@@ -1,0 +1,1 @@
+<#assign path = "/share-web-front" />
