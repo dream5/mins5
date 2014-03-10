@@ -3,6 +3,8 @@
  */
 package com.mins5.share.web.controller.login;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import com.mins5.share.business.admin.service.AdminService;
 @RequestMapping(value="/login")
 public class LoginController {
 	
+	private static final Log log = LogFactory.getLog(LoginController.class);
+	
 	@Autowired
 	private AdminService adminService;
 
@@ -31,6 +35,8 @@ public class LoginController {
 	
 	@RequestMapping(value="/main")
 	public ModelAndView main() {
+		
+		adminService.findAdminById(1L);
 		
 		ModelAndView mav = new ModelAndView();
 		
