@@ -17,4 +17,5 @@ public interface ArticleKindDao extends CrudDao<Long, ArticleKind>{
 	
 	List<ArticleKind> findAllArticleKind();
 
+	
 }

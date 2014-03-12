@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.VOID;
 
 /**
  * @author zhoutian
@@ -21,5 +22,41 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<List<ArticleKind>> findAllArticleKind();
+	
+	/**
+	 * 新增
+	 * @author zhoutian
+	 * @since 2014年3月12日
+	 * @param articleKind
+	 * @return
+	 */
+	ReturnData<ArticleKind> saveArticleKind(ArticleKind articleKind);
+	
+	/**
+	 * 根据ID删除
+	 * @author zhoutian
+	 * @since 2014年3月12日
+	 * @param articleKindId
+	 * @return
+	 */
+	ReturnData<VOID> deleteArticleKindById(Long articleKindId);
+	
+	/**
+	 * 更新
+	 * @author zhoutian
+	 * @since 2014年3月12日
+	 * @param articleKind
+	 * @return
+	 */
+	ReturnData<ArticleKind> updateArticleKind(ArticleKind articleKind);
+	
+	/**
+	 * 根据ID查询
+	 * @author zhoutian
+	 * @since 2014年3月12日
+	 * @param articleKindId
+	 * @return
+	 */
+	ReturnData<ArticleKind> findArticleKindById(Long articleKindId);
 
 }
