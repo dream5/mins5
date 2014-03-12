@@ -1,8 +1,6 @@
 package com.mins5.share.business.article.domain;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.mins5.share.common.domain.DomainObject;
 
