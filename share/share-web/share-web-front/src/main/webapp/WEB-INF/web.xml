@@ -44,6 +44,14 @@
 		<url-pattern>*.mins</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 去除空白行  add by zhanglin 20140312-->
+	<jsp-config>
+		<jsp-property-group>
+		<url-pattern>*.jsp</url-pattern>
+		<trim-directive-whitespaces>true</trim-directive-whitespaces>
+		</jsp-property-group>
+	</jsp-config> 
+	
 	<welcome-file-list>
     	<welcome-file>index.html</welcome-file>
     	<welcome-file>index.htm</welcome-file>
