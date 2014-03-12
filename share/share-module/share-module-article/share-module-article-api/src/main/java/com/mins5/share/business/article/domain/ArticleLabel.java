@@ -13,6 +13,8 @@ public class ArticleLabel extends DomainObject {
 
 	// Fields
 
+	private static final long serialVersionUID = -3577098317867948427L;
+	
 	private Long labelId;
 	private String labelName;
 	private String status;
