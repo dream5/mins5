@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page session="false"%>
+<%@ include file="/WEB-INF/views/common/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>心灵鸡汤</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="${context}css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="login">
@@ -20,20 +21,20 @@
         <form id="form" name="form" method="post" action="">
           <span>
 	          <input name="q" type="text" onfocus="if(this.value=='搜索你感兴趣的文章...'){this.value='';}" onblur="if(this.value==''){this.value='搜索你感兴趣的文章...';}"  class="keywords" id="textfield" maxlength="50" value="搜索你感兴趣的文章..." />
-	          <input name="b" type="image" src="images/search_btn.gif" class="button" />
+	          <input name="b" type="image" src="${context}images/search_btn.gif" class="button" />
           </span>
         </form>
       </div>
       <!--/search -->
       <div class="cline"></div>
       <div class="menu_nav">
-        <ul>
+       <!--  <ul>
           <li><a href="index.html">首页</a></li>
           <li><a href="list.html">心灵鸡汤</a></li>
           <li><a href="list.html">逗你一笑</a></li>
           <li><a href="list.html">励志故事</a></li>
           <li><a href="list.html">职场热读</a></li>
-        </ul>
+        </ul> -->
       </div>
       <div class="cline"></div>
     </div>
@@ -117,7 +118,7 @@
       </div>
       <div class="sidebar">
         <div class="rightbox">
-          <img class="paperclip" alt="paperclip" src="images/paperclip.png">
+          <img class="paperclip" alt="paperclip" src="${context}images/paperclip.png">
           <h2><span>热门推荐</span></h2>
           <div class="cline"></div>
           <ul class="sb_menu">
@@ -130,7 +131,7 @@
           </ul>
         </div>
         <div class="rightbox">
-           <img class="paperclip" alt="paperclip" src="images/paperclip.png">	
+           <img class="paperclip" alt="paperclip" src="${context}images/paperclip.png">	
           <h2><span>随机阅读</span></h2>
           <div class="cline"></div>
           <ul class="ex_menu">
@@ -148,7 +149,7 @@
               Premium CSS Templates</li>
           </ul>
         </div>
-        <div class="rightbox" style="background-image:url(images/baidu.jpg);height:250px;">
+        <div class="rightbox" style="background-image:url(${context}images/baidu.jpg);height:250px;">
         </div>
 		  <div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
@@ -190,8 +191,9 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="js/jquery.pagination.js"></script>
+<script type="text/javascript" src="${context}js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}js/index.js"></script>
+<script type="text/javascript" src="${context}js/jquery.pagination.js"></script>
         <script type="text/javascript">
 
             /**
