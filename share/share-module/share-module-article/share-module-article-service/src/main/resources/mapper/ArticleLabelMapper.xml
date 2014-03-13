@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 文字种类 -->
+<mapper namespace="com.mins5.share.business.article.dao.ArticleLabelDao">
+
+	<resultMap type="com.mins5.share.business.article.domain.ArticleLabel" id="ArticleLabelMap">
+		<id property="labelId" column="label_id"/>
+		<result property="labelName" column="label_name"/>
+		<result property="status" column="status"/>
+		<result property="createTime" column="create_time"/>
+	</resultMap>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="labelId">
+		insert into article_label 
+		(label_name, status, create_time) 
+		values 
+		(#{labelName}, #{status}, #{createTime})
+	</insert>
+	
+	<delete id="deleteById" parameterType="long">
+		delete from article_label where label_id = #{labelId}
+	</delete>
+	
+	<update id="update">
+		update article_label
+		<set>
+			<if test="labelName != null">label_name = #{labelName},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+		</set>
+		where label_id = #{labelId}
+	</update>
+	
+	<select id="findById" parameterType="long" resultMap="ArticleLabelMap">
+		select * from article_label where label_id = #{labelId}
+	</select>
+	
+</mapper>
