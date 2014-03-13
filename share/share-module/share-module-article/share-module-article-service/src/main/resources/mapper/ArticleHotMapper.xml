@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 文字种类 -->
+<mapper namespace="com.mins5.share.business.article.dao.ArticleHotDao">
+
+	<resultMap type="com.mins5.share.business.article.domain.ArticleHot" id="ArticleHotMap">
+		<id property="hotId" column="hot_id"/>
+		<result property="articleId" column="article_id"/>
+		<result property="reprintCount" column="reprint_count"/>
+	</resultMap>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="hotId">
+		insert into article_hot 
+		(article_id, reprint_count) 
+		values 
+		(#{articleId}, #{reprintCount})
+	</insert>
+	
+	<delete id="deleteById" parameterType="long">
+		delete from article_hot where hot_id = #{hotId}
+	</delete>
+	
+	<update id="update">
+		update article_hot
+		<set>
+			<if test="articleId != null">article_id = #{articleId},</if>
+			<if test="reprintCount != null">reprint_count = #{reprintCount},</if>
+		</set>
+		where hot_id = #{hotId}
+	</update>
+	
+	<select id="findById" parameterType="long" resultMap="ArticleHotMap">
+		select * from article_hot where hot_id = #{hotId}
+	</select>
+	
+</mapper>
