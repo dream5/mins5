@@ -2,6 +2,7 @@ package com.mins5.share.business.article.domain;
 
 import java.util.Date;
 
+import com.mins5.share.business.article.enums.ARTICLE_STATUS;
 import com.mins5.share.common.domain.DomainObject;
 
 /**
@@ -24,7 +25,7 @@ public class Article extends DomainObject {
 	private String articleUrl;
 	private String articleFrom;
 	private String articleAuthor;
-	private String status;
+	private ARTICLE_STATUS status;
 	private Date updateTime;
 	private Date createTime;
 	private String isOriginal;
@@ -37,11 +38,16 @@ public class Article extends DomainObject {
 	}
 
 	/** minimal constructor */
-	public Article(String articleTitle, String articleContent,
-			String articleAuthor, String status, Date updateTime,
-			Date createTime, String isOriginal, String isValid) {
+	public Article(Long articleId, String articleTitle, String articleContent,
+			String articleUrl, String articleFrom, String articleAuthor,
+			ARTICLE_STATUS status, Date updateTime, Date createTime,
+			String isOriginal, String isValid) {
+		super();
+		this.articleId = articleId;
 		this.articleTitle = articleTitle;
 		this.articleContent = articleContent;
+		this.articleUrl = articleUrl;
+		this.articleFrom = articleFrom;
 		this.articleAuthor = articleAuthor;
 		this.status = status;
 		this.updateTime = updateTime;
@@ -98,11 +104,11 @@ public class Article extends DomainObject {
 		this.articleAuthor = articleAuthor;
 	}
 
-	public String getStatus() {
+	public ARTICLE_STATUS getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(ARTICLE_STATUS status) {
 		this.status = status;
 	}
 
@@ -140,12 +146,12 @@ public class Article extends DomainObject {
 
 	@Override
 	public String toString() {
-		return "Article [articleAuthor=" + articleAuthor + ", articleContent="
-				+ articleContent + ", articleFrom=" + articleFrom
-				+ ", articleId=" + articleId + ", articleTitle=" + articleTitle
-				+ ", articleUrl=" + articleUrl + ", createTime=" + createTime
-				+ ", isOriginal=" + isOriginal + ", isValid=" + isValid
-				+ ", status=" + status + ", updateTime=" + updateTime + "]";
+		return "Article [articleId=" + articleId + ", articleTitle="
+				+ articleTitle + ", articleContent=" + articleContent
+				+ ", articleUrl=" + articleUrl + ", articleFrom=" + articleFrom
+				+ ", articleAuthor=" + articleAuthor + ", status=" + status
+				+ ", updateTime=" + updateTime + ", createTime=" + createTime
+				+ ", isOriginal=" + isOriginal + ", isValid=" + isValid + "]";
 	}
 
 }

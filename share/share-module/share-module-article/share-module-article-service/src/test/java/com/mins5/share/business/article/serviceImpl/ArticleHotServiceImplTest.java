@@ -3,6 +3,8 @@
  */
 package com.mins5.share.business.article.serviceImpl;
 
+import java.util.Date;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -12,7 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleHot;
+import com.mins5.share.business.article.enums.ARTICLE_STATUS;
 import com.mins5.share.business.article.service.ArticleHotService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
@@ -36,11 +40,27 @@ public class ArticleHotServiceImplTest {
 	
 	@Test
 	public void testSaveArticleHot() {
-//		ArticleHot articleHot = new ArticleHot();
-//		articleHot.setArticleId(0L);
-//		articleHot.setReprintCount(100L);
-//		ReturnData<ArticleHot> returnData = articleHotService.saveArticleHot(articleHot);
-//		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnData.getReturnCode());
+		
+		Article article = new Article();
+		article.setArticleAuthor("单元测试作者");
+		article.setArticleContent("文章内容");
+		article.setArticleFrom("文章来源");
+		article.setArticleTitle("文章标题");
+		article.setArticleUrl("http://www.mins5.com");
+		article.setCreateTime(new Date());
+		article.setIsOriginal("1");
+		article.setStatus(ARTICLE_STATUS.WAITING_CHECK);
+		article.setUpdateTime(new Date());
+		ReturnData<Article> saveArticleReturnData = articleService.saveArticle(article);
+		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), saveArticleReturnData.getReturnCode());
+		
+		Long articleId = article.getArticleId();
+		
+		ArticleHot articleHot = new ArticleHot();
+		articleHot.setArticleId(articleId);
+		articleHot.setReprintCount(100L);
+		ReturnData<ArticleHot> saveArticleHotReturnData = articleHotService.saveArticleHot(articleHot);
+		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), saveArticleHotReturnData.getReturnCode());
 	}
 	
 	@Test

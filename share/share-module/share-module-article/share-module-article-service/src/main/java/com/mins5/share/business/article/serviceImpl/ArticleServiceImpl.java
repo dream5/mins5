@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.article.dao.ArticleDao;
 import com.mins5.share.business.article.dao.ArticleKindDao;
+import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
@@ -154,4 +155,53 @@ public class ArticleServiceImpl  implements ArticleService{
 		return returnData;
 	}
 
+	@Override
+	public ReturnData<Article> saveArticle(Article article) {
+		ReturnData<Article> returnData = new ReturnData<Article>();
+		try {
+			if(!checkSaveArticle(article)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode()) ;
+				return returnData;
+			}
+			int count = articleDao.save(article);
+			if(count != 1) {
+				returnData.setReturnCode(ReturnCode.EXCEPTION.getCode()) ;
+				return returnData;
+			}
+			returnData.setResultData(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	private boolean checkSaveArticle(Article article) {
+		if(article == null) {
+			return false;
+		}
+		if(article.getArticleAuthor() == null) {
+			return false;
+		}
+		if(article.getArticleContent() == null) {
+			return false;
+		}
+		if(article.getArticleTitle() == null) {
+			return false;
+		}
+		if(article.getCreateTime() == null) {
+			return false;
+		}
+		if(article.getIsOriginal() == null) {
+			return false;
+		}
+		if(article.getStatus() == null) {
+			return false;
+		}
+		if(article.getUpdateTime() == null) {
+			return false;
+		}
+		return true;
+	}
 }

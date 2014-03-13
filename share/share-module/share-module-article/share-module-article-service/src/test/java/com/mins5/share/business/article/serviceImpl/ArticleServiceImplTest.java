@@ -15,7 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.enums.ARTICLE_STATUS;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
@@ -75,6 +77,22 @@ public class ArticleServiceImplTest {
 	@Test
 	public void testFindArticleKindById() {
 		ReturnData<ArticleKind> returnData = articleService.findArticleKindById(1L);
+		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnData.getReturnCode());
+	}
+	
+	@Test
+	public void testSaveArticle() {
+		Article article = new Article();
+		article.setArticleAuthor("单元测试作者");
+		article.setArticleContent("文章内容");
+		article.setArticleFrom("文章来源");
+		article.setArticleTitle("文章标题");
+		article.setArticleUrl("http://www.mins5.com");
+		article.setCreateTime(new Date());
+		article.setIsOriginal("1");
+		article.setStatus(ARTICLE_STATUS.WAITING_CHECK);
+		article.setUpdateTime(new Date());
+		ReturnData<Article> returnData = articleService.saveArticle(article);
 		Assert.assertEquals(ReturnCode.SUCCESS.getCode(), returnData.getReturnCode());
 	}
 }

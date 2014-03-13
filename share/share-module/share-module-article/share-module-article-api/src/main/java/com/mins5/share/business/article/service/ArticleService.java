@@ -5,6 +5,7 @@ package com.mins5.share.business.article.service;
 
 import java.util.List;
 
+import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.VOID;
@@ -58,5 +59,14 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<ArticleKind> findArticleKindById(Long articleKindId);
+	
+	/**
+	 * 保存文章
+	 * @author zhoutian
+	 * @since 2014年3月14日
+	 * @param article
+	 * @return
+	 */
+	ReturnData<Article> saveArticle(Article article);
 
 }

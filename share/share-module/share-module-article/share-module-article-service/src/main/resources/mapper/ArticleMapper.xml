@@ -4,6 +4,31 @@
 
 <mapper namespace="com.mins5.share.business.article.dao.ArticleDao">
 
-
+	<resultMap type="com.mins5.share.business.article.domain.Article" id="ArticleMap">
+		<id property="articleId" column="article_id"/>
+		<result property="articleTitle" column="article_title"/>
+		<result property="articleContent" column="article_content"/>
+		<result property="articleUrl" column="article_url"/>
+		<result property="articleFrom" column="article_from"/>
+		<result property="articleAuthor" column="article_author"/>
+		<result property="status" column="status"/>
+		<result property="updateTime" column="update_time"/>
+		<result property="createTime" column="create_time"/>
+		<result property="isOriginal" column="is_original"/>
+		<result property="isValid" column="is_valid"/>
+	</resultMap>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="articleId">
+		insert into article 
+		(
+			article_title, article_content, article_url, article_from, article_author,
+			status, update_time, create_time, is_original, is_valid
+		) 
+		values 
+		(
+			#{articleTitle}, #{articleContent}, #{articleUrl}, #{articleFrom}, #{articleAuthor},
+			#{status}, #{updateTime}, #{createTime}, #{isOriginal}, 1
+		) 
+	</insert>
 
 </mapper>
