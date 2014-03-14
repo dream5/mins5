@@ -204,4 +204,19 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return true;
 	}
+
+	@Override
+	public ReturnData<List<Article>> findRandomArticle(int amount) {
+		log.info("查询随机文章开始...");
+		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
+		try {
+			List<Article> Articles = articleDao.findRandomArticle(amount);
+			returnData.setResultData(Articles);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 }
