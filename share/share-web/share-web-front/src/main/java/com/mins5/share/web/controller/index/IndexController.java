@@ -2,6 +2,7 @@ package com.mins5.share.web.controller.index;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
@@ -49,4 +51,24 @@ public class IndexController {
 		}
 	}
 
+	
+	
+	/**
+	 * 随机阅读
+	 */
+	@RequestMapping(value = "/randomRead")
+	public void randomRead(HttpServletRequest request,HttpServletResponse response) {
+		log.info("加载随机阅读文章...");
+		int amount = 8;//默认取八篇
+		if (!StringUtils.isEmpty(request.getParameter("a"))) {
+			amount = Integer.parseInt(request.getParameter("a"));
+		}
+		ReturnData<List<Article>> articles = articleService.findRandomArticle(amount);
+		if (articles.getReturnCode()==200&&!StringUtils.isEmpty(articles.getResultData())) {
+			 JSONArray article = JSONArray.fromObject(articles.getResultData()); 
+			 JsonUtils.write(article.toString(), response);
+		}else {
+			 JsonUtils.write("error", response);
+		}
+	}
 }
