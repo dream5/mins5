@@ -68,5 +68,13 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<Article> saveArticle(Article article);
+	
+	
+	/**
+	 * 查询随机文章
+	 * @param count 篇数
+	 * @return
+	 */
+	ReturnData<List<Article>> findRandomArticle(int count);
 
 }
