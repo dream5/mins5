@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.domain.ArticleKindRel;
 import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.VOID;
@@ -113,5 +114,41 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<ArticleLabelRel> findArticleLabelRelById(Long articleLabelRelId);
+	
+	/**
+	 * 新增
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleKindRel
+	 * @return
+	 */
+	ReturnData<ArticleKindRel> saveArticleKindRel(ArticleKindRel articleKindRel);
+	
+	/**
+	 * 根据ID删除
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleKindRelId
+	 * @return
+	 */
+	ReturnData<VOID> deleteArticleKindRelById(Long articleKindRelId);
+	
+	/**
+	 * 更新
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleKindRel
+	 * @return
+	 */
+	ReturnData<ArticleKindRel> updateArticleKindRel(ArticleKindRel articleKindRel);
+	
+	/**
+	 * 根据ID查询
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleKindRelId
+	 * @return
+	 */
+	ReturnData<ArticleKindRel> findArticleKindRelById(Long articleKindRelId);
 
 }
