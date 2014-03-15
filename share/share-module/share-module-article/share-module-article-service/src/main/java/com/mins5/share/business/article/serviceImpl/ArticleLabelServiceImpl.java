@@ -3,10 +3,13 @@
  */
 package com.mins5.share.business.article.serviceImpl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.mins5.share.business.article.dao.ArticleLabelDao;
 import com.mins5.share.business.article.domain.ArticleLabel;
@@ -120,6 +123,24 @@ public class ArticleLabelServiceImpl implements ArticleLabelService {
 			}
 			ArticleLabel articleLabel = articleLabelDao.findById(labelId);
 			returnData.setResultData(articleLabel);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnData<List<ArticleLabel>> findArticleLabelByNum(int amount) {
+		ReturnData<List<ArticleLabel>> returnData = new ReturnData<List<ArticleLabel>>();
+		try {
+			if(StringUtils.isEmpty(amount)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			List<ArticleLabel> articleLabels = articleLabelDao.findArticleLabelByNum(amount);
+			returnData.setResultData(articleLabels);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
