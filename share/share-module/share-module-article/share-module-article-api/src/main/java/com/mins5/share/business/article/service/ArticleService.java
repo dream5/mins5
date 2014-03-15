@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.VOID;
 
@@ -76,5 +77,41 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<List<Article>> findRandomArticle(int count);
+	
+	/**
+	 * 新增
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleLabelRel
+	 * @return
+	 */
+	ReturnData<ArticleLabelRel> saveArticleLabelRel(ArticleLabelRel articleLabelRel);
+	
+	/**
+	 * 根据ID删除
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleLabelId
+	 * @return
+	 */
+	ReturnData<VOID> deleteArticleLabelRelById(Long articleLabelRelId);
+	
+	/**
+	 * 更新
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param articleLabel
+	 * @return
+	 */
+	ReturnData<ArticleLabelRel> updateArticleLabelRel(ArticleLabelRel articleLabelRel);
+	
+	/**
+	 * 根据ID查询
+	 * @author zhoutian
+	 * @since 2014年3月15日
+	 * @param labelId
+	 * @return
+	 */
+	ReturnData<ArticleLabelRel> findArticleLabelRelById(Long articleLabelRelId);
 
 }

@@ -29,7 +29,7 @@ public interface ArticleLabelService {
 	 * @param articleLabelId
 	 * @return
 	 */
-	ReturnData<VOID> deleteArticleLabelById(Long articleLabelId);
+	ReturnData<VOID> deleteArticleLabelById(Long labelId);
 	
 	/**
 	 * 更新
