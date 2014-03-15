@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.domain.ArticleLabel;
+import com.mins5.share.business.article.service.ArticleLabelService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.util.JsonUtils;
@@ -35,6 +37,10 @@ public class IndexController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private ArticleLabelService articleLabelService;
+	
 	
 	/**
 	 * 初始化导航菜单
@@ -71,4 +77,28 @@ public class IndexController {
 			 JsonUtils.write("error", response);
 		}
 	}
+	
+	/**
+	 * 热门标签
+	 */
+	@RequestMapping(value = "/hotLabel")
+	public void hotLabel(HttpServletRequest request,HttpServletResponse response){
+		log.info("加载热门标签...");
+		int amount = 8;//默认取八篇
+		if (!StringUtils.isEmpty(request.getParameter("a"))) {
+			amount = Integer.parseInt(request.getParameter("a"));
+		}
+		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(amount); 
+		if (articleLabels.getReturnCode()==200&&!StringUtils.isEmpty(articleLabels.getResultData())) {
+			 JSONArray articleLabel = JSONArray.fromObject(articleLabels.getResultData()); 
+			 JsonUtils.write(articleLabel.toString(), response);
+		}else {
+			 JsonUtils.write("error", response);
+		}
+		
+	}
+	
+	
+	
+	
 }
