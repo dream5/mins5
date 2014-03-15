@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.article.dao.ArticleDao;
 import com.mins5.share.business.article.dao.ArticleKindDao;
+import com.mins5.share.business.article.dao.ArticleKindRelDao;
 import com.mins5.share.business.article.dao.ArticleLabelRelDao;
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.domain.ArticleKindRel;
 import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
@@ -38,6 +40,9 @@ public class ArticleServiceImpl  implements ArticleService{
 	
 	@Autowired
 	private ArticleLabelRelDao articleLabelRelDao;
+	
+	@Autowired
+	private ArticleKindRelDao articleKindRelDao;
 	
 	public ReturnData<List<ArticleKind>> findAllArticleKind() {
 		log.info("查询文字所有分类开始...");
@@ -321,6 +326,119 @@ public class ArticleServiceImpl  implements ArticleService{
 			}
 			ArticleLabelRel articleLabelRel = articleLabelRelDao.findById(articleLabelRelId);
 			returnData.setResultData(articleLabelRel);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnData<ArticleKindRel> saveArticleKindRel(
+			ArticleKindRel articleKindRel) {
+		ReturnData<ArticleKindRel> returnData = new ReturnData<ArticleKindRel>();
+		try {
+			if(checkSaveArticleKindRel(articleKindRel)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			int count = articleKindRelDao.save(articleKindRel);
+			if(count != 1) {
+				returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+				return returnData;
+			}
+			returnData.setResultData(articleKindRel);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	private boolean checkSaveArticleKindRel(ArticleKindRel articleKindRel) {
+		if(articleKindRel == null) {
+			return false;
+		}
+		if(articleKindRel.getAdminId() == null) {
+			return false;
+		}
+		if(articleKindRel.getArticleId() == null) {
+			return false;
+		}
+		if(articleKindRel.getArticleKindId() == null) {
+			return false;
+		}
+		if(articleKindRel.getCreateTime() == null) {
+			return false;
+		}
+		if(articleKindRel.getStatus() == null) {
+			return false;
+		}
+		if(articleKindRel.getUpdateTime() == null) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public ReturnData<VOID> deleteArticleKindRelById(Long articleKindRelId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if(articleKindRelId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			articleKindRelDao.deleteById(articleKindRelId);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnData<ArticleKindRel> updateArticleKindRel(
+			ArticleKindRel articleKindRel) {
+		ReturnData<ArticleKindRel> returnData = new ReturnData<ArticleKindRel>();
+		try {
+			if(!checkUpdateArticleKindRel(articleKindRel)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			articleKindRelDao.update(articleKindRel);
+			returnData.setResultData(articleKindRel);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	private boolean checkUpdateArticleKindRel(ArticleKindRel articleKindRel) {
+		if(articleKindRel == null) {
+			return false;
+		}
+		if(articleKindRel.getArticleKindRelId() == null) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public ReturnData<ArticleKindRel> findArticleKindRelById(
+			Long articleKindRelId) {
+		ReturnData<ArticleKindRel> returnData = new ReturnData<ArticleKindRel>();
+		try {
+			if(articleKindRelId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			ArticleKindRel articleKindRel = articleKindRelDao.findById(articleKindRelId);
+			returnData.setResultData(articleKindRel);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
