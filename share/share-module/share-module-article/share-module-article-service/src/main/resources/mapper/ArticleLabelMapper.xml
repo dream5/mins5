@@ -36,4 +36,11 @@
 		select * from article_label where label_id = #{labelId}
 	</select>
 	
+	
+	<!-- 查询热门标签 add by zhanglin 20140315 -->
+	<select id="findArticleLabelByNum" parameterType="int" resultMap="ArticleLabelMap">
+		select label_id,label_name,create_time from article_label where status=1  limit 0,#{amount}
+	</select>
+	
+	
 </mapper>
