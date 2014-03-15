@@ -11,34 +11,10 @@
 <div class="login">
 </div>
 <div class="main">	
-  <div class="header">
-    <div class="header_resize">
-      <div class="logo">
-        <h1><a href="index.html"><span> Mins  </span> five </a><small></small></h1>
-      </div>
-       <div class="search">
-        <form id="form" name="form" method="post" action="">
-          <span>
-	          <input name="q" type="text" onfocus="if(this.value=='搜索你感兴趣的文章...'){this.value='';}" onblur="if(this.value==''){this.value='搜索你感兴趣的文章...';}"  class="keywords" id="textfield" maxlength="50" value="搜索你感兴趣的文章..." />
-	          <input name="b" type="image" src="${context}images/search_btn.gif" class="button" />
-          </span>
-        </form>
-      </div>
-      <!--/search -->
-      <div class="cline"></div>
-      <div class="menu_nav">
-       <!--  <ul>
-          <li><a href="index.html">首页</a></li>
-          <li><a href="list.html">心灵鸡汤</a></li>
-          <li><a href="list.html">逗你一笑</a></li>
-          <li><a href="list.html">励志故事</a></li>
-          <li><a href="list.html">职场热读</a></li>
-        </ul> -->
-      </div>
-      <div class="cline"></div>
-    </div>
-  </div>
+  <%--top --%> 
+  <%@ include file="/WEB-INF/views/frame/top.jsp" %>
   <div class="cline"></div>
+  <%--content --%>
   <div class="content">
     <div class="content_resize">
       <div class="mainbar">
@@ -129,12 +105,12 @@
             <li><a href="#" title="Website Templates">我们的第二层皮肤</a></li>
           </ul>
         </div>
-        <div class="rightbox">
+        <div class="rightbox" id="read">
            <img class="paperclip" alt="paperclip" src="${context}images/paperclip.png">	
           <h2><span>随机阅读</span></h2>
           <div class="cline"></div>
           <ul class="ex_menu">
-            <li><a href="#" title="Website Templates">【爱情】我忏悔，我爱过你</a><br />
+            <!-- <li><a href="#" title="Website Templates">【爱情】我忏悔，我爱过你</a><br />
               Over 6,000+ Premium Web Templates</li>
             <li><a href="#" title="WordPress Themes">【励志】固执的青春</a><br />
               Premium WordPress &amp; Joomla Themes</li>
@@ -145,49 +121,25 @@
             <li><a href="#" title="Website Builder">【生活】男人好动，女人好色</a><br />
               Website Builder Software &amp; Tools</li>
             <li><a href="#" title="CSS Templates">打工是故事，创业是事故</a><br />
-              Premium CSS Templates</li>
+              Premium CSS Templates</li> -->
           </ul>
         </div>
         <div class="rightbox" style="background-image:url(${context}images/baidu.jpg);height:250px;">
         </div>
-		  <div class="rightbox">
+		  <div class="rightbox" id="hotLabel">
 		  	 <h2><span>热门标签</span></h2>
           	 <div class="cline"></div>
 	          	<div class="taglist">
-					<a target="_blank" href="#">谷歌</a>
-					<a target="_blank" href="#">招聘</a>
-					<a target="_blank" href="#">微信</a>
-					<a target="_blank" href="#">张小龙</a>
-					<a target="_blank" href="#">微信之父</a>
-					<a target="_blank" href="#">新浪微博</a>
-					<a target="_blank" href="#">融资</a>
-					<a target="_blank" href="#">风险</a>
-					<a target="_blank" href="#">理财</a>
-					<a target="_blank" href="#">互联网金融</a>
-					<a target="_blank" href="#">强奸用户</a>
-					<a target="_blank" href="#">产品设计</a>
-					<a target="_blank" href="#">用户体验</a>
-					<a target="_blank" href="#">QQ</a>
-					<a target="_blank" href="#">移动互联网</a>
-					<a target="_blank" href="#">朋友圈N宗罪</a>
-					<a target="_blank" href="#">谷歌</a>
-					<a target="_blank" href="#">招聘</a>
-					<a target="_blank" href="#">微信</a>
-					<a target="_blank" href="#">张小龙</a>
-					<a target="_blank" href="#">微信之父</a>
-					<a target="_blank" href="#">新浪微博</a>
-					</div>
+				</div>
 	          </div>
       </div>
       <div class="cline"></div>
     </div>
   </div>
-  
-  
+
   <div class="fbg">
-  	<div class="footer">
-    	<span class="fs">版权所有 © 2014 5M网 </span><span class="fs"><a href="javascript:;">免责声明</a></span><span class="fs"> 站长邮箱:zl007_ml@126.com </span><span class="fs">粤ICP备xxxxxx号 </span>  <span class="fs">站长统计 </span>
-    </div>
+  	<%--footer --%> 
+     <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
   </div>
 </div>
 <script type="text/javascript" src="${context}js/jquery-1.10.2.js"></script>
