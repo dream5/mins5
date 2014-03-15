@@ -120,6 +120,19 @@ create table article_label_rel
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 /*==============================================================*/
+/* Table: article_recommend                                     */
+/*==============================================================*/
+create table article_recommend
+(
+   recommend_id         int not null auto_increment,
+   recommend_position   char(1) not null comment '0主页；1详情页',
+   recommend_sort       int not null,
+   article_id           int not null,
+   primary key (recommend_id)
+);
+ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*==============================================================*/
 /* Table: user                                                  */
 /*==============================================================*/
 create table user
@@ -149,4 +162,7 @@ alter table article_label_rel add constraint fk_article_label_rel_ref_atricle fo
 
 alter table article_label_rel add constraint fk_atricle_label_rel_ref_article_label foreign key (label_id)
       references article_label (label_id) on delete restrict on update restrict;
+      
+alter table article_recommend add constraint fk_article_recommend_rel_article foreign key (article_id)
+      references article (article_id) on delete restrict on update restrict;      
 
