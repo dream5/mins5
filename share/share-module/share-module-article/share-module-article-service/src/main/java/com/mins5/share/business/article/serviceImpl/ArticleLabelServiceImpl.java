@@ -66,14 +66,14 @@ public class ArticleLabelServiceImpl implements ArticleLabelService {
 	}
 
 	@Override
-	public ReturnData<VOID> deleteArticleLabelById(Long articleLabelId) {
+	public ReturnData<VOID> deleteArticleLabelById(Long labelId) {
 		ReturnData<VOID> returnData = new ReturnData<VOID>();
 		try {
-			if(articleLabelId == null) {
+			if(labelId == null) {
 				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnData;
 			}
-			articleLabelDao.deleteById(articleLabelId);
+			articleLabelDao.deleteById(labelId);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);

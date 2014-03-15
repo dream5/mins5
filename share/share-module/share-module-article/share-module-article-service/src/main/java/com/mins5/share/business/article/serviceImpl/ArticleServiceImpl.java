@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.article.dao.ArticleDao;
 import com.mins5.share.business.article.dao.ArticleKindDao;
+import com.mins5.share.business.article.dao.ArticleLabelRelDao;
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
@@ -33,6 +35,9 @@ public class ArticleServiceImpl  implements ArticleService{
 	
 	@Autowired
 	private ArticleKindDao articleKindDao;
+	
+	@Autowired
+	private ArticleLabelRelDao articleLabelRelDao;
 	
 	public ReturnData<List<ArticleKind>> findAllArticleKind() {
 		log.info("查询文字所有分类开始...");
@@ -212,6 +217,110 @@ public class ArticleServiceImpl  implements ArticleService{
 		try {
 			List<Article> Articles = articleDao.findRandomArticle(amount);
 			returnData.setResultData(Articles);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnData<ArticleLabelRel> saveArticleLabelRel(
+			ArticleLabelRel articleLabelRel) {
+		ReturnData<ArticleLabelRel> returnData = new ReturnData<ArticleLabelRel>();
+		try {
+			if(checkSaveArticleLabelRel(articleLabelRel)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			int count = articleLabelRelDao.save(articleLabelRel);
+			if(count != 1) {
+				returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+				return returnData;
+			}
+			returnData.setResultData(articleLabelRel);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	private boolean checkSaveArticleLabelRel(ArticleLabelRel articleLabelRel) {
+		if(articleLabelRel == null) {
+			return false;
+		}
+		if(articleLabelRel.getArticleId() == null) {
+			return false;
+		}
+		if(articleLabelRel.getArticleLabelId() == null) {
+			return false;
+		}
+		if(articleLabelRel.getCareteTime() == null) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public ReturnData<VOID> deleteArticleLabelRelById(Long articleLabelRelId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if(articleLabelRelId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			articleLabelRelDao.deleteById(articleLabelRelId);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnData<ArticleLabelRel> updateArticleLabelRel(
+			ArticleLabelRel articleLabelRel) {
+		ReturnData<ArticleLabelRel> returnData = new ReturnData<ArticleLabelRel>();
+		try {
+			if(!checkUpdateArticleLabelRel(articleLabelRel)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			articleLabelRelDao.update(articleLabelRel);
+			returnData.setResultData(articleLabelRel);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	private boolean checkUpdateArticleLabelRel(ArticleLabelRel articleLabelRel) {
+		if(articleLabelRel == null) {
+			return false;
+		}
+		if(articleLabelRel.getArticleLabelRelId() == null) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public ReturnData<ArticleLabelRel> findArticleLabelRelById(
+			Long articleLabelRelId) {
+		ReturnData<ArticleLabelRel> returnData = new ReturnData<ArticleLabelRel>();
+		try {
+			if(articleLabelRelId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			ArticleLabelRel articleLabelRel = articleLabelRelDao.findById(articleLabelRelId);
+			returnData.setResultData(articleLabelRel);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
