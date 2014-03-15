@@ -3,6 +3,8 @@
  */
 package com.mins5.share.business.article.service;
 
+import java.util.List;
+
 import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.VOID;
@@ -48,4 +50,11 @@ public interface ArticleLabelService {
 	 * @return
 	 */
 	ReturnData<ArticleLabel> findArticleLabelById(Long labelId);
+	
+	/**
+	 * 查询一定数目的标签
+	 * @param amount 数量
+	 * @return
+	 */
+	ReturnData<List<ArticleLabel>> findArticleLabelByNum(int amount);
 }
