@@ -309,7 +309,9 @@ function getCookie(name) {//取cookies函数
 	<div region="west" border="true" split="true" title="Navigation" class="cs-west">
 		<div class="easyui-accordion" fit="true" border="false">
 				<div title="文章管理">
-					<a href="javascript:void(0);" src="${path}/article/articleList.mins" class="cs-navi-tab">文章管理</a></p>
+					<a href="javascript:void(0);" src="${path}/article/articleList.mins" class="cs-navi-tab">文章管理</a></p></p>
+					<a href="javascript:void(0);" src="${path}/article/toArticleAdd.mins" class="cs-navi-tab">类别管理</a></p>
+					<a href="javascript:void(0);" src="${path}/article/toArticleAdd.mins" class="cs-navi-tab">标签管理</a></p>
 				</div>
 				<div title="Base">
 					<a href="javascript:void(0);" src="${path}/js/easyui/demo/easyloader/basic.html" class="cs-navi-tab">easyloader</a></p>
