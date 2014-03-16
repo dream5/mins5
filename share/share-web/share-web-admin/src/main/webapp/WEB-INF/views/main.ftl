@@ -3,9 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="${path}/js/easyui/themes/metro/easyui.css" id="swicth-style">
-<script type="text/javascript" src="${path}/js/jquery/jquery-2.0.2.js"></script>
-<script type="text/javascript" src="${path}/js/easyui/jquery.easyui.min.js"></script>
+<#include "common/common_js.ftl" />
 <title>文章管理</title>
 <style type="text/css">
 body {

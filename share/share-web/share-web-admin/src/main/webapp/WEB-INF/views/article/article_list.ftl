@@ -10,5 +10,8 @@
 	--列表
 	--CRUD
 	${path}
+	
+	<br/>
+	<a href="${path}/article/toArticleAdd.mins">添加文章</a>
 </body>
 </html>
