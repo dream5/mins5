@@ -67,7 +67,7 @@ public class ArticleController {
 		Date currentDate = new Date();
 		article.setCreateTime(currentDate);
 		article.setUpdateTime(currentDate);
-		article.setStatus(ARTICLE_STATUS.PASSED_CHECK);
+		article.setStatus(ARTICLE_STATUS.WAITING_CHECK);
 		ReturnData<Article> returnData = articleService.saveArticle(article);
 		String tip = "添加成功！";
 		if(returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
