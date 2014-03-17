@@ -12,10 +12,10 @@
 	<style type="text/css" media="screen">
 	ul.introduce li img.hover {
 	margin-top:15px;
-	background:url(images/thumb_bg.gif) no-repeat center center;
+	background:url(${context}/images/thumb_bg.gif) no-repeat center center;
 	border: none;
 }
-ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;background:url(images/title.gif) no-repeat center center;padding:17px 0 0 0;text-align:center;}
+ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;background:url(${context}/images/title.gif) no-repeat center center;padding:17px 0 0 0;text-align:center;}
 	</style>
 <![endif]-->
 </head>
@@ -31,7 +31,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -41,7 +41,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -51,7 +51,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -61,7 +61,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -71,7 +71,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -81,7 +81,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -91,7 +91,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -101,7 +101,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -111,7 +111,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2>一头驴被主人拴在一棵树</h2>
           <p><span>时间:2014-02-18 21:49</span>&nbsp;&nbsp;<span>来源:网络</span>&nbsp;&nbsp;<span>作者:乔叶</span>&nbsp;&nbsp;<a href="#">浏览（18）</a></p>
           <div>
-		  	<img src="images/img_1.jpg" width="200" height="100" alt="image" />
+		  	<img src="${context}/images/img_1.jpg" width="200" height="100" alt="image" />
 		  </div>
 		  <p>旁一头驴被主人拴在一棵树。一只吸血蝠盘旋着飞过来，然后，落在离驴不远的地方，慢慢地接近它，终于站到驴的身上。在下嘴之前，它先在驴身上选定一个位置，又闻又舔。
   	           驴没有反抗，陶醉地享受着它的亲吻。吸血蝠露出长长的牙齿，轻轻地把驴身上的那块毛咬掉，然后把舌头形成一支吸管，尖利地刺下去。驴仍然没有动，似乎并不觉得痛——在吸血蝠的唾液里，含有适度...<span style="float:right;"><a href="blog.html">继续阅读</a></span></p>
@@ -125,16 +125,16 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <div class="cline"></div>
           <div class="photoBox">
           <ul class="introduce">
-			      <li><a href="#"><img src="images/robots.jpg" alt="Robots like cameras" /></a></li>
-			      <li><a href="#"><img src="images/monster.jpg" alt="Monsters!" /></a></li>
-			      <li><a href="#"><img src="images/santa.jpg" alt="Santa down under" /></a></li>
-			      <li><a href="#"><img src="images/thumb6.jpg" alt="Sponguebob!" /></a></li>
-			      <li><a href="#"><img src="images/thumb7.jpg" alt="Star Wars" /></a></li>
-			      <li><a href="#"><img src="images/dino.png" alt="Dinosaur time" /></a></li>
-			      <li><a href="#"><img src="images/orange.jpg" alt="Orange car" /></a></li>
-			      <li><a href="#"><img src="images/alien.jpg" alt="Aliens!" /></a></li>
-			      <li><a href="#"><img src="images/supe.jpg" alt="It's Superman!" /></a></li>
-			      <li><a href="#"><img src="images/garfield.jpg" alt="Where's my lasagne?" /></a></li>
+			      <li><a href="#"><img src="${context}/images/robots.jpg" alt="Robots like cameras" /></a></li>
+			      <li><a href="#"><img src="${context}/images/monster.jpg" alt="Monsters!" /></a></li>
+			      <li><a href="#"><img src="${context}/images/santa.jpg" alt="Santa down under" /></a></li>
+			      <li><a href="#"><img src="${context}/images/thumb6.jpg" alt="Sponguebob!" /></a></li>
+			      <li><a href="#"><img src="${context}/images/thumb7.jpg" alt="Star Wars" /></a></li>
+			      <li><a href="#"><img src="${context}/images/dino.png" alt="Dinosaur time" /></a></li>
+			      <li><a href="#"><img src="${context}/images/orange.jpg" alt="Orange car" /></a></li>
+			      <li><a href="#"><img src="${context}/images/alien.jpg" alt="Aliens!" /></a></li>
+			      <li><a href="#"><img src="${context}/images/supe.jpg" alt="It's Superman!" /></a></li>
+			      <li><a href="#"><img src="${context}/images/garfield.jpg" alt="Where's my lasagne?" /></a></li>
     		</ul>
     		</div>
         </div>
@@ -147,7 +147,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <p style="float:right;"><strong>Earl Nightingale</strong></p>
           </div>
        <div class="rightbox">
-          <img class="paperclip" alt="paperclip" src="images/paperclip.png">	
+          <img class="paperclip" alt="paperclip" src="images/paperclip.png"/>	
           <h2><span>猜你喜欢</span></h2>
           <div class="cline"></div>
           <ul class="ex_menu">
@@ -166,7 +166,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           </ul>
         </div>
         <!-- 百度广告位置1 -->
-        <div class="rightbox" style="background-image:url(images/baidu.jpg);height:250px;">
+        <div class="rightbox" style="background-image:url(${context}/images/baidu.jpg);height:250px;">
         </div>
         <div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
@@ -197,20 +197,17 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 					</div>
 	          </div>
 	       <!-- 百度广告位置2 -->
-        <div class="rightbox" style="background-image:url(images/baidu2.jpg);height:250px;">
+        <div class="rightbox" style="background-image:url(${context}/images/baidu2.jpg);height:250px;">
         </div>     
       </div>
       <div class="cline"></div>
     </div>
   </div>
-  <div class="fbg">
-    <div class="footer">
-    	<span class="fs">版权所有 © 2014 5M网 </span><span class="fs"><a href="javascript:;">免责声明</a></span><span class="fs"> 站长邮箱:zl007_ml@126.com </span><span class="fs">粤ICP备xxxxxx号 </span>  <span class="fs">站长统计 </span>
-    </div>
-  </div>
+  <%--footer --%> 
+  <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
 </div>
-<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="js/zoomer.js"></script>
+<script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/zoomer.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});

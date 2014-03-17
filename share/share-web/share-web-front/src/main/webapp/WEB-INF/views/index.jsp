@@ -135,11 +135,8 @@
       <div class="cline"></div>
     </div>
   </div>
-
-  <div class="fbg">
   	<%--footer --%> 
      <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
-  </div>
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${context}/js/index.js"></script>
