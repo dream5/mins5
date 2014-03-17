@@ -446,4 +446,9 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return returnData;
 	}
+
+	@Override
+	public int findAllArticlesCount() {
+		return articleDao.findAllArticlesCount();
+	}
 }
