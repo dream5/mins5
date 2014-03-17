@@ -68,6 +68,7 @@ create table article_kind
 (
    article_kind_id      int not null auto_increment,
    kind_name            varchar(30) not null,
+   kind_pinyin          varchar(30) not null,
    status               char(1) not null comment '0无效；1有效',
    update_time          datetime not null,
    create_time          datetime not null,
