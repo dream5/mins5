@@ -36,5 +36,8 @@
 		select article_title,article_url,create_time from article where status=1 order by rand() limit 0,#{amount}
 	</select>
 	
-
+	<!-- 查询文章总数 add by zhanglin 20140317 -->
+	<select id="findAllArticlesCount"  resultType="int">
+		select count(article_id) from article where status=1 
+	</select>
 </mapper>
