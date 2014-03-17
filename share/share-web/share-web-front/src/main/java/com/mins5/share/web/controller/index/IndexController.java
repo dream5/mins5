@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.domain.ArticleLabel;
+import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.business.article.service.ArticleLabelService;
+import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.util.JsonUtils;
@@ -37,9 +39,40 @@ public class IndexController {
 	
 	@Autowired
 	private ArticleService articleService;
-	
 	@Autowired
 	private ArticleLabelService articleLabelService;
+	@Autowired
+	private ArticleRecommendService recommendService;
+	
+	/**
+	 * 跳转至首页
+	 * @return
+	 */
+	@RequestMapping(value = "/goToIndex")
+	public String goToIndex(HttpServletRequest request,HttpServletResponse response){
+		//查询所有文章
+		
+		
+		//热门推荐
+		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION, 7);
+		if (recommendArticles.getReturnCode()==200&&!StringUtils.isEmpty(recommendArticles.getResultData())) {
+			request.setAttribute("recommendArticlesList", recommendArticles.getResultData());
+		}
+		//随机阅读
+		int amount = 8;
+		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(amount);
+		if (randomArticles.getReturnCode()==200&&!StringUtils.isEmpty(randomArticles.getResultData())) {
+			request.setAttribute("randomReadList", randomArticles.getResultData());
+		}
+		//热门标签
+		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(amount);
+		if (articleLabels.getReturnCode()==200&&!StringUtils.isEmpty(articleLabels.getResultData())) {
+			request.setAttribute("hotLabelList", articleLabels.getResultData());
+		}
+		
+		return  "index";
+	}
+	
 	
 	
 	/**
