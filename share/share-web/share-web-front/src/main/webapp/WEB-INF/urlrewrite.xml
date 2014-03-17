@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<!--
+    Configuration file for UrlRewriteFilter
+            用于JSP页面伪静态
+    add by zhanglin 
+    20140317 
+-->
+
+<urlrewrite>
+   
+   <!-- 主页跳转 -->
+   <rule>  
+          <from>^/$</from>  
+          <to type="forward">index/goToIndex.mins</to>
+    </rule>  
+    <!-- <rule>
+        <from>^/withParams/([a-zA-Z0-9]+).html$</from>
+        <to type="forward">withParams.action?name=$1</to>
+    </rule>
+    
+    <rule>
+        <from>^/withParams2/([a-zA-Z0-9]+).html$</from>
+        <to type="redirect">%{context-path}/withParams.action?name=$1</to>
+    </rule> -->
+    
+</urlrewrite>
+
