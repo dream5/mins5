@@ -143,11 +143,11 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
       <div class="rightbox">
           <h2>Wise Words</h2>
           <div class="cline"></div>
-          <p>   <img src="images/test_1.gif" alt="image" width="20" height="18" /> <em>We can let circumstances rule us, or we can take charge and rule our lives from within </em>.<img src="images/test_2.gif" alt="image" width="20" height="18" /></p>
+          <p>   <img src="${context}/images/test_1.gif" alt="image" width="20" height="18" /> <em>We can let circumstances rule us, or we can take charge and rule our lives from within </em>.<img src="images/test_2.gif" alt="image" width="20" height="18" /></p>
           <p style="float:right;"><strong>Earl Nightingale</strong></p>
           </div>
        <div class="rightbox">
-          <img class="paperclip" alt="paperclip" src="images/paperclip.png"/>	
+          <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png"/>	
           <h2><span>猜你喜欢</span></h2>
           <div class="cline"></div>
           <ul class="ex_menu">
