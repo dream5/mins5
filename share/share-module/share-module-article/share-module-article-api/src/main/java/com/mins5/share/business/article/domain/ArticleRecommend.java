@@ -1,9 +1,7 @@
 package com.mins5.share.business.article.domain;
 
 
-import java.util.Date;
-
-import com.mins5.share.business.article.enums.ARTICLE_STATUS;
+import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.common.domain.DomainObject;
 
 /**
@@ -20,7 +18,7 @@ public class ArticleRecommend extends DomainObject {
 	
 	// Fields
 	private Long recommendId;
-	private String recommendPosition;
+	private RECOMMEND_POSITION recommendPosition;
 	private Long recommendSort;
 	private Long articleId;
 
@@ -32,7 +30,7 @@ public class ArticleRecommend extends DomainObject {
 	}
 
 	/** full constructor */
-	public ArticleRecommend(Long recommendId, String recommendPosition,
+	public ArticleRecommend(Long recommendId, RECOMMEND_POSITION recommendPosition,
 			Long recommendSort, Long articleId) {
 		super();
 		this.recommendId = recommendId;
@@ -50,11 +48,11 @@ public class ArticleRecommend extends DomainObject {
 		this.recommendId = recommendId;
 	}
 
-	public String getRecommendPosition() {
+	public RECOMMEND_POSITION getRecommendPosition() {
 		return recommendPosition;
 	}
 
-	public void setRecommendPosition(String recommendPosition) {
+	public void setRecommendPosition(RECOMMEND_POSITION recommendPosition) {
 		this.recommendPosition = recommendPosition;
 	}
 
