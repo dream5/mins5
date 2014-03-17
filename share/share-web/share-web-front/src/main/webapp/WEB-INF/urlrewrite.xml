@@ -15,6 +15,13 @@
           <from>^/$</from>  
           <to type="forward">index/goToIndex.mins</to>
     </rule>  
+    
+    <!-- 分类页面跳转 -->
+    <rule>  
+          <from>^/([a-zA-Z]+)/$</from>  
+          <to type="forward">kind/goToKindList.mins</to>
+    </rule> 
+    
     <!-- <rule>
         <from>^/withParams/([a-zA-Z0-9]+).html$</from>
         <to type="forward">withParams.action?name=$1</to>
