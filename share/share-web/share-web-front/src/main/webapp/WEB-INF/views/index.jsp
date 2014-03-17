@@ -164,8 +164,10 @@
 
             // When document has loaded, initialize pagination and form
             $(document).ready(function(){
+            	
+            	
               
-                $("#Pagination").pagination(200, {
+                $("#Pagination").pagination('${totalArticleCount}', {
   							 num_edge_entries: 2,//两侧显示的首尾分页的条目数
    							 num_display_entries: 10,//连续分页主体部分显示的分页条目数
     						 callback: pageselectCallback,//回调函数
