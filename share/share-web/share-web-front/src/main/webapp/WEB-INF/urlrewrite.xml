@@ -19,7 +19,7 @@
     <!-- 分类页面跳转 -->
     <rule>  
           <from>^/([a-zA-Z]+)/$</from>  
-          <to type="forward">kind/goToKindList.mins</to>
+          <to type="forward">%{context-path}/kind/goToKindList.mins</to>
     </rule> 
     
     <!-- <rule>
