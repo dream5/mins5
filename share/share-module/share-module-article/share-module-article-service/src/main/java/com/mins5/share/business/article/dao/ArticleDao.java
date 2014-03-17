@@ -22,5 +22,12 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 	 * @return
 	 */
 	List<Article> findRandomArticle(@Param("amount") Integer amount);
+	
+	
+	/**
+	 * 查询文章总数
+	 * @return 
+	 */
+	int findAllArticlesCount();
 
 }
