@@ -7,7 +7,7 @@
 <title>分类列表页面</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="css/zoomer.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="${context}css/zoomer.css" media="screen" />
 <!--[if IE 6]>
 	<style type="text/css" media="screen">
 	ul.introduce li img.hover {
