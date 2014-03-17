@@ -22,8 +22,9 @@ public class KindListController {
 	private static final Log log = LogFactory.getLog(KindListController.class);
 	
 	
-	@RequestMapping(value = "/goToIndex")
+	@RequestMapping(value = "/goToKindList")
 	public String goToKindList(HttpServletRequest request,HttpServletResponse response){
+		log.info("跳转到分类列表页面...");
 		return "articleList";
 	}
 	
