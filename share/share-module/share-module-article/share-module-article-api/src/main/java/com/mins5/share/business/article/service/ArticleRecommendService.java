@@ -3,6 +3,7 @@ package com.mins5.share.business.article.service;
 import java.util.List;
 
 import com.mins5.share.business.article.domain.Article;
+import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.common.service.ReturnData;
 
 /**
@@ -18,6 +19,6 @@ public interface ArticleRecommendService {
 	 * @param num 推荐数量
 	 * @return
 	 */
-	ReturnData<List<Article>> findRecommendByPositionAndCount(int position,int num);
+	ReturnData<List<Article>> findRecommendByPositionAndCount(RECOMMEND_POSITION position,int num);
 
 }
