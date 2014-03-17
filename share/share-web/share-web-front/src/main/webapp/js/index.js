@@ -4,6 +4,7 @@
  */
 $(function (){
 	var timestamp = Date.parse(new Date());
+
 	$.ajax({
 	       type: "GET",
 	       contentType : 'application/json;charset=UTF-8',
@@ -29,9 +30,10 @@ $(function (){
 	});
 	
 	
+
 	
 	
-	$.ajax({
+	/*$.ajax({
 	       type: "GET",
 	       contentType : 'application/json;charset=UTF-8',
 	       url: '/index/randomRead.mins',
@@ -74,6 +76,6 @@ $(function (){
 	       error:function(data){
 	    	   $("#hotLabel").hide();
 	       }
-	});
-	
+	});*/
+
 });
