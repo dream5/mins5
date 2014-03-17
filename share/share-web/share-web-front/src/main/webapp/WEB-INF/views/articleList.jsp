@@ -21,37 +21,8 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 </head>
 <body>
 <div class="main">
-  <div class="header">
-    <div class="header_resize">
-      <div class="logo">
-        <h1><a href="index.html"><span> Mins  </span> five </a><small></small></h1>
-      </div>
-       <div class="search">
-        <form id="form" name="form" method="post" action="">
-          <span>
-          <input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="搜索你感兴趣的文章..." />
-          <input name="b" type="image" src="images/search_btn.gif" class="button" />
-          </span>
-        </form>
-      </div>
-      <!--/search -->
-      <div class="cline"></div>
-      <div class="menu_nav">
-        <ul>
-          <li><a href="index.html">首页</a></li>
-          <li><a href="list.html">心灵鸡汤</a></li>
-          <li><a href="list.html">逗你一笑</a></li>
-          <li><a href="list.html">励志故事</a></li>
-          <li><a href="list.html">职场热读</a></li>
-        </ul>
-      </div>
-      <div class="cline"></div>
-	  <!--面包屑-->
-		<div class="page-position">
-			当前位置：<a target="_parent" href="#">5分钟</a>&nbsp;&gt;&nbsp;<a target="_parent" href="#">心灵鸡汤</a>&nbsp;&gt;&nbsp;分类列表
-		</div>
-    </div>
-  </div>
+  <%--top --%> 
+  <%@ include file="/WEB-INF/views/frame/listTop.jsp" %>
   <div class="cline"></div>
   <div class="content">
     <div class="content_resize">
