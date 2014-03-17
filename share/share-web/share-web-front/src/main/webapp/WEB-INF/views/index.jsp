@@ -95,7 +95,7 @@
       <div class="sidebar">
       <c:if test="not empty recommendArticlesList">
         <div class="rightbox">
-          <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png">
+          <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png"/>
           <h2><span>热门推荐</span></h2>
           <div class="cline"></div>
           <ul class="sb_menu">
@@ -107,7 +107,7 @@
         </c:if>
         <c:if test="not empty randomReadList">
         <div class="rightbox">
-           <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png">	
+           <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png"/>	
           <h2><span>随机阅读</span></h2>
           <div class="cline"></div>
           <ul class="ex_menu">
