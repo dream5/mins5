@@ -51,6 +51,8 @@ public class IndexController {
 	@RequestMapping(value = "/goToIndex")
 	public String goToIndex(HttpServletRequest request,HttpServletResponse response){
 		//查询所有文章
+		int totalArticleCount = articleService.findAllArticlesCount();
+		request.setAttribute("totalArticleCount", totalArticleCount);
 		
 		
 		//热门推荐
