@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.article.dao.ArticleRecommendDao;
 import com.mins5.share.business.article.domain.Article;
-import com.mins5.share.business.article.domain.ArticleKind;
+import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
@@ -27,7 +27,7 @@ public class ArticleRecommendServiceImpl implements ArticleRecommendService{
 	private ArticleRecommendDao recommendDao;
 	
 	@Override
-	public ReturnData<List<Article>> findRecommendByPositionAndCount(int position,
+	public ReturnData<List<Article>> findRecommendByPositionAndCount(RECOMMEND_POSITION position,
 			int num) {
 		log.info("查询推荐文章开始...");
 		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
