@@ -22,6 +22,7 @@ public class ArticleKind extends DomainObject {
 
 	private Long articleKindId;
 	private String kindName;
+	private String kindPinyin;
 	private String status;
 	private Date updateTime;
 	private Date createTime;
@@ -47,7 +48,19 @@ public class ArticleKind extends DomainObject {
 	
 
 	/** full constructor */
-	
+	public ArticleKind(Long articleKindId, String kindName, String kindPinyin,
+			String status, Date updateTime, Date createTime, Long adminId,
+			Long parentKindId) {
+		super();
+		this.articleKindId = articleKindId;
+		this.kindName = kindName;
+		this.kindPinyin = kindPinyin;
+		this.status = status;
+		this.updateTime = updateTime;
+		this.createTime = createTime;
+		this.adminId = adminId;
+		this.parentKindId = parentKindId;
+	}
 
 	
 	public Long getArticleKindId() {
@@ -64,6 +77,14 @@ public class ArticleKind extends DomainObject {
 
 	public void setKindName(String kindName) {
 		this.kindName = kindName;
+	}
+
+	public String getKindPinyin() {
+		return kindPinyin;
+	}
+
+	public void setKindPinyin(String kindPinyin) {
+		this.kindPinyin = kindPinyin;
 	}
 
 	public String getStatus() {
@@ -110,8 +131,9 @@ public class ArticleKind extends DomainObject {
 	public String toString() {
 		return "ArticleKind [adminId=" + adminId + ", articleKindId="
 				+ articleKindId + ", createTime=" + createTime + ", kindName="
-				+ kindName + ", parentKindId=" + parentKindId + ", status="
-				+ status + ", updateTime=" + updateTime + "]";
+				+ kindName + ", kindPinyin=" + kindPinyin + ", parentKindId="
+				+ parentKindId + ", status=" + status + ", updateTime="
+				+ updateTime + "]";
 	}
 	
 
