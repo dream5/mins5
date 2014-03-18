@@ -29,5 +29,11 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 	 * @return 
 	 */
 	int findAllArticlesCount();
+	
+	/**
+	 * 根据条件查询文章
+	 * @return
+	 */
+	List<Article> findArticleByCondition(@Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
 
 }
