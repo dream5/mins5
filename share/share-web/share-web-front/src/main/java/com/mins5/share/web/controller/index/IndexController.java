@@ -23,6 +23,7 @@ import com.mins5.share.business.article.service.ArticleLabelService;
 import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.JsonUtils;
 
 /**
@@ -75,6 +76,29 @@ public class IndexController {
 		return  "index";
 	}
 	
+	/**
+	 * 获取分页文章
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/getArticlesByPageNo")
+	public void getArticlesByPageNo(HttpServletRequest request,HttpServletResponse response){
+		int currentPage = 1;
+		int pageSize = 15;
+		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		if (!StringUtils.isEmpty(request.getParameter("pageSize"))) {
+			pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		}
+		ReturnPageData<List<Article>> returnData = articleService.findArticleByCondition(null, currentPage, pageSize);
+		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
+			 JSONArray artcles = JSONArray.fromObject(returnData.getResultData()); 
+			 JsonUtils.write(artcles.toString(), response);
+		}else {
+			JsonUtils.write("error", response);
+		}
+	}
 	
 	
 	/**
