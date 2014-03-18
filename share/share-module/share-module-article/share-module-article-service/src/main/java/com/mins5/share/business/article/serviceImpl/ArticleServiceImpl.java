@@ -3,12 +3,14 @@
  */
 package com.mins5.share.business.article.serviceImpl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.mins5.share.business.article.dao.ArticleDao;
 import com.mins5.share.business.article.dao.ArticleKindDao;
@@ -21,6 +23,7 @@ import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
 
 /**
@@ -450,5 +453,27 @@ public class ArticleServiceImpl  implements ArticleService{
 	@Override
 	public int findAllArticlesCount() {
 		return articleDao.findAllArticlesCount();
+	}
+
+	@Override
+	public ReturnPageData<List<Article>> findArticleByCondition(
+			String kindPinYin, int currentPage, int onePageSize) {
+		ReturnPageData<List<Article>> returnPageData = new ReturnPageData<List<Article>>(currentPage, onePageSize);
+		try {
+			//没有处理查询条件
+			int totalResults = articleDao.findAllArticlesCount();
+			int startRow = returnPageData.getStartRow();
+			List<Article> articles = articleDao.findArticleByCondition(startRow, onePageSize);
+			if(StringUtils.isEmpty(articles)) {
+				articles = Collections.emptyList();
+			}
+			returnPageData.setTotalResults(totalResults);
+			returnPageData.setResultData(articles);
+			returnPageData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnPageData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnPageData;
 	}
 }

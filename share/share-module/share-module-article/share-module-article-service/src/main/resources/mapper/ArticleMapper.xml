@@ -40,4 +40,13 @@
 	<select id="findAllArticlesCount"  resultType="int">
 		select count(article_id) from article where status=1 
 	</select>
+	
+	<!-- 根据条件查询文章  add by zhanglin 20140318-->
+	<select id="findArticleByCondition"  resultMap="ArticleMap">
+		select 
+			article_id,article_title,article_content,article_from,article_url,article_author,
+        from article where status=1  limit #{startRow},#{onePageSize} 
+	</select>
+	
+	
 </mapper>
