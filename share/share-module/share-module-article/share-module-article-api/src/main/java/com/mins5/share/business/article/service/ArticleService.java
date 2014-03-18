@@ -10,6 +10,7 @@ import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.domain.ArticleKindRel;
 import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
 
 /**
@@ -150,5 +151,20 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<ArticleKindRel> findArticleKindRelById(Long articleKindRelId);
+	
+	/**
+	 * 查询文章总数
+	 * @return
+	 */
+	int findAllArticlesCount();
+	
+	/**
+	 * 根据条件查询
+	 * @param kindPinYin
+	 * @param currentPage
+	 * @param onePageSize
+	 * @return
+	 */
+	ReturnPageData<List<Article>> findArticleByCondition(String kindPinYin, int currentPage, int onePageSize);
 
 }
