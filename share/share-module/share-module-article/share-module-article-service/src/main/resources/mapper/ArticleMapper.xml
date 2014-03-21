@@ -44,7 +44,7 @@
 	<!-- 根据条件查询文章  add by zhanglin 20140318-->
 	<select id="findArticleByCondition"  resultMap="ArticleMap">
 		select 
-			article_id,article_title,article_content,article_from,article_url,article_author
+			article_id,article_title,article_content,article_from,article_url,article_author, update_time, create_time
         from article where status=1  limit #{startRow},#{onePageSize} 
 	</select>
 	
