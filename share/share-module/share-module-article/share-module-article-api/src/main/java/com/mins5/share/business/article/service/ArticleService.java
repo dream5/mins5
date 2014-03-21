@@ -167,4 +167,20 @@ public interface ArticleService {
 	 */
 	ReturnPageData<List<Article>> findArticleByCondition(String kindPinYin, int currentPage, int onePageSize);
 
+	
+	/**
+	 * 根据分类拼音查询文章总数
+	 * @param kindPinyin 分类全拼
+	 * @return
+	 */
+	int findArticlesByKindPinyinCount(String kindPinyin);
+	
+	/**
+	 *  根据分类拼音查询文章
+	 * @param kindPinYin
+	 * @param currentPage
+	 * @param onePageSize
+	 * @return
+	 */
+	ReturnPageData<List<Article>> findArticlesByKindPinyin(String kindPinYin,int currentPage, int onePageSize);
 }
