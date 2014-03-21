@@ -23,7 +23,7 @@
        </div>
       </div>
       <div class="sidebar">
-      <c:if test="not empty recommendArticlesList">
+      <c:if test="${not empty  recommendArticlesList}">
         <div class="rightbox">
           <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png"/>
           <h2><span>热门推荐</span></h2>
@@ -35,7 +35,7 @@
           </ul>
         </div>
         </c:if>
-        <c:if test="not empty randomReadList">
+        <c:if test="${not empty randomReadList}">
         <div class="rightbox">
            <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png"/>	
           <h2><span>随机阅读</span></h2>
@@ -49,7 +49,7 @@
         </c:if>
         <div class="rightbox" style="background-image:url(${context}/images/baidu.jpg);height:250px;">
         </div>
-        <c:if test="not empty hotLabelList">
+        <c:if test="${not empty hotLabelList}">
 		<div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
           	 <div class="cline"></div>
@@ -106,7 +106,6 @@
        		    	   $(".mypage").before(content);
        		       } 
          	    	   
-         	    	   
          	       },
          	       error:function(data){
          	    	  $(".mainbar").html("<div class=\"article\"><span>对不起，没有查询出数据！<span></div>");
@@ -118,6 +117,7 @@
                 return false;
             }
 
+            
 
             // When document has loaded, initialize pagination and form
             $(document).ready(function(){
