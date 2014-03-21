@@ -6,10 +6,7 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
 
 /**
  * @author zhoutian
@@ -65,6 +62,11 @@ public abstract class JsonUtils {
 				out.close();
 			}
 		}
+	}
+	
+	public static void write(Object obj, HttpServletResponse response) {
+		String json = JsonUtils.writeValue(obj);
+		JsonUtils.write(json, response);
 	}
 
 }
