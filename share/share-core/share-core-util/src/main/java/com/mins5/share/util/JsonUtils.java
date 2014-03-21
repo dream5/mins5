@@ -2,10 +2,14 @@ package com.mins5.share.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
 
 /**
  * @author zhoutian
@@ -14,6 +18,13 @@ import org.codehaus.jackson.map.ObjectMapper;
 public abstract class JsonUtils {
 
 	private static ObjectMapper objectMapper = new ObjectMapper();
+	
+	static {
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+//        objectMapper.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        objectMapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,    false);
+//        objectMapper.setFilters(new SimpleFilterProvider().setFailOnUnknownId(false));
+	}
 
 	public static String writeValue(Object obj) {
 		if (obj == null) {
