@@ -4,9 +4,10 @@
 <!-- 文字种类 -->
 <mapper namespace="com.mins5.share.business.article.dao.ArticleKindDao">
 
-	<resultMap type="com.mins5.share.business.article.domain.ArticleKind" id="ArticleKind">
+	<resultMap type="com.mins5.share.business.article.domain.ArticleKind" id="ArticleKindMap">
 		<id property="articleKindId" column="article_kind_id"/>
 		<result property="kindName" column="kind_name"/>
+		<result property="kindPinyin" column="kind_pinyin"/>
 		<result property="status" column="status"/>
 		<result property="updateTime" column="update_time"/>
 		<result property="createTime" column="create_time"/>
@@ -15,8 +16,8 @@
 	</resultMap>
 	
 	<!-- 查询所有有效分类 -->
-	<select id="findAllArticleKind"  resultMap="ArticleKind">
-		select article_kind_id,kind_name,status,parent_kind_id from article_kind where status = 1 
+	<select id="findAllArticleKind"  resultMap="ArticleKindMap">
+		select article_kind_id,kind_name,status,parent_kind_id,kind_pinyin from article_kind where status = 1 
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="articleKindId">
@@ -43,7 +44,7 @@
 		where article_kind_id = #{articleKindId}
 	</update>
 	
-	<select id="findById" parameterType="long" resultMap="ArticleKind">
+	<select id="findById" parameterType="long" resultMap="ArticleKindMap">
 		select * from article_kind where article_kind_id = #{articleKindId}
 	</select>
 	
