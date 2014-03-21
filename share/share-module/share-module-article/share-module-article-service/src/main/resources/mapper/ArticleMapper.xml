@@ -45,8 +45,34 @@
 	<select id="findArticleByCondition"  resultMap="ArticleMap">
 		select 
 			article_id,article_title,article_content,article_from,article_url,article_author, update_time, create_time
-        from article where status=1  limit #{startRow},#{onePageSize} 
+        from article where status=1  order by article_id desc limit #{startRow},#{onePageSize} 
 	</select>
+	
+	<!-- 根据分类拼音查询文章总数 add by zhanglin 20140321 -->
+	<select id="findArticlesByKindPinyinCount"  resultType="int">
+		select count(a.article_id) from article a 
+		left join article_kind_rel akr on a.article_id = akr.article_id
+		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
+		where a.status =1 and akr.status=1 and ak.status = 1
+		 <if test="kindPinyin != null">  
+	       and ak.kind_name =#{kindPinyin}  
+	     </if>  
+	</select>
+	
+	<!-- 根据分类拼音查询文章  add by zhanglin 20140321-->
+	<select id="findArticlesByKindPinyin"  resultMap="ArticleMap">
+		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time
+		from article a 
+		left join article_kind_rel akr on a.article_id = akr.article_id
+		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
+		where a.status =1 and akr.status=1 and ak.status = 1
+		 <if test="kindPinyin != null">  
+	       and ak.kind_name =#{kindPinyin}  
+	     </if>  
+	     order by a.article_id desc
+	     limit #{startRow},#{onePageSize} 
+	</select>
+	
 	
 	
 </mapper>
