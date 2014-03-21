@@ -462,14 +462,45 @@ public class ArticleServiceImpl  implements ArticleService{
 		try {
 			//没有处理查询条件
 			int totalResults = articleDao.findAllArticlesCount();
-			int startRow = returnPageData.getStartRow();
-			List<Article> articles = articleDao.findArticleByCondition(startRow, onePageSize);
-			if(StringUtils.isEmpty(articles)) {
-				articles = Collections.emptyList();
+			if (totalResults>0) {
+				int startRow = returnPageData.getStartRow();
+				List<Article> articles = articleDao.findArticleByCondition(startRow, onePageSize);
+				if(StringUtils.isEmpty(articles)) {
+					articles = Collections.emptyList();
+				}
+				returnPageData.setTotalResults(totalResults);
+				returnPageData.setResultData(articles);
+				returnPageData.setReturnCode(ReturnCode.SUCCESS.getCode());
 			}
-			returnPageData.setTotalResults(totalResults);
-			returnPageData.setResultData(articles);
-			returnPageData.setReturnCode(ReturnCode.SUCCESS.getCode());
+			
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnPageData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnPageData;
+	}
+
+	@Override
+	public int findArticlesByKindPinyinCount(String kindPinyin) {
+		return articleDao.findArticlesByKindPinyinCount(kindPinyin);
+	}
+
+	@Override
+	public ReturnPageData<List<Article>> findArticlesByKindPinyin(
+			String kindPinYin, int currentPage, int onePageSize) {
+		ReturnPageData<List<Article>> returnPageData = new ReturnPageData<List<Article>>(currentPage, onePageSize);
+		try {
+			int totalResults = articleDao.findArticlesByKindPinyinCount(kindPinYin);
+			if (totalResults>0) {
+				int startRow = returnPageData.getStartRow();
+				List<Article> articles = articleDao.findArticlesByKindPinyin(kindPinYin,startRow, onePageSize);
+				if(StringUtils.isEmpty(articles)) {
+					articles = Collections.emptyList();
+				}
+				returnPageData.setTotalResults(totalResults);
+				returnPageData.setResultData(articles);
+				returnPageData.setReturnCode(ReturnCode.SUCCESS.getCode());
+			}
 		} catch(Exception e) {
 			log.error("service exception", e);
 			returnPageData.setReturnCode(ReturnCode.EXCEPTION.getCode());
