@@ -93,8 +93,7 @@ public class IndexController {
 		}
 		ReturnPageData<List<Article>> returnData = articleService.findArticleByCondition(null, currentPage, pageSize);
 		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
-			 JSONArray artcles = JSONArray.fromObject(returnData.getResultData()); 
-			 JsonUtils.write(artcles.toString(), response);
+			 JsonUtils.write(returnData.getResultData(), response);
 		}else {
 			JsonUtils.write("error", response);
 		}
