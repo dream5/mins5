@@ -18,11 +18,9 @@
   <%--content --%>
   <div class="content">
     <div class="content_resize">
-      <div class="mainbar">
-       <%--内容加载于异步获取 --%>
-      </div>
-          <div id="Pagination" class="mypage">
-          </div>
+      <div class="mainbar"><%--内容加载于异步获取 --%>
+       <div id="Pagination" class="mypage">
+       </div>
       </div>
       <div class="sidebar">
       <c:if test="not empty recommendArticlesList">
@@ -78,7 +76,7 @@
    
             function pageSelectCallBack(page_index, jq){
             	var currentPage = page_index+1;
-            	var pageSize = 15;
+            	var pageSize = 7;
             	var timestamp = Date.parse(new Date());
             	$.ajax({
          	       type: "GET",
@@ -92,7 +90,6 @@
        		    	   $(".mypage").hide();
        		       }else{
        		    	   var content = "";
-       		    		content +="<li><a href='http://www.mins5.com'>首页</a></li>";
        		    	   $.each(result,function(index,item){
        		    		   content +="<div class=\"article\">";
        		    		   content +="<h2>"+item.articleTitle+"</h2>";
@@ -106,7 +103,7 @@
        		    		   content +=baiduShare();
        		    			content +="</div>";
        		    	   });
-       		    	   $(".menu_nav").html(content);
+       		    	   $(".mypage").before(content);
        		       } 
          	    	   
          	    	   
