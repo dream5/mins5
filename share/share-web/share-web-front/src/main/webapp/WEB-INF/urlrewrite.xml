@@ -22,6 +22,13 @@
           <to type="forward">%{context-path}/kind/goToKindList.mins?k=$1</to>
     </rule> 
     
+      <!-- 详情页面跳转 -->
+    <rule>  
+          <from>^/([a-zA-Z]+)/([0-9]+).html$</from>  
+          <to type="forward">%{context-path}/detail/goToDetail.mins?k=$1&amp;id=$2</to>
+    </rule> 
+    
+    
     <!-- <rule>
         <from>^/withParams/([a-zA-Z0-9]+).html$</from>
         <to type="forward">withParams.action?name=$1</to>
