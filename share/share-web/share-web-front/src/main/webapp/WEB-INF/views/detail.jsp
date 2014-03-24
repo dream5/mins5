@@ -141,8 +141,8 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
     </div>
   </div>
 </div>
-<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="js/zoomer.js"></script>
+<script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/zoomer.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
