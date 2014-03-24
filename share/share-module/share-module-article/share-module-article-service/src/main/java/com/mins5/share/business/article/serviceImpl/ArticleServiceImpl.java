@@ -507,4 +507,22 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return returnPageData;
 	}
+
+	@Override
+	public ReturnData<Article> findArticleById(long id) {
+		ReturnData<Article> returnData = new ReturnData<Article>();
+		try {
+			if(StringUtils.isEmpty(id)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Article article = articleDao.findById(id);
+			returnData.setResultData(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 }
