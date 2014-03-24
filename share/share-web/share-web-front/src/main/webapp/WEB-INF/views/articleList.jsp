@@ -30,24 +30,28 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
          <%--内容加载于异步获取 --%>
 		 <div id="Pagination" class="mypage">
       	 </div>
-        <div class="article" style="height:300px;">
-          <h2><span>精彩推荐</span></h2>
-          <div class="cline"></div>
-          <div class="photoBox">
-          <ul class="introduce">
-			      <li><a href="#"><img src="${context}/images/robots.jpg" alt="Robots like cameras" /></a></li>
-			      <li><a href="#"><img src="${context}/images/monster.jpg" alt="Monsters!" /></a></li>
-			      <li><a href="#"><img src="${context}/images/santa.jpg" alt="Santa down under" /></a></li>
-			      <li><a href="#"><img src="${context}/images/thumb6.jpg" alt="Sponguebob!" /></a></li>
-			      <li><a href="#"><img src="${context}/images/thumb7.jpg" alt="Star Wars" /></a></li>
-			      <li><a href="#"><img src="${context}/images/dino.png" alt="Dinosaur time" /></a></li>
-			      <li><a href="#"><img src="${context}/images/orange.jpg" alt="Orange car" /></a></li>
-			      <li><a href="#"><img src="${context}/images/alien.jpg" alt="Aliens!" /></a></li>
-			      <li><a href="#"><img src="${context}/images/supe.jpg" alt="It's Superman!" /></a></li>
-			      <li><a href="#"><img src="${context}/images/garfield.jpg" alt="Where's my lasagne?" /></a></li>
-    		</ul>
-    		</div>
-        </div>
+      	 <c:if test="${not empty recommendArticlesList }">
+	        <div class="article" style="height:300px;">
+	          <h2><span>精彩推荐</span></h2>
+	          <div class="cline"></div>
+	          <div class="photoBox">
+	          <ul class="introduce">
+	          	<c:forEach var="recommendArticles" items="${recommendArticlesList }">
+	          		  <li><a href="${ recommendArticles.articleUrl}" target="_blank"><img src="${context}/images/robots.jpg" alt="${recommendArticles.articleTitle}" /></a></li>
+	          	</c:forEach>
+				   <%--    <li><a href="#"><img src="${context}/images/monster.jpg" alt="Monsters!" /></a></li>
+				      <li><a href="#"><img src="${context}/images/santa.jpg" alt="Santa down under" /></a></li>
+				      <li><a href="#"><img src="${context}/images/thumb6.jpg" alt="Sponguebob!" /></a></li>
+				      <li><a href="#"><img src="${context}/images/thumb7.jpg" alt="Star Wars" /></a></li>
+				      <li><a href="#"><img src="${context}/images/dino.png" alt="Dinosaur time" /></a></li>
+				      <li><a href="#"><img src="${context}/images/orange.jpg" alt="Orange car" /></a></li>
+				      <li><a href="#"><img src="${context}/images/alien.jpg" alt="Aliens!" /></a></li>
+				      <li><a href="#"><img src="${context}/images/supe.jpg" alt="It's Superman!" /></a></li>
+				      <li><a href="#"><img src="${context}/images/garfield.jpg" alt="Where's my lasagne?" /></a></li> --%>
+	    		</ul>
+	    		</div>
+	        </div>
+        </c:if>
       </div>
       <div class="sidebar">
       <div class="rightbox">
