@@ -183,4 +183,12 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnPageData<List<Article>> findArticlesByKindPinyin(String kindPinYin,int currentPage, int onePageSize);
+
+	/**
+	 * 根据文章ID查询文章
+	 * @param id
+	 * @return
+	 */
+	ReturnData<Article> findArticleById(long id);
+	
 }
