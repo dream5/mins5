@@ -1,7 +1,9 @@
 package com.mins5.share.web.controller.detail;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,11 +51,13 @@ public class DetailController {
 	public String goToDetail(HttpServletRequest request,
 			HttpServletResponse response) {
 		log.info("跳转到详情页面...");
-		
 		String id = request.getParameter("id");
 		String kind = request.getParameter("k");
 		if (!StringUtils.isEmpty(id)) {
 			ReturnData<Article> article  = articleService.findArticleById(Long.parseLong(id));
+			if (article.getResultData()==null) {
+				return "error";
+			}
 			request.setAttribute("article", article);
 		}
 		
