@@ -21,7 +21,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 </head>
 <body>
 <div class="main">
-   <%--top --%> 
+  <%--top --%> 
   <%@ include file="/WEB-INF/views/frame/listTop.jsp" %>
   <div class="cline"></div>
   <div class="content">
