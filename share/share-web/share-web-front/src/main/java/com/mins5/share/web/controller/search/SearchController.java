@@ -48,19 +48,19 @@ public class SearchController {
 	
 	@RequestMapping(value = "/s")
 	public String search(HttpServletRequest request,HttpServletResponse response){
-		log.info("搜索开始...");
 		String key = request.getParameter("k");
-		int totalArticleCount = searchService.complexSearchArticleDataCount(key);
-		request.setAttribute("totalArticleCount", totalArticleCount);
-
+		log.info("搜索["+key+"]...");
+		if (!StringUtils.isEmpty(key)) {
+			int totalArticleCount = searchService.complexSearchArticleDataCount(key);
+			request.setAttribute("totalArticleCount", totalArticleCount);
+			request.setAttribute("searchKey", key);
+		}
+		
 		// 猜你喜欢
 		int amount = 6;
-		ReturnData<List<Article>> randomArticles = articleService
-				.findRandomArticle(amount);
-		if (randomArticles.getReturnCode() == 200
-				&& !StringUtils.isEmpty(randomArticles.getResultData())) {
-			request.setAttribute("randomReadList",
-					randomArticles.getResultData());
+		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(amount);
+		if (randomArticles.getReturnCode() == 200 && !StringUtils.isEmpty(randomArticles.getResultData())) {
+			request.setAttribute("randomReadList",randomArticles.getResultData());
 		}
 		
 		//热门推荐
@@ -90,11 +90,11 @@ public class SearchController {
 			HttpServletResponse response){
 		int currentPage = 1;
 		int pageSize = 10;
-		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		if(!StringUtils.isEmpty(request.getParameter("c"))){
+			currentPage = Integer.parseInt(request.getParameter("c"));
 		}
-		if (!StringUtils.isEmpty(request.getParameter("pageSize"))) {
-			pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		if (!StringUtils.isEmpty(request.getParameter("p"))) {
+			pageSize = Integer.parseInt(request.getParameter("p"));
 		}
 		String key  = request.getParameter("k");
 		ReturnPageData<List<Article>> returnData = searchService.complexSearchArticleData(key, currentPage, pageSize);
