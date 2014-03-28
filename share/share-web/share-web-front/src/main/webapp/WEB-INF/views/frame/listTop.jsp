@@ -7,8 +7,8 @@
        <div class="search">
         <form id="form" name="form" method="post" action="">
           <span>
-          <input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="搜索你感兴趣的文章..." />
-          <input name="b" type="image" src="${context}/images/search_btn.gif" class="button" />
+          <input name="searchContent" type="text" class="keywords" id="textfield" maxlength="50" value="搜索你感兴趣的文章..." />
+          <input name="searchbtn" type="image" src="${context}/images/search_btn.gif" class="sbtn" />
           </span>
         </form>
       </div>
