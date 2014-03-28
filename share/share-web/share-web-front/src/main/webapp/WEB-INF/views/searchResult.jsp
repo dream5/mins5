@@ -105,6 +105,10 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 <script type="text/javascript" src="${context}/js/jquery.pagination.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	var searchkey = '${searchKey}';
+	$('.keywords').val(searchkey);
+	
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
  	
  	$("#Pagination").pagination('${totalArticleCount}', {
@@ -117,7 +121,7 @@ $(document).ready(function(){
     function pageSelectCallBack(page_index, jq){
     	var c = page_index+1;
     	var p = 10;
-    	var k = '${k}';
+    	var k = $('.keywords').val();
     	var timestamp = Date.parse(new Date());
     	$.ajax({
  	       type: "GET",
