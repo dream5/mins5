@@ -79,4 +79,25 @@
 	</select>
 	
 	
+	<!-- 根据文本标题查询文章总数 add by zhanglin 20140328 -->
+	<select id="findArticlesCountByTitle"  resultType="int">
+		select count(a.article_id) from article a 
+		where a.status =1 
+		 <if test="title != null">  
+	       and a.article_title like CONCAT('%',#{title},'%')
+	     </if>  
+	</select>
+	
+	<!-- 根据文本标题查询文章 add by zhanglin 20140328-->
+	<select id="findArticlesByTitle"  resultMap="ArticleMap">
+		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time
+		from article a 
+		where a.status =1 
+		 <if test="title != null">  
+	       and a.article_title like CONCAT('%',#{title},'%')
+	     </if>  
+	     order by a.article_id desc
+	     limit #{startRow},#{onePageSize} 
+	</select>
+	
 </mapper>
