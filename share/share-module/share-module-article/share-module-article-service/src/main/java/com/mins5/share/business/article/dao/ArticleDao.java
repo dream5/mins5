@@ -55,4 +55,17 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 	List<Article> findArticlesByKindPinyin(@Param("kindPinyin")String kindPinYin,@Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
 	
 	
+	
+	/**
+	 * 查询文章总数
+	 * @return 
+	 */
+	int findArticlesCountByTitle(String title);
+	
+	/**
+	 * 根据条件查询文章
+	 * @return
+	 */
+	List<Article> findArticlesByTitle(@Param("title")String title,@Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
+	
 }
