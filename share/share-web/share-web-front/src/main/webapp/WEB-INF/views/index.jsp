@@ -81,7 +81,7 @@
             	$.ajax({
          	       type: "GET",
          	       contentType : 'application/json;charset=UTF-8',
-         	       url: '/index/getArticlesByPageNo.mins',
+         	       url: '${context}/index/getArticlesByPageNo.mins',
          	       data: {t:timestamp,currentPage:currentPage,pageSize:pageSize},
          	       dataType: "json",
          	       success:function(result) {
