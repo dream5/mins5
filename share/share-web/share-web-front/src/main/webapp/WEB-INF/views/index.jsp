@@ -69,20 +69,21 @@
      <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/index.js"></script>
 <script type="text/javascript" src="${context}/js/jquery.pagination.js"></script>
         <script type="text/javascript">
 
    
             function pageSelectCallBack(page_index, jq){
-            	var currentPage = page_index+1;
-            	var pageSize = 7;
+            	var cp = page_index+1;
+            	var ps = 7;
             	var timestamp = Date.parse(new Date());
             	$.ajax({
          	       type: "GET",
          	       contentType : 'application/json;charset=UTF-8',
          	       url: '${context}/index/getArticlesByPageNo.mins',
-         	       data: {t:timestamp,currentPage:currentPage,pageSize:pageSize},
+         	       data: {t:timestamp,cp:cp,cp:ps},
          	       dataType: "json",
          	       success:function(result) {
          	    	  if(result == "error"){

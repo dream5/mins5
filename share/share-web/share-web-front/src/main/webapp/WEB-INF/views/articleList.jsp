@@ -100,6 +100,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
   <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/zoomer.js"></script>
 <script type="text/javascript" src="${context}/js/jquery.pagination.js"></script>
 <script type="text/javascript">

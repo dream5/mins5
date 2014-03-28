@@ -132,6 +132,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
   </div>
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/zoomer.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
