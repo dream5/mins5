@@ -48,6 +48,7 @@ public class SearchController {
 	
 	@RequestMapping(value = "/s")
 	public String search(HttpServletRequest request,HttpServletResponse response){
+		log.info("搜索开始...");
 		String key = request.getParameter("k");
 		int totalArticleCount = searchService.complexSearchArticleDataCount(key);
 		request.setAttribute("totalArticleCount", totalArticleCount);
