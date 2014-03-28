@@ -83,7 +83,7 @@
          	       type: "GET",
          	       contentType : 'application/json;charset=UTF-8',
          	       url: '${context}/index/getArticlesByPageNo.mins',
-         	       data: {t:timestamp,cp:cp,cp:ps},
+         	       data: {t:timestamp,cp:cp,ps:ps},
          	       dataType: "json",
          	       success:function(result) {
          	    	  if(result == "error"){
