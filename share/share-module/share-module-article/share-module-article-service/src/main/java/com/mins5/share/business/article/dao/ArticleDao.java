@@ -60,7 +60,7 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 	 * 查询文章总数
 	 * @return 
 	 */
-	int findArticlesCountByTitle(String title);
+	int findArticlesCountByTitle(@Param("title") String title);
 	
 	/**
 	 * 根据条件查询文章
