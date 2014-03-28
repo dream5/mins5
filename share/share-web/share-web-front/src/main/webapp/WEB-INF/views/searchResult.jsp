@@ -122,6 +122,9 @@ $(document).ready(function(){
     	var c = page_index+1;
     	var p = 10;
     	var k = $('.keywords').val();
+    	if(k=='搜索你感兴趣的文章...'){
+    		k="";
+    	}
     	var timestamp = Date.parse(new Date());
     	$.ajax({
  	       type: "GET",
