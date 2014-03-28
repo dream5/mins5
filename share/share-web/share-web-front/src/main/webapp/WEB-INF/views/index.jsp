@@ -70,7 +70,6 @@
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
-<script type="text/javascript" src="${context}/js/index.js"></script>
 <script type="text/javascript" src="${context}/js/jquery.pagination.js"></script>
         <script type="text/javascript">
 
