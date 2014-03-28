@@ -19,6 +19,16 @@ $(function() {
 	});
 });
 
+
+$(".sbtn").click(function(){
+	var k  = $('.keywords').val();
+		if(k=='搜索你感兴趣的文章...'||k==null ||k==''){
+			alert("请输入搜索关键字...");
+			return;
+		}
+		window.location.href="/s/s.mins?k"+k;
+});
+
 /**
  * 解析时间对象成字符串
  * @param data
