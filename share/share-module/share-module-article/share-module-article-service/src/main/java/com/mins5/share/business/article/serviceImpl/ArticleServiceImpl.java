@@ -90,6 +90,9 @@ public class ArticleServiceImpl  implements ArticleService{
 		if(articleKind.getAdminId() == null) {
 			return false;
 		}
+		if(articleKind.getKindPinyin() == null) {
+			return false;
+		}
 		if(articleKind.getCreateTime() == null) {
 			return false;
 		}

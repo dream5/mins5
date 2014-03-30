@@ -3,6 +3,7 @@
  */
 package com.mins5.share.business.article.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -16,6 +17,7 @@ import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.business.article.service.ArticleLabelService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
 
 /**
@@ -141,6 +143,27 @@ public class ArticleLabelServiceImpl implements ArticleLabelService {
 			}
 			List<ArticleLabel> articleLabels = articleLabelDao.findArticleLabelByNum(amount);
 			returnData.setResultData(articleLabels);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnPageData<List<ArticleLabel>> findArticleLabelByLabelNameAndStatusAndCreateTime(
+			String labelName, String status, Date beginTime, Date endTime,
+			int currentPage, int onePageSize) {
+		ReturnPageData<List<ArticleLabel>> returnData = new ReturnPageData<List<ArticleLabel>>(currentPage, onePageSize);
+		try {
+			int count = articleLabelDao.findArticleLabelCountByLabelNameAndStatusAndCreateTime(labelName, status, beginTime, endTime);
+			if(count > 0) {
+				int startRow = returnData.getStartRow();
+				List<ArticleLabel> articleLabelList = articleLabelDao.findArticleLabelByLabelNameAndStatusAndCreateTime(labelName, status, beginTime, endTime, startRow, onePageSize);
+				returnData.setTotalResults(count);
+				returnData.setResultData(articleLabelList);;
+			}
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
