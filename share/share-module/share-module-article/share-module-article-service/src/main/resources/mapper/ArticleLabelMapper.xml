@@ -36,11 +36,30 @@
 		select * from article_label where label_id = #{labelId}
 	</select>
 	
-	
 	<!-- 查询热门标签 add by zhanglin 20140315 -->
 	<select id="findArticleLabelByNum" parameterType="int" resultMap="ArticleLabelMap">
 		select label_id,label_name,create_time from article_label where status=1  limit 0,#{amount}
 	</select>
 	
+	<select id="findArticleLabelCountByLabelNameAndStatusAndCreateTime" resultType="int">
+		SELECT COUNT(*) FROM article_label
+		<where>
+			<if test="labelName != null">label_name LIKE CONCAT('%', #{labelName}, '%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+		</where>
+	</select>
+	
+	<select id="findArticleLabelByLabelNameAndStatusAndCreateTime" resultMap="ArticleLabelMap">
+		SELECT * FROM article_label
+		<where>
+			<if test="labelName != null">label_name LIKE CONCAT('%', #{labelName}, '%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+		</where>
+		LIMIT #{startRow}, #{onePageSize}
+	</select>
 	
 </mapper>

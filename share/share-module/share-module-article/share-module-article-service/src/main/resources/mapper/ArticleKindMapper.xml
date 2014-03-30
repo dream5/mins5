@@ -22,9 +22,9 @@
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="articleKindId">
 		insert into article_kind 
-		(kind_name, status, update_time, create_time, admin_id, parent_kind_id) 
+		(kind_name, kind_pinyin, status, update_time, create_time, admin_id, parent_kind_id) 
 		values 
-		(#{kindName}, #{status}, #{updateTime}, #{createTime}, #{adminId}, #{parentKindId})
+		(#{kindName}, #{kindPinyin}, #{status}, #{updateTime}, #{createTime}, #{adminId}, #{parentKindId})
 	</insert>
 	
 	<delete id="deleteById" parameterType="long">
@@ -47,6 +47,5 @@
 	<select id="findById" parameterType="long" resultMap="ArticleKindMap">
 		select * from article_kind where article_kind_id = #{articleKindId}
 	</select>
-	
 
 </mapper>
