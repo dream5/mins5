@@ -9,7 +9,7 @@
 
 	});
 	function submitForm() {
-		$('#articleFormId').form('submit', {
+		$('#articleKindFormId').form('submit', {
 			//	url:...,
 			onSubmit : function() {
 				var isValid = $(this).form('validate');
@@ -25,60 +25,42 @@
 		});
 	}
 	function clearForm() {
-		$('#articleFormId').form('clear');
-		$('#isOriginal').combobox('setValue', '1');
+		$('#articleKindFormId').form('clear');
 	}
 </script>
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<h2>添加文章</h2>
+	<h2>添加文章类别</h2>
 	<div class="demo-info">
 		<div class="demo-tip icon-tip"></div>
-		<div>输入文章信息然后点击提交按钮</div>
+		<div>输入文章类别信息然后点击提交按钮</div>
 	</div>
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
 	</div>
-	<div class="easyui-panel" title="添加文章" style="width: 800px">
+	<div class="easyui-panel" title="添加文章类别" style="width: 800px">
 		<div style="padding: 10px 0 10px 60px">
-			<form id="articleFormId" method="post"
-				action="${path}/article/articleAdd.mins">
+			<form id="articleKindFormId" method="post"
+				action="${path}/article/articleKindAdd.mins">
 				<table>
 					<tr>
-						<td>标题:</td>
+						<td>类别名称:</td>
 						<td><input class="easyui-validatebox input-long" type="text"
-							name="articleTitle" data-options="required:true"></input></td>
+							name="kindName" data-options="required:true"></input></td>
 					</tr>
 					<tr>
-						<td>来源url:</td>
+						<td>类别拼音:</td>
 						<td><input class="easyui-validatebox input-long" type="text"
-							name="articleUrl"></input></td>
+							name="kindPinyin" data-options="required:true"></input></td>
 					</tr>
+					<!-- 
 					<tr>
-						<td>文章来源描述:</td>
-						<td><input class="easyui-validatebox input-long" type="text"
-							name="articleFrom"></input></td>
-					</tr>
-					<tr>
-						<td>文章作者:</td>
+						<td>父类别:</td>
 						<td><input class="easyui-validatebox input-short" type="text"
-							name="articleAuthor" data-options="required:true"></input></td>
+							name="parentKindId" data-options="required:true"></input></td>
 					</tr>
-					<tr>
-						<td>是否原创:</td>
-						<td><select id="isOriginal" class="easyui-combobox"
-							style="height: 1" name="isOriginal"
-							data-options="required:true,editable:false,panelHeight:'auto'">
-								<option value="0">否</option>
-								<option value="1" selected="selected">是</option>
-						</select></td>
-					</tr>
-					<tr>
-						<td>内容:</td>
-						<td><textarea class="easyui-validatebox textarea-article"
-								name="articleContent" data-options="required:true"></textarea></td>
-					</tr>
+					 -->
 				</table>
 			</form>
 		</div>
