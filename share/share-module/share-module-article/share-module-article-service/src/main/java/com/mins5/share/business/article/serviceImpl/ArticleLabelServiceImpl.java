@@ -10,11 +10,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.mins5.share.business.article.dao.ArticleLabelDao;
+import com.mins5.share.business.article.dao.ArticleLabelRelDao;
 import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.business.article.service.ArticleLabelService;
+import com.mins5.share.common.exception.TransactionException;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
@@ -31,6 +34,9 @@ public class ArticleLabelServiceImpl implements ArticleLabelService {
 	
 	@Autowired
 	private ArticleLabelDao articleLabelDao;
+	
+	@Autowired
+	private ArticleLabelRelDao articleLabelRelDao;
 	
 	@Override
 	public ReturnData<ArticleLabel> saveArticleLabel(ArticleLabel articleLabel) {
@@ -168,6 +174,21 @@ public class ArticleLabelServiceImpl implements ArticleLabelService {
 		} catch(Exception e) {
 			log.error("service exception", e);
 			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	@Transactional
+	public ReturnData<VOID> deleteArticleLabelAndArticleLabelRelByLabelId(Long articleLabelId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			articleLabelDao.deleteById(articleLabelId);
+			articleLabelRelDao.deleteArticleLabelRelByArticleLabelId(articleLabelId);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(TransactionException e) {
+			log.error("service exception", e);
+			throw new TransactionException(ReturnCode.EXCEPTION.getCode(), e);
 		}
 		return returnData;
 	}

@@ -36,4 +36,8 @@
 		select * from article_label_rel where article_label_rel_id = #{articleLabelRelId}
 	</select>
 	
+	<delete id="deleteArticleLabelRelByArticleLabelId" parameterType="long">
+		delete from article_label_rel where label_id = #{articleLabelId}
+	</delete>
+	
 </mapper>
