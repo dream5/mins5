@@ -81,4 +81,14 @@ public interface ArticleLabelService {
 	ReturnPageData<List<ArticleLabel>> findArticleLabelByLabelNameAndStatusAndCreateTime(
 			String labelName, String status, Date beginTime, Date endTime,
 			int currentPage, int onePageSize);
+	
+	/**
+	 * 删除文章标签
+	 * <p/>关联删除文章标签关联表数据
+	 * @author zhoutian
+	 * @since 2014年3月31日
+	 * @param articleLabelId
+	 * @return
+	 */
+	ReturnData<VOID> deleteArticleLabelAndArticleLabelRelByLabelId(Long articleLabelId);
 }
