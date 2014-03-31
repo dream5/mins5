@@ -69,6 +69,9 @@
 	};
 	function deleteConfirm(labelId){
 		$.messager.confirm('删除提示', '您确认删除此标签吗?', function(r){
+			if(!r) {
+				return;
+			}
 			var queryParams = {"labelId":labelId};
 			jQuery.ajax({
 			    url: '${path}/article/articleLabelDelete.mins',
