@@ -5,9 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "common/common_js.ftl" />
 <script type="text/javascript">
-	$(document).ready(function() {
-
-	});
 	function submitForm() {
 		$('#articleLabelFormId').form('submit', {
 			//	url:...,
@@ -26,12 +23,13 @@
 	}
 	function clearForm() {
 		$('#articleLabelFormId').form('clear');
+		$('#status').combobox('setValue', '0');
 	}
 </script>
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<h2>添加文章类别</h2>
+	<h2>添加文章标签</h2>
 	<div class="demo-info">
 		<div class="demo-tip icon-tip"></div>
 		<div>输入文章标签信息然后点击提交按钮</div>
@@ -49,6 +47,15 @@
 						<td><input class="easyui-validatebox input-long" type="text"
 							name="labelName" data-options="required:true"></input></td>
 					</tr>
+					<tr>
+	    				<td>标签状态:</td>
+		    			<td>
+		    				<select class="easyui-combobox" id="status" name="status">
+		    					<option value="0">未启用</option>
+		    					<option value="1">启用</option>
+		    				</select>
+	    				</td>
+	    			</tr>
 				</table>
 			</form>
 		</div>

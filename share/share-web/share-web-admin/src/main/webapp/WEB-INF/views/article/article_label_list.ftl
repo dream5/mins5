@@ -26,21 +26,17 @@
 		});
 		loadTable();
 	});
-	function formatStatus(val,row){
-		if (val == 0){
+	function formatStatus(val,row) {
+		if (val == 0) {
 			return '<span style="color:red;">未启用</span>';
 		} else {
 			return '<span style="color:green;">启用</span>';
 		}
 	}
 	function formatOperation(val,row) {
-		var operation = '<a href="${path}/articleLabelDetail.mins">查看</>';
+		var operation = '<a href="${path}/article/toArticleLabelEdit.mins?labelId='+val+'">修改</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="${path}/toArticleLabelEdit.mins">修改</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#">删除</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="${path}/toArticleLabelEdit.mins">启用</>';
+		operation += '<a href="#" onclick="deleteConfirm('+val+')">删除</>';
 		return operation;
 	}
 	function loadTable() {
@@ -71,6 +67,24 @@
 		    }
 		});
 	};
+	function deleteConfirm(labelId){
+		$.messager.confirm('删除提示', '您确认删除此标签吗?', function(r){
+			var queryParams = {"labelId":labelId};
+			jQuery.ajax({
+			    url: '${path}/article/articleLabelDelete.mins',
+			    data: queryParams,
+			    type: "POST",
+			    dataType: "text",
+			    success: function (msg) {
+			    	$.messager.alert('删除提示', msg);
+			    	loadTable();
+			    },
+			    error: function() {
+			    	$.messager.alert('删除提示', '删除失败！');
+			    }
+			});
+		});
+	}
 </script>
 <title>Mins5后台管理</title>
 </head>
@@ -82,7 +96,7 @@
 				<th data-options="field:'labelName',width:100,align:'center'">标签名称</th>
 				<th data-options="field:'status',width:80,align:'center',formatter:formatStatus">标签状态</th>
 				<th data-options="field:'createTime',width:150,align:'center'">标签生成时间</th>
-				<th data-options="field:'labelId',width:150,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'labelId',width:100,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
