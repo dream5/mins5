@@ -64,6 +64,15 @@ public interface ArticleService {
 	ReturnData<ArticleKind> findArticleKindById(Long articleKindId);
 	
 	/**
+	 * 根据父ID查询文章类别列表
+	 * @author zhoutian
+	 * @since 2014年4月1日
+	 * @param parentId
+	 * @return
+	 */
+	ReturnData<List<ArticleKind>> findArticleKindByParentId(Long parentId);
+	
+	/**
 	 * 保存文章
 	 * @author zhoutian
 	 * @since 2014年3月14日
