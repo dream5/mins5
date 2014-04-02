@@ -1,13 +1,10 @@
 <#include "common/common.ftl" />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "common/common_js.ftl" />
 <script type="text/javascript">
-	$(document).ready(function() {
-
-	});
 	function submitForm() {
 		$('#articleKindFormId').form('submit', {
 			//	url:...,
@@ -26,7 +23,20 @@
 	}
 	function clearForm() {
 		$('#articleKindFormId').form('clear');
+		$('#status').combobox('setValue', '0');
 	}
+	function initArticleKindTree() {
+		$('#parentKindId').combotree({
+			animate: true,
+		    url: '${path}/article/getArticleKindByParentIdTest.mins',
+		    onBeforeExpand:function(node) {  
+            	$('#parentKindId').combotree('options').url = '${path}/article/getArticleKindByParentId.mins?parentId='+node.id;
+		    }
+		});
+	}
+	$(document).ready(function() {
+		initArticleKindTree();
+	});
 </script>
 <title>Mins5后台管理</title>
 </head>
@@ -54,13 +64,21 @@
 						<td><input class="easyui-validatebox input-long" type="text"
 							name="kindPinyin" data-options="required:true"></input></td>
 					</tr>
-					<!-- 
 					<tr>
-						<td>父类别:</td>
-						<td><input class="easyui-validatebox input-short" type="text"
-							name="parentKindId" data-options="required:true"></input></td>
-					</tr>
-					 -->
+	    				<td>类别状态:</td>
+		    			<td>
+		    				<select class="easyui-combobox" id="status" name="status">
+		    					<option value="0">无效</option>
+		    					<option value="1">有效</option>
+		    				</select>
+	    				</td>
+	    			</tr>
+	    			<tr>
+	    				<td>所属类别:</td>
+		    			<td>
+		    				<input id="parentKindId" name="parentKindId" class="easyui-combotree" style="width:200px;">
+	    				</td>
+	    			</tr>
 				</table>
 			</form>
 		</div>
