@@ -17,5 +17,12 @@ public interface ArticleKindDao extends CrudDao<Long, ArticleKind>{
 	
 	List<ArticleKind> findAllArticleKind();
 
-	
+	/**
+	 * 根据父ID查询文章类别列表
+	 * @author zhoutian
+	 * @since 2014年4月1日
+	 * @param parentId
+	 * @return
+	 */
+	List<ArticleKind> findArticleKindByParentId(Long parentId);
 }

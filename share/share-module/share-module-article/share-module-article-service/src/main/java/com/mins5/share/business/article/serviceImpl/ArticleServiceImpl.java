@@ -170,6 +170,24 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return returnData;
 	}
+	
+	@Override
+	public ReturnData<List<ArticleKind>> findArticleKindByParentId(Long parentId) {
+		ReturnData<List<ArticleKind>> returnData = new ReturnData<List<ArticleKind>>();
+		try {
+			if(parentId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			List<ArticleKind> articleKindList = articleKindDao.findArticleKindByParentId(parentId);
+			returnData.setResultData(articleKindList);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 
 	@Override
 	public ReturnData<Article> saveArticle(Article article) {
@@ -528,4 +546,5 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return returnData;
 	}
+	
 }
