@@ -18,6 +18,7 @@
 			success : function(data) {
 				clearForm();
 				$("#tip").html(data);
+				initArticleKindTree();
 			}
 		});
 	}
@@ -27,12 +28,8 @@
 	}
 	function initArticleKindTree() {
 		$('#parentKindId').combotree({
-			animate: true,
-		    url: '${path}/article/getArticleKindByParentIdTest.mins',
-		    onBeforeExpand:function(node) {  
-            	$('#parentKindId').combotree('options').url = '${path}/article/getArticleKindByParentId.mins?parentId='+node.id;
-		    }
-		});
+			url: '${path}/article/getArticleKind.mins'
+	    });
 	}
 	$(document).ready(function() {
 		initArticleKindTree();
