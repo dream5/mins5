@@ -31,6 +31,10 @@
 		delete from article_kind where article_kind_id = #{articleKindId}
 	</delete>
 	
+	<delete id="deleteArticleKindByParentId" parameterType="long">
+		delete from article_kind where parent_kind_id = #{parentId}
+	</delete>
+	
 	<update id="update">
 		update article_kind
 		<set>
@@ -50,6 +54,27 @@
 	
 	<select id="findArticleKindByParentId" parameterType="long" resultMap="ArticleKindMap">
 		select * from article_kind where parent_kind_id = #{parentId} 
+	</select>
+	
+	<select id="findArticleKindCountByKindNameAndStatusAndCreateTime" resultType="int">
+		SELECT COUNT(*) FROM article_kind
+		<where>
+			<if test="kindName != null">kind_name LIKE CONCAT('%', #{kindName}, '%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+		</where>
+	</select>
+	
+	<select id="findArticleKindByKindNameAndStatusAndCreateTime" resultMap="ArticleKindMap">
+		SELECT * FROM article_kind
+		<where>
+			<if test="kindName != null">kind_name LIKE CONCAT('%', #{kindName}, '%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+		</where>
+		LIMIT #{startRow}, #{onePageSize}
 	</select>
 
 </mapper>

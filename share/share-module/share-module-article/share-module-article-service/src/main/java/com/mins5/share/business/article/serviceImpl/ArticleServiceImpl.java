@@ -4,12 +4,15 @@
 package com.mins5.share.business.article.serviceImpl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.mins5.share.business.article.dao.ArticleDao;
@@ -21,6 +24,7 @@ import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.domain.ArticleKindRel;
 import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.business.article.service.ArticleService;
+import com.mins5.share.common.exception.TransactionException;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
@@ -60,7 +64,61 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return returnData;
 	}
+	
+	@Override
+	public ReturnPageData<List<ArticleKind>> findArticleKindByKindNameAndStatusAndCreateTime(
+			String kindName, String status, Date beginTime, Date endTime,
+			int currentPage, int onePageSize) {
+		ReturnPageData<List<ArticleKind>> returnData = new ReturnPageData<List<ArticleKind>>(currentPage, onePageSize);
+		try {
+			int count = articleKindDao.findArticleKindCountByKindNameAndStatusAndCreateTime(kindName, status, beginTime, endTime);
+			if(count > 0) {
+				int startRow = returnData.getStartRow();
+				List<ArticleKind> articleLabelList = articleKindDao.findArticleKindByKindNameAndStatusAndCreateTime(kindName, status, beginTime, endTime, startRow, onePageSize);
+				returnData.setTotalResults(count);
+				returnData.setResultData(articleLabelList);;
+			}
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 
+	@Override
+	@Transactional
+	public ReturnData<VOID> deleteArticleKindAndArticleKindRelByArticleKindId(Long articleKindId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			this.deleteAticleKindTree(articleKindId);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(TransactionException e) {
+			log.error("service exception", e);
+			throw new TransactionException(ReturnCode.EXCEPTION.getCode(), e);
+		}
+		return returnData;
+	}
+	
+	@Transactional
+	private void deleteAticleKindTree(Long articleKindId) {
+		try {
+			articleKindDao.deleteById(articleKindId);
+			articleKindRelDao.deleteArticleKindRelByArticleKindId(articleKindId);
+			List<ArticleKind> articleKindList = articleKindDao.findArticleKindByParentId(articleKindId);
+			if(!CollectionUtils.isEmpty(articleKindList)) {
+				for(ArticleKind articleKind : articleKindList) {
+					this.deleteAticleKindTree(articleKind.getArticleKindId());
+				}
+				articleKindDao.deleteArticleKindByParentId(articleKindId);
+			}
+		} catch(TransactionException e) {
+			log.error("service exception", e);
+			throw new TransactionException(ReturnCode.EXCEPTION.getCode(), e);
+		}
+	}
+
+	
 	@Override
 	public ReturnData<ArticleKind> saveArticleKind(ArticleKind articleKind) {
 		ReturnData<ArticleKind> returnData = new ReturnData<ArticleKind>();
@@ -126,6 +184,7 @@ public class ArticleServiceImpl  implements ArticleService{
 	}
 
 	@Override
+	@Transactional
 	public ReturnData<ArticleKind> updateArticleKind(ArticleKind articleKind) {
 		ReturnData<ArticleKind> returnData = new ReturnData<ArticleKind>();
 		try {
@@ -134,11 +193,20 @@ public class ArticleServiceImpl  implements ArticleService{
 				return returnData;
 			}
 			articleKindDao.update(articleKind);
+//			if(articleKind.getParentKindId() != 0) {
+//				ArticleKind parentArticleKind = articleKindDao.findById(articleKind.getParentKindId());
+//				ArticleKind parentParentArticleKind = articleKindDao.findById(parentArticleKind.getParentKindId());
+//				if(parentParentArticleKind == null) {
+//					parentArticleKind.setParentKindId(0L);
+//					articleKindDao.update(parentArticleKind);
+//				}
+//			}
 			returnData.setResultData(articleKind);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
 			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+//			throw new TransactionException(ReturnCode.EXCEPTION.getCode(), e);
 		}
 		return returnData;
 	}

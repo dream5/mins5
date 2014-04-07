@@ -12,4 +12,12 @@ import com.mins5.share.common.dao.CrudDao;
  */
 public interface ArticleKindRelDao extends CrudDao<Long, ArticleKindRel> {
 
+	/**
+	 * 根据文章类别ID删除关联数据
+	 * @author zhoutian
+	 * @since 2014年4月7日
+	 * @param articleKindId
+	 * @return
+	 */
+	int deleteArticleKindRelByArticleKindId(Long articleKindId);
 }

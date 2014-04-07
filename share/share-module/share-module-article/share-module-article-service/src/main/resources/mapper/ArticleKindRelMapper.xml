@@ -42,4 +42,8 @@
 		select * from article_kind_rel where article_kind_rel_id = #{articleKindRelId}
 	</select>
 	
+	<delete id="deleteArticleKindRelByArticleKindId" parameterType="long">
+		delete from article_kind_rel where article_kind_id = #{articleKindId}
+	</delete>
+	
 </mapper>
