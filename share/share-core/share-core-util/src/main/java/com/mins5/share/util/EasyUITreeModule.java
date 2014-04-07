@@ -20,7 +20,7 @@ public class EasyUITreeModule {
 	
 	private List<Object> attributes;
 	
-	private List<Object> children;
+	private List<EasyUITreeModule> children;
 
 	public Long getId() {
 		return id;
@@ -62,11 +62,11 @@ public class EasyUITreeModule {
 		this.attributes = attributes;
 	}
 
-	public List<Object> getChildren() {
+	public List<EasyUITreeModule> getChildren() {
 		return children;
 	}
 
-	public void setChildren(List<Object> children) {
+	public void setChildren(List<EasyUITreeModule> children) {
 		this.children = children;
 	}
 	
