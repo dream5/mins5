@@ -20,8 +20,12 @@ import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
+import com.mins5.share.util.DateUtils;
 import com.mins5.share.util.EasyUITreeModule;
+import com.mins5.share.util.EasyUIUtils;
 import com.mins5.share.util.JsonUtils;
+import com.mins5.share.util.StringUtils;
 
 /**
  * @author zhoutian
@@ -41,10 +45,35 @@ public class ArticleKindController {
 	 * @return
 	 */
 	@RequestMapping(value = "/articleKindList")
-	public ModelAndView articleKindList() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("article/article_kind_list");
-		return mav;
+	public String articleKindList() {
+		return "article/article_kind_list";
+	}
+	
+	/**
+	 * ajax查询文章类别
+	 * @author zhoutian
+	 * @since 2014年4月7日
+	 * @param response
+	 * @param kindName 类别名称
+	 * @param status 类别状态
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param currentPage 当前页
+	 * @param onePageSize 每页行数
+	 */
+	@RequestMapping(value = "/searchArticleKind")
+	public void searchArticleKind(HttpServletResponse response, String kindName, String status,
+			String beginTime, String endTime, Integer currentPage, Integer onePageSize) {
+		
+		onePageSize = onePageSize == null ? 10 : onePageSize;
+		currentPage = currentPage == null ? 1 : currentPage;
+		
+		ReturnPageData<List<ArticleKind>> returnData = articleService
+				.findArticleKindByKindNameAndStatusAndCreateTime(StringUtils.parseNull(kindName),
+						StringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT), DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), currentPage, onePageSize);
+		
+		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), returnData.getResultData());
+		JsonUtils.write(data, response);
 	}
 	
 	/**
@@ -90,9 +119,21 @@ public class ArticleKindController {
 	 * @param response
 	 * @param parentId
 	 */
-	@RequestMapping(value = "/getArticleKindByParentId")
-	public void getArticleKindByParentId(HttpServletResponse response, Long parentId) {
-		System.out.println("-----------"+parentId+"------------");
+	@RequestMapping(value = "/getArticleKind")
+	public void getArticleKind(HttpServletResponse response) {
+		Long parentId = 0L;
+		List<EasyUITreeModule> treeList = this.getArticleKindTreeByParentId(parentId);
+		JsonUtils.write(treeList, response);
+	}
+	
+	/**
+	 * 递归查询文章列表树
+	 * @author zhoutian
+	 * @since 2014年4月7日
+	 * @param parentId
+	 * @return
+	 */
+	private List<EasyUITreeModule> getArticleKindTreeByParentId(Long parentId) {
 		ReturnData<List<ArticleKind>> returnData = articleService.findArticleKindByParentId(parentId);
 		List<ArticleKind> articleKindList = returnData.getResultData();
 		List<EasyUITreeModule> treeList = new ArrayList<EasyUITreeModule>();
@@ -101,37 +142,81 @@ public class ArticleKindController {
 				EasyUITreeModule tree = new EasyUITreeModule();
 				tree.setId(articleKind.getArticleKindId());
 				tree.setText(articleKind.getKindName());
-				ReturnData<List<ArticleKind>> childReturnData = articleService.findArticleKindByParentId(articleKind.getArticleKindId());
-				if(CollectionUtils.isEmpty(childReturnData.getResultData())) {
+				List<EasyUITreeModule> childTree = this.getArticleKindTreeByParentId(articleKind.getArticleKindId());
+				if(CollectionUtils.isEmpty(childTree)) {
 					tree.setState("open");
+				} else {
+					tree.setChildren(childTree);
+					for(EasyUITreeModule easyUITreeModule : childTree) {
+						this.getArticleKindTreeByParentId(easyUITreeModule.getId());
+					}
 				}
 				treeList.add(tree);
 			}
 		}
-		System.out.println(JsonUtils.writeValue(treeList));
-		JsonUtils.write(treeList, response);
+		return treeList;
 	}
 	
-	@RequestMapping(value = "/getArticleKindByParentIdTest")
-	public void getArticleKindByParentIdTest(HttpServletResponse response) {
-		System.out.println("ttttttttttttttttttttt");
-		ReturnData<List<ArticleKind>> returnData = articleService.findArticleKindByParentId(0L);
-		
-		List<ArticleKind> articleKindList = returnData.getResultData();
-		List<EasyUITreeModule> treeList = new ArrayList<EasyUITreeModule>();
-		if(articleKindList != null) {
-			for(ArticleKind articleKind : articleKindList) {
-				EasyUITreeModule tree = new EasyUITreeModule();
-				tree.setId(articleKind.getArticleKindId());
-				tree.setText(articleKind.getKindName());
-				ReturnData<List<ArticleKind>> childReturnData = articleService.findArticleKindByParentId(articleKind.getArticleKindId());
-				if(CollectionUtils.isEmpty(childReturnData.getResultData())) {
-					tree.setState("open");
-				}
-				treeList.add(tree);
-			}
+	/**
+	 * 跳转到类别编辑页面
+	 * @author zhoutian
+	 * @since 2014年4月7日
+	 * @param articleKindId
+	 * @return
+	 */
+	@RequestMapping(value = "/toArticleKindEdit")
+	public ModelAndView toArticleKindEdit(Long articleKindId) {
+		ModelAndView mv = new ModelAndView();
+		ReturnData<ArticleKind> returnData = articleService.findArticleKindById(articleKindId);
+		ArticleKind articleKind = returnData.getResultData();
+		mv.addObject("articleKind", articleKind);
+		mv.setViewName("article/article_kind_edit");
+		return mv;
+	}
+	
+	/**
+	 * 修改文章标签
+	 * @author zhoutian
+	 * @since 2014年4月7日
+	 * @param response
+	 * @param articleKindId
+	 * @param kindName
+	 * @param status
+	 */
+	@RequestMapping(value = "/articleKindEdit")
+	public void  articleLabelEdit(HttpServletResponse response, Long articleKindId, String kindName, String status, Long parentKindId) {
+		ArticleKind articleKind = new ArticleKind();
+		articleKind.setArticleKindId(articleKindId);
+		articleKind.setKindName(StringUtils.trimBlank(kindName));
+		articleKind.setStatus(status);
+		if(parentKindId == null) {
+			articleKind.setParentKindId(0L);
+		} else {
+			articleKind.setParentKindId(parentKindId);
 		}
-		System.out.println(JsonUtils.writeValue(treeList));
-		JsonUtils.write(treeList, response);
+		ReturnData<ArticleKind> returnData = articleService.updateArticleKind(articleKind);
+		String tip = "修改成功！";
+		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
+			tip = "修改失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+	
+	/**
+	 * 删除文章类别
+	 * @author zhoutian
+	 * @since 2014年4月7日
+	 * @param response
+	 * @param articleKindId
+	 */
+	@RequestMapping(value = "/articleKindDelete")
+	public void articleKindDelete(HttpServletResponse response, Long articleKindId) {
+		String tip = "删除成功！";
+		try {
+			articleService.deleteArticleKindAndArticleKindRelByArticleKindId(articleKindId);
+		} catch(Exception e) {
+			tip = "删除失败！";
+		}
+		JsonUtils.write(tip, response);
 	}
 }
