@@ -16,7 +16,6 @@
 				return isValid;
 			},
 			success : function(data) {
-				clearForm();
 				$("#tip").html(data);
 				initArticleKindTree();
 			}
