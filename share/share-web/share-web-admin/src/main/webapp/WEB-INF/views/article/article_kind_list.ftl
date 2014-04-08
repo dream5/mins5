@@ -77,7 +77,7 @@
 	<table id="dg" style="width:700px;">
 		<thead>
 			<tr>
-				<th data-options="field:'kindName',width:100,align:'center'">类别名称</th>
+				<th data-options="field:'kindName',width:200,align:'left'">类别名称</th>
 				<th data-options="field:'kindPinyin',width:80,align:'center'">类别拼音</th>
 				<th data-options="field:'status',width:80,align:'center',formatter:formatStatus">类别状态</th>
 				<th data-options="field:'createTime',width:150,align:'center'">类别生成时间</th>
