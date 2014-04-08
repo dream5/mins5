@@ -91,8 +91,6 @@ public class ArticleKindController {
 					for(Map<String, Object> childTreeMap : childTreeList) {
 						this.getArticleKindTreeGrid((Long)childTreeMap.get("articleKindId"));
 					}
-					
-					
 				}
 				treeList.add(treeMap);
 			}
