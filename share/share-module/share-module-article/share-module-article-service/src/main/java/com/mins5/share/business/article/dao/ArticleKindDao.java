@@ -1,13 +1,10 @@
 package com.mins5.share.business.article.dao;
 
-import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.article.domain.ArticleKind;
-import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.common.dao.CrudDao;
 
 /**
@@ -37,37 +34,5 @@ public interface ArticleKindDao extends CrudDao<Long, ArticleKind>{
 	 * @return
 	 */
 	int deleteArticleKindByParentId(Long parentId);
-	
-	/**
-	 * 分页查询文章类别列表总行数
-	 * @author zhoutian
-	 * @since 2014年4月7日
-	 * @param labelName 类别名称
-	 * @param status 类别状态
-	 * @param beginTime 开始时间
-	 * @param endTime 结束时间
-	 * @return
-	 */
-	int findArticleKindCountByKindNameAndStatusAndCreateTime(
-			@Param("kindName") String kindName,
-			@Param("status") String status, @Param("beginTime") Date beginTime,
-			@Param("endTime") Date endTime);
 
-	/**
-	 * 分页查询文章类别列表
-	 * @author zhoutian
-	 * @since 2014年4月7日
-	 * @param labelName 类别名称
-	 * @param status 类别状态
-	 * @param beginTime 开始时间
-	 * @param endTime 结束时间
-	 * @param startRow 开始行
-	 * @param onePageSize 每行行数
-	 * @return
-	 */
-	List<ArticleKind> findArticleKindByKindNameAndStatusAndCreateTime(
-			@Param("kindName") String kindName,
-			@Param("status") String status, @Param("beginTime") Date beginTime,
-			@Param("endTime") Date endTime, @Param("startRow") int startRow,
-			@Param("onePageSize") int onePageSize);
 }

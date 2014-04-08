@@ -4,7 +4,6 @@
 package com.mins5.share.business.article.serviceImpl;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -57,27 +56,6 @@ public class ArticleServiceImpl  implements ArticleService{
 		try {
 			List<ArticleKind> ArticleKinds = articleKindDao.findAllArticleKind();
 			returnData.setResultData(ArticleKinds);
-			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
-		} catch(Exception e) {
-			log.error("service exception", e);
-			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
-		}
-		return returnData;
-	}
-	
-	@Override
-	public ReturnPageData<List<ArticleKind>> findArticleKindByKindNameAndStatusAndCreateTime(
-			String kindName, String status, Date beginTime, Date endTime,
-			int currentPage, int onePageSize) {
-		ReturnPageData<List<ArticleKind>> returnData = new ReturnPageData<List<ArticleKind>>(currentPage, onePageSize);
-		try {
-			int count = articleKindDao.findArticleKindCountByKindNameAndStatusAndCreateTime(kindName, status, beginTime, endTime);
-			if(count > 0) {
-				int startRow = returnData.getStartRow();
-				List<ArticleKind> articleLabelList = articleKindDao.findArticleKindByKindNameAndStatusAndCreateTime(kindName, status, beginTime, endTime, startRow, onePageSize);
-				returnData.setTotalResults(count);
-				returnData.setResultData(articleLabelList);;
-			}
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
