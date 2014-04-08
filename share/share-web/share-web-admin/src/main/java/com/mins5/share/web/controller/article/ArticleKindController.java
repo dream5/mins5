@@ -5,7 +5,9 @@ package com.mins5.share.web.controller.article;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,10 +22,7 @@ import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
-import com.mins5.share.common.service.ReturnPageData;
-import com.mins5.share.util.DateUtils;
 import com.mins5.share.util.EasyUITreeModule;
-import com.mins5.share.util.EasyUIUtils;
 import com.mins5.share.util.JsonUtils;
 import com.mins5.share.util.StringUtils;
 
@@ -54,26 +53,52 @@ public class ArticleKindController {
 	 * @author zhoutian
 	 * @since 2014年4月7日
 	 * @param response
-	 * @param kindName 类别名称
-	 * @param status 类别状态
-	 * @param beginTime 开始时间
-	 * @param endTime 结束时间
-	 * @param currentPage 当前页
-	 * @param onePageSize 每页行数
 	 */
 	@RequestMapping(value = "/searchArticleKind")
-	public void searchArticleKind(HttpServletResponse response, String kindName, String status,
-			String beginTime, String endTime, Integer currentPage, Integer onePageSize) {
+	public void searchArticleKind(HttpServletResponse response) {
 		
-		onePageSize = onePageSize == null ? 10 : onePageSize;
-		currentPage = currentPage == null ? 1 : currentPage;
-		
-		ReturnPageData<List<ArticleKind>> returnData = articleService
-				.findArticleKindByKindNameAndStatusAndCreateTime(StringUtils.parseNull(kindName),
-						StringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT), DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), currentPage, onePageSize);
-		
-		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), returnData.getResultData());
-		JsonUtils.write(data, response);
+		Long parentId = 0L;
+		List<Map<String, Object>> articleKindTreeGrid = this.getArticleKindTreeGrid(parentId); 
+		System.out.println(JsonUtils.writeValue(articleKindTreeGrid));
+		JsonUtils.write(articleKindTreeGrid, response);
+	}
+	
+	/**
+	 * 递归查询文章列表树
+	 * @author zhoutian
+	 * @since 2014年4月8日
+	 * @param articleKindList
+	 * @return
+	 */
+	private List<Map<String, Object>> getArticleKindTreeGrid(Long parentId) {
+		ReturnData<List<ArticleKind>> returnData = articleService.findArticleKindByParentId(parentId);
+		List<ArticleKind> articleKindList = returnData.getResultData();
+		List<Map<String, Object>> treeList = new ArrayList<Map<String, Object>>();
+		if(articleKindList != null) {
+			for(ArticleKind articleKind : articleKindList) {
+				Map<String, Object> treeMap = new HashMap<String, Object>();
+				treeMap.put("state", "open");
+				treeMap.put("adminId", articleKind.getAdminId());
+				treeMap.put("articleKindId", articleKind.getArticleKindId());
+				treeMap.put("createTime", articleKind.getCreateTime());
+				treeMap.put("kindName", articleKind.getKindName());
+				treeMap.put("kindPinyin", articleKind.getKindPinyin());
+				treeMap.put("parentKindId", articleKind.getParentKindId());
+				treeMap.put("status", articleKind.getStatus());
+				treeMap.put("updateTime", articleKind.getUpdateTime());
+				List<Map<String, Object>> childTreeList = this.getArticleKindTreeGrid(articleKind.getArticleKindId());
+				if(!CollectionUtils.isEmpty(childTreeList)) {
+					treeMap.put("children", childTreeList);
+					for(Map<String, Object> childTreeMap : childTreeList) {
+						this.getArticleKindTreeGrid((Long)childTreeMap.get("articleKindId"));
+					}
+					
+					
+				}
+				treeList.add(treeMap);
+			}
+		}
+		return treeList;
 	}
 	
 	/**
@@ -97,7 +122,7 @@ public class ArticleKindController {
 	@RequestMapping(value = "/articleKindAdd")
 	public void articleKindAdd(HttpServletResponse response, ArticleKind articleKind) {
 		Date currentDate = new Date();
-		articleKind.setKindPinyin(articleKind.getKindPinyin().toLowerCase());
+		articleKind.setKindPinyin(StringUtils.trimBlank(articleKind.getKindPinyin()).toLowerCase());
 		articleKind.setAdminId(0L);
 		articleKind.setCreateTime(currentDate);
 		articleKind.setUpdateTime(currentDate);
@@ -184,11 +209,13 @@ public class ArticleKindController {
 	 * @param status
 	 */
 	@RequestMapping(value = "/articleKindEdit")
-	public void  articleLabelEdit(HttpServletResponse response, Long articleKindId, String kindName, String status, Long parentKindId) {
+	public void  articleLabelEdit(HttpServletResponse response, Long articleKindId, String kindName, String kindPinyin, String status, Long parentKindId) {
 		ArticleKind articleKind = new ArticleKind();
 		articleKind.setArticleKindId(articleKindId);
 		articleKind.setKindName(StringUtils.trimBlank(kindName));
+		articleKind.setKindPinyin(StringUtils.trimBlank(kindPinyin).toLowerCase());
 		articleKind.setStatus(status);
+		articleKind.setUpdateTime(new Date());
 		if(parentKindId == null) {
 			articleKind.setParentKindId(0L);
 		} else {
