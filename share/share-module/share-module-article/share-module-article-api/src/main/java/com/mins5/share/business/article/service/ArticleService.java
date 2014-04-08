@@ -3,6 +3,7 @@
  */
 package com.mins5.share.business.article.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.mins5.share.business.article.domain.Article;
@@ -209,5 +210,22 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<Article> findArticleById(long id);
+	
+	/**
+	 * 后台查询文章列表
+	 * @author zhoutian
+	 * @since 2014年4月8日
+	 * @param articleTitle 文章标题
+	 * @param status 文章状态
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param isOriginal 是否原创
+	 * @param currentPage 当前页
+	 * @param onePageSize 每页行数
+	 * @return
+	 */
+	ReturnPageData<List<Article>> findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(String articleTitle, String status, Date beginTime,
+			Date endTime, String isOriginal, int currentPage,
+			int onePageSize);
 	
 }
