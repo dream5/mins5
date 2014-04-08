@@ -59,7 +59,6 @@ public class ArticleKindController {
 		
 		Long parentId = 0L;
 		List<Map<String, Object>> articleKindTreeGrid = this.getArticleKindTreeGrid(parentId); 
-		System.out.println(JsonUtils.writeValue(articleKindTreeGrid));
 		JsonUtils.write(articleKindTreeGrid, response);
 	}
 	
