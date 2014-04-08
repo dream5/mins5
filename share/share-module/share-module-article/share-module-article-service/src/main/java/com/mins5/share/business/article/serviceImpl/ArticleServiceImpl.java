@@ -4,6 +4,7 @@
 package com.mins5.share.business.article.serviceImpl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -162,7 +163,6 @@ public class ArticleServiceImpl  implements ArticleService{
 	}
 
 	@Override
-	@Transactional
 	public ReturnData<ArticleKind> updateArticleKind(ArticleKind articleKind) {
 		ReturnData<ArticleKind> returnData = new ReturnData<ArticleKind>();
 		try {
@@ -171,20 +171,11 @@ public class ArticleServiceImpl  implements ArticleService{
 				return returnData;
 			}
 			articleKindDao.update(articleKind);
-//			if(articleKind.getParentKindId() != 0) {
-//				ArticleKind parentArticleKind = articleKindDao.findById(articleKind.getParentKindId());
-//				ArticleKind parentParentArticleKind = articleKindDao.findById(parentArticleKind.getParentKindId());
-//				if(parentParentArticleKind == null) {
-//					parentArticleKind.setParentKindId(0L);
-//					articleKindDao.update(parentArticleKind);
-//				}
-//			}
 			returnData.setResultData(articleKind);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
 			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
-//			throw new TransactionException(ReturnCode.EXCEPTION.getCode(), e);
 		}
 		return returnData;
 	}
@@ -585,6 +576,34 @@ public class ArticleServiceImpl  implements ArticleService{
 			}
 			Article article = articleDao.findById(id);
 			returnData.setResultData(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public ReturnPageData<List<Article>> findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
+			String articleTitle, String status, Date beginTime,
+			Date endTime, String isOriginal, int currentPage, int onePageSize) {
+		ReturnPageData<List<Article>> returnData = new ReturnPageData<List<Article>>(currentPage, onePageSize );
+		try {
+			int count = articleDao
+					.findArticlesCountByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
+							articleTitle, status, beginTime, endTime,
+							isOriginal);
+			if(count > 0) {
+				int startRow = returnData.getStartRow();
+				List<Article> articleList = articleDao
+						.findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
+								articleTitle, status, beginTime, endTime,
+								isOriginal, startRow, onePageSize);
+			
+				returnData.setTotalResults(count);
+				returnData.setResultData(articleList);
+			}
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);

@@ -27,7 +27,7 @@
 		values 
 		(
 			#{articleTitle}, #{articleContent}, #{articleUrl}, #{articleFrom}, #{articleAuthor},
-			#{status}, #{updateTime}, #{createTime}, #{isOriginal}, 1
+			#{status}, #{updateTime}, #{createTime}, #{isOriginal}, 0
 		) 
 	</insert>
 	
@@ -98,6 +98,31 @@
 	     </if>  
 	     order by a.article_id desc
 	     limit #{startRow},#{onePageSize} 
+	</select>
+	
+	<select id="findArticlesCountByArticleTitleAndStatusAndCreateTimeAndIsOriginal" resultType="int">
+		select count(*) from article
+		<where>
+			<if test="articleTitle != null">article_title like concat('%', #{articleTitle}, '%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+			<if test="isOriginal != null">AND is_original = #{isOriginal}</if>
+			<if test="true">AND is_valid = 0</if>
+		</where>
+	</select>
+	
+	<select id="findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal" resultMap="ArticleMap">
+		select * from article
+		<where>
+			<if test="articleTitle != null">article_title like concat('%', #{articleTitle}, '%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+			<if test="isOriginal != null">AND is_original = #{isOriginal}</if>
+			<if test="true">AND is_valid = 0</if>
+		</where>
+		LIMIT #{startRow}, #{onePageSize}
 	</select>
 	
 </mapper>
