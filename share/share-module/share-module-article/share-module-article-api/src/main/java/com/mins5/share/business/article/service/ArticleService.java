@@ -3,13 +3,11 @@
  */
 package com.mins5.share.business.article.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.domain.ArticleKindRel;
-import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
@@ -28,22 +26,6 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<List<ArticleKind>> findAllArticleKind();
-	
-	/**
-	 * 分页查询文章类别列表
-	 * @author zhoutian
-	 * @since 2014年4月7日
-	 * @param kindName 类别名称
-	 * @param status 类别状态
-	 * @param beginTime 开始时间
-	 * @param endTime 结束时间
-	 * @param currentPage 当前页
-	 * @param onePageSize 每行行数
-	 * @return
-	 */
-	ReturnPageData<List<ArticleKind>> findArticleKindByKindNameAndStatusAndCreateTime(
-			String kindName, String status, Date beginTime, Date endTime,
-			int currentPage, int onePageSize);
 	
 	/**
 	 * 删除文章类别
