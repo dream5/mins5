@@ -4,6 +4,7 @@
 package com.mins5.share.web.controller.article;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,14 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.enums.ARTICLE_STATUS;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
+import com.mins5.share.util.DateUtils;
+import com.mins5.share.util.EasyUIUtils;
 import com.mins5.share.util.JsonUtils;
+import com.mins5.share.util.StringUtils;
 
 /**
  * @author zhoutian
@@ -38,11 +42,44 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/articleList")
-	public ModelAndView articleList() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("article/article_list");
-		return mav;
+	public String articleList() {
+		return "article/article_list";
 	}
+	
+	/**
+	 * 文章列表查询
+	 * @author zhoutian
+	 * @since 2014年4月8日
+	 * @param response
+	 * @param articleTitle 文章标题
+	 * @param status 文章状态
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param isOriginal 是否原创
+	 * @param currentPage 当前页
+	 * @param onePageSize 每页行数
+	 */
+	@RequestMapping(value = "/searchArticle")
+	public void searchArticle(HttpServletResponse response,
+			String articleTitle, String status, String beginTime,
+			String endTime, String isOriginal, Integer currentPage,
+			Integer onePageSize) {
+		
+		onePageSize = onePageSize == null ? 10 : onePageSize;
+		currentPage = currentPage == null ? 1 : currentPage;
+
+		ReturnPageData<List<Article>> returnData = articleService
+				.findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
+						StringUtils.parseNull(articleTitle),
+						StringUtils.parseNull(status),
+						DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
+						DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT),
+						StringUtils.parseNull(isOriginal), currentPage,
+						onePageSize);
+
+		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), returnData.getResultData());
+		JsonUtils.write(data, response);
+	} 
 	
 	/**
 	 * 跳转到添加文章页面
