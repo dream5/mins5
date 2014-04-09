@@ -3,15 +3,20 @@
  */
 package com.mins5.share.web.controller.article;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.enums.ARTICLE_STATUS;
@@ -42,7 +47,9 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/articleList")
-	public String articleList() {
+	public String articleList(HttpServletRequest request) {
+		ARTICLE_STATUS[] articleStatusArray = ARTICLE_STATUS.values();
+		request.setAttribute("articleStatusArray", articleStatusArray);
 		return "article/article_list";
 	}
 	
@@ -76,8 +83,23 @@ public class ArticleController {
 						DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT),
 						StringUtils.parseNull(isOriginal), currentPage,
 						onePageSize);
-
-		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), returnData.getResultData());
+		
+		
+		List<Article> articleList = returnData.getResultData();
+		List<Map<String, Object>> articleMapList = new ArrayList<Map<String, Object>>();
+		if(articleList != null) {
+			for(Article article : articleList) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("articleId", article.getArticleId());
+				map.put("articleTitle", article.getArticleTitle());
+				map.put("createTime", article.getCreateTime());
+				map.put("isOriginal", article.getIsOriginal());
+				map.put("status", article.getStatus().getName());
+				articleMapList.add(map);
+			}
+		}
+		
+		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), articleMapList);
 		JsonUtils.write(data, response);
 	} 
 	
@@ -111,5 +133,25 @@ public class ArticleController {
 			tip = "添加失败！";
 		}
 		JsonUtils.write(tip, response);
+	}
+	
+	/**
+	 * 跳转到文章修改页面
+	 * @author zhoutian
+	 * @since 2014年4月9日
+	 * @param articleId
+	 * @return
+	 */
+	@RequestMapping(value = "/toArticleEdit")
+	public ModelAndView toArticleEdit(Long articleId) {
+		ModelAndView mv = new ModelAndView();
+		Article article = articleService.findArticleById(articleId).getResultData();
+		mv.addObject("article", article);
+		mv.setViewName("article/article_edit");
+		return mv;
+	}
+	
+	public void articleEdit() {
+		
 	}
 }
