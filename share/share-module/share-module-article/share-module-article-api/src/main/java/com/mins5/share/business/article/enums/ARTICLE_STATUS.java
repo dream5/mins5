@@ -11,7 +11,7 @@ package com.mins5.share.business.article.enums;
  */
 public enum ARTICLE_STATUS {
 
-	WAITING_CHECK(0, "待审核"), PASSED_CHECK(1, "通过审核"), PUBLISHED(2, "已发布"), REMOVED(2, "已下架");
+	WAITING_CHECK(0, "待审核"), PASSED_CHECK(1, "通过审核"), PUBLISHED(2, "已发布"), REMOVED(3, "已下架");
 	
 	private int code;
 	
