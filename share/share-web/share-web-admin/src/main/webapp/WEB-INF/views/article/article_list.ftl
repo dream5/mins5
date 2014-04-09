@@ -25,13 +25,6 @@
 			}
 		});
 	}
-	function formatStatus(val,row) {
-		if (val == 0) {
-			return '<span style="color:red;">未启用</span>';
-		} else {
-			return '<span style="color:green;">启用</span>';
-		}
-	}
 	function formatIsOriginal(val,row) {
 		if (val == 0) {
 			return '<span style="color:red;">否</span>';
@@ -45,6 +38,12 @@
 		operation += '<a href="${path}/article/toArticleEdit.mins?articleId='+val+'">修改</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="deleteConfirm('+val+')">删除</>';
+		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '<a href="#" onclick="deleteConfirm('+val+')">审核</>';
+		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '<a href="#" onclick="deleteConfirm('+val+')">发布</>';
+		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '<a href="#" onclick="deleteConfirm('+val+')">下架</>';
 		return operation;
 	}
 	function loadTable() {
@@ -55,7 +54,7 @@
 		if(status == -1) {
 			status = null;
 		}
-		var isOriginal = $('#isOriginal').val();
+		var isOriginal = $('#isOriginal').combobox('getValue');
 		if(isOriginal == -1) {
 			isOriginal = null;
 		}
@@ -114,10 +113,10 @@
 		<thead>
 			<tr>
 				<th data-options="field:'articleTitle',width:300,align:'left'">标题</th>
-				<th data-options="field:'status',width:80,align:'center',formatter:formatStatus">文章状态</th>
+				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
 				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
-				<th data-options="field:'articleId',width:100,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'articleId',width:200,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -132,8 +131,9 @@
 			文章状态: 
 			<select id="status" class="easyui-combobox" style="width:60px" data-options="editable:false,panelHeight:'auto'">
 				<option value="-1">全部</option>
-				<option value="0">未启用</option>
-				<option value="1">启用</option>
+				<#list articleStatusArray as status>
+				<option value="${status.getCode() }">${status.getName() }</option>
+				</#list>
 			</select>
 			是否原创: 
 			<select id="isOriginal" class="easyui-combobox" style="width:60px" data-options="editable:false,panelHeight:'auto'">
