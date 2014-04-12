@@ -33,17 +33,17 @@
 		}
 	}
 	function formatOperation(val,row) {
-		var operation = '<a href="${path}/article/toArticleDetail.mins?articleId='+val+'">查看</>';
+		var operation = '<a href="#" onclick="articleDetail('+val+')">查看</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="${path}/article/toArticleEdit.mins?articleId='+val+'">修改</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="deleteConfirm('+val+')">删除</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="deleteConfirm('+val+')">审核</>';
+		operation += '<a href="#" onclick="articleDetail('+val+')">审核</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="deleteConfirm('+val+')">发布</>';
+		operation += '<a href="#" onclick="publishedArticle('+val+')">发布</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="deleteConfirm('+val+')">下架</>';
+		operation += '<a href="#" onclick="removedArticle('+val+')">下架</>';
 		return operation;
 	}
 	function loadTable() {
@@ -79,8 +79,31 @@
 		    }
 		});
 	};
+	function articleDetail(articleId){
+		var queryParams = {"articleId":articleId};
+		jQuery.ajax({
+		    url: '${path}/article/articleDetail.mins',
+		    data: queryParams,
+		    type: "POST",
+		    dataType: "json",
+		    success: function (msg) {
+		    	$('#detail_articleTitle').text(msg.articleTitle);
+		    	$('#detail_articleUrl').text(msg.articleUrl);
+		    	$('#detail_articleFrom').text(msg.articleFrom);
+		    	$('#detail_articleAuthor').text(msg.articleAuthor);
+		    	$('#detail_isOriginal').text(msg.isOriginal);
+		  //  	$('#detail_articleLabel').text(msg.articleTitle);
+		   // 	$('#detail_articleKind').text(msg.articleTitle);
+		    	$('#detail_articleContent').text(msg.articleContent);
+		    	$('#articleDetail').window('open');
+		    },
+		    error: function() {
+		    	$.messager.alert('操作提示', '系统繁忙！');
+		    }
+		});
+	}
 	function deleteConfirm(articleId){
-		$.messager.confirm('删除提示', '您确认删除此标签吗?', function(r){
+		$.messager.confirm('删除提示', '您确认删除此文章吗?', function(r){
 			if(!r) {
 				return;
 			}
@@ -96,6 +119,48 @@
 			    },
 			    error: function() {
 			    	$.messager.alert('删除提示', '删除失败！');
+			    }
+			});
+		});
+	}
+	function publishedArticle(articleId){
+		$.messager.confirm('删除提示', '您确认发布此文章吗?', function(r){
+			if(!r) {
+				return;
+			}
+			var queryParams = {"articleId":articleId};
+			jQuery.ajax({
+			    url: '${path}/article/publishedArticle.mins',
+			    data: queryParams,
+			    type: "POST",
+			    dataType: "text",
+			    success: function (msg) {
+			    	$.messager.alert('操作提示', msg);
+			    	loadTable();
+			    },
+			    error: function() {
+			    	$.messager.alert('操作提示', '发布失败！');
+			    }
+			});
+		});
+	}
+	function removedArticle(articleId){
+		$.messager.confirm('删除提示', '您确认下架此文章吗?', function(r){
+			if(!r) {
+				return;
+			}
+			var queryParams = {"articleId":articleId};
+			jQuery.ajax({
+			    url: '${path}/article/removedArticle.mins',
+			    data: queryParams,
+			    type: "POST",
+			    dataType: "text",
+			    success: function (msg) {
+			    	$.messager.alert('操作提示', msg);
+			    	loadTable();
+			    },
+			    error: function() {
+			    	$.messager.alert('操作提示', '发布失败！');
 			    }
 			});
 		});
@@ -142,6 +207,44 @@
 				<option value="1">是</option>
 			</select>
 			<a href="#" onclick="loadTable();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		</div>
+	</div>
+	<div id="articleDetail" class="easyui-window" title="查看文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
+		<div style="padding: 10px 0 10px 60px">
+			<table>
+				<tr>
+					<td>标题:</td>
+					<td id="detail_articleTitle"></td>
+				</tr>
+				<tr>
+					<td>来源url:</td>
+					<td id="detail_articleUrl"></td>
+				</tr>
+				<tr>
+					<td>文章来源描述:</td>
+					<td id="detail_articleFrom"></td>
+				</tr>
+				<tr>
+					<td>文章作者:</td>
+					<td id="detail_articleAuthor"></td>
+				</tr>
+				<tr>
+					<td>是否原创:</td>
+					<td id="detail_isOriginal"></td>
+				</tr>
+				<tr>
+					<td>文章标签:</td>
+					<td id="detail_articleLabel"></td>
+				</tr>
+				<tr>
+					<td>文章类别:</td>
+					<td id="detail_articleKind"></td>
+				</tr>
+				<tr>
+					<td>内容:</td>
+					<td id="detail_articleContent"></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>
