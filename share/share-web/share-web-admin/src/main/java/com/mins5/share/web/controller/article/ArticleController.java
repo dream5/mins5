@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,8 @@ import com.mins5.share.util.StringUtils;
 @Scope("prototype")
 @RequestMapping(value = "/article")
 public class ArticleController {
+	
+	private static final Log log = LogFactory.getLog(ArticleController.class);
 	
 	@Autowired
 	private ArticleService articleService;
@@ -122,17 +126,52 @@ public class ArticleController {
 	 * @param article
 	 */
 	@RequestMapping(value = "/articleAdd")
-	public void articleAdd(HttpServletResponse response, Article article) {
-		Date currentDate = new Date();
-		article.setCreateTime(currentDate);
-		article.setUpdateTime(currentDate);
-		article.setStatus(ARTICLE_STATUS.WAITING_CHECK);
-		ReturnData<Article> returnData = articleService.saveArticle(article);
-		String tip = "添加成功！";
-		if(returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
-			tip = "添加失败！";
+	public void articleAdd(HttpServletResponse response, Article article, String articleKind, String articleLabel) {
+		
+		try {
+		
+			Date currentDate = new Date();
+			article.setCreateTime(currentDate);
+			article.setUpdateTime(currentDate);
+			article.setStatus(ARTICLE_STATUS.WAITING_CHECK);
+			
+			String[] articleKindIdArray = articleKind.split(",");
+			List<Long> articleKindIdList = new ArrayList<Long>();
+			for(String articleKindId : articleKindIdArray) {
+				articleKindIdList.add(Long.parseLong(articleKindId));
+			}
+			
+			String[] articleLabelIdArray = articleLabel.split(",");
+			List<Long> articleLabelIdList = new ArrayList<Long>();
+			for(String articleLabelId : articleLabelIdArray) {
+				articleLabelIdList.add(Long.parseLong(articleLabelId));
+			}
+		
+			ReturnData<Article> returnData = articleService.saveArticle(article, articleKindIdList, articleLabelIdList);	
+			
+			String tip = "添加成功！";
+			if(returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
+				tip = "添加失败！";
+			}
+			JsonUtils.write(tip, response);
+		} catch(Exception e) {
+			log.error("添加文章失败！", e);
+			JsonUtils.write("添加失败！", response);
 		}
-		JsonUtils.write(tip, response);
+	}
+	
+	/**
+	 * 查看文章详细信息
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param response
+	 * @param articleId
+	 */
+	@RequestMapping(value = "/articleDetail")
+	public void articleDetail(HttpServletResponse response, Long articleId) {
+		ReturnData<Article> returnData = articleService.findArticleById(articleId);
+		Article article = returnData.getResultData();
+		JsonUtils.write(article, response);
 	}
 	
 	/**
@@ -154,4 +193,59 @@ public class ArticleController {
 	public void articleEdit() {
 		
 	}
+	
+	/**
+	 * 删除文章
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param response
+	 * @param articleId
+	 */
+	@RequestMapping(value = "/articleDelete")
+	public void articleDelete(HttpServletResponse response, Long articleId) {
+		String tip = "删除成功！";
+		try {
+			articleService.deleteArticleById(articleId);
+		} catch(Exception e) {
+			tip = "删除失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+	
+	/**
+	 * 发布文章
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param response
+	 * @param articleId
+	 */
+	@RequestMapping(value = "/publishedArticle")
+	public void publishedArticle(HttpServletResponse response, Long articleId) {
+		String tip = "发布成功！";
+		try {
+			articleService.publishedArticle(articleId);
+		} catch(Exception e) {
+			tip = "发布失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+	
+	/**
+	 * 下架文章
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param response
+	 * @param articleId
+	 */
+	@RequestMapping(value = "/removedArticle")
+	public void removedArticle(HttpServletResponse response, Long articleId) {
+		String tip = "下架成功！";
+		try {
+			articleService.removedArticle(articleId);
+		} catch(Exception e) {
+			tip = "下架失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+	
 }
