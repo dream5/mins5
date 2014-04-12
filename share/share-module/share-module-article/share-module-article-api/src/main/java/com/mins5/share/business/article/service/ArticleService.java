@@ -86,12 +86,40 @@ public interface ArticleService {
 	/**
 	 * 保存文章
 	 * @author zhoutian
-	 * @since 2014年3月14日
+	 * @since 2014年4月12日
 	 * @param article
+	 * @param articleKindIdList
+	 * @param articleLabelIdList
 	 * @return
 	 */
-	ReturnData<Article> saveArticle(Article article);
+	ReturnData<Article> saveArticle(Article article, List<Long> articleKindIdList, List<Long> articleLabelIdList);
 	
+	/**
+	 * 根据id删除文章（逻辑删除）
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param articleId
+	 * @return
+	 */
+	ReturnData<VOID> deleteArticleById(Long articleId);
+	
+	/**
+	 * 发布文章
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param articleId
+	 * @return
+	 */
+	ReturnData<VOID> publishedArticle(Long articleId);
+	
+	/**
+	 * 下架文章
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param articleId
+	 * @return
+	 */
+	ReturnData<VOID> removedArticle(Long articleId);
 	
 	/**
 	 * 查询随机文章
@@ -209,7 +237,7 @@ public interface ArticleService {
 	 * @param id
 	 * @return
 	 */
-	ReturnData<Article> findArticleById(long id);
+	ReturnData<Article> findArticleById(Long id);
 	
 	/**
 	 * 后台查询文章列表

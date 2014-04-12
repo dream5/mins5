@@ -11,18 +11,14 @@ import com.mins5.share.common.domain.DomainObject;
  */
 public class ArticleLabelRel extends DomainObject {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	// Fields
 
 	private Long articleLabelRelId;
-	private Long articleLabelId;
+	private Long labelId;
 	private Long articleId;
-	private Date careteTime;
+	private Date createTime;
 
 	// Constructors
 
@@ -30,17 +26,14 @@ public class ArticleLabelRel extends DomainObject {
 	public ArticleLabelRel() {
 	}
 
-	/** full constructor */
-	public ArticleLabelRel(Long articleLabelRelId,
-			Long articleLabelId, Long articleId, Date careteTime) {
+	public ArticleLabelRel(Long articleLabelRelId, Long labelId,
+			Long articleId, Date createTime) {
+		super();
 		this.articleLabelRelId = articleLabelRelId;
-		this.articleLabelId = articleLabelId;
+		this.labelId = labelId;
 		this.articleId = articleId;
-		this.careteTime = careteTime;
+		this.createTime = createTime;
 	}
-	
-	
-	// Property accessors
 
 	public Long getArticleLabelRelId() {
 		return articleLabelRelId;
@@ -50,12 +43,12 @@ public class ArticleLabelRel extends DomainObject {
 		this.articleLabelRelId = articleLabelRelId;
 	}
 
-	public Long getArticleLabelId() {
-		return articleLabelId;
+	public Long getLabelId() {
+		return labelId;
 	}
 
-	public void setArticleLabelId(Long articleLabelId) {
-		this.articleLabelId = articleLabelId;
+	public void setLabelId(Long labelId) {
+		this.labelId = labelId;
 	}
 
 	public Long getArticleId() {
@@ -66,20 +59,19 @@ public class ArticleLabelRel extends DomainObject {
 		this.articleId = articleId;
 	}
 
-	public Date getCareteTime() {
-		return careteTime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCareteTime(Date careteTime) {
-		this.careteTime = careteTime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	@Override
 	public String toString() {
-		return "ArticleLabelRel [articleId=" + articleId + ", articleLabelId="
-				+ articleLabelId + ", articleLabelRelId=" + articleLabelRelId
-				+ ", careteTime=" + careteTime + "]";
+		return "ArticleLabelRel [articleLabelRelId=" + articleLabelRelId
+				+ ", labelId=" + labelId + ", articleId=" + articleId
+				+ ", createTime=" + createTime + "]";
 	}
-	
 
 }
