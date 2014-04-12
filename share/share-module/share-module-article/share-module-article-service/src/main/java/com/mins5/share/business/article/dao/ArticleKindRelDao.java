@@ -3,6 +3,8 @@
  */
 package com.mins5.share.business.article.dao;
 
+import java.util.List;
+
 import com.mins5.share.business.article.domain.ArticleKindRel;
 import com.mins5.share.common.dao.CrudDao;
 
@@ -20,4 +22,13 @@ public interface ArticleKindRelDao extends CrudDao<Long, ArticleKindRel> {
 	 * @return
 	 */
 	int deleteArticleKindRelByArticleKindId(Long articleKindId);
+	
+	/**
+	 * 批量保存
+	 * @author zhoutian
+	 * @since 2014年4月12日
+	 * @param articleKindRelList
+	 * @return
+	 */
+	int batchSaveArticleKindRel(List<ArticleKindRel> articleKindRelList);
 }

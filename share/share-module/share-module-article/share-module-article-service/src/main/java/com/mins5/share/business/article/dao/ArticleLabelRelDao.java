@@ -3,6 +3,8 @@
  */
 package com.mins5.share.business.article.dao;
 
+import java.util.List;
+
 import com.mins5.share.business.article.domain.ArticleLabelRel;
 import com.mins5.share.common.dao.CrudDao;
 
@@ -20,4 +22,13 @@ public interface ArticleLabelRelDao extends CrudDao<Long, ArticleLabelRel> {
 	 * @return
 	 */
 	int deleteArticleLabelRelByArticleLabelId(Long articleLabelId);
+	
+	/**
+	 * 批量插入
+	 * @author zhoutian
+	 * @since 2014年4月12日
+	 * @param articleLabelList
+	 * @return
+	 */
+	int batchSaveArticleLabelRel(List<ArticleLabelRel> articleLabelRelList);
 }

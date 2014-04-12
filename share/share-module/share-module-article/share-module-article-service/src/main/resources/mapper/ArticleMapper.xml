@@ -31,6 +31,23 @@
 		) 
 	</insert>
 	
+	<update id="update">
+		update article
+		<set>
+			<if test="articleTitle != null">article_title = #{articleTitle},</if>
+			<if test="articleContent != null">article_content = #{articleContent},</if>
+			<if test="articleUrl != null">article_url = #{articleUrl},</if>
+			<if test="articleFrom != null">article_from = #{articleFrom},</if>
+			<if test="articleAuthor != null">article_author = #{articleAuthor},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="isOriginal != null">is_original = #{isOriginal},</if>
+			<if test="isValid != null">is_valid = #{isValid},</if>
+		</set>
+		where article_id = #{articleId}
+	</update>
+	
 	<!-- 查询随机文章 add by zhanglin 20140314 -->
 	<select id="findRandomArticle" parameterType="int" resultMap="ArticleMap">
 		select article_title,article_url,create_time from article where status=1 order by rand() limit 0,#{amount}
@@ -122,6 +139,7 @@
 			<if test="isOriginal != null">AND is_original = #{isOriginal}</if>
 			<if test="true">AND is_valid = 0</if>
 		</where>
+		order by create_time desc
 		LIMIT #{startRow}, #{onePageSize}
 	</select>
 	

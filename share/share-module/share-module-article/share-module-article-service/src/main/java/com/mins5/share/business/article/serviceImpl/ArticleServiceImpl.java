@@ -3,6 +3,7 @@
  */
 package com.mins5.share.business.article.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.domain.ArticleKindRel;
 import com.mins5.share.business.article.domain.ArticleLabelRel;
+import com.mins5.share.business.article.enums.ARTICLE_STATUS;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.exception.TransactionException;
 import com.mins5.share.common.service.ReturnCode;
@@ -144,6 +146,66 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return true;
 	}
+	
+	@Override
+	public ReturnData<VOID> deleteArticleById(Long articleId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if(articleId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Article article = new Article();
+			article.setArticleId(articleId);
+			article.setIsValid("1");
+			articleDao.update(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	@Override
+	public ReturnData<VOID> publishedArticle(Long articleId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if(articleId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Article article = new Article();
+			article.setArticleId(articleId);
+			article.setStatus(ARTICLE_STATUS.PUBLISHED);
+			articleDao.update(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	@Override
+	public ReturnData<VOID> removedArticle(Long articleId) {
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if(articleId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Article article = new Article();
+			article.setArticleId(articleId);
+			article.setStatus(ARTICLE_STATUS.REMOVED);
+			articleDao.update(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 
 	@Override
 	public ReturnData<VOID> deleteArticleKindById(Long articleKindId) {
@@ -161,7 +223,7 @@ public class ArticleServiceImpl  implements ArticleService{
 		}
 		return returnData;
 	}
-
+	
 	@Override
 	public ReturnData<ArticleKind> updateArticleKind(ArticleKind articleKind) {
 		ReturnData<ArticleKind> returnData = new ReturnData<ArticleKind>();
@@ -226,24 +288,53 @@ public class ArticleServiceImpl  implements ArticleService{
 		return returnData;
 	}
 
+	@Transactional
 	@Override
-	public ReturnData<Article> saveArticle(Article article) {
+	public ReturnData<Article> saveArticle(Article article, List<Long> articleKindIdList, List<Long> articleLabelIdList) {
 		ReturnData<Article> returnData = new ReturnData<Article>();
 		try {
 			if(!checkSaveArticle(article)) {
 				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode()) ;
 				return returnData;
 			}
-			int count = articleDao.save(article);
-			if(count != 1) {
-				returnData.setReturnCode(ReturnCode.EXCEPTION.getCode()) ;
-				return returnData;
+			
+			articleDao.save(article);
+			Long articleId = article.getArticleId();
+			
+			Date currentTime = new Date();
+			
+			List<ArticleKindRel> articleKindRelList = new ArrayList<ArticleKindRel>();
+			for(Long articleKindId : articleKindIdList) {
+				ArticleKindRel articleKindRel = new ArticleKindRel();
+				articleKindRel.setAdminId(0L);
+				articleKindRel.setArticleId(articleId);
+				articleKindRel.setCreateTime(currentTime);
+				articleKindRel.setStatus("1");
+				articleKindRel.setUpdateTime(currentTime);
+				articleKindRel.setArticleKindId(articleKindId);
+				articleKindRelList.add(articleKindRel);
 			}
+			if(!CollectionUtils.isEmpty(articleKindRelList)) {
+				articleKindRelDao.batchSaveArticleKindRel(articleKindRelList);
+			}
+			
+			List<ArticleLabelRel> articleLabelRelList = new ArrayList<ArticleLabelRel>();
+			for(Long articleLabelId : articleLabelIdList) {
+				ArticleLabelRel articleLabelRel = new ArticleLabelRel();
+				articleLabelRel.setArticleId(articleId);
+				articleLabelRel.setLabelId(articleLabelId);
+				articleLabelRel.setCreateTime(currentTime);
+				articleLabelRelList.add(articleLabelRel);
+			}
+			if(!CollectionUtils.isEmpty(articleLabelRelList)) {
+				articleLabelRelDao.batchSaveArticleLabelRel(articleLabelRelList);
+			}
+			
 			returnData.setResultData(article);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch(Exception e) {
 			log.error("service exception", e);
-			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+			throw new TransactionException(ReturnCode.EXCEPTION.getCode(), e);
 		}
 		return returnData;
 	}
@@ -321,10 +412,10 @@ public class ArticleServiceImpl  implements ArticleService{
 		if(articleLabelRel.getArticleId() == null) {
 			return false;
 		}
-		if(articleLabelRel.getArticleLabelId() == null) {
+		if(articleLabelRel.getLabelId() == null) {
 			return false;
 		}
-		if(articleLabelRel.getCareteTime() == null) {
+		if(articleLabelRel.getCreateTime() == null) {
 			return false;
 		}
 		return true;
@@ -567,7 +658,7 @@ public class ArticleServiceImpl  implements ArticleService{
 	}
 
 	@Override
-	public ReturnData<Article> findArticleById(long id) {
+	public ReturnData<Article> findArticleById(Long id) {
 		ReturnData<Article> returnData = new ReturnData<Article>();
 		try {
 			if(StringUtils.isEmpty(id)) {

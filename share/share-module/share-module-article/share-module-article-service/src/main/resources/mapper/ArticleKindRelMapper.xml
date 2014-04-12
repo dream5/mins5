@@ -21,6 +21,15 @@
 		(#{articleId}, #{articleKindId}, #{status}, #{updateTime}, #{createTime}, #{adminId})
 	</insert>
 	
+	<insert id="batchSaveArticleKindRel">
+		insert into article_kind_rel 
+		(article_id, article_kind_id, status, update_time, create_time, admin_id) 
+		values 
+		<foreach collection="list" item="item" separator=",">
+		(#{item.articleId}, #{item.articleKindId}, #{item.status}, #{item.updateTime}, #{item.createTime}, #{item.adminId})
+		</foreach>
+	</insert>
+	
 	<delete id="deleteById" parameterType="long">
 		delete from article_kind_rel where article_kind_rel_id = #{articleKindRelId}
 	</delete>

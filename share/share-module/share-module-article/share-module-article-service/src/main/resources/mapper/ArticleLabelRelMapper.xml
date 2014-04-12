@@ -8,7 +8,7 @@
 		<id property="articleLabelRelId" column="article_label_rel_id"/>
 		<result property="articleId" column="article_id"/>
 		<result property="labelId" column="label_id"/>
-		<result property="createTime" column="carete_time"/>
+		<result property="createTime" column="create_time"/>
 	</resultMap>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="articleLabelRelId">
@@ -16,6 +16,15 @@
 		(article_id, label_id, create_time) 
 		values 
 		(#{articleId}, #{labelId}, #{createTime})
+	</insert>
+	
+	<insert id="batchSaveArticleLabelRel">
+		insert into article_label_rel 
+		(article_id, label_id, create_time)
+		values 
+		<foreach collection="list" item="item" separator=",">
+		(#{item.articleId}, #{item.labelId}, #{item.createTime})
+		</foreach>
 	</insert>
 	
 	<delete id="deleteById" parameterType="long">
