@@ -34,15 +34,15 @@
 	}
 	function formatOperation(val,row) {
 		var operation = '<a href="#" onclick="articleDetail('+val+')">查看</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="${path}/article/toArticleEdit.mins?articleId='+val+'">修改</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="deleteConfirm('+val+')">删除</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="articleDetail('+val+')">审核</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="publishedArticle('+val+')">发布</>';
-		operation += '&nbsp;&nbsp;&nbsp;';
+		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="removedArticle('+val+')">下架</>';
 		return operation;
 	}
@@ -181,7 +181,7 @@
 				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
 				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
-				<th data-options="field:'articleId',width:200,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'articleId',width:260,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
