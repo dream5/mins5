@@ -97,8 +97,10 @@
           </ul>
         </div>
         </c:if>
+        <%--广告层暂时保留 
         <div class="rightbox" style="background-image:url(${context}/images/baidu.jpg);height:250px;">
         </div>
+        --%>
         <c:if test="${not empty hotLabelList}">
 		<div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
