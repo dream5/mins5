@@ -106,7 +106,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           <div class="photoBox">
           <ul class="introduce">
 			    <c:forEach var="recommendArticles" items="${recommendArticlesList }">
-	          		  <li><a href="${ recommendArticles.articleUrl}" target="_blank"><img src="${context}/images/robots.jpg" alt="${recommendArticles.articleTitle}" /></a></li>
+	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank"><img src="${context}/images/robots.jpg" alt="${recommendArticles.articleTitle}" /></a></li>
 	          	</c:forEach>
     		</ul>
     		</div>
