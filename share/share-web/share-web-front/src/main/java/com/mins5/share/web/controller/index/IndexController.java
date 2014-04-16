@@ -78,7 +78,7 @@ public class IndexController {
 		request.setAttribute("currentPage",currentPage);
 		request.setAttribute("pageSize",pageSize);
 		
-		ReturnPageData<List<Article>> returnData = articleService.findArticleByCondition(null, currentPage, pageSize);
+		ReturnPageData<List<Article>> returnData = articleService.findArticlesByKindPinyin(null, currentPage, pageSize);
 		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
 			request.setAttribute("totalArticleCount", returnData.getTotalResults());
 			request.setAttribute("articlesList", returnData.getResultData());
