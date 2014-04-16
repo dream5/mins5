@@ -703,4 +703,23 @@ public class ArticleServiceImpl  implements ArticleService{
 		return returnData;
 	}
 	
+	
+	@Override
+	public ReturnData<List<Article>> findPreAndNextArticles(int id,String pinyin){
+		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
+		try {
+			if(StringUtils.isEmpty(id)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			List<Article> article = articleDao.findPreAndNextArticles(id, pinyin);
+			returnData.setResultData(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
 }

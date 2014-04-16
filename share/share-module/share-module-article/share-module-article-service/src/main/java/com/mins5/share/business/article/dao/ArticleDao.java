@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mins5.share.business.article.domain.Article;
 import com.mins5.share.common.dao.CrudDao;
+import com.mins5.share.common.service.ReturnData;
 
 /**
  * @author zhoutian
@@ -107,5 +108,11 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 			@Param("isOriginal") String isOriginal, 
 			@Param("startRow") int startRow,
 			@Param("onePageSize") int onePageSize);
-	
+	/**
+	 * 任意查询2篇不是本身的文章，作为前一篇及后一篇
+	 * @param id 本身文章ID
+	 * @param pinyin 文章拼音分类
+	 * @return
+	 */
+	List<Article> findPreAndNextArticles(@Param("articleId")int id,@Param("pinyin") String pinyin);
 }
