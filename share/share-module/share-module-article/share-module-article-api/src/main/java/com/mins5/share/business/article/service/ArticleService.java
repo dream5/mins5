@@ -256,4 +256,17 @@ public interface ArticleService {
 			Date endTime, String isOriginal, int currentPage,
 			int onePageSize);
 	
+	
+	/**
+	 * 任意查询2篇不是本身的文章，作为前一篇，及后一篇
+	 * @param id 本身文章ID
+	 * @param pinyin 文章拼音分类
+	 * @return
+	 */
+	ReturnData<List<Article>> findPreAndNextArticles(int id,String pinyin);
+	
+	
+	
+	
+	
 }
