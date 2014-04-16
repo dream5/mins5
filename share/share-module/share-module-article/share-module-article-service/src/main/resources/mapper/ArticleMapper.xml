@@ -16,6 +16,7 @@
 		<result property="createTime" column="create_time"/>
 		<result property="isOriginal" column="is_original"/>
 		<result property="isValid" column="is_valid"/>
+		<result property="kindPinYin"  column="kind_pinyin"/>
 	</resultMap>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="articleId">
@@ -78,7 +79,8 @@
 	
 	<!-- 根据分类拼音查询文章  add by zhanglin 20140321-->
 	<select id="findArticlesByKindPinyin"  resultMap="ArticleMap">
-		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time
+		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,
+			   ak.kind_pinyin 	
 		from article a 
 		left join article_kind_rel akr on a.article_id = akr.article_id
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
