@@ -13,7 +13,11 @@
    <!-- 主页跳转 -->
    <rule>  
           <from>^/$</from>  
-          <to type="forward">index/goToIndex.mins</to>
+          <to type="forward">index/goToIndex.mins?currentPage=1</to>
+    </rule>  
+   <rule>  
+          <from>^/([1-9]+).html$</from>  
+          <to type="forward">%{context-path}/index/goToIndex.mins?currentPage=$1</to>
     </rule>  
     
     <!-- 分类页面跳转 -->
