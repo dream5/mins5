@@ -30,8 +30,19 @@ public class Article extends DomainObject {
 	private Date createTime;
 	private String isOriginal;
 	private String isValid;
-
+	
+	//扩展 add by zhanglin 20140416
+	private String kindPinYin;//分类拼音
+	
 	// Constructors
+
+	public String getKindPinYin() {
+		return kindPinYin;
+	}
+
+	public void setKindPinYin(String kindPinYin) {
+		this.kindPinYin = kindPinYin;
+	}
 
 	/** default constructor */
 	public Article() {
