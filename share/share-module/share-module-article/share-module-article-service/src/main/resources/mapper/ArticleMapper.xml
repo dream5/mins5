@@ -145,4 +145,22 @@
 		LIMIT #{startRow}, #{onePageSize}
 	</select>
 	
+	
+	
+	<!-- 查询前一篇，后一篇文章  add by zhanglin 20140321-->
+	<select id="findPreAndNextArticles"  resultMap="ArticleMap">
+		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,
+			   ak.kind_pinyin 	
+		from article a 
+		left join article_kind_rel akr on a.article_id = akr.article_id
+		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
+		where a.status =1 and akr.status=1 and ak.status = 1 and a.article_id!=#{articleId}
+		 <if test="pinyin != null">  
+	      	 and ak.kind_pinyin =#{pinyin}  
+	     </if>  
+	     order by rand()
+	     limit 0,2 
+	</select>
+	
+	
 </mapper>
