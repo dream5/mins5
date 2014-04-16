@@ -58,7 +58,7 @@ public class DetailController {
 			if (article.getResultData()==null) {
 				return "error";
 			}
-			request.setAttribute("article", article);
+			request.setAttribute("article", article.getResultData());
 		}
 		
 		// 热门推荐
