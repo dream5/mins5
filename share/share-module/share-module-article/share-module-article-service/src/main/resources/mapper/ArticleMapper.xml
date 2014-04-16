@@ -51,7 +51,7 @@
 	
 	<!-- 查询随机文章 add by zhanglin 20140314 -->
 	<select id="findRandomArticle" parameterType="int" resultMap="ArticleMap">
-		select article_title,article_url,create_time from article where status=1 order by rand() limit 0,#{amount}
+		select article_title,article_url,create_time,article_from,article_author from article where status=1 order by rand() limit 0,#{amount}
 	</select>
 	
 	<!-- 查询文章总数 add by zhanglin 20140317 -->
