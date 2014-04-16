@@ -51,7 +51,13 @@
 	
 	<!-- 查询随机文章 add by zhanglin 20140314 -->
 	<select id="findRandomArticle" parameterType="int" resultMap="ArticleMap">
-		select article_title,article_url,create_time,article_from,article_author from article where status=1 order by rand() limit 0,#{amount}
+		select a.article_id,a.article_title,a.article_from,a.article_url,a.article_author,a.create_time,
+			   ak.kind_pinyin 	
+		from article a 
+		left join article_kind_rel akr on a.article_id = akr.article_id
+		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
+		where a.status =1 and akr.status=1 and ak.status = 1  
+		order by rand() limit 0,#{amount}
 	</select>
 	
 	<!-- 查询文章总数 add by zhanglin 20140317 -->
