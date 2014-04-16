@@ -16,18 +16,22 @@
 		<result property="createTime" column="create_time"/>
 		<result property="isOriginal" column="is_original"/>
 		<result property="isValid" column="is_valid"/>
+		<result property="kindPinYin"  column="kind_pinyin"/>
 	</resultMap>
 
 	
    <!-- 查询推荐文章 add by zhanglin 20140317 -->
 	<select id="findRecommendByPositionAndCount"  resultMap="ArticleMap">
 		select 
-			a.article_title,a.article_url,a.create_time from article a left join article_recommend r
-		on  
-			a.article_id = r.article_id
-	    where
-	    	 a.status=1 and r.recommend_position = #{position}
+			a.article_id,a.article_title,a.article_url,a.create_time, ak.kind_pinyin  
+		from article a 
+		left join article_recommend r on  a.article_id = r.article_id
+		left join article_kind_rel akr on a.article_id = akr.article_id
+		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
 			
+	    where
+	    	a.status =1 and akr.status=1 and ak.status = 1 
+	    	 and r.recommend_position = #{position}
 		order by r.recommend_sort limit 0,#{num}
 	</select>
 
