@@ -122,8 +122,17 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           <ul class="ex_menu">
              <c:forEach var="randomArticle" items="${randomReadList }">
 	  			 <li>
-	  			 	<a href="${randomArticle.articleUrl}" target="_blank" title="${randomArticle.articleTitle}">${randomArticle.articleTitle}</a><br />
-					      来源：${randomArticle.articleFrom}   作者：${randomArticle.articleAuthor}             
+	  			 	<a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">
+	  				 	 <c:choose>
+							<c:when test="${fn:length(randomArticle.articleTitle) > 20}">
+								${fn:substring(randomArticle.articleTitle, 0,20)}...
+							</c:when>
+							<c:otherwise>
+								${randomArticle.articleTitle}
+							</c:otherwise>
+						</c:choose>
+	  			 	</a><br />
+					 <span>作者：${randomArticle.articleAuthor}</span> <span style="float:right">来源：${randomArticle.articleFrom}</span>              
 				</li>         
 		   </c:forEach>
           </ul>
