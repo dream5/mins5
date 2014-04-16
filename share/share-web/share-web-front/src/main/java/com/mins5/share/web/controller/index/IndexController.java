@@ -45,6 +45,26 @@ public class IndexController {
 	@Autowired
 	private ArticleRecommendService recommendService;
 	
+	private int currentPage = 1;
+	private int pageSize = 10;
+	
+	
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	/**
 	 * 跳转至首页
 	 * @return
@@ -52,9 +72,17 @@ public class IndexController {
 	@RequestMapping(value = "/goToIndex")
 	public String goToIndex(HttpServletRequest request,HttpServletResponse response){
 		//查询所有文章
-		int totalArticleCount = articleService.findAllArticlesCount();
-		request.setAttribute("totalArticleCount", totalArticleCount);
+		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		request.setAttribute("currentPage",currentPage);
+		request.setAttribute("pageSize",pageSize);
 		
+		ReturnPageData<List<Article>> returnData = articleService.findArticleByCondition(null, currentPage, pageSize);
+		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
+			request.setAttribute("totalArticleCount", returnData.getTotalResults());
+			request.setAttribute("articlesList", returnData.getResultData());
+		}
 		
 		//热门推荐
 		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION, 7);
