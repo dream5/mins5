@@ -43,12 +43,32 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           <div class="cline"></div>
          	${article.articleContent}
           <p class="links"><a href="#" target="_blank">标签</a>,<a href="#" target="_blank">标签</a></p>
-          <div class="nextContent">
-	          <p>
-	          	   <b>上一篇:</b><a href="#">2013年全国移动支付业务...</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				   <b>下一篇:</b> <a href="#">苹果新专利：智能健康监测...</a>
-			  </p>
-		  </div>
+          <c:if test="${not empty preArticle and not empty nextArticle}">
+	          <div class="nextContent">
+		          <p>
+		          	   <b>上一篇:</b><a href="${context}/${preArticle.kindPinYin}/${preArticle.articleId}.html" target="_blank">
+		          	    <c:choose>
+							<c:when test="${fn:length(preArticle.articleTitle) > 20}">
+								${fn:substring(preArticle.articleTitle, 0,20)}...
+							</c:when>
+							<c:otherwise>
+								${preArticle.articleTitle}
+							</c:otherwise>
+						</c:choose>
+		          	   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					   <b>下一篇:</b><a href="${context}/${nextArticle.kindPinYin}/${nextArticle.articleId}.html" target="_blank">
+					  	 <c:choose>
+							<c:when test="${fn:length(nextArticle.articleTitle) > 20}">
+								${fn:substring(nextArticle.articleTitle, 0,20)}...
+							</c:when>
+							<c:otherwise>
+								${nextArticle.articleTitle}
+							</c:otherwise>
+						</c:choose>
+					   </a>
+				  </p>
+			  </div>
+		  </c:if>
 		  <!-- baidu share begin-->
 			  <div class="bdsharebuttonbox" style="float:right;">
 				<a href="#" class="bds_more" data-cmd="more"></a>
