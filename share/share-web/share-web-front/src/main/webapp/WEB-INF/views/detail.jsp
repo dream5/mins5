@@ -38,7 +38,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           <div class="cline"></div>
           <p><span>时间:${article.createTime}</span>&nbsp;&nbsp;<span>来源:${article.articleFrom}</span>&nbsp;&nbsp;<span>作者:${article.articleAuthor}</span></a></p>
           <c:if test="${not empty article.articleUrl}">
-         	 <img src="${article.articleUrl}" width="613" height="193" alt="image" />
+         	 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
           </c:if>
           <div class="cline"></div>
          	${article.articleContent}
