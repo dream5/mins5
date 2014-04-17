@@ -14,6 +14,7 @@ import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.service.ArticleLabelService;
 import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.business.article.service.ArticleService;
+import com.mins5.share.business.article.service.SearchService;
 import com.mins5.share.common.service.ReturnData;
 /**
  * <p>前端控制器基类<p>
@@ -47,6 +48,8 @@ public class BaseController {
 	
 	@Autowired
 	protected ArticleService articleService;
+	@Autowired
+	protected SearchService searchService;
 	@Autowired
 	protected ArticleLabelService articleLabelService;
 	@Autowired
