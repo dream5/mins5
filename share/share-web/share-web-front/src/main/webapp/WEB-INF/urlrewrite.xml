@@ -23,8 +23,14 @@
     <!-- 分类页面跳转 -->
     <rule>  
           <from>^/([a-zA-Z]+)/$</from>  
-          <to type="forward">%{context-path}/kind/goToKindList.mins?k=$1</to>
+          <to type="forward">%{context-path}/kind/goToKindList.mins?k=$1&amp;currentPage=1</to>
     </rule> 
+    
+     <rule>  
+          <from>^/([a-zA-Z]+)/([1-9]+)$</from>  
+          <to type="forward">%{context-path}/kind/goToKindList.mins?k=$1&amp;currentPage=$2</to>
+    </rule> 
+    
     
       <!-- 详情页面跳转 -->
     <rule>  
