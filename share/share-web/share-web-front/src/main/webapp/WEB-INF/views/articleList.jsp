@@ -27,28 +27,69 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
   <div class="content">
     <div class="content_resize">
       <div class="mainbar">
-         <%--内容加载于异步获取 --%>
-		 <div id="Pagination" class="mypage">
-      	 </div>
+        
+         <c:if test="${not empty articlesList}">
+      	  <c:forEach var="article" items="${articlesList }">
+      	 	<div class="articlelist">
+         		 <h2>
+         		 	<c:choose>
+						<c:when test="${fn:length(article.articleTitle) > 20}">
+							<c:out value="${fn:substring(article.articleTitle, 0,20)}..." />
+						</c:when>
+						<c:otherwise>
+							<c:out value="${article.articleTitle}" />
+						</c:otherwise>
+					</c:choose>
+         		</h2>
+         		 <div class="cline"></div>
+          		<p>
+	          		<span>时间:${article.createTime}</span>&nbsp;&nbsp;<span>来源:${article.articleFrom}</span>
+	          		&nbsp;&nbsp;<span>作者:${article.articleAuthor}</span>&nbsp;&nbsp;浏览（18）
+          		</p>
+          		<c:if test="${not empty article.articleTitle}">
+          			 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
+          		</c:if>
+         		<div class="cline"></div>
+		         <c:choose>
+					<c:when test="${fn:length(article.articleContent) > 200}">
+						${fn:substring(article.articleContent, 0,200)}...
+					</c:when>
+					<c:otherwise>
+						${article.articleContent}"
+					</c:otherwise>
+				</c:choose>
+	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
+			  <!-- baidu share begin-->
+				  <div class="bdsharebuttonbox" style="float:right;">
+					<a href="#" class="bds_more" data-cmd="more"></a>
+					<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+					<a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+					<a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+					<a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
+					<a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+				 </div>
+			 <!-- baidu share end-->
+	        </div>
+        	</c:forEach>
+      	 </c:if>
+      	 <c:if test="${ empty articlesList}">
+      	 	<div class="articlelist"><span>对不起，没有查询出数据！${kind}<span></div>
+      	 </c:if>
+        
+       <%--分页标签开始 --%>
+       <pageUtil:pageHandler currPage="${currentPage}" link="${kind}/" var="pageTag" pageSize="${pageSize}" totalResults="${totalArticleCount}"></pageUtil:pageHandler>
+       ${pageTag}
+       <%--分页标签结束 --%>
       	 <c:if test="${not empty recommendArticlesList }">
 	        <div class="article" style="height:300px;">
 	          <h2><span>精彩推荐</span></h2>
 	          <div class="cline"></div>
 	          <div class="photoBox">
-	          <ul class="introduce">
-	          	<c:forEach var="recommendArticles" items="${recommendArticlesList }">
-	          		  <li><a href="${ recommendArticles.articleUrl}" target="_blank"><img src="${context}/images/robots.jpg" alt="${recommendArticles.articleTitle}" /></a></li>
+		          <ul class="introduce">
+		          	 <c:forEach var="recommendArticles" items="${recommendArticlesList }">
+	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank"><img src="${context}/images/robots.jpg" alt="${recommendArticles.articleTitle}" /></a></li>
 	          	</c:forEach>
-				   <%--    <li><a href="#"><img src="${context}/images/monster.jpg" alt="Monsters!" /></a></li>
-				      <li><a href="#"><img src="${context}/images/santa.jpg" alt="Santa down under" /></a></li>
-				      <li><a href="#"><img src="${context}/images/thumb6.jpg" alt="Sponguebob!" /></a></li>
-				      <li><a href="#"><img src="${context}/images/thumb7.jpg" alt="Star Wars" /></a></li>
-				      <li><a href="#"><img src="${context}/images/dino.png" alt="Dinosaur time" /></a></li>
-				      <li><a href="#"><img src="${context}/images/orange.jpg" alt="Orange car" /></a></li>
-				      <li><a href="#"><img src="${context}/images/alien.jpg" alt="Aliens!" /></a></li>
-				      <li><a href="#"><img src="${context}/images/supe.jpg" alt="It's Superman!" /></a></li>
-				      <li><a href="#"><img src="${context}/images/garfield.jpg" alt="Where's my lasagne?" /></a></li> --%>
-	    		</ul>
+		    	  </ul>
 	    		</div>
 	        </div>
         </c:if>
@@ -66,10 +107,19 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <h2><span>猜你喜欢</span></h2>
           <div class="cline"></div>
           <ul class="ex_menu">
-           <c:forEach var="randomArticle" items="${randomReadList }">
+            <c:forEach var="randomArticle" items="${randomReadList }">
 	  			 <li>
-	  			 	<a href="${randomArticle.articleUrl}" target="_blank" title="${randomArticle.articleTitle}">${randomArticle.articleTitle}</a><br />
-					      来源：${randomArticle.articleFrom}作者：${randomArticle.articleAuthor}             
+	  			 	<a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">
+	  				 	 <c:choose>
+							<c:when test="${fn:length(randomArticle.articleTitle) > 20}">
+								${fn:substring(randomArticle.articleTitle, 0,20)}...
+							</c:when>
+							<c:otherwise>
+								${randomArticle.articleTitle}
+							</c:otherwise>
+						</c:choose>
+	  			 	</a><br />
+					 <span>作者：${randomArticle.articleAuthor}</span> <span style="float:right">来源：${randomArticle.articleFrom}</span>              
 				</li>         
 		   </c:forEach>
           </ul>
@@ -102,18 +152,10 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/zoomer.js"></script>
-<script type="text/javascript" src="${context}/js/jquery.pagination.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
- 	
- 	$("#Pagination").pagination('${totalArticleCount}', {
-			 num_edge_entries: 2,//两侧显示的首尾分页的条目数
-			 num_display_entries: 10,//连续分页主体部分显示的分页条目数
-		 callback: pageSelectCallBack,//回调函数
-		 items_per_page:10,//每页显示的条目数
-	});
- 	
+
     function pageSelectCallBack(page_index, jq){
     	var c = page_index+1;
     	var p = 10;

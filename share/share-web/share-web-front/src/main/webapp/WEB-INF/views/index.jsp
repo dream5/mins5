@@ -68,7 +68,7 @@
       	 </c:if>
       
        <%--分页标签开始 --%>
-       <pageUtil:pageHandler currPage="${currentPage}" var="pageTag" pageSize="${pageSize}" totalResults="${totalArticleCount}"></pageUtil:pageHandler>
+       <pageUtil:pageHandler currPage="${currentPage}" link="/" var="pageTag" pageSize="${pageSize}" totalResults="${totalArticleCount}"></pageUtil:pageHandler>
        ${pageTag}
        <%--分页标签结束 --%>
       </div>
