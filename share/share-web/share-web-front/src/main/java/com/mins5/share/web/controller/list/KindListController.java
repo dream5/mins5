@@ -22,6 +22,7 @@ import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.JsonUtils;
+import com.mins5.share.web.controller.base.BaseController;
 
 /**
  * 分类类别
@@ -32,25 +33,30 @@ import com.mins5.share.util.JsonUtils;
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/kind")
-public class KindListController {
+public class KindListController extends BaseController {
 
 	private static final Log log = LogFactory.getLog(KindListController.class);
-
-	@Autowired
-	private ArticleService articleService;
-	@Autowired
-	private ArticleLabelService articleLabelService;
-	@Autowired
-	private ArticleRecommendService recommendService;
 
 	@RequestMapping(value = "/goToKindList")
 	public String goToKindList(HttpServletRequest request,
 			HttpServletResponse response) {
 		log.info("跳转到分类列表页面...");
+		
+		initMenu(request, response);
+		
+		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
 		String kindPinyin = request.getParameter("k");
-		int totalArticleCount = articleService
-				.findArticlesByKindPinyinCount(kindPinyin);
-		request.setAttribute("totalArticleCount", totalArticleCount);
+		request.setAttribute("currentPage",currentPage);
+		request.setAttribute("pageSize",pageSize);
+		request.setAttribute("kind",kindPinyin);
+		
+		ReturnPageData<List<Article>> returnData = articleService.findArticlesByKindPinyin(kindPinyin, currentPage, pageSize);
+		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
+			request.setAttribute("totalArticleCount", returnData.getTotalResults());
+			request.setAttribute("articlesList", returnData.getResultData());
+		}
 
 		// 猜你喜欢
 		int amount = 6;

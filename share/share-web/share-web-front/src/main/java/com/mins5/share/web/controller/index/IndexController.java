@@ -25,6 +25,7 @@ import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.JsonUtils;
+import com.mins5.share.web.controller.base.BaseController;
 
 /**
  * <p>首页控制器</p>
@@ -34,43 +35,19 @@ import com.mins5.share.util.JsonUtils;
 @Controller
 @Scope("prototype")
 @RequestMapping(value="/index")
-public class IndexController {
+public class IndexController extends BaseController{
 	
 	private static final Log log = LogFactory.getLog(IndexController.class);
 	
-	@Autowired
-	private ArticleService articleService;
-	@Autowired
-	private ArticleLabelService articleLabelService;
-	@Autowired
-	private ArticleRecommendService recommendService;
-	
-	private int currentPage = 1;
-	private int pageSize = 10;
-	
-	
-	public int getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
 	/**
 	 * 跳转至首页
 	 * @return
 	 */
 	@RequestMapping(value = "/goToIndex")
 	public String goToIndex(HttpServletRequest request,HttpServletResponse response){
+		
+		initMenu(request, response);
+		
 		//查询所有文章
 		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -110,6 +87,7 @@ public class IndexController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/getArticlesByPageNo")
+	@Deprecated
 	public void getArticlesByPageNo(HttpServletRequest request,HttpServletResponse response){
 		int currentPage = 1;
 		int pageSize = 15;
@@ -129,9 +107,11 @@ public class IndexController {
 	
 	
 	/**
-	 * 初始化导航菜单
+	 * 初始化导航菜单 
+	 * 2014 0417迁移到父类中
 	 */
 	@RequestMapping(value = "/initNav")
+	@Deprecated
 	public void initNavigate(HttpServletResponse response) {
 		log.info("加载主页导航菜单...");
 		ReturnData<List<ArticleKind>> articleKinds = articleService.findAllArticleKind();
@@ -149,6 +129,7 @@ public class IndexController {
 	 * 随机阅读
 	 */
 	@RequestMapping(value = "/randomRead")
+	@Deprecated
 	public void randomRead(HttpServletRequest request,HttpServletResponse response) {
 		log.info("加载随机阅读文章...");
 		int amount = 8;//默认取八篇
@@ -168,6 +149,7 @@ public class IndexController {
 	 * 热门标签
 	 */
 	@RequestMapping(value = "/hotLabel")
+	@Deprecated
 	public void hotLabel(HttpServletRequest request,HttpServletResponse response){
 		log.info("加载热门标签...");
 		int amount = 8;//默认取八篇

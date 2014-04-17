@@ -23,6 +23,7 @@ import com.mins5.share.business.article.service.SearchService;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.JsonUtils;
+import com.mins5.share.web.controller.base.BaseController;
 
 /**
  * <P>公用搜索</p>
@@ -33,23 +34,18 @@ import com.mins5.share.util.JsonUtils;
 @Controller
 @Scope("prototype")
 @RequestMapping(value="/s")
-public class SearchController {
+public class SearchController extends BaseController {
 	
 	private static final Log log = LogFactory.getLog(SearchController.class);
 	
-	@Autowired
-	private ArticleService articleService;
-	@Autowired
-	private ArticleLabelService articleLabelService;
-	@Autowired
-	private SearchService searchService;
-	@Autowired
-	private ArticleRecommendService recommendService;
 	
 	@RequestMapping(value = "/s")
 	public String search(HttpServletRequest request,HttpServletResponse response){
 		String key = request.getParameter("k");
 		log.info("搜索["+key+"]...");
+		
+		initMenu(request, response);
+		
 		if (!StringUtils.isEmpty(key)) {
 			int totalArticleCount = searchService.complexSearchArticleDataCount(key);
 			request.setAttribute("totalArticleCount", totalArticleCount);

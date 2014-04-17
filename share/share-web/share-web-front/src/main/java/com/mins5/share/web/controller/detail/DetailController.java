@@ -17,12 +17,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mins5.share.business.article.domain.Article;
+import com.mins5.share.business.article.domain.ArticleKind;
 import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.business.article.service.ArticleLabelService;
 import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.web.controller.base.BaseController;
 import com.mins5.share.web.controller.list.KindListController;
 
 /**
@@ -36,21 +38,16 @@ import com.mins5.share.web.controller.list.KindListController;
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/detail")
-public class DetailController {
+public class DetailController extends BaseController {
 
 	private static final Log log = LogFactory.getLog(DetailController.class);
-
-	@Autowired
-	private ArticleService articleService;
-	@Autowired
-	private ArticleLabelService articleLabelService;
-	@Autowired
-	private ArticleRecommendService recommendService;
 
 	@RequestMapping(value = "/goToDetail")
 	public String goToDetail(HttpServletRequest request,
 			HttpServletResponse response) {
 		log.info("跳转到详情页面...");
+		initMenu(request, response);
+		
 		String id = request.getParameter("id");
 		String kind = request.getParameter("k");
 		if (!StringUtils.isEmpty(id)) {
