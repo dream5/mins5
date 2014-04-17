@@ -14,6 +14,12 @@
       </div>
       <div class="cline"></div>
       <div class="menu_nav">
+      	<ul>
+			<li><a href='http://www.mins5.com'>首页</a></li>
+			<c:forEach var="kind" items="${articleKinds }">
+				<li><a href="${context}/${kind.kindPinyin}/">${kind.kindName}</a></li>
+			</c:forEach>
+		</ul>
       </div>
       <div class="cline"></div>
     </div>
