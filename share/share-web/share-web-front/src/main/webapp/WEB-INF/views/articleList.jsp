@@ -43,8 +43,10 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
          		</h2>
          		 <div class="cline"></div>
           		<p>
-	          		<span>时间:${article.createTime}</span>&nbsp;&nbsp;<span>来源:${article.articleFrom}</span>
-	          		&nbsp;&nbsp;<span>作者:${article.articleAuthor}</span>&nbsp;&nbsp;浏览（18）
+	          		<span>时间:&nbsp;${article.createTime}</span>
+	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
+	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
+	          		浏览（18）
           		</p>
           		<c:if test="${not empty article.articleTitle}">
           			 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
