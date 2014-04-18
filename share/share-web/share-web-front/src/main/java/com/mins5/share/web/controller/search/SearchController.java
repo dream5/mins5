@@ -46,9 +46,18 @@ public class SearchController extends BaseController {
 		
 		initMenu(request, response);
 		
+		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		request.setAttribute("currentPage",currentPage);
+		request.setAttribute("pageSize",pageSize);
+		
 		if (!StringUtils.isEmpty(key)) {
-			int totalArticleCount = searchService.complexSearchArticleDataCount(key);
-			request.setAttribute("totalArticleCount", totalArticleCount);
+			ReturnPageData<List<Article>> returnData = searchService.complexSearchArticleData(key, currentPage, pageSize);
+			if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
+				request.setAttribute("totalArticleCount", returnData.getTotalResults());
+				request.setAttribute("articlesList", returnData.getResultData());
+			}
 			request.setAttribute("searchKey", key);
 		}
 		
