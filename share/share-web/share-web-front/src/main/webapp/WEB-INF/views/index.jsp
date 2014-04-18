@@ -24,8 +24,8 @@
       	 	<div class="article">
          		 <h2>
          		 	<c:choose>
-						<c:when test="${fn:length(article.articleTitle) > 20}">
-							<c:out value="${fn:substring(article.articleTitle, 0,20)}..." />
+						<c:when test="${fn:length(article.articleTitle) > 28}">
+							<c:out value="${fn:substring(article.articleTitle, 0,28)}..." />
 						</c:when>
 						<c:otherwise>
 							<c:out value="${article.articleTitle}" />
