@@ -106,7 +106,18 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           <div class="photoBox">
           <ul class="introduce">
 			    <c:forEach var="recommendArticles" items="${recommendArticlesList }">
-	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank"><img src="${context}/images/robots.jpg" alt="${recommendArticles.articleTitle}" /></a></li>
+			     <c:choose>
+					<c:when test="${fn:length(recommendArticles.articleTitle) > 10}">
+						<c:set var="recommendtitle" value="${fn:substring(recommendArticles.articleTitle, 0,10)}..."></c:set>	
+					</c:when>
+					<c:otherwise>
+							<c:set var="recommendtitle" value="${recommendArticles.articleTitle}"></c:set>	
+					</c:otherwise>
+				</c:choose>
+	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank">
+	          		  <img src="${context}/images/robots.jpg" alt="${recommendtitle}" />
+	          		  </a>
+	          		  </li>
 	          	</c:forEach>
     		</ul>
     		</div>
