@@ -149,49 +149,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
-
-    function pageSelectCallBack(page_index, jq){
-    	var c = page_index+1;
-    	var p = 10;
-    	var k = '${k}';
-    	var timestamp = Date.parse(new Date());
-    	$.ajax({
- 	       type: "GET",
- 	       contentType : 'application/json;charset=UTF-8',
- 	       url: '/kind/getArticlesByPinyin.mins',
- 	       data: {t:timestamp,c:c,p:p,k:k},
- 	       dataType: "json",
- 	       success:function(result) {
- 	    	  if(result == "error"){
- 	    		   $(".mypage").before("<div class=\"articlelist\"><span>对不起，没有查询出数据！<span></div>");
-		    	   $(".mypage").hide();
-		       }else{
-		    	   var content = "";
-		    	   $.each(result,function(index,item){
-		    		   content +="<div class=\"articlelist\">";
-		    		   content +="<h2>"+item.articleTitle+"</h2>";
-		    		   content +="<p><span>时间:"+item.createTime+"</span>&nbsp;&nbsp;<span>来源:"+item.articleFrom+"</span>&nbsp;&nbsp;<span>作者:"+item.articleAuthor+"</span>&nbsp;&nbsp;浏览（18）</p>";
-		    		   content +="<div>";
-		    		   content +="<img src=\"/images/img_1.jpg\" width=\"200\" height=\"100\" />";
-		    		   content +="</div>";
-		    		   content +=item.articleContent;
-		    		   content +=" <p class=\"links\"><a href=\"#\" target=\"_blank\">标签/a>，<a href=\"#\" target=\"_blank\">标签/a></p>";
-		    		    content +="</div>";
-		    	   });
-		    	   $(".mypage").before(content);
-		       } 
- 	    	   
- 	       },
- 	       error:function(data){
- 	    	  $(".mypage").before("<div class=\"articlelist\"><span>对不起，没有查询出数据！<span></div>");
- 	    	  $(".mypage").hide();
- 	    	  
- 	       }
- 	});
-        
-        return false;
-    }
- 	
+ 	$(window).toTop({showHeight : 100,speed : 500 });
 });
 </script>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
