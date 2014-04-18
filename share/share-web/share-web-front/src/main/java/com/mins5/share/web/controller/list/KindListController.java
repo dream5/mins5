@@ -25,8 +25,7 @@ import com.mins5.share.util.JsonUtils;
 import com.mins5.share.web.controller.base.BaseController;
 
 /**
- * 分类类别
- * 
+ * <p>分类列表处理<p>
  * @author zhanglin
  * @since 20140317
  */
