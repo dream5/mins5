@@ -85,19 +85,20 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 	          <div class="cline"></div>
 	          <div class="photoBox">
 	          <ul class="introduce">
-	          	   <c:forEach var="recommendArticle" items="${recommendArticlesList }">
-		            	 <c:choose>
-							<c:when test="${fn:length(recommendArticle.articleTitle) > 30}">
-								<c:set var="recommendtitle" value="${fn:substring(recommendArticle.articleTitle, 0,30)}..."></c:set>	
-							</c:when>
-							<c:otherwise>
-									<c:set var="recommendtitle" value="${recommendArticle.articleTitle}"></c:set>	
-							</c:otherwise>
-						</c:choose>
-		            	 <li>
-			            	 <a href="${context}/${recommendArticle.kindPinYin}/${recommendArticle.articleId}.html" target="_blank" title="${recommendtitle}">${recommendtitle}</a>
-		            	 </li>
-           		 </c:forEach>
+	          	   <c:forEach var="recommendArticles" items="${recommendArticlesList }">
+			     <c:choose>
+					<c:when test="${fn:length(recommendArticles.articleTitle) > 10}">
+						<c:set var="recommendtitle" value="${fn:substring(recommendArticles.articleTitle, 0,10)}..."></c:set>	
+					</c:when>
+					<c:otherwise>
+							<c:set var="recommendtitle" value="${recommendArticles.articleTitle}"></c:set>	
+					</c:otherwise>
+				</c:choose>
+	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank">
+	          		  <img src="${context}/images/robots.jpg" alt="${recommendtitle}" />
+	          		  </a>
+	          		  </li>
+	          	</c:forEach>
 	    		</ul>
 	    		</div>
 	        </div>

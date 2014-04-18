@@ -49,6 +49,7 @@
 						${article.articleContent}"
 					</c:otherwise>
 				</c:choose>
+			  </br>	
 	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
 			  <!-- baidu share begin-->
 				  <div class="bdsharebuttonbox" style="float:right;">
