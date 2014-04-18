@@ -5,7 +5,7 @@ $(function() {
 			speed : 1000
 		};
 		var options = $.extend(defaults,options);
-		$("body").prepend("<div id='totop'><a>返回</a></div>");
+		$("body").prepend("<div id='totop'><a></a></div>");
 		var $toTop = $(this);
 		var $top = $("#totop");
 		var $ta = $("#totop a");
