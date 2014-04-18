@@ -64,7 +64,7 @@
         	</c:forEach>
       	 </c:if>
       	 <c:if test="${ empty articlesList}">
-      	 	<div class="article"><span>对不起，没有查询出数据！<span></div>
+      	 	<div class="article"><span>对不起，没有查询出数据！</span></div>
       	 </c:if>
       
        <%--分页标签开始 --%>
