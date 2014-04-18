@@ -79,7 +79,7 @@
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
 		where a.status =1 and akr.status=1 and ak.status = 1
 		 <if test="kindPinyin != null">  
-	       and ak.kind_name =#{kindPinyin}  
+	       and ak.kind_pinyin =#{kindPinyin}  
 	     </if>  
 	</select>
 	
@@ -92,7 +92,7 @@
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
 		where a.status =1 and akr.status=1 and ak.status = 1
 		 <if test="kindPinyin != null">  
-	       and ak.kind_name =#{kindPinyin}  
+	       and ak.kind_pinyin =#{kindPinyin}  
 	     </if>  
 	     order by a.article_id desc
 	     limit #{startRow},#{onePageSize} 
