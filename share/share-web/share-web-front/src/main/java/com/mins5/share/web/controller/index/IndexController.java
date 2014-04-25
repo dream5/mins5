@@ -90,12 +90,16 @@ public class IndexController extends BaseController{
 	@Deprecated
 	public void getArticlesByPageNo(HttpServletRequest request,HttpServletResponse response){
 		int currentPage = 1;
-		int pageSize = 15;
+		int pageSize = 10;
 		if(!StringUtils.isEmpty(request.getParameter("cp"))){
 			currentPage = Integer.parseInt(request.getParameter("cp"));
 		}
 		if (!StringUtils.isEmpty(request.getParameter("ps"))) {
 			pageSize = Integer.parseInt(request.getParameter("ps"));
+			if(pageSize>10){//防止恶意传参
+				JsonUtils.write("error", response);
+				return;
+			}
 		}
 		ReturnPageData<List<Article>> returnData = articleService.findArticleByCondition(null, currentPage, pageSize);
 		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
