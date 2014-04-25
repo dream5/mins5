@@ -186,7 +186,7 @@ a.rm, a.com {
 }
 /* content */
 .content {
-	padding: 10px 0 0 0;
+	padding: 2px 0 0 0;
 }
 .content_resize {
 	margin: 0 auto;
@@ -209,6 +209,7 @@ a.rm, a.com {
 	padding: 25px 20px;
 	width: 640px;
 	border: 1px dashed #ddd;
+	background: none repeat scroll 0 0 #F8F8F8;
 }
 .content .mainbar .article span.butons a {
 	margin: 0 5px 0 0;
@@ -270,6 +271,7 @@ a.rm, a.com {
 	padding: 30px 20px;
 	width: 230px;
 	border: 1px dashed #ddd;
+	background: none repeat scroll 0 0 #F8F8F8;
 }
 .content p.links {
 	background: url(/images/li_a.gif) left no-repeat;
@@ -728,7 +730,7 @@ div.mypage  span.next {
 .ui-banner .ui-banner-slides li.ui-banner-slides-prev{left:-654px;}
 .ui-banner .ui-banner-slides li.ui-banner-slides-next{left:654px;}
 .ui-banner .ui-banner-slogans{background:#009AC9;height:213px;overflow:hidden;padding:10px 30px 10px 15px;width:267px;right:0;}
-.ui-banner .ui-banner-slogans li{cursor:pointer;color:#8DC4EC;text-align:left;font-weight:bold;font-size:12px;line-height:14px;padding:10px 0 10px 10px;margin-left:5px;border-bottom:1px solid #79B4DF;list-style:none;list-style-type:none;}
+.ui-banner .ui-banner-slogans li{cursor:pointer;color:#8DC4EC;text-align:left;font-weight:bold;font-size:12px;line-height:15px;padding:10px 0 10px 10px;margin-left:5px;border-bottom:1px solid #79B4DF;list-style:none;list-style-type:none;}
 .ui-banner .ui-banner-slogans li.ui-banner-slogans-current{color:#FFF;}
 .ui-banner .ui-banner-slogans li.ui-banner-slogans-prev{border-bottom:none;}
 .ui-banner .ui-banner-arrow{display:block;width:45px;outline:none;}
