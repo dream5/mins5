@@ -9,6 +9,9 @@
 <meta name="description" content="对不起，出错了！" />
 <meta name="keywords" content="" />
 <meta name="robots" content="all" />
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 <style>
 	body {TEXT-ALIGN: center;}
 	.error{

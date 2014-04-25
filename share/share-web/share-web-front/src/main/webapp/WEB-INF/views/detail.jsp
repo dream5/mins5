@@ -13,6 +13,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
 <link href="${context}/css/zoomer.css" rel="stylesheet" type="text/css"  media="screen" />
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 <!--[if IE 6]>
 	<style type="text/css" media="screen">
 	ul.thumb li img.hover {

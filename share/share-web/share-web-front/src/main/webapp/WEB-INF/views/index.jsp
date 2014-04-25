@@ -7,6 +7,10 @@
 <title>互联网资讯</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+ 
 </head>
 <body>
 <div class="login">
@@ -71,6 +75,7 @@
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
 	          		浏览（18）
+	          		
           		</p>
           		<c:if test="${not empty article.articleTitle}">
           			 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
@@ -86,16 +91,6 @@
 				</c:choose>
 			  </br>	
 	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
-			  <!-- baidu share begin-->
-				  <div class="bdsharebuttonbox" style="float:right;">
-					<a href="#" class="bds_more" data-cmd="more"></a>
-					<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-					<a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-					<a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-					<a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
-					<a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-				 </div>
-			 <!-- baidu share end-->
 	        </div>
         	</c:forEach>
       	 </c:if>
@@ -186,6 +181,5 @@
 		});
 	});
 </script>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </body>
 </html>
