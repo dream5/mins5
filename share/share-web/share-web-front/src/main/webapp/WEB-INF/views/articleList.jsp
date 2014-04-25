@@ -151,7 +151,6 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
- 	$(window).toTop({showHeight : 100,speed : 500 });
 });
 </script>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>

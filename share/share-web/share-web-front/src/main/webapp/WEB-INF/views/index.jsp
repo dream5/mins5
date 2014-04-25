@@ -143,14 +143,6 @@
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
-<script>
-$(function (){
-$(window).toTop({
-		showHeight : 100,//设置滚动高度时显示
-		speed : 500 //返回顶部的速度以毫秒为单位
-});
-});
-</script>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </body>
 </html>
