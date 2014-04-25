@@ -88,26 +88,18 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 			 </div>
 		 <!-- baidu share end-->
         </div>
+         <!-- 多说评论框 start -->
+         <div class="article">
+			<div class="ds-thread" data-thread-key="${article.articleId}" data-title="${article.articleTitle}" data-url="${context}/${article.kindPinYin}/${article.articleId}.html">
+			</div>
+		 </div>	
+		 <!-- 多说评论框 end -->
        </c:if>
        <c:if test="${ empty article }">
      	  <div class="article"><span>对不起，没有查询出数据！<span></div>
        </c:if>
-        <!-- <div class="article">
-          <h2><span>3</span> 评论（暂不接入）</h2><div class="cline"></div>
-          <div class="comment">
-            <a href="#"><img src="images/userpic.gif" width="40" height="40" alt="user" class="userpic" /></a>
-            <p><a href="#">admin</a> Says:<br />April 20th, 2009 at 2:17 pm</p>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum.</p>
-          </div>
-          <div class="comment">
-            <a href="#"><img src="images/userpic.gif" width="40" height="40" alt="user" class="userpic" /></a>
-            <p><a href="#">Owner</a> Says:<br />April 20th, 2009 at 3:21 pm</p>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu posuere nunc justo tempus leo.</p>
-          </div>
-          <div class="comment">
-          </div>
-        </div> -->
-        <c:if test="${not empty recommendArticlesList }">
+        
+       <c:if test="${not empty recommendArticlesList }">
         <div class="article" style="height:300px;">
           <h2><span>精彩推荐</span></h2>
           <div class="cline"></div>
@@ -190,6 +182,19 @@ $(document).ready(function(){
  	
 });
 </script>
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"min5"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+	<!-- 多说公共JS代码 end -->
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </body>
 </html>
