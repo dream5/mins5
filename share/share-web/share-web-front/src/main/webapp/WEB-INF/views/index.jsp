@@ -7,9 +7,9 @@
 <title>互联网资讯</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
  
 </head>
 <body>
@@ -71,7 +71,7 @@
          		</h2>
          		 <div class="cline"></div>
           		<p>
-	          		<span>时间:&nbsp;${article.createTime}</span>
+	          		<span>时间:&nbsp;<fmt:formatDate value="${article.createTime}" pattern="yyyy年MM月dd日" /></span>
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
 	          		浏览（18）

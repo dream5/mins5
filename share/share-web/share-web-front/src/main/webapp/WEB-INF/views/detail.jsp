@@ -13,9 +13,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
 <link href="${context}/css/zoomer.css" rel="stylesheet" type="text/css"  media="screen" />
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 <!--[if IE 6]>
 	<style type="text/css" media="screen">
 	ul.thumb li img.hover {
@@ -45,7 +45,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           <h2>${article.articleTitle}</h2>
           <div class="cline"></div>
           <p>
-	          <span>时间:&nbsp;${article.createTime}</span>
+	          <span>时间:&nbsp;<fmt:formatDate value="${article.createTime}" pattern="yyyy年MM月dd日" /></span>
 	          <span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          <span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
 	                             浏览（18）
@@ -140,15 +140,15 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 	  			 <li>
 	  			 	<a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">
 	  				 	 <c:choose>
-							<c:when test="${fn:length(randomArticle.articleTitle) > 20}">
-								${fn:substring(randomArticle.articleTitle, 0,20)}...
+							<c:when test="${fn:length(randomArticle.articleTitle) > 15}">
+								${fn:substring(randomArticle.articleTitle, 0,15)}...
 							</c:when>
 							<c:otherwise>
 								${randomArticle.articleTitle}
 							</c:otherwise>
 						</c:choose>
 	  			 	</a><br />
-					 <span>作者：${randomArticle.articleAuthor}</span> <span style="float:right">来源：${randomArticle.articleFrom}</span>              
+					<%--  <span>作者：${randomArticle.articleAuthor}</span> <span style="float:right">来源：${randomArticle.articleFrom}</span>   --%>            
 				</li>         
 		   </c:forEach>
           </ul>

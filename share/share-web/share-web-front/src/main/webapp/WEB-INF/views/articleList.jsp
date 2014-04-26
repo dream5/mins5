@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${context}/css/zoomer.css" media="screen" />
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 <!--[if IE 6]>
 <style type="text/css" media="screen">
 	ul.introduce li img.hover {
@@ -25,7 +25,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 <body>
 <div class="main">
   <%--top --%> 
-  <%@ include file="/WEB-INF/views/frame/listTop.jsp" %>
+  <%@ include file="/WEB-INF/views/frame/top.jsp" %>
   <div class="cline"></div>
   <div class="content">
     <div class="content_resize">
@@ -46,7 +46,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
          		</h2>
          		 <div class="cline"></div>
           		<p>
-	          		<span>时间:&nbsp;${article.createTime}</span>
+	          		<span>时间:&nbsp;<fmt:formatDate value="${article.createTime}" pattern="yyyy年MM月dd日" /></span>
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
 	          		浏览（18）
@@ -64,16 +64,6 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 					</c:otherwise>
 				</c:choose>
 	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
-			  <!-- baidu share begin-->
-				  <div class="bdsharebuttonbox" style="float:right;">
-					<a href="#" class="bds_more" data-cmd="more"></a>
-					<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-					<a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-					<a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-					<a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
-					<a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-				 </div>
-			 <!-- baidu share end-->
 	        </div>
         	</c:forEach>
       	 </c:if>
@@ -110,15 +100,15 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 	  			 <li>
 	  			 	<a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">
 	  				 	 <c:choose>
-							<c:when test="${fn:length(randomArticle.articleTitle) > 20}">
-								${fn:substring(randomArticle.articleTitle, 0,20)}...
+							<c:when test="${fn:length(randomArticle.articleTitle) > 15}">
+								${fn:substring(randomArticle.articleTitle, 0,15)}...
 							</c:when>
 							<c:otherwise>
 								${randomArticle.articleTitle}
 							</c:otherwise>
 						</c:choose>
 	  			 	</a><br />
-					  <span style="float:right">来源：${randomArticle.articleFrom}</span>              
+					 <%--  <span style="float:right">来源：${randomArticle.articleFrom}</span> --%>              
 				</li>         
 		   </c:forEach>
           </ul>
@@ -156,6 +146,5 @@ $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
 });
 </script>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </body>
 </html>

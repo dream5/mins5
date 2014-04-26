@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${context}/css/zoomer.css" media="screen" />
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
-<link href="favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
+<link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
 <!--[if IE 6]>
 <style type="text/css" media="screen">
 	ul.introduce li img.hover {
@@ -25,7 +25,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 <body>
 <div class="main">
   <%--top --%> 
-  <%@ include file="/WEB-INF/views/frame/listTop.jsp" %>
+  <%@ include file="/WEB-INF/views/frame/top.jsp" %>
   <div class="cline"></div>
   <div class="content">
     <div class="content_resize">
@@ -45,7 +45,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
          		</h2>
          		 <div class="cline"></div>
           		<p>
-	          		<span>时间:&nbsp;${article.createTime}</span>
+	          		<span>时间:&nbsp;<fmt:formatDate value="${article.createTime}" pattern="yyyy年MM月dd日" /></span>
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
 	          		浏览（18）
