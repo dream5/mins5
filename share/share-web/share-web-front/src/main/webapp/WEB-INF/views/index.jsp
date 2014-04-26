@@ -78,7 +78,7 @@
 	          		
           		</p>
           		<c:if test="${not empty article.articleTitle}">
-          			 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
+          			 <img src="${article.articleUrl}" width="613px" height="193px" alt="${article.articleTitle}" />
           		</c:if>
          		<div class="cline"></div>
 		         <c:choose>
