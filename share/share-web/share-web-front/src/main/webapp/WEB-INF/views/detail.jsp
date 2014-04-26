@@ -30,8 +30,13 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 <body>
 <div class="main">
   <%--top --%> 
-  <%@ include file="/WEB-INF/views/frame/listTop.jsp" %>
+  <%@ include file="/WEB-INF/views/frame/top.jsp" %>
   <div class="cline"></div>
+   <!--面包屑-->
+  <div class="page-position">
+	当前位置：<a target="_parent" href="${context}">5分钟</a>&nbsp;&gt;&nbsp;<a target="_parent" href="${context}/${kind}/">心灵鸡汤</a>&nbsp;&gt;&nbsp;分类列表
+  </div>
+  <!--面包屑  -->
   <div class="content">
     <div class="content_resize">
       <div class="mainbar">
