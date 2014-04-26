@@ -136,10 +136,11 @@ a.rm, a.com {
 	color: #9A9A9A;
 	height: 19px;
 	line-height: 19px;
-	margin: 10px 0 0 200px;
+	margin: 10px auto;
 	overflow: hidden;
 	padding-left: 16px;
 	vertical-align: middle;
+	width:953px;
 }
 .page-position a {
 	color: #9A9A9A;
