@@ -625,7 +625,7 @@ div.mypage  span.next {
 #totop {
 	position: fixed;
 	bottom: 40px;
-	right: 140px;
+	right: 120px;
 	z-index: 999;
 	width: 65px;
 	cursor: pointer;
