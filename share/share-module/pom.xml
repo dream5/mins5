@@ -12,6 +12,5 @@
   	<module>share-module-admin</module>
   	<module>share-module-user</module>
   	<module>share-module-article</module>
-    <module>share-module-attachment</module>
   </modules>
 </project>
