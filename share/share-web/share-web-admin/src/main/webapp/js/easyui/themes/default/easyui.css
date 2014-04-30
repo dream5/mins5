@@ -149,6 +149,7 @@
 }
 .accordion-noborder .accordion-body {
   border-width: 0 0 1px;
+  text-align: center;
 }
 .accordion-collapse {
   background: url('images/accordion_arrows.png') no-repeat 0 0;
