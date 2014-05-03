@@ -11,6 +11,5 @@
   <modules>
   	<module>share-core-common</module>
   	<module>share-core-util</module>
-    <module>share-core-attachment</module>
   </modules>
 </project>
