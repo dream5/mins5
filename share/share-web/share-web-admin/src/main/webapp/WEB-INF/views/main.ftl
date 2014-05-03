@@ -26,7 +26,10 @@
 					<a href="javascript:void(0);" src="${path}/article/articleKindList.mins" class="cs-navi-tab">类别管理</a></p>
 					<a href="javascript:void(0);" src="${path}/article/articleLabelList.mins" class="cs-navi-tab">标签管理</a></p>
 				</div>
-				<div title="Base">
+				<div title="图片管理">
+					<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">图片管理</a></p></p>
+				</div>
+				<div title="base">
 					<a href="javascript:void(0);" src="${path}/js/easyui/demo/easyloader/basic.html" class="cs-navi-tab">easyloader</a></p>
 					
 					<a href="javascript:void(0);" src="${path}/js/easyui/demo/draggable/basic.html" class="cs-navi-tab">draggable-basic</a></p>
