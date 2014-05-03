@@ -1,0 +1,49 @@
+@charset "gb2312";
+/* css document*/
+*{padding:0;margin:0;}
+/* links-style*/
+a{outline:none;}
+
+/* ---------初始化页面主要元素---------*/
+body{ font-size:12px;  font-family:"Verdana,宋体"; color:#3f3f3f; background:url(/images/userhome/01/main_bg.gif) repeat-x;}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,caption,tfoot,thead{padding:0;margin:0;border:0;vertical-align: baselinebaseline;font-style: inherit;font-family: inherit;}
+img,iframe {border: none; text-decoration:none;}
+ol,li,ul,li{list-style:none; list-style-type:none}
+th,tr,td{ padding:5px;}
+select {margin: inherit;}   
+:focus { outline: 0;}  
+input,textarea,button{ padding:0; margin:0;}
+input, textarea, select, button {font-size: 100%;font-family: inherit;}
+textarea{display:block;overflow:auto;}
+hr {margin: 0;padding: 0;border: 0;color: #000;background-color: #000;height: 1px}
+.fontfam{ font-family:Verdana, Arial, Helvetica, sans-serif}
+/*--------- images---------*/
+img{padding:0;margin:0;border:0;}
+/*---------连接---------*/
+a:link,a:visited {color: #3f3f3f; text-decoration:none;} a:hover{color: #ff6600; text-decoration:underline;}
+a.link_bai:link,a.link_bai:visited {color:#FFFFFF; text-decoration:none;} a.link_bai:hover{color: #E4F85C; text-decoration:underline;}
+a.link_lan:link,a.link_lan:visited {color:#005eac; text-decoration:underline;} a.link_lan:hover{color: #ff6600; text-decoration:underline;}
+a.link_lan2:link,a.link_lan2:visited {color:#005eac; text-decoration:none;} a.link_lan2:hover{color: #ff6600; text-decoration:underline;}
+a.link_cheng:link,a.link_cheng:visited {color:#ff6600; text-decoration:underline;} a.link_cheng:hover{color: #ff6600; text-decoration:underline;}
+a.link_huang:link,a.link_huang:visited {color:#ffff00; text-decoration:underline;} a.link_huang:hover{color: #7a220d; text-decoration:underline;}
+/*---------结构---------*/
+.center_box{ width:970px; margin:0 auto;}
+.left{ float:left;}
+.right{ float:right;}
+.block{ display:block;}
+.clearz{ clear:both;}
+.none{ display:none;} 
+.bold{ font-weight:bold;}
+.text_center{ text-align:center;}
+.mt_10{ margin-top:10px;}
+/*---------颜色---------*/
+.color_lan{ color:#005eac;}
+.color_cheng{ color:#ff6600;}
+.color_lv{ color:#0db068;}
+.color_hong{ color:#cc0000;}
+.color_bai{ color:#ffffff;}
+/*---------字体---------*/
+.font_12{ font-size:12px;}
+.font_14{ font-size:14px;}
+.font_18{ font-size:18px; font-family:"黑体"; line-height:40px;}
+.font_12_link{font-size:12px;color:#005eac}
