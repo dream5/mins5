@@ -13,7 +13,7 @@
 <table class="navTb" cellspacing="0" cellpadding="0"  border="0" >
 	<tbody>
 		<tr>
-			<td>当前位置：系统管理 &gt; 用户管理</td>
+			<td>当前位置：图片管理 &gt; 上传图片</td>
 		</tr>
 	</tbody>
 </table>
@@ -24,16 +24,10 @@
 		    <td width=15 background=${path}/images/frame/new_022.jpg><img src="${path}/images/frame/new_022.jpg" border=0></td>
 		    <td valign=top width="100%" bgcolor=#ffffff>
 				<table width="100%" id="upload">
-	<tr>
-		<td colspan="2">
-			<div id="fileQueue"></div>
-		</td>
-	</tr>
-	<tr>
+	     <tr>
 		<td width="30%" align="left" valign="middle">
 			<input type="hidden" name="extname" id="extname" />
 			<input type="file" name="uploadify" id="uploadify" />
-			<input type="hidden" name="proVal" id="proVal" value="" />
 		</td>
 		<td width="70%" align="left" valign="middle"
 			style="padding-top: 9px;">
@@ -42,6 +36,11 @@
 			<input type="button" class="but_bg" style="float: left;"
 				onclick="javascript:jQuery('#uploadify').uploadifyClearQueue();"
 				value="撤销" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="fileQueue"></div>
 		</td>
 	</tr>
 </table>
@@ -69,24 +68,25 @@ $(document).ready(function() {
 		'multi': false,
 		'auto':false,
 		'sizeLimit': fileSize,
-		//'displayData': 'speed',
+		'displayData': 'speed',
 		'wmode': 'transparent',
 		'buttonText': 'BROWSE',
 		'buttonImg':'${path}/js/uploadify/liulan_bg.gif',
 		'onError':function(event,queueID,fileObj,errorObj) { 
-			alert("上传的所有文件不能超过200M，支持的格式有.doc,.docx,.xls,.xlsx,.ppt,.pptx,.pdf。\r\n如需上传其它格式的文件，可压缩为.rar或.zip格式后上传。");
+			alert("上传错误！");
 		},
 		'onSelect':function(event,queueID,fileObj) { 
 			$("#extname").val(fileObj.type);
 		},
 		'onComplete':function(event,queueID,fileObj,response) { 
+			alert("文件:" + fileObj.name + "上传成功");
 		}
 
 	});
 });
 
 function exeUpload(){
-	$('#uploadify').uploadifySettings('scriptData', {'filetype':$('#extname').val(),'proVal': $('#proVal').val()});
+	$('#uploadify').uploadifySettings('scriptData', {'filetype':$('#extname').val()});
 	jQuery('#uploadify').uploadifyUpload();
 }
 function trim(str){
