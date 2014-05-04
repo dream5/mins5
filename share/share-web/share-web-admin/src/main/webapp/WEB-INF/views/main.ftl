@@ -9,7 +9,7 @@
 <body class="easyui-layout">
 	<div region="north" border="true" class="cs-north">
 		<div class="cs-north-bg">
-		<div class="cs-north-logo"><!--Mins5 后台管理系统--></div>
+		<div class="cs-north-logo">Mins5 后台管理系统</div>
 		<ul class="ui-skin-nav">				
 			<li class="li-skinitem" title="gray"><span class="gray" rel="gray"></span></li>
 			<li class="li-skinitem" title="default"><span class="default" rel="default"></span></li>
