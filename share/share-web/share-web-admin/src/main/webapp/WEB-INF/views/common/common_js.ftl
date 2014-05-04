@@ -1,4 +1,4 @@
-<link rel="stylesheet" id="swicth-style" type="text/css" href="${path}/js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" id="swicth-style" type="text/css" href="${path}/js/easyui/themes/bootstrap/easyui.css">
 <link rel="stylesheet" type="text/css" href="${path}/js/easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="${path}/js/css/common.css">
 <script type="text/javascript" src="${path}/js/jquery/jquery-1.10.1.js"></script>
