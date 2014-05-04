@@ -50,15 +50,12 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<h2>添加文章</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>输入文章信息然后点击提交按钮</div>
-	</div>
+	<div class="curPosition"><span class="sys-nav"></span><span>当前位置：新增文章</span></div>
+	<div class="content">
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
 	</div>
-	<div class="easyui-panel" title="添加文章" style="width: 1000px">
+	<div class="easyui-panel" title="添加文章">
 		<div style="padding: 10px 0 10px 60px">
 			<form id="articleFormId" method="post"
 				action="${path}/article/articleAdd.mins">
@@ -132,6 +129,7 @@
 				onclick="submitForm()">提交</a> <a href="javascript:void(0)"
 				class="easyui-linkbutton" onclick="clearForm()">重置</a>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
