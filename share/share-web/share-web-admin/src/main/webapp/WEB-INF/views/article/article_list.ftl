@@ -182,7 +182,7 @@
 				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
 				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
-				<th data-options="field:'articleId',width:260,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'articleId',width:300,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -191,7 +191,7 @@
 			<a href="${path}/article/toArticleAdd.mins" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加文章</a>
 		</div>
 		<div>
-			文章标题: <input id="articleTitle" type="text" style="width:100px">
+			文章标题: <input id="articleTitle" type="text" style="width:200px">
 			开始时间: <input id="beginTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
 			结束时间: <input id="endTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
 			文章状态: 
