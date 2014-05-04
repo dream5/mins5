@@ -184,10 +184,26 @@ a:active {
     width: 18px;
 }
 
+/*面包屑*/
+.curPosition{
+	margin:15px auto 15px 10px;
+}
+.curPosition span{
+	background-image:url('../easyui/themes/sys_icons/photo.png') no-repeat center center;
+}
 
-
-
-
+/*正文*/
+.content{
+	margin:0 auto;
+	width:100%;
+	height:100%;
+	text-align:center;
+}
+.content .gridHead{
+	margin:15px auto;
+	width:100%;
+	height:100%;
+}
 
 
 
