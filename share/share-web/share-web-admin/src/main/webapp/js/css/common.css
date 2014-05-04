@@ -38,7 +38,9 @@ a:active {
 .cs-north {
 	height:60px;
 	background:url('../../images/top_bg.jpg') repeat center center;
-	background-size:100% 100%; 
+	background-size:100% 100%;
+	overflow-x: hidden; 
+	overflow-y: hidden; 
 }
 .cs-north-bg {
 	width:100%;
@@ -201,7 +203,7 @@ a:active {
 }
 .content .gridHead{
 	margin:15px auto;
-	width:100%;
+	#width:90%;
 	height:100%;
 }
 
