@@ -21,13 +21,41 @@
 	</div>
 	<div region="west" border="true" split="true" title="Navigation" class="cs-west">
 		<div class="easyui-accordion" fit="true" border="false">
-				<div title="文章管理">
-					<a href="javascript:void(0);" src="${path}/article/articleList.mins" class="cs-navi-tab">文章管理</a></p></p>
-					<a href="javascript:void(0);" src="${path}/article/articleKindList.mins" class="cs-navi-tab">类别管理</a></p>
-					<a href="javascript:void(0);" src="${path}/article/articleLabelList.mins" class="cs-navi-tab">标签管理</a></p>
+				<div title="文章管理" data-options="iconCls:'sys-article'">
+					<ul class="subMenuCls">
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/article/articleList.mins" class="cs-navi-tab">
+								<span class="leftIcons"></span><span>文章管理</span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/article/articleKindList.mins" class="cs-navi-tab">
+								<span class="leftIcons"></span><span>类别管理</span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/article/articleLabelList.mins" class="cs-navi-tab">
+								<span class="leftIcons"></span><span>标签管理</span>
+								</a>
+							</div>
+						</li>
+					</ul>
 				</div>
-				<div title="图片管理">
-					<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">图片管理</a></p></p>
+				<div title="图片管理" data-options="iconCls:'sys-images'"> 
+					<ul class="subMenuCls">
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">
+								<span class="leftIcons"></span><span>图片管理</span>
+								</a>
+							</div>
+						</li>
+					</ul>
 				</div>
 				<div title="base">
 					<a href="javascript:void(0);" src="${path}/js/easyui/demo/easyloader/basic.html" class="cs-navi-tab">easyloader</a></p>
@@ -226,7 +254,7 @@
 		 <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
                 <div title="Home">
 				<div class="cs-home-remark">
-					<h1>Mins5 后台管理系统</h1><br/>
+					<h1><!--Mins5 后台管理系统--></h1><br/>
 					心有多大，舞台就有多大！ <br/>
 				</div>
 				</div>
