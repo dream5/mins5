@@ -243,15 +243,15 @@
 		<div id="mm-tabcloseall">关闭全部</div>
 	</div>
 	<script>
-	$(function(){
+	$(function() {
+	tabCloseEven();
 
-	var themes = {
-		'gray' : '${path}/js/easyui/themes/gray/easyui.css',
-		'black' : '${path}/js/easyui/themes/black/easyui.css',
-		'bootstrap' : '${path}/js/easyui/themes/bootstrap/easyui.css',
-		'default' : '${path}/js/easyui/themes/default/easyui.css',
-		'metro' : '${path}/js/easyui/themes/metro/easyui.css'
-	};
+	$('.cs-navi-tab').click(function() {
+		var $this = $(this);
+		var href = $this.attr('src');
+		var title = $this.text();
+		addTab(title, href);
+	});
 
 	var skins = $('.li-skinitem span').click(function() {
 		if ($(this).hasClass('cs-skin-on')){
@@ -261,19 +261,17 @@
 		$(this).addClass('cs-skin-on');
 		var skin = $(this).attr('rel');
 		$('#swicth-style').attr('href', themes[skin]);
+		var $iframe = $('iframe'); 
+		if ($iframe.length> 0) { 
+			for ( var i = 0; i< $iframe.length; i++) { 
+				var ifr = $iframe[i]; 
+				$(ifr).contents().find('#swicth-style').attr('href', href); 
+			} 
+		}
 		setCookie('cs-skin', skin);
 		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
 	});
-
-	if (getCookie('cs-skin')) {
-		var skin = getCookie('cs-skin');
-		$('#swicth-style').attr('href', themes[skin]);
-		$this = $('.li-skinitem span[rel=' + skin + ']');
-		$this.addClass('cs-skin-on');
-		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
-	}
 });
-
 	</script>
 </body>
 </html>
