@@ -92,14 +92,15 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div style="margin:10px 0;"></div>
-	<table id="dg" style="width:700px;">
+   <div class="curPosition"><span class="sys-nav"></span><span>当前位置：标签管理</span></div>
+	<div class="content">
+	<table id="dg" class="gridHead">
 		<thead>
 			<tr>
-				<th data-options="field:'labelName',width:100,align:'center'">标签名称</th>
-				<th data-options="field:'status',width:80,align:'center',formatter:formatStatus">标签状态</th>
-				<th data-options="field:'createTime',width:150,align:'center'">标签生成时间</th>
-				<th data-options="field:'labelId',width:100,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'labelName',width:300,align:'center'">标签名称</th>
+				<th data-options="field:'status',width:100,align:'center',formatter:formatStatus">标签状态</th>
+				<th data-options="field:'createTime',width:240,align:'center'">标签生成时间</th>
+				<th data-options="field:'labelId',width:300,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -108,7 +109,7 @@
 			<a href="${path}/article/toArticleLabelAdd.mins" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加标签</a>
 		</div>
 		<div>
-			标签名称: <input id="labelName" type="text" style="width:100px">
+			标签名称: <input id="labelName" type="text" style="width:300px">
 			开始时间: <input id="beginTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
 			结束时间: <input id="endTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
 			标签状态: 
@@ -119,6 +120,7 @@
 			</select>
 			<a href="#" onclick="loadTable();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
