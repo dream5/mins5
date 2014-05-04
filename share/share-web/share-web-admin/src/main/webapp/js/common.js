@@ -134,18 +134,17 @@ function tabCloseEven() {
 	})
 }
 
-$(function() {
-	tabCloseEven();
-
-	$('.cs-navi-tab').click(function() {
-		var $this = $(this);
-		var href = $this.attr('src');
-		var title = $this.text();
-		addTab(title, href);
-	});
-
+$(function(){
+	//每个页面加载时自动从cookie中读取已保存的主题
+	if (getCookie('cs-skin')) {
+		var skin = getCookie('cs-skin');
+		alert('skin='+skin);
+		$('#swicth-style').attr('href', themes[skin]);
+		$this = $('.li-skinitem span[rel=' + skin + ']');
+		$this.addClass('cs-skin-on');
+		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
+	}
 });
-
 function setCookie(name, value) {//两个参数，一个是cookie的名子，一个是值
 	var Days = 30;
 	//此 cookie 将被保存 30 天
