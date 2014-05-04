@@ -138,7 +138,6 @@ $(function(){
 	//每个页面加载时自动从cookie中读取已保存的主题
 	if (getCookie('cs-skin')) {
 		var skin = getCookie('cs-skin');
-		alert('skin='+skin);
 		$('#swicth-style').attr('href', themes[skin]);
 		$this = $('.li-skinitem span[rel=' + skin + ']');
 		$this.addClass('cs-skin-on');
