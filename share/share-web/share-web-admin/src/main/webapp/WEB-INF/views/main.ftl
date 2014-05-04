@@ -9,7 +9,7 @@
 <body class="easyui-layout">
 	<div region="north" border="true" class="cs-north">
 		<div class="cs-north-bg">
-		<div class="cs-north-logo">Mins5 后台管理系统</div>
+		<div class="cs-north-logo"><!--Mins5 后台管理系统--></div>
 		<ul class="ui-skin-nav">				
 			<li class="li-skinitem" title="gray"><span class="gray" rel="gray"></span></li>
 			<li class="li-skinitem" title="default"><span class="default" rel="default"></span></li>
@@ -242,5 +242,38 @@
 		<div id="mm-tabcloseother">关闭其他</div>
 		<div id="mm-tabcloseall">关闭全部</div>
 	</div>
+	<script>
+	$(function(){
+
+	var themes = {
+		'gray' : '${path}/js/easyui/themes/gray/easyui.css',
+		'black' : '${path}/js/easyui/themes/black/easyui.css',
+		'bootstrap' : '${path}/js/easyui/themes/bootstrap/easyui.css',
+		'default' : '${path}/js/easyui/themes/default/easyui.css',
+		'metro' : '${path}/js/easyui/themes/metro/easyui.css'
+	};
+
+	var skins = $('.li-skinitem span').click(function() {
+		if ($(this).hasClass('cs-skin-on')){
+			return;
+		}
+		skins.removeClass('cs-skin-on');
+		$(this).addClass('cs-skin-on');
+		var skin = $(this).attr('rel');
+		$('#swicth-style').attr('href', themes[skin]);
+		setCookie('cs-skin', skin);
+		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
+	});
+
+	if (getCookie('cs-skin')) {
+		var skin = getCookie('cs-skin');
+		$('#swicth-style').attr('href', themes[skin]);
+		$this = $('.li-skinitem span[rel=' + skin + ']');
+		$this.addClass('cs-skin-on');
+		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
+	}
+});
+
+	</script>
 </body>
 </html>
