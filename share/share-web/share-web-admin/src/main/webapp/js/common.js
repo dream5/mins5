@@ -143,6 +143,15 @@ $(function(){
 		$this.addClass('cs-skin-on');
 		skin == 'dark-hive' ? $('.cs-north-logo').css('color', '#FFFFFF') : $('.cs-north-logo').css('color', '#000000');
 	}
+	//左侧菜单样式控制
+	$('.subMenuCls li a').click(function(){
+		$('.subMenuCls li div').removeClass("selected");
+		$(this).parent().addClass("selected");
+	}).hover(function(){
+		$(this).parent().addClass("hover");
+	},function(){
+		$(this).parent().removeClass("hover");
+	});
 });
 function setCookie(name, value) {//两个参数，一个是cookie的名子，一个是值
 	var Days = 30;
@@ -159,3 +168,5 @@ function getCookie(name) {//取cookies函数
 		return unescape(arr[2]);
 	return null;
 }
+
+
