@@ -57,6 +57,17 @@
 						</li>
 					</ul>
 				</div>
+				<div title="统计管理" data-options="iconCls:'sys-statistics'"> 
+					<ul class="subMenuCls">
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">
+								<span class="leftIcons"></span><span>图片管理</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
 				<div title="base">
 					<a href="javascript:void(0);" src="${path}/js/easyui/demo/easyloader/basic.html" class="cs-navi-tab">easyloader</a></p>
 					
@@ -254,7 +265,7 @@
 		 <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
                 <div title="Home">
 				<div class="cs-home-remark">
-					<h1><!--Mins5 后台管理系统--></h1><br/>
+					<h1>Mins5 后台管理系统</h1><br/>
 					心有多大，舞台就有多大！ <br/>
 				</div>
 				</div>
