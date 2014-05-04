@@ -173,8 +173,9 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div style="margin:10px 0;"></div>
-	<table id="dg" style="width:1000px;">
+	<div class="curPosition"><span class="sys-nav"></span><span>当前位置：文章管理</span></div>
+	<div class="content">
+		<table id="dg" class="gridHead">
 		<thead>
 			<tr>
 				<th data-options="field:'articleTitle',width:300,align:'left'">标题</th>
@@ -247,5 +248,8 @@
 			</table>
 		</div>
 	</div>
+		
+	</div>
+	
 </body>
 </html>
