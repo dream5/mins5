@@ -30,27 +30,21 @@ public class UploadUtil {
 	 * @param serverPath 指定服务器存放文件路径
 	 * @return
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map singleFileUpload(HttpServletRequest request) {
 		
 		log.info("单独文件上传开始...");
-		long startTime = System.currentTimeMillis();
 		String fileType = request.getParameter("filetype");
-		String proVal = request.getParameter("proVal");
 		if (fileType==null||fileType.trim().length()==0) {
 			fileType = ".unknown";
 		}else{
 			fileType = fileType.toLowerCase();
 		}
 		String newFileName = String.valueOf(System.currentTimeMillis())+fileType;
-		//System.out.println("[" + fileType + "]...... Upload time:" + today+ " （IP:" + request.getRemoteAddr().toString() + "）" + proVal);
-
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(8192);
 		 //获取保存文件的最终路径
-		String saveFilePath = null;
-		if (saveFilePath == null) {
-			return null;
-		}
+		String saveFilePath = request.getSession().getServletContext().getRealPath("/")+"upload"+File.separator;
 		factory.setRepository(new File(saveFilePath));
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		List uploadlist = null;
@@ -71,26 +65,13 @@ public class UploadUtil {
 				FileItem item = (FileItem) uploadlist.get(i);
 				if (!item.isFormField()) { //处理文件上传域 忽略其他不是文件域的所有表单信息
 					try {
-						long start = System.currentTimeMillis();
 						actualFileSize = String.valueOf(item.getSize()); //获取文件大小
-						String fullPath = item.getName(); //取到客户端完整 路径+文件名
-						//oldFileName = FilenameUtils.getName(fullPath);// 取到文件名
 						item.write(new File(saveFilePath + newFileName));// 保存文件路径
-
-						long end = System.currentTimeMillis();
-						/*System.out.println("  save file："
-								+ newFileName
-								+ "(size："
-								+ FileUtil.getAllFilesSizeWithUnit(String
-										.valueOf(actualFileSize)) + " ，used："
-								+ (end - start) + " ms)");*/
-
 					} catch (Exception e) {
 						e.printStackTrace();
 						throw e;
 					}
 					item.delete();
-
 					break;
 				}
 				item.delete();
@@ -112,7 +93,7 @@ public class UploadUtil {
 		 */
 		Map rtnMap = new HashMap();
 		rtnMap.put("newName", newFileName);
-		rtnMap.put("oldName", oldFileName);
+		//rtnMap.put("oldName", oldFileName);
 		return rtnMap;
 	}
 	
