@@ -55,7 +55,7 @@
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
 	</div>
-	<div class="easyui-panel" title="添加文章">
+	<div class="easyui-panel" title="添加文章" data-options="iconCls:'icon-add'">
 		<div style="padding: 10px 0 10px 60px">
 			<form id="articleFormId" method="post"
 				action="${path}/article/articleAdd.mins">
