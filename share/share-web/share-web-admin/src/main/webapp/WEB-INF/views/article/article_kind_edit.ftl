@@ -43,15 +43,12 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<h2>修改文章类别</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>输入文章类别信息然后点击提交按钮</div>
-	</div>
+	<div class="curPosition"><span class="sys-nav"></span><span>当前位置：修改文章类别</span></div>
+	<div class="content">
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
 	</div>
-	<div class="easyui-panel" title="修改文章类别" style="width: 800px">
+	<div class="easyui-panel" title="修改文章类别"  data-options="iconCls:'icon-edit'">
 		<div style="padding: 10px 0 10px 60px">
 			<form id="articleKindFormId" method="post"
 				action="${path}/article/articleKindEdit.mins">
@@ -59,12 +56,12 @@
 				<table>
 					<tr>
 						<td>类别名称:</td>
-						<td><input class="easyui-validatebox input-long" type="text"
+						<td><input class="easyui-validatebox input-short" type="text"
 							name="kindName" data-options="required:true" value="${articleKind.kindName }"></input></td>
 					</tr>
 					<tr>
 						<td>类别拼音:</td>
-						<td><input class="easyui-validatebox input-long" type="text"
+						<td><input class="easyui-validatebox input-short" type="text"
 							name="kindPinyin" data-options="required:true" value="${articleKind.kindPinyin }"></input></td>
 					</tr>
 					<tr>
@@ -92,6 +89,7 @@
 				onclick="submitForm()">提交</a> <a href="javascript:void(0)"
 				class="easyui-linkbutton" onclick="clearForm()">重置</a>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

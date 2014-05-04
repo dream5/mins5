@@ -73,21 +73,23 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div style="margin:10px 0;"></div>
-	<table id="dg" style="width:700px;">
-		<thead>
-			<tr>
-				<th data-options="field:'kindName',width:200,align:'left'">类别名称</th>
-				<th data-options="field:'kindPinyin',width:80,align:'center'">类别拼音</th>
-				<th data-options="field:'status',width:80,align:'center',formatter:formatStatus">类别状态</th>
-				<th data-options="field:'createTime',width:150,align:'center'">类别生成时间</th>
-				<th data-options="field:'articleKindId',width:100,align:'center',formatter:formatOperation">操作</th>
-			</tr>
-		</thead>
-	</table>
-	<div id="tb" style="padding:5px;height:auto">
-		<div style="margin-bottom:5px">
-			<a href="${path}/article/toArticleKindAdd.mins" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加类别</a>
+	<div class="curPosition"><span class="sys-nav"></span><span>当前位置：类别管理管理</span></div>
+	<div class="content">
+		<table id="dg">
+			<thead>
+				<tr>
+					<th data-options="field:'kindName',width:200,align:'left'">类别名称</th>
+					<th data-options="field:'kindPinyin',width:200,align:'center'">类别拼音</th>
+					<th data-options="field:'status',width:80,align:'center',formatter:formatStatus">类别状态</th>
+					<th data-options="field:'createTime',width:150,align:'center'">类别生成时间</th>
+					<th data-options="field:'articleKindId',width:100,align:'center',formatter:formatOperation">操作</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="tb" style="padding:5px;height:auto">
+			<div style="margin-bottom:5px">
+				<a href="${path}/article/toArticleKindAdd.mins" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加类别</a>
+			</div>
 		</div>
 	</div>
 </body>
