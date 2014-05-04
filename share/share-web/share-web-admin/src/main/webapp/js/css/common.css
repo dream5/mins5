@@ -24,14 +24,13 @@ body {
 .layout-split-west {
 	border-right:0px solid #efefef;
 }
+a{ color:Black; text-decoration:none;}
+a:hover{ color:Red; text-decoration:underline;}
 a:link {
 	text-decoration:none;
 }
 a:visited {
 	text-decoration:none;
-}
-a:hover {
-	text-decoration:underline;
 }
 a:active {
 	text-decoration:none;
@@ -119,14 +118,6 @@ a:active {
 	width:500px;
 	height:100px;
 }
-a {
-	color:#2cadff;
-	text-decoration:none;
-}
-a:hover {
-	color:#000;
-	text-decoration:none;
-}
 
 /*upload images*/
 .navTb{
@@ -158,11 +149,34 @@ a:hover {
 
 
 
+/**left menu**/
+.subMenuCls{
+	 list-style-type: none;
+}
+.subMenuCls li{
+	 margin:0 auto;
+}
+.subMenuCls li div {
+    border: 1px dashed #FFFFFF;
+    margin: 2px 0;
+    width: 100px;
+    padding-top: 2px;
+}
+.subMenuCls li div.hover {
+    background: none repeat scroll 0 0 #E0ECFF;
+    border: 1px dashed #99BBE8;
+    cursor: pointer;
+}
+.subMenuCls li div.hover a{color:#416AA3;}
+.subMenuCls li div.selected{border:1px solid #99BBE8; background:#E0ECFF;cursor:default;}
+.subMenuCls li div.selected a{color:#416AA3; font-weight:bold;}
 
-
-
-
-
+.leftIcons{
+	background:url('../easyui/themes/sys_icons/photo.png') no-repeat center center;
+	display: inline-block;
+    line-height: 18px;
+    width: 18px;
+}
 
 
 
