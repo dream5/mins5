@@ -66,3 +66,17 @@
 .icon-mini-refresh{
 	background:url('icons/mini_refresh.png') no-repeat center center;
 }
+
+
+
+/*expand*/
+.sys-article{
+	background:url('sys_icons/book.png') no-repeat center center;
+}
+.sys-images{
+	background:url('sys_icons/photo.png') no-repeat center center;
+}
+
+
+
+
