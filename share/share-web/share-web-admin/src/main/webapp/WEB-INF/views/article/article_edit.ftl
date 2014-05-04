@@ -48,7 +48,7 @@
 				<table>
 					<tr>
 						<td>标题:</td>
-						<td><input class="easyui-validatebox input-long" type="text"
+						<td><input class="easyui-validatebox input-long" type="text" width="240px"
 							name="articleTitle" data-options="required:true" value="${article.articleTitle }"></input></td>
 					</tr>
 					<tr>
