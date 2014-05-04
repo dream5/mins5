@@ -54,12 +54,12 @@
 					<tr>
 						<td>来源url:</td>
 						<td><input class="easyui-validatebox input-long" type="text"
-							name="articleUrl" value="${article.articleUrl }"></input></td>
+							name="articleUrl" value='${article.articleUrl }'></input></td>
 					</tr>
 					<tr>
 						<td>文章来源描述:</td>
 						<td><input class="easyui-validatebox input-long" type="text"
-							name="articleFrom" value="${article.articleFrom }"></input></td>
+							name="articleFrom" value='${article.articleFrom }'></input></td>
 					</tr>
 					<tr>
 						<td>文章作者:</td>
