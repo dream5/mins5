@@ -82,6 +82,8 @@
 	line-height: 18px;
     width: 18px;
 }
-
+.sys-statistics{
+	background:url('sys_icons/chart_bar.png') no-repeat center center;
+}
 
 
