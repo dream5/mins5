@@ -179,12 +179,18 @@ a:active {
 .subMenuCls li div.selected{border:1px solid #99BBE8; background:#E0ECFF;cursor:default;}
 .subMenuCls li div.selected a{color:#416AA3; font-weight:bold;}
 
-.leftIcons{
-	background:url('../easyui/themes/sys_icons/photo.png') no-repeat center center;
+.leftIcons{	
 	display: inline-block;
     line-height: 18px;
-    width: 18px;
+    width: auto;
+    height:18px;
 }
+
+.leftIcons em{
+	margin-left:17px;
+	line-height: 18px;
+}
+
 
 /*面包屑*/
 .curPosition{
@@ -209,7 +215,34 @@ a:active {
 
 
 
-
+.article {
+	margin: 0 0 20px 0;
+	padding: 25px 20px;
+	width: 640px;
+	border: 1px dashed #ddd;
+	background: none repeat scroll 0 0 #F8F8F8;
+}
+.article span.butons a {
+	margin: 0 5px 0 0;
+	float: right;
+	color: #9a9a9a;
+	padding: 1px 10px;
+	text-decoration: none;
+	border: 1px solid #ebe8e8;
+	background: #fbfbfc;
+}
+.article span.butons a:hover {
+	border: 1px solid #d9f0ff;
+	background: #40b5ff;
+	color: #fff;
+	text-decoration: none;
+}
+.article span.butons a.active {
+	border: 1px solid #ebe8e8;
+	background: #40b5ff;
+	color: #fff;
+	text-decoration: none;
+}
 
 
 
