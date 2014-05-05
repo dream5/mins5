@@ -176,7 +176,7 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div class="curPosition"><span class="sys-nav"></span><span>当前位置：文章管理</span></div>
+	<div class="curPosition"><span class="sys-nav"><em>当前位置：文章管理</em></span></div>
 	<div class="content">
 		<table id="dg" class="gridHead">
 		<thead>

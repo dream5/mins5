@@ -38,7 +38,7 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div class="curPosition"><span class="sys-nav"></span><span>当前位置：新增文章类别</span></div>
+	<div class="curPosition"><span class="sys-nav"><em>当前位置：新增文章类别</em></span></div>
 	<div class="content">
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
