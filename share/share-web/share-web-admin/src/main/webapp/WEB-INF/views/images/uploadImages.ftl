@@ -10,47 +10,40 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-<table class="navTb" cellspacing="0" cellpadding="0"  border="0" >
-	<tbody>
-		<tr>
-			<td>当前位置：图片管理 &gt; 上传图片</td>
-		</tr>
-	</tbody>
-</table>
-<#include "frame/top.ftl" />
-<table class="contentTb" cellspacing="0" cellpadding="0"  border="0">
-	<tbody>
-		<tr>
-		    <td width=15 background=${path}/images/frame/new_022.jpg><img src="${path}/images/frame/new_022.jpg" border=0></td>
-		    <td valign=top width="100%" bgcolor=#ffffff>
-				<table width="100%" id="upload">
-	     <tr>
-		<td width="30%" align="left" valign="middle">
-			<input type="hidden" name="extname" id="extname" />
-			<input type="file" name="uploadify" id="uploadify" />
-		</td>
-		<td width="70%" align="left" valign="middle"
-			style="padding-top: 9px;">
-			<input type="button" class="but_bg" style="float: left;"
-				onclick="javascript:exeUpload()" value="上传" />
-			<input type="button" class="but_bg" style="float: left;"
-				onclick="javascript:jQuery('#uploadify').uploadifyClearQueue();"
-				value="撤销" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<div id="fileQueue"></div>
-		</td>
-	</tr>
-</table>
-<div id="info"></div>
-</td>
-<td width=15 background=${path}/images/frame/new_023.jpg><img src="${path}/images/frame/new_023.jpg" border="0"></td>
-</tr>
-</tbody>
-</table>
-<#include "frame/footer.ftl" />
+
+<div class="curPosition"><span class="sys-nav"><em>当前位置：图片上传</em></span></div>
+	<div class="content">
+	<div style="margin: 10px 0;">
+		<span id="tip" style="color: red"></span>
+	</div>
+	<div class="easyui-panel" title="图片上传" data-options="iconCls:'icon-add'">
+		<div style="padding: 10px 0 10px 60px">
+			<form id="articleFormId" method="post" action="">
+			   <input type="hidden" name="extname" id="extname" />
+			   <input type="file" name="uploadify" id="uploadify" />
+				<table id="upload">
+					<tr>
+						<td colspan="2">
+						<input type="button" class="but_bg" style="float: left;" onclick="javascript:exeUpload()" value="上传" />
+						<input type="button" class="but_bg" style="float: left;" onclick="javascript:jQuery('#uploadify').uploadifyClearQueue();"
+				value="撤销" /></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+								<div id="fileQueue"></div>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<!--<div style="text-align: center; padding: 5px">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				onclick="submitForm()">提交</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" onclick="clearForm()">重置</a>
+		</div>-->
+	</div>
+	</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
 
