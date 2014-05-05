@@ -85,5 +85,18 @@
 .sys-statistics{
 	background:url('sys_icons/chart_bar.png') no-repeat center center;
 }
-
-
+.sys-article-edit{
+	background:url('sys_icons/book_edit.png') no-repeat 0 center;
+}
+.sys-kind-edit{
+	background:url('sys_icons/brick_edit.png') no-repeat 0 center;
+}
+.sys-label-edit{
+	background:url('sys_icons/folder_key.png') no-repeat 0 center;
+}
+.sys-images-edit{
+	background:url('sys_icons/photos.png') no-repeat 0 center;
+}
+.sys-statistics-edit{
+	background:url('sys_icons/chart_curve_edit.png') no-repeat center center;
+}
