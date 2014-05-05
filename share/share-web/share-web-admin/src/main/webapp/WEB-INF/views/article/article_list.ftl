@@ -15,7 +15,10 @@
 			pagination:true,
 			pageList:[10, 20, 30, 40, 50],
 			pageSize:10,
-			toolbar:'#tb'
+			toolbar:'#tb',
+			onDblClickRow :function(rowIndex,rowData){
+  				  articleDetail(rowData.articleId);
+ 			 } 
 		});
 		$('#dg').datagrid('getPager').pagination({
 			onSelectPage:function(pageNum, pageSize){
@@ -88,13 +91,13 @@
 		    dataType: "json",
 		    success: function (msg) {
 		    	$('#detail_articleTitle').text(msg.articleTitle);
-		    	$('#detail_articleUrl').text(msg.articleUrl);
-		    	$('#detail_articleFrom').text(msg.articleFrom);
+		    	$('#detail_articleUrl').attr("src",msg.articleUrl);
+		    	$('#detail_articleFrom').html(msg.articleFrom);
 		    	$('#detail_articleAuthor').text(msg.articleAuthor);
 		    	$('#detail_isOriginal').text(msg.isOriginal);
 		  //  	$('#detail_articleLabel').text(msg.articleTitle);
 		   // 	$('#detail_articleKind').text(msg.articleTitle);
-		    	$('#detail_articleContent').text(msg.articleContent);
+		    	$('#detail_articleContent').html(msg.articleContent);
 		    	$('#articleDetail').window('open');
 		    },
 		    error: function() {
@@ -210,42 +213,24 @@
 			<a href="#" onclick="loadTable();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</div>
 	</div>
+	<!--预览层-->
 	<div id="articleDetail" class="easyui-window" title="查看文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
 		<div style="padding: 10px 0 10px 60px">
-			<table>
-				<tr>
-					<td>标题:</td>
-					<td id="detail_articleTitle"></td>
-				</tr>
-				<tr>
-					<td>来源url:</td>
-					<td id="detail_articleUrl"></td>
-				</tr>
-				<tr>
-					<td>文章来源描述:</td>
-					<td id="detail_articleFrom"></td>
-				</tr>
-				<tr>
-					<td>文章作者:</td>
-					<td id="detail_articleAuthor"></td>
-				</tr>
-				<tr>
-					<td>是否原创:</td>
-					<td id="detail_isOriginal"></td>
-				</tr>
-				<tr>
-					<td>文章标签:</td>
-					<td id="detail_articleLabel"></td>
-				</tr>
-				<tr>
-					<td>文章类别:</td>
-					<td id="detail_articleKind"></td>
-				</tr>
-				<tr>
-					<td>内容:</td>
-					<td id="detail_articleContent"></td>
-				</tr>
-			</table>
+		
+			<div class="article">
+	          <h2 id="detail_articleTitle"></h2>
+	          <div class="cline"></div>
+	          <p>
+		          <span>时间:&nbsp;</span>
+		          <span style="margin-left:25px;" >来源:&nbsp;<em id="detail_articleFrom"></em></span>
+		          <span style="margin-left:25px;">作者:&nbsp;<em id="detail_articleAuthor"></em></span>&nbsp;&nbsp;
+		                             浏览（18）
+	          	</p>
+	         	 <img id="detail_articleUrl" src="#" width="613" height="193" alt="" />
+	          <div class="cline"></div>
+	         	<div id="detail_articleContent"></div>
+	          <p class="links" id="detail_articleLabel"></p>
+	         </div>
 		</div>
 	</div>
 		
