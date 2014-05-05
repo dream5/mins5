@@ -181,7 +181,7 @@
 		<table id="dg" class="gridHead">
 		<thead>
 			<tr>
-				<th data-options="field:'articleTitle',width:300,align:'left'">标题</th>
+				<th data-options="field:'articleTitle',width:300,align:'left'">标题<font color="red">（双击记录，可预览文章！）</font></th>
 				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
 				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
