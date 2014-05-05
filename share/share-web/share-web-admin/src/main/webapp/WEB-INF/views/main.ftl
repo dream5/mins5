@@ -9,7 +9,7 @@
 <body class="easyui-layout">
 	<div region="north" border="true" class="cs-north">
 		<div class="cs-north-bg">
-		<div class="cs-north-logo"><!--Mins5 后台管理系统--></div>
+		<div class="cs-north-logo">Mins5 后台管理系统</div>
 		<ul class="ui-skin-nav">				
 			<li class="li-skinitem" title="gray"><span class="gray" rel="gray"></span></li>
 			<li class="li-skinitem" title="default"><span class="default" rel="default"></span></li>
@@ -50,7 +50,7 @@
 					<ul class="subMenuCls">
 						<li>
 							<div>
-								<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">
+								<a href="javascript:void(0);" src="${path}/capture/init.mins" class="cs-navi-tab">
 								<span class="leftIcons sys-capture-add"><em>抓取管理</em></span>
 								</a>
 							</div>
@@ -276,7 +276,7 @@
 		 <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
                 <div title="Home">
 				<div class="cs-home-remark">
-					<h1><!--Mins5 后台管理系统--></h1><br/>
+					<h1>Mins5 后台管理系统</h1><br/>
 					心有多大，舞台就有多大！ <br/>
 				</div>
 				</div>
