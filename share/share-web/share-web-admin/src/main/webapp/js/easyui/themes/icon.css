@@ -77,10 +77,12 @@
 	background:url('sys_icons/photo.png') no-repeat center center;
 }
 .sys-nav{
-	background:url('sys_icons/car.png') no-repeat center center;
+	background:url('sys_icons/car.png') no-repeat 0 center;
 	display: inline-block;
 	line-height: 18px;
-    width: 18px;
+}
+.sys-nav em{
+	margin-left:15px;
 }
 .sys-statistics{
 	background:url('sys_icons/chart_bar.png') no-repeat center center;
