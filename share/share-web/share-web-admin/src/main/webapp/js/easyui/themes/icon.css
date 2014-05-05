@@ -100,3 +100,9 @@
 .sys-statistics-edit{
 	background:url('sys_icons/chart_curve_edit.png') no-repeat 0 center;
 }
+.sys-capture{
+	background:url('sys_icons/world_link.png') no-repeat center center;
+}
+.sys-capture-add{
+	background:url('sys_icons/world_add.png') no-repeat 0 center;
+}
