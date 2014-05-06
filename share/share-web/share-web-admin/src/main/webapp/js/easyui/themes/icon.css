@@ -108,3 +108,10 @@
 .sys-capture-add{
 	background:url('sys_icons/world_add.png') no-repeat 0 center;
 }
+
+.sys-recommend{
+	background:url('sys_icons/date.png') no-repeat center center;
+}
+.sys-recommend-add{
+	background:url('sys_icons/date_add.png') no-repeat 0 center;
+}
