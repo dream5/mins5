@@ -191,5 +191,10 @@
 		order by create_time desc
 		LIMIT #{startRow}, #{onePageSize}
 	</select>
+	
+	<select id="findCaptureById" parameterType="long" resultMap="ArticleMap">
+		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,a.status,a.is_original
+        from article_copy a where a.article_id = #{articleId}
+	</select>
 	<!-- 后台 查询抓取文章列表 add by zhanglin 20140506 -->
 </mapper>
