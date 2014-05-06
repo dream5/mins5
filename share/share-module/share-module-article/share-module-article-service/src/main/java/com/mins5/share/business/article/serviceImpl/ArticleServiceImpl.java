@@ -758,4 +758,27 @@ public class ArticleServiceImpl  implements ArticleService{
 		return returnData;
 	}
 	
+	
+	/**
+	 * 根据文章ID查询抓取文章
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public ReturnData<Article> findCaptureArticleById(Long id) {
+		ReturnData<Article> returnData = new ReturnData<Article>();
+		try {
+			if(StringUtils.isEmpty(id)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Article article = articleDao.findCaptureById(id);
+			returnData.setResultData(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 }
