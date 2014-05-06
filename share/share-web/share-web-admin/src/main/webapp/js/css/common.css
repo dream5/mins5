@@ -209,8 +209,7 @@ a:active {
 }
 .content .gridHead{
 	margin:15px auto;
-	#width:90%;
-	height:100%;
+	height:600px;
 }
 
 
@@ -245,5 +244,9 @@ a:active {
 }
 
 
-
+/*search condition*/
+.scondition{
+	height:200px;
+	width:100%;
+}
 
