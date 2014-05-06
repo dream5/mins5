@@ -168,5 +168,25 @@ function getCookie(name) {//取cookies函数
 		return unescape(arr[2]);
 	return null;
 }
-
+/**
+ * 打开遮蔽层
+ * @author zhanglin
+ * @date 20140506
+ */
+function beginMark(){
+	$('</body>').before('<div class="datagrid-mask"></div><div class="datagrid-mask-msg"></div>');
+	$(".datagrid-mask").css({display:"block",width:"100%",height:$(window).height()}).appendTo("body");
+	$(".datagrid-mask-msg").html("正在处理，请稍候...").appendTo("body").css({display:"block",left:($(document.body).outerWidth(true) - 190) / 2,top:($(window).height() - 45) / 2}); 
+}
+/**
+ * 关闭遮蔽层
+ * @author zhanglin
+ * @date 20140506
+ */
+function endMark(){
+	$(".datagrid-mask").css({display:"none",width:"100%",height:$(window).height()}).appendTo("body");
+	$(".datagrid-mask-msg").html("正在处理，请稍候...").appendTo("body").css({display:"none",left:($(document.body).outerWidth(true) - 190) / 2,top:($(window).height() - 45) / 2}); 
+	$(".datagrid-mask").remove();
+	$(".datagrid-mask-msg").remove();
+}
 
