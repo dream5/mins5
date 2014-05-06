@@ -149,4 +149,11 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 	 * @return
 	 */
 	List<Article> findPreAndNextArticles(@Param("articleId")int id,@Param("pinyin") String pinyin);
+	
+	/**
+	 * 根据ID获取抓取文章
+	 * @param id
+	 * @return
+	 */
+	Article findCaptureById(@Param("articleId")long id);
 }
