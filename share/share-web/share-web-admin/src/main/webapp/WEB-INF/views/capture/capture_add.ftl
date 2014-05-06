@@ -103,9 +103,8 @@
 		    	$('#detail_articleUrl').attr("src",msg.articleUrl);
 		    	$('#detail_articleFrom').html(msg.articleFrom);
 		    	$('#detail_articleAuthor').text(msg.articleAuthor);
-		    	$('#detail_isOriginal').text(msg.isOriginal);
 		    	$('#detail_articleContent').html(msg.articleContent);
-		    	$('#articleDetail').parent().window('open');
+		    	$('#articleDetail').window('open');
 		    },
 		    error: function() {
 		    	$.messager.alert('操作提示', '系统繁忙！');
@@ -231,7 +230,8 @@
 			文章标题: <input id="articleTitle" type="text" style="width:200px">
 			开始时间: <input id="beginTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
 			结束时间: <input id="endTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
-			<a href="#" onclick="loadTable();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+			 <input id="search" type="button" onclick="loadTable();" value="查询">
+			<!--<a href="#" onclick="loadTable();"  class="easyui-linkbutton" iconCls="icon-search">查询</a>-->
 		</div>
 	</div>
 		
@@ -239,7 +239,6 @@
 		<!--预览层-->
 	<div id="articleDetail" class="easyui-window" title="查看文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
 		<div style="padding: 10px 0 10px 60px">
-		
 			<div class="article">
 	          <h2 id="detail_articleTitle"></h2>
 	          <div class="cline"></div>
