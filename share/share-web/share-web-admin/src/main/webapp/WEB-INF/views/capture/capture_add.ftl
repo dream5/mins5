@@ -9,14 +9,14 @@
 		$('#captureForm').form('submit', {
 			onSubmit : function() {
 				beginMark();
-				//var isValid = $(this).form('validate');
-				//if (isValid) {
-				//	clearForm();
-				//}
+				var isValid = $(this).form('validate');
+				if (isValid) {
+					clearForm();
+				}
 				return;
 			},
 			success : function(data) {
-				//endMark();
+				endMark();
 				clearForm();
 				$("#tip").html(data);
 			}
@@ -25,26 +25,10 @@
 	function clearForm() {
 		$('#captureForm').form('clear');
 	}
-	function initArticleLabel() {
-		$('#articleLabel').combogrid({
-			url: '${path}/article/searchArticleLabel.mins?currentPage=0&onePageSize=1000'
-	    });
-	}
-	function formatLabelStatus(val,row) {
-		if (val == 0) {
-			return '<span style="color:red;">未启用</span>';
-		} else {
-			return '<span style="color:green;">启用</span>';
-		}
-	}
-	function initArticleKind() {
-		$('#articleKind').combotree({
-			url: '${path}/article/getArticleKind.mins'
-	    });
-	}
+
 	$(document).ready(function() {
-		initArticleLabel();
-		initArticleKind();
+		//initArticleLabel();
+		//initArticleKind();
 	});
 </script>
 <script type="text/javascript">
@@ -116,9 +100,10 @@
 		});
 	};
 	function articleDetail(articleId){
+	 alert(articleId);
 		var queryParams = {"articleId":articleId};
 		jQuery.ajax({
-		    url: '${path}/article/articleDetail.mins',
+		    url: '${path}/article/captureArticleDetail.mins',
 		    data: queryParams,
 		    type: "POST",
 		    dataType: "json",
@@ -128,8 +113,6 @@
 		    	$('#detail_articleFrom').html(msg.articleFrom);
 		    	$('#detail_articleAuthor').text(msg.articleAuthor);
 		    	$('#detail_isOriginal').text(msg.isOriginal);
-		  //  	$('#detail_articleLabel').text(msg.articleTitle);
-		   // 	$('#detail_articleKind').text(msg.articleTitle);
 		    	$('#detail_articleContent').html(msg.articleContent);
 		    	$('#articleDetail').window('open');
 		    },
@@ -262,6 +245,26 @@
 	</div>
 		
 		</div>
+		<!--预览层-->
+	<div id="articleDetail" class="easyui-window" title="查看文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
+		<div style="padding: 10px 0 10px 60px">
+		
+			<div class="article">
+	          <h2 id="detail_articleTitle"></h2>
+	          <div class="cline"></div>
+	          <p>
+		          <span>时间:&nbsp;</span>
+		          <span style="margin-left:25px;" >来源:&nbsp;<em id="detail_articleFrom"></em></span>
+		          <span style="margin-left:25px;">作者:&nbsp;<em id="detail_articleAuthor"></em></span>&nbsp;&nbsp;
+		                             浏览（18）
+	          	</p>
+	         	 <img id="detail_articleUrl" src="#" width="613" height="193" alt="" />
+	          <div class="cline"></div>
+	         	<div id="detail_articleContent"></div>
+	          <p class="links" id="detail_articleLabel"></p>
+	         </div>
+		</div>
+	</div>
 	</div>
 </body>
 </html>
