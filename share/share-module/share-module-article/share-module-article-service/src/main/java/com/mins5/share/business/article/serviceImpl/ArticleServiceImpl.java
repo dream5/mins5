@@ -704,6 +704,42 @@ public class ArticleServiceImpl  implements ArticleService{
 	}
 	
 	
+	/**
+	 * 后台查询抓取文章列表
+	 * @author zhoutian
+	 * @since 2014年4月8日
+	 * @param articleTitle 文章标题
+	 * @param status 文章状态
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param isOriginal 是否原创
+	 * @param currentPage 当前页
+	 * @param onePageSize 每页行数
+	 * @return
+	 */
+	public ReturnPageData<List<Article>> findAllCaptureArticlesByCondition(String articleTitle, Date beginTime,
+			Date endTime, int currentPage,
+			int onePageSize){
+		ReturnPageData<List<Article>> returnData = new ReturnPageData<List<Article>>(currentPage, onePageSize );
+		try {
+			int count = articleDao.findAllCaptureArticlesCountByCondition(articleTitle, beginTime, endTime);
+			if(count > 0) {
+				int startRow = returnData.getStartRow();
+				List<Article> articleList = articleDao.findAllCaptureArticlesByCondition(
+								articleTitle,beginTime, endTime, startRow, onePageSize);
+				returnData.setTotalResults(count);
+				returnData.setResultData(articleList);
+			}
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch(Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	
+	
 	@Override
 	public ReturnData<List<Article>> findPreAndNextArticles(int id,String pinyin){
 		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
