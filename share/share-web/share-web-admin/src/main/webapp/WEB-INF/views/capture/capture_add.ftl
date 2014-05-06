@@ -100,7 +100,6 @@
 		});
 	};
 	function articleDetail(articleId){
-	 alert(articleId);
 		var queryParams = {"articleId":articleId};
 		jQuery.ajax({
 		    url: '${path}/article/captureArticleDetail.mins',
