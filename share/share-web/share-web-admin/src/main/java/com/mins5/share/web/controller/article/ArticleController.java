@@ -295,4 +295,19 @@ public class ArticleController {
 		JsonUtils.write(tip, response);
 	}
 	
+	
+	/**
+	 * 查看抓取文章详细信息
+	 * @author zhanglin
+	 * @since 20140506
+	 * @param response
+	 * @param articleId
+	 */
+	@RequestMapping(value = "/captureArticleDetail")
+	public void captureArticleDetail(HttpServletResponse response, Long articleId) {
+		ReturnData<Article> returnData = articleService.findCaptureArticleById(articleId);
+		Article article = returnData.getResultData();
+		JsonUtils.write(article, response);
+	}
+	
 }
