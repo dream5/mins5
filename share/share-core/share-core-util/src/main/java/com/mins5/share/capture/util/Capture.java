@@ -12,29 +12,28 @@ import org.apache.http.impl.client.CloseableHttpClient;
  * @author zhanglin
  * @date 20140412 17:44
  */
-public class Capture {
+public final class Capture {
 
 	private final static Log log = LogFactory.getLog(Capture.class);
 
 	public static void main(String[] args) throws Exception {
 		Capture capture = new Capture();
-		capture.beginCapture();
+		//capture.beginCapture();
 	}
 
 	/**
 	 * <p>
 	 * 根据URL获取其HTML
 	 * </p>
-	 * 
 	 * @param url
 	 *            请求URL
 	 */
-	private void beginCapture() throws Exception {
+	public  boolean beginCapture(List<String> url) throws Exception {
 		log.info("抓取开始...");
+		boolean result = true;
 		long startTime = System.currentTimeMillis();
 		CloseableHttpClient httpclient = ClientThreadPools.getClientFromPools();
 		try {
-			/*	List<String> url = FileUtil.getUrlFromConfigFile();
 			if (url != null && url.size() > 0) {
 				CaptureThreads[] threads = new CaptureThreads[url.size()];
 				for (int i = 0, len = threads.length; i < len; i++) {
@@ -48,21 +47,18 @@ public class Capture {
 					threads[j].join();
 				}
 				log.info("总共抓取实例数量：[" + CaptureThreads.articles.size() + "]");
-				DBUtil dbUtil = new DBUtil();
-				dbUtil.init();
-				dbUtil.batchInsertBean(CaptureThreads.articles,
-						dbUtil.getConnection());
 			}
-*/
 		} catch (Exception e) {
 			log.error("根据URL获取其HTML异常：[" + e.toString() + "]");
+			result = false;
 		} finally {
-			//if (httpclient != null) {
-				// httpclient.close();
-			//}
+			if (httpclient != null) {
+				 httpclient.close();
+			}
 		}
 		long endTime = System.currentTimeMillis();
 		log.info("抓取保存结束共花费" + (endTime - startTime) + "ms");
+		return result;
 	}
 
 }
