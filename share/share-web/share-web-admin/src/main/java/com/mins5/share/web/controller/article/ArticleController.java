@@ -108,6 +108,53 @@ public class ArticleController {
 	} 
 	
 	/**
+	 * 抓取文章列表查询
+	 * @author zhanglin copy from searchArticle方法
+	 * @since 2014年4月8日
+	 * @param response
+	 * @param articleTitle 文章标题
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param currentPage 当前页
+	 * @param onePageSize 每页行数
+	 */
+	@RequestMapping(value = "/searchCaptureArticle")
+	public void searchCaptureArticle(HttpServletResponse response,
+			String articleTitle, String beginTime,
+			String endTime, Integer currentPage,
+			Integer onePageSize) {
+		
+		onePageSize = onePageSize == null ? 10 : onePageSize;
+		currentPage = currentPage == null ? 1 : currentPage;
+
+		ReturnPageData<List<Article>> returnData = articleService
+				.findAllCaptureArticlesByCondition(
+						StringUtils.parseNull(articleTitle),
+						DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
+						DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT),
+						currentPage,
+						onePageSize);
+		
+		List<Article> articleList = returnData.getResultData();
+		List<Map<String, Object>> articleMapList = new ArrayList<Map<String, Object>>();
+		if(articleList != null) {
+			for(Article article : articleList) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("articleId", article.getArticleId());
+				map.put("articleTitle", article.getArticleTitle());
+				map.put("createTime", article.getCreateTime());
+				map.put("articleAuthor", article.getArticleAuthor());
+				map.put("articleFrom", article.getArticleFrom());
+				articleMapList.add(map);
+			}
+		}
+		
+		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), articleMapList);
+		JsonUtils.write(data, response);
+	} 
+	
+	
+	/**
 	 * 跳转到添加文章页面
 	 * @author zhoutian
 	 * @since 2014年3月17日
