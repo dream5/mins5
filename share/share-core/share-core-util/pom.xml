@@ -72,6 +72,10 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.7.3</version>
 		</dependency>
+		<dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-context</artifactId>
+		</dependency>
 		<!-- 抓取依赖 add by zhanglin 20140505 -->
 	</dependencies>
 
