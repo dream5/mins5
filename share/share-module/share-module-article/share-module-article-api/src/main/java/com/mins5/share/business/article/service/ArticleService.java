@@ -256,6 +256,23 @@ public interface ArticleService {
 			Date endTime, String isOriginal, int currentPage,
 			int onePageSize);
 	
+	/**
+	 * 后台查询抓取文章列表
+	 * @author zhoutian
+	 * @since 2014年4月8日
+	 * @param articleTitle 文章标题
+	 * @param status 文章状态
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param isOriginal 是否原创
+	 * @param currentPage 当前页
+	 * @param onePageSize 每页行数
+	 * @return
+	 */
+	ReturnPageData<List<Article>> findAllCaptureArticlesByCondition(String articleTitle, Date beginTime,
+			Date endTime, int currentPage,
+			int onePageSize);
+	
 	
 	/**
 	 * 任意查询2篇不是本身的文章，作为前一篇，及后一篇
