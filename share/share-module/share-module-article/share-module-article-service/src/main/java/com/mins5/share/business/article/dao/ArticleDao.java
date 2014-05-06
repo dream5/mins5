@@ -108,6 +108,40 @@ public interface ArticleDao extends CrudDao<Long, Article>{
 			@Param("isOriginal") String isOriginal, 
 			@Param("startRow") int startRow,
 			@Param("onePageSize") int onePageSize);
+	
+	/**
+	 * 后台查询抓取文章总数列表
+	 * @author zhanglin
+	 * @since 20140506 13:03
+	 * @param articleTitle 文章标题
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @return
+	 */
+	int findAllCaptureArticlesCountByCondition(
+			@Param("articleTitle") String articleTitle,
+			@Param("beginTime") Date beginTime,
+			@Param("endTime") Date endTime);
+	
+	/**
+	 * 后台查询抓取文章列表
+	 * @author zhanglin
+	 * @since 20140506 13:04
+	 * @param articleTitle 文章标题
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param startRow 开始行
+	 * @param onePageSize 每页行数
+	 * @return
+	 */
+	List<Article> findAllCaptureArticlesByCondition(
+			@Param("articleTitle") String articleTitle,
+			@Param("beginTime") Date beginTime,
+			@Param("endTime") Date endTime,
+			@Param("startRow") int startRow,
+			@Param("onePageSize") int onePageSize);
+	
+	
 	/**
 	 * 任意查询2篇不是本身的文章，作为前一篇及后一篇
 	 * @param id 本身文章ID
