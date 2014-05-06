@@ -168,5 +168,28 @@
 	     limit 0,2 
 	</select>
 	
+	<!-- 后台查询抓取文章列表 add by zhanglin 20140506 -->
+	<select id="findAllCaptureArticlesCountByCondition" resultType="int">
+		select count(article_id) from article_copy
+		<where>
+			<if test="articleTitle != null">article_title like concat('%', #{articleTitle}, '%')</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+			<if test="true">AND is_valid = 1</if>
+		</where>
+	</select>
 	
+	<select id="findAllCaptureArticlesByCondition" resultMap="ArticleMap">
+		select  a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time
+		from article_copy a 
+		<where>
+			<if test="articleTitle != null">article_title like concat('%', #{articleTitle}, '%')</if>
+			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
+			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
+			<if test="true">AND is_valid = 1</if>
+		</where>
+		order by create_time desc
+		LIMIT #{startRow}, #{onePageSize}
+	</select>
+	<!-- 后台 查询抓取文章列表 add by zhanglin 20140506 -->
 </mapper>
