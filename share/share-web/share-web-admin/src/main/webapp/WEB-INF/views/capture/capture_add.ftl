@@ -65,15 +65,7 @@
 	function formatOperation(val,row) {
 		var operation = '<a href="#" onclick="articleDetail('+val+')">查看</>';
 		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="${path}/article/toArticleEdit.mins?articleId='+val+'">修改</>';
-		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="deleteConfirm('+val+')">删除</>';
-		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="articleDetail('+val+')">审核</>';
-		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="publishedArticle('+val+')">发布</>';
-		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="removedArticle('+val+')">下架</>';
+		operation += '<a href="#" onclick="publishedArticle('+val+')">发布到正式表</>';
 		return operation;
 	}
 	function loadTable() {
@@ -113,7 +105,7 @@
 		    	$('#detail_articleAuthor').text(msg.articleAuthor);
 		    	$('#detail_isOriginal').text(msg.isOriginal);
 		    	$('#detail_articleContent').html(msg.articleContent);
-		    	$('#articleDetail').window('open');
+		    	$('#articleDetail').parent().window('open');
 		    },
 		    error: function() {
 		    	$.messager.alert('操作提示', '系统繁忙！');
@@ -142,7 +134,7 @@
 		});
 	}
 	function publishedArticle(articleId){
-		$.messager.confirm('删除提示', '您确认发布此文章吗?', function(r){
+		$.messager.confirm('提示', '您确认发布此文章吗?', function(r){
 			if(!r) {
 				return;
 			}
