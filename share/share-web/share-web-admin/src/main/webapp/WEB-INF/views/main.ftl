@@ -9,7 +9,7 @@
 <body class="easyui-layout">
 	<div region="north" border="true" class="cs-north">
 		<div class="cs-north-bg">
-		<div class="cs-north-logo">Mins5 后台管理系统</div>
+		<div class="cs-north-logo"><!--Mins5 后台管理系统--></div>
 		<ul class="ui-skin-nav">				
 			<li class="li-skinitem" title="gray"><span class="gray" rel="gray"></span></li>
 			<li class="li-skinitem" title="default"><span class="default" rel="default"></span></li>
@@ -21,7 +21,7 @@
 	</div>
 	<div region="west" border="true" split="true" title="Navigation" class="cs-west">
 		<div class="easyui-accordion" fit="true" border="false">
-				<div title="综合管理" data-options="iconCls:'sys-article'">
+				<div title="基础管理" data-options="iconCls:'sys-article'">
 					<ul class="subMenuCls">
 						<li>
 							<div>
@@ -41,6 +41,17 @@
 							<div>
 								<a href="javascript:void(0);" src="${path}/article/articleLabelList.mins" class="cs-navi-tab">
 								<span class="leftIcons sys-label-edit"><em>标签管理</em></span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div title="推荐管理" data-options="iconCls:'sys-recommend'"> 
+					<ul class="subMenuCls">
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/capture/init.mins" class="cs-navi-tab">
+								<span class="leftIcons sys-recommend-add"><em>推荐管理</em></span>
 								</a>
 							</div>
 						</li>
@@ -276,7 +287,7 @@
 		 <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
                 <div title="Home">
 				<div class="cs-home-remark">
-					<h1>Mins5 后台管理系统</h1><br/>
+					<h1><!--Mins5 后台管理系统--></h1><br/>
 					心有多大，舞台就有多大！ <br/>
 				</div>
 				</div>

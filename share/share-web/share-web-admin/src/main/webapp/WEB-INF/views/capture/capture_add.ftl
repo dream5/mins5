@@ -6,24 +6,24 @@
 <#include "common/common_js.ftl" />
 <script type="text/javascript">
 	function submitForm() {
-		$('#articleFormId').form('submit', {
-			//	url:...,
+		$('#captureForm').form('submit', {
 			onSubmit : function() {
-				var isValid = $(this).form('validate');
-				if (isValid) {
+				beginMark();
+				//var isValid = $(this).form('validate');
+				//if (isValid) {
 				//	clearForm();
-				}
-				return isValid;
+				//}
+				return;
 			},
 			success : function(data) {
+				//endMark();
 				clearForm();
 				$("#tip").html(data);
 			}
 		});
 	}
 	function clearForm() {
-		$('#articleFormId').form('clear');
-		$('#isOriginal').combobox('setValue', '1');
+		$('#captureForm').form('clear');
 	}
 	function initArticleLabel() {
 		$('#articleLabel').combogrid({
@@ -214,6 +214,13 @@
 	$(document).ready(function() {
 		buildDataGrid();
 		loadTable();
+		 $("textarea").keydown(function(event) {
+	        if (event.keyCode == "13") {
+		        e = $(this).val();
+				$(this).val(e + ';');
+				           
+	        }
+	    });
 	});
 </script>
 <title>Mins5后台管理</title>
@@ -226,12 +233,12 @@
 		</div>
 		<div class="easyui-panel" title="抓取URL" data-options="iconCls:'icon-add'">
 			<div style="padding: 10px 0 10px 60px">
-				<form id="articleFormId" method="post" action="${path}/capture/captureAdd.mins">
+				<form id="captureForm" method="post" action="${path}/capture/beginCapture.mins">
 					<table>
 						<tr>
 							<td>URL:</td>
 							<td><textarea class="easyui-validatebox textarea-article"
-									name="captureURl" data-options="required:true" style="width: 600px;height: 100px;"></textarea>
+									name="captureUrl" data-options="required:true" style="width: 600px;height: 100px;"></textarea>
 							</td>
 							<td>
 								<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">开始抓取</a>
