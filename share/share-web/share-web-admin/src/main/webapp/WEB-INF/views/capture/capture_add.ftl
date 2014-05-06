@@ -52,7 +52,7 @@
 	var onePageSize = 10;
 	function buildDataGrid() {
 		$('#dg').datagrid({
-			title:"文章列表",
+			title:"抓取文章列表",
 			rownumbers:true,
 			singleSelect:true,
 			pagination:true,
@@ -96,27 +96,17 @@
 		var articleTitle = $('#articleTitle').val();
 		var beginTime = $('#beginTime').datebox('getValue');
 		var endTime = $('#endTime').datebox('getValue');
-		var status = $('#status').combobox('getValue');
-		if(status == -1) {
-			status = null;
-		}
-		var isOriginal = $('#isOriginal').combobox('getValue');
-		if(isOriginal == -1) {
-			isOriginal = null;
-		}
 		var currentTime = new Date().getTime();
 		var queryParams = {
 			'articleTitle':articleTitle,
 			'beginTime':beginTime,
 			'endTime':endTime,
-			'status':status,
-			'isOriginal':isOriginal,
 			'currentPage':currentPage,
 			'onePageSize':onePageSize,
 			'currentTime':currentTime
 		};
 		jQuery.ajax({
-		    url: '${path}/article/searchArticle.mins',
+		    url: '${path}/article/searchCaptureArticle.mins',
 		    data: queryParams,
 		    type: "POST",
 		    dataType: "json",
@@ -243,6 +233,7 @@
 							<td>
 								<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">开始抓取</a>
 							</td>
+							<td><font color="red">（注：每个URL请已分号";"结尾！！！）</font></td>
 						</tr>
 					</table>
 				</form>
@@ -253,9 +244,9 @@
 			<table id="dg" class="gridHead">
 		<thead>
 			<tr>
-				<th data-options="field:'articleTitle',width:300,align:'left'">标题<font color="red">（双击记录，可预览文章！）</font></th>
-				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
-				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
+				<th data-options="field:'articleTitle',width:400,align:'left'">标题<font color="red">（双击记录，可预览文章！）</font></th>
+				<th data-options="field:'articleFrom',width:120,align:'center'">来源</th>
+				<th data-options="field:'articleAuthor',width:120,align:'center'">作者</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
 				<th data-options="field:'articleId',width:300,align:'center',formatter:formatOperation">操作</th>
 			</tr>
@@ -266,19 +257,6 @@
 			文章标题: <input id="articleTitle" type="text" style="width:200px">
 			开始时间: <input id="beginTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
 			结束时间: <input id="endTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
-			文章状态: 
-			<select id="status" class="easyui-combobox" style="width:60px" data-options="editable:false,panelHeight:'auto'">
-				<option value="-1">全部</option>
-				<#list articleStatusArray as status>
-				<option value="${status.getCode() }">${status.getName() }</option>
-				</#list>
-			</select>
-			是否原创: 
-			<select id="isOriginal" class="easyui-combobox" style="width:60px" data-options="editable:false,panelHeight:'auto'">
-				<option value="-1">全部</option>
-				<option value="0">否</option>
-				<option value="1">是</option>
-			</select>
 			<a href="#" onclick="loadTable();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</div>
 	</div>
