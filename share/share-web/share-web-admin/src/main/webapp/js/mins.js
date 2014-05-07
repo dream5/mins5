@@ -59,7 +59,7 @@
 			
 			
 		},
-		loadGridData:function(fields,values,args){
+		loadGridData:function(fields,values,options){
 			
 			var defaults = {
 				"gridId" : "dg",//Grid对应ID
@@ -133,6 +133,8 @@
 								$.messager.alert('确认提示', '操作失败！');
 							}
 						});
+					}else{
+						$.messager.alert('提示', '参数错误！');
 					}
 					
 
