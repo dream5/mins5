@@ -3,61 +3,155 @@
  * @author zhanglin
  * @date 2014-05-06 18:50
  * @param JQuery
+ * 说明：
+ * 1.生成GRID
+ * $.mins.createDataGrid({gridId：‘dg’,panelTitle:'文章列表'});
+ * 2.GRID加载数据
+ * var fields = ['artileTitle','artileSts'];//查询参数名称
+ * var values = ['苹果'，'1'];//查询参数对应的值
+ * $.mins.loadGridData(fields,values,{url:'xxxxxxxxx'});
+ * 3.删除，审核确认
+ * $.mins.confirm({paramId:'articleId',action:'${path}/article/articleDelete.mins',dataId:数据ID,tip:'您确认删除此文章吗?'});
+ * 4.格式化状态
+ * $.mins.formatSts(value);
+ * 
  */
 (function($) {
-	$.fn.mins = function(options) {
-		alert(1);
-		var defaults = {
-			"id" : "dbGrid"
-		};
-		var opts = $.extend(defaults, options);
-
-	};
-
-	//通用异步方法，用于删除记录，修改状态
-	$.fn.mins.confirm = function(options) {
-		
-		var defaults = {
-				"id" : "dbGrid"
-		};
-		alert(1);
-		var opts = $.extend(defaults, options); 
-		this.each(function(){
-			alert(2+opts.id);
-		});
-		alert(3);
-		return;
-		$.messager.confirm('确认提示', tip, function(r) {
-			if (!r) {
-				return;
-			}
-			var queryParams = {
-				paramName : id
+	var currentPage = 1;
+	var onePageSize = 10;
+	var currentTime = new Date().getTime();
+	$.mins = {
+		init : function() {},
+		createDataGrid:function(options){
+			var defaults = {
+				"gridId" : "dg",//Grid对应ID
+				"toolbarId" : "tb",//搜索工具条对应ID
+				"panelTitle" : "列表",//panel栏名称
+				"onDblClickRow" : function(){},//双击函数
+				"currentPage":1,
+				"onePageSize":10,
 			};
-			jQuery.ajax({
-				url : url,
-				data : queryParams,
-				type : "POST",
-				dataType : "text",
-				success : function(msg) {
-					$.messager.alert('确认提示', msg);
-					loadTable();
-				},
-				error : function() {
-					$.messager.alert('确认提示', '操作失败！');
-				}
+			var opts = $.extend(defaults, options);
+			
+			$(this).each(function() {
+				
+				$('#'+opts.gridId).datagrid({
+						title:opts.panelTitle,
+						rownumbers:true,
+						singleSelect:true,
+						pagination:true,
+						pageList:[10, 20, 30, 40, 50],
+						pageSize:10,
+						toolbar:'#'+opts.toolbarId,
+						onDblClickRow :function(rowIndex,rowData){
+			  				 //opts.onDblClickRow;
+			 			 } 
+					});
+				$('#'+opts.gridId).datagrid('getPager').pagination({
+						onSelectPage:function(pageNum, pageSize){
+						 currentPage = pageNum;
+						 onePageSize = pageSize;
+						 loadTable();//每个页面需要定义的方法
+					}
+				});
+				
 			});
-		});
-	};
-	
-	//格式化状态
-	$.fn.mins.formatSts= function(opts){
-		if (value == 0) {
-			return '<span style="color:red;">否</span>';
-		} else {
-			return '<span style="color:green;">是</span>';
-		}
-	};
-	
+			
+			
+		},
+		loadGridData:function(fields,values,args){
+			
+			var defaults = {
+				"gridId" : "dg",//Grid对应ID
+				"url" : "",//请求URL
+			};
+			
+			var opts = $.extend(defaults, options);
+			
+			$(this).each(function() {
+				if(fields.length = values.length){
+				var s="({";
+				
+				for(i=0;i<fields.length;i++){
+					if(i!=(fields.length-1)){
+						s+=fields[i]+":'"+values[i]+"',";
+					}else if(i==(fields.length-1)){
+						s+=fields[i]+":'"+values[i]+"',";
+						//追加分页参数到最后
+						s+="currentPage:"+currentPage+",";
+						s+="onePageSize:"+onePageSize+",";
+						s+="currentTime:"+currentTime+"})";
+					}
+				}
+				var p=eval(s);
+				$.ajax({
+				    url: opts.url,
+				    data: p,
+				    type: "POST",
+				    dataType: "json",
+				    success: function (msg) {
+				    	$('#'+opts.gridId).datagrid('loadData', msg);
+				    }
+				});
+				
+			}else{
+				alert("参数初始化错误！");
+			}
+				
+			});
+			
+		},
+		confirm : function(options) {
+			var defaults = {
+				"paramId" : "id",//action中参数名
+				"dataId" : "",
+				"tip" : "你确认要删除此项记录吗？",
+				"action" : ""
+			};
+			var opts = $.extend(defaults, options);
+			$(this).each(function() {
 
+				$.messager.confirm('确认提示', opts.tip, function(r) {
+					if (!r) {
+						return;
+					}
+					var queryParams = {};
+					queryParams[opts.paramId] = opts.paramId;
+					queryParams[opts.dataId] = opts.dataId;
+
+					if(typeof opts.dataId==number){
+						$.ajax({
+							url : opts.action,
+							data : queryParams,
+							type : "POST",
+							dataType : "text",
+							success : function(msg) {
+								$.messager.alert('确认提示', msg);
+								//loadTable();
+							},
+							error : function() {
+								$.messager.alert('确认提示', '操作失败！');
+							}
+						});
+					}
+					
+
+				});
+
+			});
+		},
+		formatSts : function(v) {
+			if (v == 0) {
+				return '<span style="color:red;">否</span>';
+			} else {
+				return '<span style="color:green;">是</span>';
+			}
+		},//v为值，r为行对象，args操作对象args
+		formatOperation:function(v,row,args){
+			 $.each(args, function(i, item) {
+            	alert(item.name);
+       	 });
+		}
+
+	};
 })(jQuery);
