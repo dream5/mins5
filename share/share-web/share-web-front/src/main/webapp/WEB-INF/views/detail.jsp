@@ -120,7 +120,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 					</c:otherwise>
 				</c:choose>
 	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank">
-	          		  <img src="${context}/images/robots.jpg" alt="${recommendtitle}" />
+	          			  <img src="${context}/images/robots.jpg" alt="${recommendtitle}" />
 	          		  </a>
 	          		  </li>
 	          	</c:forEach>
