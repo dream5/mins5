@@ -115,3 +115,9 @@
 .sys-recommend-add{
 	background:url('sys_icons/date_add.png') no-repeat 0 center;
 }
+.sys-safe{
+	background:url('sys_icons/flag_red.png') no-repeat center center;
+}
+.sys-safe-add{
+	background:url('sys_icons/lightning.png') no-repeat 0 center;
+}
