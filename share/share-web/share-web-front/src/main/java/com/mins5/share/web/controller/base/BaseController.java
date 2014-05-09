@@ -16,20 +16,22 @@ import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.business.article.service.SearchService;
 import com.mins5.share.common.service.ReturnData;
+
 /**
- * <p>前端控制器基类<p>
+ * <p>
+ * 前端控制器基类
+ * <p>
+ * 
  * @author zhanglin
  * @date 20140417 15:48
  */
 @Controller
 @Scope("prototype")
 public class BaseController {
-	
-	
-	protected  int currentPage = 1;
-	protected  int pageSize = 10;
-	
-	
+
+	protected int currentPage = 1;
+	protected int pageSize = 10;
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -45,7 +47,7 @@ public class BaseController {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	
+
 	@Autowired
 	protected ArticleService articleService;
 	@Autowired
@@ -57,14 +59,15 @@ public class BaseController {
 
 	/**
 	 * 初始化菜单
+	 * 
 	 * @param request
 	 * @param response
 	 */
-	protected void initMenu(HttpServletRequest request,HttpServletResponse response){
-		//初始化菜单
+	protected void initMenu(HttpServletRequest request, HttpServletResponse response) {
+		// 初始化菜单
 		ReturnData<List<ArticleKind>> articleKinds = articleService.findAllArticleKind();
-		if (articleKinds.getReturnCode()==200&&!StringUtils.isEmpty(articleKinds.getResultData())) {
-				request.setAttribute("articleKinds", articleKinds.getResultData());
+		if (articleKinds.getReturnCode() == 200 && !StringUtils.isEmpty(articleKinds.getResultData())) {
+			request.setAttribute("articleKinds", articleKinds.getResultData());
 		}
 	}
 }
