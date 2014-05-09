@@ -42,7 +42,7 @@
 						pagination:true,
 						pageList:[10, 20, 30, 40, 50],
 						pageSize:10,
-						toolbar:'#'+opts.toolbarId,
+				 		toolbar:'#'+opts.toolbarId,
 						onDblClickRow :function(rowIndex,rowData){
 			  				 //opts.onDblClickRow;
 			 			 } 
