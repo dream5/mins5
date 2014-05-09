@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "common/common_js.ftl" />
-<title>Mins5 后台管理系统</title>
+<title></title>
 </head>
 <body class="easyui-layout">
 	<div region="north" border="true" class="cs-north">
@@ -74,6 +74,17 @@
 							<div>
 								<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">
 								<span class="leftIcons sys-images-edit"><em>图片管理</em></span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div title="安全管理" data-options="iconCls:'sys-safe'"> 
+					<ul class="subMenuCls">
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/upload/addImagesInit.mins" class="cs-navi-tab">
+								<span class="leftIcons sys-safe-add"><em>黑名单管理</em></span>
 								</a>
 							</div>
 						</li>
