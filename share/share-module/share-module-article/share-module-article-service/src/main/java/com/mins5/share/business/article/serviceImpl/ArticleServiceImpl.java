@@ -789,4 +789,27 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return returnData;
 	}
+	
+	/**
+	 * 将临时表数据删除
+	 * @param id
+	 * @author zhanglin
+	 * @since 2014年5月13日
+	 */
+	@Transactional
+	public ReturnData<VOID> removedArticleFromTempTable(Long articleId){
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if (articleId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			articleDao.deleteTempArticleById(articleId);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 }
