@@ -184,25 +184,32 @@
 	        }
 	    });
 	    
-	    
+	    //批处理发布
 	    $('#batchPublish').click(function(){
 	    	
 	        var checkedItems = $('#dg').datagrid('getChecked');
 			var temp = [];
+			var flag = true;
             $.each(checkedItems, function(index, item){
-                if(item.articleSts=='WAITING_CHECK'){
-                 	$.messager.alert('确认提示', '选中的记录中包含已发布的文章，程序已过滤！');
+                if(item.articleSts=='PASSED_CHECK'){
+                 	$.messager.alert('确认提示', '选中的记录中包含已发布的文章，请重新选择！');
+                 	flag =false;
+                 	return false;
                 }else{
                 	temp.push(item.articleId);
                 }
                 
-			});       
-			if(temp.length==0){
-				$.messager.alert('确认提示', '请选择文章！');
-				return;
-			}        
- 			var ids = temp.join(",");
- 			$.mins.confirm({paramId:'articleIds',action:'${path}/article/publishedArticlesToTable.mins',dataId:ids,tip:'您确认要批量发布这些文章吗?'});
+			}); 
+			if(flag){
+				if(temp.length==0){
+					$.messager.alert('确认提示', '请选择文章！');
+					return;
+				}        
+	 			var ids = temp.join(",");
+	 			$.mins.confirm({paramId:'articleIds',action:'${path}/article/publishedArticlesToTable.mins',dataId:ids,tip:'您确认要批量发布这些文章吗?'});
+			
+			}   
+				
 	 		
 	    });
 	    
