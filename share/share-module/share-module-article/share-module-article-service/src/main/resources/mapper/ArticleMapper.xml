@@ -204,5 +204,9 @@
 		</set>
 		where article_id = #{articleId}
 	</update>
+	  <!-- 删除记录 -->  
+    <delete id="deleteTempArticleById" parameterType="int">  
+        delete from article_copy where article_id = #{articleId}  
+    </delete>  
 	<!-- 后台 查询抓取文章列表 add by zhanglin 20140506 -->
 </mapper>
