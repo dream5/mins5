@@ -10,15 +10,12 @@
 			onSubmit : function() {
 				beginMark();
 				var isValid = $(this).form('validate');
-				if (isValid) {
-					clearForm();
-				}
-				return;
+				return isValid;
 			},
 			success : function(data) {
 				endMark();
-				clearForm();
 				$("#tip").html(data);
+				loadTable();
 			}
 		});
 	}
@@ -110,27 +107,7 @@
 		    }
 		});
 	}
-	function deleteConfirm(articleId){
-		$.messager.confirm('删除提示', '您确认删除此文章吗?', function(r){
-			if(!r) {
-				return;
-			}
-			var queryParams = {"articleId":articleId};
-			jQuery.ajax({
-			    url: '${path}/article/articleDelete.mins',
-			    data: queryParams,
-			    type: "POST",
-			    dataType: "text",
-			    success: function (msg) {
-			    	$.messager.alert('删除提示', msg);
-			    	loadTable();
-			    },
-			    error: function() {
-			    	$.messager.alert('删除提示', '删除失败！');
-			    }
-			});
-		});
-	}
+	
 	function publishedArticle(articleId){
 		$.messager.confirm('提示', '您确认发布此文章吗?', function(r){
 			if(!r) {
@@ -152,27 +129,7 @@
 			});
 		});
 	}
-	function removedArticle(articleId){
-		$.messager.confirm('删除提示', '您确认下架此文章吗?', function(r){
-			if(!r) {
-				return;
-			}
-			var queryParams = {"articleId":articleId};
-			jQuery.ajax({
-			    url: '${path}/article/removedArticle.mins',
-			    data: queryParams,
-			    type: "POST",
-			    dataType: "text",
-			    success: function (msg) {
-			    	$.messager.alert('操作提示', msg);
-			    	loadTable();
-			    },
-			    error: function() {
-			    	$.messager.alert('操作提示', '发布失败！');
-			    }
-			});
-		});
-	}
+	
 	$(document).ready(function() {
 		buildDataGrid();
 		loadTable();
