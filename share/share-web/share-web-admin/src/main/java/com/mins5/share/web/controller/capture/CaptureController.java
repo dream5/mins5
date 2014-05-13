@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mins5.share.capture.util.Article;
 import com.mins5.share.capture.util.Capture;
 import com.mins5.share.capture.util.CaptureThreads;
 import com.mins5.share.capture.util.DBUtil;
@@ -45,9 +46,7 @@ public class CaptureController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/beginCapture")
-	public void beginCapture(HttpServletRequest request,HttpServletResponse response,String captureUrl){
-		log.info("抓取开始...");
-		
+	public void beginCapture(HttpServletResponse response,String captureUrl){
 		if (!StringUtils.isEmpty(captureUrl)) {
 			try {
 				String [] urls =  captureUrl.trim().split(";");
@@ -59,6 +58,7 @@ public class CaptureController {
 					ComboPooledDataSource dataSources = (ComboPooledDataSource)ApplicationContextUtil.getBean("dataSource");
 					DBUtil dbUtil = new DBUtil();
 					dbUtil.batchInsertBean(CaptureThreads.articles,dataSources.getConnection());
+					CaptureThreads.articles = new ArrayList<Article>();//必须，否则出现静态变量出现并发问题
 					JsonUtils.write("已成功完成抓取！", response);
 				}
 			} catch (Exception e) {
