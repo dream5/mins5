@@ -142,11 +142,11 @@
 
 			});
 		},
-		formatSts : function(v) {
-			if (v == 0) {
-				return '<span style="color:red;">否</span>';
+		formatSts : function(v,args) {//args,为1或0值代表的中文意思，如['未发布','已发布'];
+			if (v == 'WAITING_CHECK') {
+				return '<span style="color:red;">'+args[0]+'</span>';
 			} else {
-				return '<span style="color:green;">是</span>';
+				return '<span style="color:green;">'+args[1]+'</span>';
 			}
 		},//v为值，r为行对象，args操作对象args
 		formatOperation:function(v,row,args){
