@@ -61,7 +61,7 @@
 	}
 	function formatOperation(val,row) {
 		var operation = '<a href="#" onclick="articleDetail('+val+')">查看</>';
-		if(row.articleSts!='PASSED_CHECK'){\
+		if(row.articleSts!='PASSED_CHECK'){
 			operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 			operation += '<a href="#" onclick="publishedArticle('+val+')">发布到正式表</>';
 		}
