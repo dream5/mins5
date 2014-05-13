@@ -293,6 +293,31 @@ public class ArticleController {
 	}
 
 	/**
+	 * <p>
+	 * 批量将临时表数据推送到正式表
+	 * </p>
+	 * 
+	 * @param response
+	 * @param articleIds
+	 * @author zhanglin
+	 * @since 2014年5月13日
+	 */
+	@RequestMapping(value = "/publishedArticlesToTable")
+	public void publishedArticlesToTable(HttpServletResponse response, String articleIds) {
+		String tip = "批量发布成功！";
+		try {
+			String[] ids = articleIds.split(",");
+			for (int i = 0; i < ids.length; i++) {
+				articleService.publishedArticleToTable(Long.valueOf(ids[i]));
+			}
+
+		} catch (Exception e) {
+			tip = "批量发布失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+
+	/**
 	 * 下架文章
 	 * 
 	 * @author zhoutian
