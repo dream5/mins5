@@ -316,6 +316,28 @@ public class ArticleController {
 		}
 		JsonUtils.write(tip, response);
 	}
+	
+	/**
+	 * 
+	 * <p>批量从临时表中清除数据</p>
+	 * @param response
+	 * @param articleIds
+	 */
+	@RequestMapping(value = "/removeArticlesFromTable")
+	public void removeArticlesFromTable(HttpServletResponse response, String articleIds) {
+		String tip = "批量删除成功！";
+		try {
+			String[] ids = articleIds.split(",");
+			for (int i = 0; i < ids.length; i++) {
+				articleService.removedArticleFromTempTable(Long.valueOf(ids[i]));
+			}
+
+		} catch (Exception e) {
+			tip = "批量删除失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+	
 
 	/**
 	 * 下架文章
