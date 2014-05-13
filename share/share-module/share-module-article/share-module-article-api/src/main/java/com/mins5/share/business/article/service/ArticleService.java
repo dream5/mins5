@@ -323,5 +323,16 @@ public interface ArticleService {
 	 * @since 2014年5月13日
 	 */
 	ReturnData<VOID> publishedArticleToTable(Long id);
+	
+	
+	/**
+	 * 从抓取临时表中清除数据
+	 * 
+	 * @author zhoutian
+	 * @since 2014年4月13日
+	 * @param articleId
+	 * @return
+	 */
+	ReturnData<VOID> removedArticleFromTempTable(Long articleId);
 
 }
