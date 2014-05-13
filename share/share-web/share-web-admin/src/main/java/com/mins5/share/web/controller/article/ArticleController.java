@@ -39,14 +39,15 @@ import com.mins5.share.util.StringUtils;
 @Scope("prototype")
 @RequestMapping(value = "/article")
 public class ArticleController {
-	
+
 	private static final Log log = LogFactory.getLog(ArticleController.class);
-	
+
 	@Autowired
 	private ArticleService articleService;
 
 	/**
 	 * 文章列表
+	 * 
 	 * @since 2014-3-9
 	 * @return
 	 */
@@ -56,9 +57,10 @@ public class ArticleController {
 		request.setAttribute("articleStatusArray", articleStatusArray);
 		return "article/article_list";
 	}
-	
+
 	/**
 	 * 文章列表查询
+	 * 
 	 * @author zhoutian
 	 * @since 2014年4月8日
 	 * @param response
@@ -71,28 +73,20 @@ public class ArticleController {
 	 * @param onePageSize 每页行数
 	 */
 	@RequestMapping(value = "/searchArticle")
-	public void searchArticle(HttpServletResponse response,
-			String articleTitle, String status, String beginTime,
-			String endTime, String isOriginal, Integer currentPage,
-			Integer onePageSize) {
-		
+	public void searchArticle(HttpServletResponse response, String articleTitle, String status, String beginTime, String endTime, String isOriginal,
+			Integer currentPage, Integer onePageSize) {
+
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
 
-		ReturnPageData<List<Article>> returnData = articleService
-				.findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
-						StringUtils.parseNull(articleTitle),
-						StringUtils.parseNull(status),
-						DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
-						DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT),
-						StringUtils.parseNull(isOriginal), currentPage,
-						onePageSize);
-		
-		
+		ReturnPageData<List<Article>> returnData = articleService.findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
+				StringUtils.parseNull(articleTitle), StringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
+				DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), StringUtils.parseNull(isOriginal), currentPage, onePageSize);
+
 		List<Article> articleList = returnData.getResultData();
 		List<Map<String, Object>> articleMapList = new ArrayList<Map<String, Object>>();
-		if(articleList != null) {
-			for(Article article : articleList) {
+		if (articleList != null) {
+			for (Article article : articleList) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("articleId", article.getArticleId());
 				map.put("articleTitle", article.getArticleTitle());
@@ -102,13 +96,14 @@ public class ArticleController {
 				articleMapList.add(map);
 			}
 		}
-		
+
 		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), articleMapList);
 		JsonUtils.write(data, response);
-	} 
-	
+	}
+
 	/**
 	 * 抓取文章列表查询
+	 * 
 	 * @author zhanglin copy from searchArticle方法
 	 * @since 2014年4月8日
 	 * @param response
@@ -119,43 +114,37 @@ public class ArticleController {
 	 * @param onePageSize 每页行数
 	 */
 	@RequestMapping(value = "/searchCaptureArticle")
-	public void searchCaptureArticle(HttpServletResponse response,
-			String articleTitle, String beginTime,
-			String endTime, Integer currentPage,
+	public void searchCaptureArticle(HttpServletResponse response, String articleTitle, String beginTime, String endTime, Integer currentPage,
 			Integer onePageSize) {
-		
+
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
 
-		ReturnPageData<List<Article>> returnData = articleService
-				.findAllCaptureArticlesByCondition(
-						StringUtils.parseNull(articleTitle),
-						DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
-						DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT),
-						currentPage,
-						onePageSize);
-		
+		ReturnPageData<List<Article>> returnData = articleService.findAllCaptureArticlesByCondition(StringUtils.parseNull(articleTitle),
+				DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT), DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), currentPage, onePageSize);
+
 		List<Article> articleList = returnData.getResultData();
 		List<Map<String, Object>> articleMapList = new ArrayList<Map<String, Object>>();
-		if(articleList != null) {
-			for(Article article : articleList) {
+		if (articleList != null) {
+			for (Article article : articleList) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("articleId", article.getArticleId());
 				map.put("articleTitle", article.getArticleTitle());
 				map.put("createTime", article.getCreateTime());
 				map.put("articleAuthor", article.getArticleAuthor());
 				map.put("articleFrom", article.getArticleFrom());
+				map.put("articleSts", article.getStatus());
 				articleMapList.add(map);
 			}
 		}
-		
+
 		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), articleMapList);
 		JsonUtils.write(data, response);
-	} 
-	
-	
+	}
+
 	/**
 	 * 跳转到添加文章页面
+	 * 
 	 * @author zhoutian
 	 * @since 2014年3月17日
 	 * @return
@@ -164,9 +153,10 @@ public class ArticleController {
 	public String toArticleAdd() {
 		return "article/article_add";
 	}
-	
+
 	/**
 	 * ajax请求添加文章
+	 * 
 	 * @author zhoutian
 	 * @since 2014年3月17日
 	 * @param response
@@ -174,41 +164,42 @@ public class ArticleController {
 	 */
 	@RequestMapping(value = "/articleAdd")
 	public void articleAdd(HttpServletResponse response, Article article, String articleKind, String articleLabel) {
-		
+
 		try {
-		
+
 			Date currentDate = new Date();
 			article.setCreateTime(currentDate);
 			article.setUpdateTime(currentDate);
 			article.setStatus(ARTICLE_STATUS.WAITING_CHECK);
-			
+
 			String[] articleKindIdArray = articleKind.split(",");
 			List<Long> articleKindIdList = new ArrayList<Long>();
-			for(String articleKindId : articleKindIdArray) {
+			for (String articleKindId : articleKindIdArray) {
 				articleKindIdList.add(Long.parseLong(articleKindId));
 			}
-			
+
 			String[] articleLabelIdArray = articleLabel.split(",");
 			List<Long> articleLabelIdList = new ArrayList<Long>();
-			for(String articleLabelId : articleLabelIdArray) {
+			for (String articleLabelId : articleLabelIdArray) {
 				articleLabelIdList.add(Long.parseLong(articleLabelId));
 			}
-		
-			ReturnData<Article> returnData = articleService.saveArticle(article, articleKindIdList, articleLabelIdList);	
-			
+
+			ReturnData<Article> returnData = articleService.saveArticle(article, articleKindIdList, articleLabelIdList);
+
 			String tip = "添加成功！";
-			if(returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
+			if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
 				tip = "添加失败！";
 			}
 			JsonUtils.write(tip, response);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			log.error("添加文章失败！", e);
 			JsonUtils.write("添加失败！", response);
 		}
 	}
-	
+
 	/**
 	 * 查看文章详细信息
+	 * 
 	 * @author zhoutian
 	 * @since 2014年4月13日
 	 * @param response
@@ -220,9 +211,10 @@ public class ArticleController {
 		Article article = returnData.getResultData();
 		JsonUtils.write(article, response);
 	}
-	
+
 	/**
 	 * 跳转到文章修改页面
+	 * 
 	 * @author zhoutian
 	 * @since 2014年4月9日
 	 * @param articleId
@@ -236,13 +228,14 @@ public class ArticleController {
 		mv.setViewName("article/article_edit");
 		return mv;
 	}
-	
+
 	public void articleEdit() {
-		
+
 	}
-	
+
 	/**
 	 * 删除文章
+	 * 
 	 * @author zhoutian
 	 * @since 2014年4月13日
 	 * @param response
@@ -253,14 +246,15 @@ public class ArticleController {
 		String tip = "删除成功！";
 		try {
 			articleService.deleteArticleById(articleId);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			tip = "删除失败！";
 		}
 		JsonUtils.write(tip, response);
 	}
-	
+
 	/**
 	 * 发布文章
+	 * 
 	 * @author zhoutian
 	 * @since 2014年4月13日
 	 * @param response
@@ -271,14 +265,36 @@ public class ArticleController {
 		String tip = "发布成功！";
 		try {
 			articleService.publishedArticle(articleId);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			tip = "发布失败！";
 		}
 		JsonUtils.write(tip, response);
 	}
-	
+
+	/**
+	 * <p>
+	 * 将临时表数据推送到正式表
+	 * </p>
+	 * 
+	 * @param response
+	 * @param articleId
+	 * @author zhanglin
+	 * @since 2014年5月13日
+	 */
+	@RequestMapping(value = "/publishedArticleToTable")
+	public void publishedArticleToTable(HttpServletResponse response, Long articleId) {
+		String tip = "发布成功！";
+		try {
+			articleService.publishedArticleToTable(articleId);
+		} catch (Exception e) {
+			tip = "发布失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+
 	/**
 	 * 下架文章
+	 * 
 	 * @author zhoutian
 	 * @since 2014年4月13日
 	 * @param response
@@ -289,15 +305,15 @@ public class ArticleController {
 		String tip = "下架成功！";
 		try {
 			articleService.removedArticle(articleId);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			tip = "下架失败！";
 		}
 		JsonUtils.write(tip, response);
 	}
-	
-	
+
 	/**
 	 * 查看抓取文章详细信息
+	 * 
 	 * @author zhanglin
 	 * @since 20140506
 	 * @param response
@@ -309,5 +325,5 @@ public class ArticleController {
 		Article article = returnData.getResultData();
 		JsonUtils.write(article, response);
 	}
-	
+
 }
