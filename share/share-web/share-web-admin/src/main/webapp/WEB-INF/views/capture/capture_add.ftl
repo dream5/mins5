@@ -213,6 +213,24 @@
 	 		
 	    });
 	    
+	    //批量移除
+	     $('#batchRemove').click(function(){
+		      var checkedItems = $('#dg').datagrid('getChecked');
+				var temp = [];
+	            $.each(checkedItems, function(index, item){
+	                	temp.push(item.articleId);
+				}); 
+				if(temp.length==0){
+					$.messager.alert('确认提示', '请选择文章！');
+					return;
+				}        
+		 		var ids = temp.join(",");
+		 		$.mins.confirm({paramId:'articleIds',action:'${path}/article/removeArticlesFromTable.mins',dataId:ids,tip:'<font color=red>您确认要从临时表批量删除这些文章吗?</front>'});
+	     
+	     });
+	    
+	    
+	    
 	});
 </script>
 <title>Mins5后台管理</title>
