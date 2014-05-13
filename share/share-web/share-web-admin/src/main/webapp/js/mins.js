@@ -116,10 +116,8 @@
 						return;
 					}
 					var queryParams = {};
-					queryParams[opts.paramId] = opts.paramId;
-					queryParams[opts.dataId] = opts.dataId;
+					queryParams[opts.paramId] = opts.dataId;
 
-					if(typeof opts.dataId==number){
 						$.ajax({
 							url : opts.action,
 							data : queryParams,
@@ -127,16 +125,12 @@
 							dataType : "text",
 							success : function(msg) {
 								$.messager.alert('确认提示', msg);
-								//loadTable();
+								loadTable();
 							},
 							error : function() {
 								$.messager.alert('确认提示', '操作失败！');
 							}
 						});
-					}else{
-						$.messager.alert('提示', '参数错误！');
-					}
-					
 
 				});
 
