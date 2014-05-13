@@ -55,17 +55,16 @@
 			}
 		});
 	}
-	function formatIsOriginal(val,row) {
-		if (val == 0) {
-			return '<span style="color:red;">否</span>';
-		} else {
-			return '<span style="color:green;">是</span>';
-		}
+	function formatSts(val,row) {
+	    var stsValue=['未发布','已发布'];
+		return $.mins.formatSts(val,stsValue);
 	}
 	function formatOperation(val,row) {
 		var operation = '<a href="#" onclick="articleDetail('+val+')">查看</>';
-		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="publishedArticle('+val+')">发布到正式表</>';
+		if(row.articleSts!='PASSED_CHECK'){\
+			operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
+			operation += '<a href="#" onclick="publishedArticle('+val+')">发布到正式表</>';
+		}
 		return operation;
 	}
 	function loadTable() {
@@ -139,7 +138,7 @@
 			}
 			var queryParams = {"articleId":articleId};
 			jQuery.ajax({
-			    url: '${path}/article/publishedArticle.mins',
+			    url: '${path}/article/publishedArticleToTable.mins',
 			    data: queryParams,
 			    type: "POST",
 			    dataType: "text",
@@ -221,6 +220,7 @@
 				<th data-options="field:'articleFrom',width:120,align:'center'">来源</th>
 				<th data-options="field:'articleAuthor',width:120,align:'center'">作者</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
+				<th data-options="field:'articleSts',width:150,align:'center', formatter:formatSts">状态</th>
 				<th data-options="field:'articleId',width:300,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
