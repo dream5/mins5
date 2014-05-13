@@ -191,8 +191,11 @@
 			var temp = [];
             $.each(checkedItems, function(index, item){
                 if(item.articleSts=='WAITING_CHECK'){
-                 	temp.push(item.articleId);
+                 	$.messager.alert('确认提示', '选中的记录中包含已发布的文章，程序已过滤！');
+                }else{
+                	temp.push(item.articleId);
                 }
+                
 			});       
 			if(temp.length==0){
 				$.messager.alert('确认提示', '请选择文章！');
