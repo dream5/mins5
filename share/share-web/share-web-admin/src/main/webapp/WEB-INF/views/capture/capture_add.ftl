@@ -38,7 +38,7 @@
 		$('#dg').datagrid({
 			title:"抓取文章列表",
 			rownumbers:true,
-			singleSelect:true,
+			singleSelect:false,
 			pagination:true,
 			pageList:[10, 20, 30, 40, 50],
 			pageSize:10,
@@ -183,6 +183,26 @@
 				           
 	        }
 	    });
+	    
+	    
+	    $('#batchPublish').click(function(){
+	    	
+	        var checkedItems = $('#dg').datagrid('getChecked');
+			var temp = [];
+            $.each(checkedItems, function(index, item){
+                if(item.articleSts=='WAITING_CHECK'){
+                 	temp.push(item.articleId);
+                }
+			});       
+			if(temp.length==0){
+				$.messager.alert('确认提示', '请选择文章！');
+				return;
+			}        
+ 			var ids = temp.join(",");
+ 			$.mins.confirm({paramId:'articleIds',action:'${path}/article/publishedArticlesToTable.mins',dataId:ids,tip:'您确认要批量发布这些文章吗?'});
+	 		
+	    });
+	    
 	});
 </script>
 <title>Mins5后台管理</title>
@@ -216,6 +236,7 @@
 			<table id="dg" class="gridHead">
 		<thead>
 			<tr>
+				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'articleTitle',width:400,align:'left'">标题<font color="red">（双击记录，可预览文章！）</font></th>
 				<th data-options="field:'articleFrom',width:120,align:'center'">来源</th>
 				<th data-options="field:'articleAuthor',width:120,align:'center'">作者</th>
@@ -226,6 +247,9 @@
 		</thead>
 	</table>
 	<div id="tb" style="padding:5px;height:auto">
+		<div style="margin-bottom:5px">
+			<a href="javascript:;" id="batchPublish" class="easyui-linkbutton" iconCls="icon-add" plain="true">批量发布文章</a>
+		</div>
 		<div>
 			文章标题: <input id="articleTitle" type="text" style="width:200px">
 			开始时间: <input id="beginTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
