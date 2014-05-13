@@ -252,6 +252,7 @@
 	<div id="tb" style="padding:5px;height:auto">
 		<div style="margin-bottom:5px">
 			<a href="javascript:;" id="batchPublish" class="easyui-linkbutton" iconCls="icon-add" plain="true">批量发布文章</a>
+			<a href="javascript:;" id="batchRemove" class="easyui-linkbutton" iconCls="icon-remove" plain="true">批量清空已发布文章</a>
 		</div>
 		<div>
 			文章标题: <input id="articleTitle" type="text" style="width:200px">
