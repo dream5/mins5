@@ -133,7 +133,7 @@
 			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
 			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
 			<if test="isOriginal != null">AND is_original = #{isOriginal}</if>
-			<if test="true">AND is_valid = 1</if>
+			<!-- <if test="true">AND is_valid = 1</if> -->
 		</where>
 	</select>
 	
@@ -145,7 +145,7 @@
 			<if test="beginTime != null">AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{beginTime}, '%Y-%m-%d')</if>
 			<if test="endTime != null">AND DATE_FORMAT(#{endTime}, '%Y-%m-%d') >= DATE_FORMAT(create_time, '%Y-%m-%d')</if>
 			<if test="isOriginal != null">AND is_original = #{isOriginal}</if>
-			<if test="true">AND is_valid = 1</if>
+			<!-- <if test="true">AND is_valid = 1</if> -->
 		</where>
 		order by create_time desc
 		LIMIT #{startRow}, #{onePageSize}
@@ -180,7 +180,7 @@
 	</select>
 	
 	<select id="findAllCaptureArticlesByCondition" resultMap="ArticleMap">
-		select  a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time
+		select  a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,a.status
 		from article_copy a 
 		<where>
 			<if test="articleTitle != null">article_title like concat('%', #{articleTitle}, '%')</if>
@@ -193,8 +193,16 @@
 	</select>
 	
 	<select id="findCaptureById" parameterType="long" resultMap="ArticleMap">
-		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,a.status,a.is_original
+		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,a.status,a.is_original,a.is_valid
         from article_copy a where a.article_id = #{articleId}
 	</select>
+	
+	<update id="updateCaptureArticleSts">
+		update article_copy
+		<set>
+			<if test="status != null">status = #{status},</if>
+		</set>
+		where article_id = #{articleId}
+	</update>
 	<!-- 后台 查询抓取文章列表 add by zhanglin 20140506 -->
 </mapper>
