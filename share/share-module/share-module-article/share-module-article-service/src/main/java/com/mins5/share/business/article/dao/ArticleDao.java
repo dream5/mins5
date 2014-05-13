@@ -159,4 +159,12 @@ public interface ArticleDao extends CrudDao<Long, Article> {
 	 * @since 2014年5月13日
 	 */
 	int updateCaptureArticleSts(@Param("articleId") long id, @Param("status") long status);
+	
+	/**
+	 * <p>从临时表中清除</p>
+	 * @param id
+	 * @return
+	 */
+	int deleteTempArticleById(@Param("articleId") long id);
+
 }
