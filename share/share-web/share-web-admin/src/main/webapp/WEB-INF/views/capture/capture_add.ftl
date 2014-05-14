@@ -135,7 +135,6 @@
 	        if (event.keyCode == "13") {
 		        e = $(this).val();
 				$(this).val(e + ';');
-				           
 	        }
 	    });
 	    
