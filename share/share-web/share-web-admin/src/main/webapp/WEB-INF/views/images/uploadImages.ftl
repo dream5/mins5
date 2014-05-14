@@ -44,16 +44,16 @@
 		<thead>
 			<tr>
 				<th data-options="field:'ck',checkbox:true"></th>
-				<th data-options="field:'articleId',width:200,align:'left'">文章ID</th>
-				<th data-options="field:'attachmentOldName',width:200,align:'left'">上传前名称</th>
+				<th data-options="field:'articleId',width:80,align:'left'">文章ID</th>
+				<th data-options="field:'attachmentOldName',width:150,align:'left'">上传前名称</th>
 				<th data-options="field:'attachmentName',width:200,align:'left'">新名称</th>
-				<th data-options="field:'attachmentType',width:120,align:'center'">后缀名称</th>
+				<th data-options="field:'attachmentType',width:80,align:'center'">后缀名称</th>
 				<th data-options="field:'createDate',width:120,align:'center'">上传时间</th>
-				<th data-options="field:'large',width:150,align:'center'">大尺寸图名称</th>
-				<th data-options="field:'midSize',width:150,align:'center'">中尺寸图名称</th>
-				<th data-options="field:'small',width:150,align:'center'">小尺寸图名称</th>
-				<th data-options="field:'attachmenSts',width:150,align:'center', formatter:formatSts">状态</th>
-				<th data-options="field:'attachmentId',width:300,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'large',width:200,align:'center'">大尺寸图名称</th>
+				<th data-options="field:'midSize',width:200,align:'center'">中尺寸图名称</th>
+				<th data-options="field:'small',width:200,align:'center'">小尺寸图名称</th>
+				<th data-options="field:'attachmenSts',width:100,align:'center', formatter:formatSts">状态</th>
+				<th data-options="field:'attachmentId',width:100,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -95,13 +95,15 @@ $(document).ready(function() {
 		'buttonText': 'BROWSE',
 		'buttonImg':'${path}/js/uploadify/liulan_bg.gif',
 		'onError':function(event,queueID,fileObj,errorObj) { 
-			alert("上传错误！");
+			$.messager.alert('操作提示', '上传错误！');
 		},
 		'onSelect':function(event,queueID,fileObj) { 
 			$("#extname").val(fileObj.type);
 		},
 		'onComplete':function(event,queueID,fileObj,response) { 
-			alert("文件:" + fileObj.name + "上传成功");
+			$.mins.unmark();
+			$.messager.alert('操作提示','文件:' + fileObj.name + '上传成功!');
+			loadTable();
 		}
 
 	});
@@ -109,8 +111,12 @@ $(document).ready(function() {
 	
 	//初始化表格
     $.mins.createDataGrid({gridId:'dg',panelTitle:'上传图片列表'});
+	loadTable();
 	
-	function loadTable() {
+});
+var currentPage = 1;
+var onePageSize = 10;
+function loadTable() {
 		var articleTitle = $('#articleTitle').val();
 		var beginTime = $('#beginTime').datebox('getValue');
 		var endTime = $('#endTime').datebox('getValue');
@@ -132,8 +138,7 @@ $(document).ready(function() {
 		    	$('#dg').datagrid('loadData', msg);
 		    }
 		});
-	};
-});
+	}
 
 function formatSts(val,row) {
 	    var stsValue=['未发布','已发布'];
@@ -146,6 +151,7 @@ function formatOperation(val,row) {
 }
 
 function exeUpload(){
+	$.mins.mark();
 	$('#uploadify').uploadifySettings('scriptData', {'filetype':$('#extname').val()});
 	jQuery('#uploadify').uploadifyUpload();
 }
