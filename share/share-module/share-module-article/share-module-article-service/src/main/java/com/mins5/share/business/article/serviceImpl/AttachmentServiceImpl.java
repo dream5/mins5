@@ -59,20 +59,65 @@ public class AttachmentServiceImpl implements AttachmentService {
 
 	@Override
 	public ReturnData<VOID> deleteAttachmentById(Long attachmentId) {
-		// TODO Auto-generated method stub
-		return null;
+		ReturnData<VOID> returnData = new ReturnData<VOID>();
+		try {
+			if (attachmentId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			attachmentDao.deleteById(attachmentId);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
 	}
 
 	@Override
 	public ReturnData<Attachment> updateAttachment(Attachment attachment) {
-		// TODO Auto-generated method stub
-		return null;
+		ReturnData<Attachment> returnData = new ReturnData<Attachment>();
+		try {
+			if (!checkUpdateAttachment(attachment)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			attachmentDao.update(attachment);
+			returnData.setResultData(attachment);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	private boolean checkUpdateAttachment(Attachment attachment) {
+		if (attachment == null) {
+			return false;
+		}
+		if (attachment.getAttachmentId() == null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public ReturnData<Attachment> findAttachmentById(Long attachmentId) {
-		// TODO Auto-generated method stub
-		return null;
+		ReturnData<Attachment> returnData = new ReturnData<Attachment>();
+		try {
+			if (attachmentId == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Attachment attachment = attachmentDao.findById(attachmentId);
+			returnData.setResultData(attachment);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
 	}
 
 }
