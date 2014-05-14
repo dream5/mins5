@@ -14,6 +14,7 @@ public class Attachment extends DomainObject {
 	private java.lang.Integer attachmentId; // 主键
 	private java.lang.Integer articleId; // 对应文章ID，与其一对一关系
 	private java.lang.String attachmentName; // 文件名
+	private java.lang.String attachmentOldName; // 旧的文件名
 	private java.lang.String attachmentType; // 后缀
 	private java.util.Date createDate; // 创建时间
 	private java.lang.String attachmenSts; // 是否有效，1有效，0无效
@@ -45,6 +46,14 @@ public class Attachment extends DomainObject {
 
 	public java.lang.String getAttachmentName() {
 		return this.attachmentName;
+	}
+
+	public java.lang.String getAttachmentOldName() {
+		return attachmentOldName;
+	}
+
+	public void setAttachmentOldName(java.lang.String attachmentOldName) {
+		this.attachmentOldName = attachmentOldName;
 	}
 
 	public void setAttachmentType(java.lang.String value) {
