@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mins5.share.business.article.dao.AttachmentDao">
+
+	<!-- 新增 -->
+	<insert id="save"  parameterType="Attachment" useGeneratedKeys="true" keyProperty="attachmentId">
+	    <![CDATA[
+	        INSERT INTO attachment (
+	        	attachment_id ,
+	        	article_id ,
+	        	attachment_name ,
+	        	attachment_type ,
+	        	create_date ,
+	        	attachmen_sts ,
+	        	large ,
+	        	midSize ,
+	        	small 
+	        ) VALUES (
+	        	#{attachmentId} ,
+	        	#{articleId} ,
+	        	#{attachmentName} ,
+	        	#{attachmentType} ,
+	        	#{createDate} ,
+	        	#{attachmenSts} ,
+	        	#{large} ,
+	        	#{midSize} ,
+	        	#{small} 
+	        )
+	    ]]>
+	</insert>
+
+	<!-- 修改-->
+	<update id="update" parameterType="Attachment">
+	    <![CDATA[
+	        UPDATE attachment SET
+		        article_id = #{articleId} ,
+		        attachment_name = #{attachmentName} ,
+		        attachment_type = #{attachmentType} ,
+		        create_date = #{createDate} ,
+		        attachmen_sts = #{attachmenSts} ,
+		        large = #{large} ,
+		        midSize = #{midSize} ,
+		        small = #{small} 
+	        WHERE  attachment_id = #{attachmentId} 
+	    ]]>
+	</update>
+
+    <!-- 根据IDS批量删除 -->
+    <delete id="deleteByIds" parameterType="list">
+    	DELETE FROM attachment WHERE 
+      	  attachment_id IN 
+	      	  <foreach collection="list" item="id" index="i" open="(" separator="," close=")">
+#{id}	    	</foreach>
+    </delete>
+    
+	<!-- 根据ID删除 -->
+    <delete id="deleteById">
+    <![CDATA[
+        DELETE FROM attachment WHERE  attachment_id = #{id}  
+    ]]>
+    </delete>
+    
+    <!-- 用于select查询公用抽取的列 -->
+	<sql id="attachmentColumns">
+	    <![CDATA[
+		attachment_id,article_id,attachment_name,attachment_type,create_date,attachmen_sts,large,midSize,small
+	    ]]>
+	</sql>
+	
+	<!-- 根据ID查询-->
+	<select id="findById" parameterType="Integer" resultType="Attachment">
+		SELECT <include refid="attachmentColumns" />
+	    <![CDATA[
+		    FROM attachment 
+	        WHERE  attachment_id = #{id}      
+	    ]]>
+    </select>
+    
+    <!-- 分页查询 begin -->
+    <select id="findAttachmentCount" resultType="Integer">
+    	SELECT COUNT(*) <include refid="findAttachmentCommon"/>
+    </select>
+    
+    <select id="findAttachmentList" resultType="Attachment">
+    	SELECT  
+    	<include refid="attachmentColumns" /> <include refid="findAttachmentCommon"/>
+		ORDER BY    attachment_id  DESC
+       	LIMIT #{startRow}, #{onePageSize}
+    </select>
+    
+    <!-- 查询条件列 -->
+    <sql id="findAttachmentCommon">
+    	FROM attachment  WHERE 1=1
+    	<!-- 此处添加查询条件 -->
+    </sql>
+   <!-- 分页查询  end --> 
+
+</mapper>
