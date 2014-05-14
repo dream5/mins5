@@ -69,10 +69,11 @@ public class UploadUtil {
 				FileItem item = (FileItem) uploadlist.get(i);
 				if (!item.isFormField()) { // 处理文件上传域 忽略其他不是文件域的所有表单信息
 					try {
+						oldFileName = item.getName();
 						actualFileSize = String.valueOf(item.getSize()); // 获取文件大小
 						item.write(new File(saveFilePath + newFileName));// 保存文件路径
 					} catch (Exception e) {
-						e.printStackTrace();
+						log.error("上传图片异常：[" + e.toString() + "]");
 						throw e;
 					}
 					item.delete();
@@ -81,7 +82,7 @@ public class UploadUtil {
 				item.delete();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("上传图片异常：[" + e.toString() + "]");
 			actualFileSize = null;
 		} finally {
 			factory = null;
@@ -91,20 +92,32 @@ public class UploadUtil {
 
 		String fullName = saveFilePath + newFileName;
 		log.info("生成文件的完整路径：" + fullName);
+		String large = System.currentTimeMillis() + "_730x260.png";
+		String midSize = System.currentTimeMillis() + "_613x193.png";
+		String small = System.currentTimeMillis() + "_212x212.png";
 		// 生成不同尺寸的图片
-		ImageUtils.scale2(fullName, saveFilePath + "_730x260.png", 260, 730, true);// 测试OK
-		ImageUtils.scale2(fullName, saveFilePath + "_613x193.png", 193, 613, true);
-		ImageUtils.scale2(fullName, saveFilePath + "_212x212.png", 212, 212, true);
+		ImageUtils.scale2(fullName, saveFilePath + large, 260, 730, true);// 测试OK
+		ImageUtils.scale2(fullName, saveFilePath + midSize, 193, 613, true);
+		ImageUtils.scale2(fullName, saveFilePath + small, 212, 212, true);
 
-		/*
-		 * String[] rtnVal = new String[5]; rtnVal[0] = oldFileName; 旧文件名
-		 * rtnVal[1] = fileType; 带点的扩展名，如 .wmv rtnVal[2] = newFileName;
-		 * 不带扩展名重命名的文件 rtnVal[3] = actualFileSize; 文件大小 rtnVal[4] =
-		 * saveFilePath; 保存文件的绝对路径
-		 */
+		log.info("####################################################");
+		log.info("############## newName:" + newFileName);
+		log.info("############## oldName:" + oldFileName);
+		log.info("############## type:" + fileType);
+		log.info("############## path:" + saveFilePath);
+		log.info("############## large:" + large);
+		log.info("############## midSize:" + midSize);
+		log.info("############## small:" + small);
+		log.info("####################################################");
+
 		Map rtnMap = new HashMap();
 		rtnMap.put("newName", newFileName);
-		// rtnMap.put("oldName", oldFileName);
+		rtnMap.put("oldName", oldFileName);
+		rtnMap.put("type", fileType);
+		rtnMap.put("path", saveFilePath);
+		rtnMap.put("large", large);
+		rtnMap.put("midSize", midSize);
+		rtnMap.put("small", small);
 		return rtnMap;
 	}
 
