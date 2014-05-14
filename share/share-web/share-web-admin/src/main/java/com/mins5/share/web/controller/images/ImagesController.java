@@ -1,6 +1,7 @@
 package com.mins5.share.web.controller.images;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,17 @@ public class ImagesController {
 	@RequestMapping(value = "/beginUpload")
 	public void BeginUpload(HttpServletRequest request, HttpServletResponse response) {
 		Map alist = UploadUtil.singleFileUpload(request);
+		// 上传信息保存到数据库
+		Attachment attachment = new Attachment();
+		attachment.setAttachmenSts("0");
+		attachment.setAttachmentName(alist.get("newName").toString());
+		attachment.setAttachmentOldName(alist.get("oldName").toString());
+		attachment.setAttachmentType(alist.get("type").toString());
+		attachment.setCreateDate(new Date());
+		attachment.setLarge(alist.get("large").toString());
+		attachment.setMidSize(alist.get("midSize").toString());
+		attachment.setSmall(alist.get("small").toString());
+		attachmentService.saveAttachment(attachment);
 		JsonUtils.write(alist, response);
 	}
 
@@ -68,6 +80,7 @@ public class ImagesController {
 	@RequestMapping(value = "/searchUploadImages")
 	public void searchUploadImages(HttpServletResponse response, String articleTitle, String beginTime, String endTime, Integer currentPage,
 			Integer onePageSize) {
+		log.info("查询上传图片...");
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
 		Map params = new HashMap();
