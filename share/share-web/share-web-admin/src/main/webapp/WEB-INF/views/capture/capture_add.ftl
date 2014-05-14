@@ -8,12 +8,12 @@
 	function submitForm() {
 		$('#captureForm').form('submit', {
 			onSubmit : function() {
-				beginMark();
+				$.mins.mark(); 
 				var isValid = $(this).form('validate');
 				return isValid;
 			},
 			success : function(data) {
-				endMark();
+				$.mins.unmark(); 
 				$("#tip").html(data);
 				loadTable();
 			}
@@ -23,10 +23,6 @@
 		$('#captureForm').form('clear');
 	}
 
-	$(document).ready(function() {
-		//initArticleLabel();
-		//initArticleKind();
-	});
 </script>
 <script type="text/javascript">
 	var currentPage = 1;
@@ -140,6 +136,7 @@
 				           
 	        }
 	    });
+	    
 	    
 	    //批处理发布
 	    $('#batchPublish').click(function(){
