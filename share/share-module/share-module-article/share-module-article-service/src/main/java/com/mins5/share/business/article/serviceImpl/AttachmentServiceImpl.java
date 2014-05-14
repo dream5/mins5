@@ -4,6 +4,9 @@
 
 package com.mins5.share.business.article.serviceImpl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import com.mins5.share.business.article.domain.Attachment;
 import com.mins5.share.business.article.service.AttachmentService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
 
 /**
@@ -120,4 +124,24 @@ public class AttachmentServiceImpl implements AttachmentService {
 		return returnData;
 	}
 
+	@Override
+	public ReturnPageData<List<Attachment>> findAttachmentListByCondition(Map params, int currentPage, int onePageSize) {
+		ReturnPageData<List<Attachment>> returnData = new ReturnPageData<List<Attachment>>(currentPage, onePageSize);
+		try {
+			int count = attachmentDao.findAttachmentCount(params);
+			if (count > 0) {
+				int startRow = returnData.getStartRow();
+				params.put("startRow", startRow);
+				params.put("onePageSize", onePageSize);
+				List<Attachment> attachmentList = attachmentDao.findAttachmentList(params);
+				returnData.setTotalResults(count);
+				returnData.setResultData(attachmentList);
+			}
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
 }
