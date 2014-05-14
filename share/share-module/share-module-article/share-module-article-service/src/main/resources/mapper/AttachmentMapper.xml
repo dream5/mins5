@@ -11,6 +11,7 @@
 	        	attachment_id ,
 	        	article_id ,
 	        	attachment_name ,
+	        	attachement_old_name,
 	        	attachment_type ,
 	        	create_date ,
 	        	attachmen_sts ,
@@ -21,6 +22,7 @@
 	        	#{attachmentId} ,
 	        	#{articleId} ,
 	        	#{attachmentName} ,
+	        	#{attachementOldName},
 	        	#{attachmentType} ,
 	        	#{createDate} ,
 	        	#{attachmenSts} ,
@@ -37,6 +39,7 @@
 	        UPDATE attachment SET
 		        article_id = #{articleId} ,
 		        attachment_name = #{attachmentName} ,
+		        attachement_old_name = #{attachementOldName},
 		        attachment_type = #{attachmentType} ,
 		        create_date = #{createDate} ,
 		        attachmen_sts = #{attachmenSts} ,
@@ -65,7 +68,7 @@
     <!-- 用于select查询公用抽取的列 -->
 	<sql id="attachmentColumns">
 	    <![CDATA[
-		attachment_id,article_id,attachment_name,attachment_type,create_date,attachmen_sts,large,midSize,small
+		attachment_id,article_id,attachment_name,attachement_old_name,attachment_type,create_date,attachmen_sts,large,midSize,small
 	    ]]>
 	</sql>
 	
@@ -80,7 +83,7 @@
     
     <!-- 分页查询 begin -->
     <select id="findAttachmentCount" resultType="Integer">
-    	SELECT COUNT(*) <include refid="findAttachmentCommon"/>
+    	SELECT COUNT(attachment_id) <include refid="findAttachmentCommon"/>
     </select>
     
     <select id="findAttachmentList" resultType="Attachment">
