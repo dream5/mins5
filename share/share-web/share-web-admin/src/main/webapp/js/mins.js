@@ -147,6 +147,12 @@
 			 $.each(args, function(i, item) {
             	alert(item.name);
        	 });
+		},
+		mark:function(){
+			$.messager.progress({title:'请稍后',msg:'正在处理中...'}); 
+		},
+		unmark:function(){
+			$.messager.progress('close');
 		}
 
 	};
