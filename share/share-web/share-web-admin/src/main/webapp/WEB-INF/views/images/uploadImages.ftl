@@ -36,17 +36,46 @@
 				</table>
 			</form>
 		</div>
-		<!--<div style="text-align: center; padding: 5px">
-			<a href="javascript:void(0)" class="easyui-linkbutton"
-				onclick="submitForm()">提交</a> <a href="javascript:void(0)"
-				class="easyui-linkbutton" onclick="clearForm()">重置</a>
-		</div>-->
+	</div>
+	
+	
+	<div class="dbGrid">
+			<table id="dg" class="gridHead">
+		<thead>
+			<tr>
+				<th data-options="field:'ck',checkbox:true"></th>
+				<th data-options="field:'articleId',width:200,align:'left'">文章ID</th>
+				<th data-options="field:'attachmentOldName',width:200,align:'left'">上传前名称</th>
+				<th data-options="field:'attachmentName',width:200,align:'left'">新名称</th>
+				<th data-options="field:'attachmentType',width:120,align:'center'">后缀名称</th>
+				<th data-options="field:'createDate',width:120,align:'center'">上传时间</th>
+				<th data-options="field:'large',width:150,align:'center'">大尺寸图名称</th>
+				<th data-options="field:'midSize',width:150,align:'center'">中尺寸图名称</th>
+				<th data-options="field:'small',width:150,align:'center'">小尺寸图名称</th>
+				<th data-options="field:'attachmenSts',width:150,align:'center', formatter:formatSts">状态</th>
+				<th data-options="field:'attachmentId',width:300,align:'center',formatter:formatOperation">操作</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="tb" style="padding:5px;height:auto">
+		<div style="margin-bottom:5px">
+			<a href="javascript:;" id="batchPublish" class="easyui-linkbutton" iconCls="icon-add" plain="true">批量发布文章</a>
+			<a href="javascript:;" id="batchRemove" class="easyui-linkbutton" iconCls="icon-remove" plain="true">批量清空已发布文章</a>
+		</div>
+		<div>
+			文章标题: <input id="articleTitle" type="text" style="width:200px">
+			开始时间: <input id="beginTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
+			结束时间: <input id="endTime" class="easyui-datebox" style="width:100px" data-options="editable:false">
+			 <input id="search" type="button" onclick="loadTable();" value="查询">
+			<!--<a href="#" onclick="loadTable();"  class="easyui-linkbutton" iconCls="icon-search">查询</a>-->
+		</div>
 	</div>
 	</div>
 
 <script type="text/javascript">
 $(document).ready(function() {
 
+	//上传图片
 	var desc = '*.gif;*.jpg;*.jpeg;*.bmp;*.png';
 	var fileSize=3*1024*1024;
 	$("#uploadify").uploadify({
@@ -76,7 +105,45 @@ $(document).ready(function() {
 		}
 
 	});
+	
+	
+	//初始化表格
+    $.mins.createDataGrid({gridId:'dg',panelTitle:'上传图片列表'});
+	
+	function loadTable() {
+		var articleTitle = $('#articleTitle').val();
+		var beginTime = $('#beginTime').datebox('getValue');
+		var endTime = $('#endTime').datebox('getValue');
+		var currentTime = new Date().getTime();
+		var queryParams = {
+			'articleTitle':articleTitle,
+			'beginTime':beginTime,
+			'endTime':endTime,
+			'currentPage':currentPage,
+			'onePageSize':onePageSize,
+			'currentTime':currentTime
+		};
+		jQuery.ajax({
+		    url: '${path}/upload/searchUploadImages.mins',
+		    data: queryParams,
+		    type: "POST",
+		    dataType: "json",
+		    success: function (msg) {
+		    	$('#dg').datagrid('loadData', msg);
+		    }
+		});
+	};
 });
+
+function formatSts(val,row) {
+	    var stsValue=['未发布','已发布'];
+		return $.mins.formatSts(val,stsValue);
+}
+
+function formatOperation(val,row) {
+	var operation = '<a href="#" onclick="articleDetail('+val+')">删除</>';
+	return operation;
+}
 
 function exeUpload(){
 	$('#uploadify').uploadifySettings('scriptData', {'filetype':$('#extname').val()});
