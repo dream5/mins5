@@ -4,6 +4,21 @@
 
 <mapper namespace="com.mins5.share.business.article.dao.AttachmentDao">
 
+	<resultMap type="com.mins5.share.business.article.domain.Attachment" id="AttachmentMap">
+		<id property="attachmentId" column="attachment_id"/>
+		<result property="articleId" column="article_id"/>
+		<result property="attachmentName" column="attachment_name"/>
+		<result property="attachmentOldName" column="attachment_old_name"/>
+		<result property="attachmentType" column="attachment_type"/>
+		<result property="createDate" column="create_date"/>
+		<result property="attachmenSts" column="attachmen_sts"/>
+		<result property="large" column="large"/>
+		<result property="midSize" column="midSize"/>
+		<result property="small" column="small"/>
+	</resultMap>
+	
+
+
 	<!-- 新增 -->
 	<insert id="save"  parameterType="Attachment" useGeneratedKeys="true" keyProperty="attachmentId">
 	    <![CDATA[
@@ -11,7 +26,7 @@
 	        	attachment_id ,
 	        	article_id ,
 	        	attachment_name ,
-	        	attachement_old_name,
+	        	attachment_old_name,
 	        	attachment_type ,
 	        	create_date ,
 	        	attachmen_sts ,
@@ -22,7 +37,7 @@
 	        	#{attachmentId} ,
 	        	#{articleId} ,
 	        	#{attachmentName} ,
-	        	#{attachementOldName},
+	        	#{attachmentOldName},
 	        	#{attachmentType} ,
 	        	#{createDate} ,
 	        	#{attachmenSts} ,
@@ -39,7 +54,7 @@
 	        UPDATE attachment SET
 		        article_id = #{articleId} ,
 		        attachment_name = #{attachmentName} ,
-		        attachement_old_name = #{attachementOldName},
+		        attachment_old_name = #{attachmentOldName},
 		        attachment_type = #{attachmentType} ,
 		        create_date = #{createDate} ,
 		        attachmen_sts = #{attachmenSts} ,
@@ -68,12 +83,12 @@
     <!-- 用于select查询公用抽取的列 -->
 	<sql id="attachmentColumns">
 	    <![CDATA[
-		attachment_id,article_id,attachment_name,attachement_old_name,attachment_type,create_date,attachmen_sts,large,midSize,small
+		attachment_id,article_id,attachment_name,attachment_Old_Name,attachment_type,create_date,attachmen_sts,large,midSize,small
 	    ]]>
 	</sql>
 	
 	<!-- 根据ID查询-->
-	<select id="findById" parameterType="Integer" resultType="Attachment">
+	<select id="findById" parameterType="Integer"  resultMap="AttachmentMap">
 		SELECT <include refid="attachmentColumns" />
 	    <![CDATA[
 		    FROM attachment 
@@ -86,7 +101,7 @@
     	SELECT COUNT(attachment_id) <include refid="findAttachmentCommon"/>
     </select>
     
-    <select id="findAttachmentList" resultType="Attachment">
+    <select id="findAttachmentList" resultMap="AttachmentMap">
     	SELECT  
     	<include refid="attachmentColumns" /> <include refid="findAttachmentCommon"/>
 		ORDER BY    attachment_id  DESC
