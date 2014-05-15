@@ -77,6 +77,10 @@
 		  <artifactId>spring-context</artifactId>
 		</dependency>
 		<!-- 抓取依赖 add by zhanglin 20140505 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>
