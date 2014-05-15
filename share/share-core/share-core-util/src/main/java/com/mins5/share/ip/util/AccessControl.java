@@ -3,6 +3,7 @@
  */
 package com.mins5.share.ip.util;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
@@ -39,7 +40,7 @@ public class AccessControl extends Thread {
 	public static long longMonitoringMaxTimes = 1000L;
 	public static long longMonitoringLockTime = 3000L;
 
-	public static long time3 = 10L;
+	public static long sleepTime = 10L;
 
 	/**
 	 * 初始化
@@ -59,6 +60,26 @@ public class AccessControl extends Thread {
 		longMonitoringTime = _longMonitoringTime;
 		longMonitoringMaxTimes = _longMonitoringMaxTimes;
 		longMonitoringLockTime = _longMonitoringLockTime;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void run() {
+		isStart = true;
+		new AccessLogProcess().start();
+		new UnlockLogProcess().start();
+		while (true) {
+			for (Enumeration e = shortMonitoringAccess.keys(); e.hasMoreElements();) {
+				String ip = (String) e.nextElement();
+				int accessTimes = Integer.parseInt((String) shortMonitoringAccess.get(ip));
+				access_log.debug(" [" + ip + "] 在 " + shortMonitoringTime + " 秒内，访问 [" + accessTimes + "] 次");
+			}
+			shortMonitoringAccess.clear();
+			try {
+				sleep(sleepTime * 1000L);
+			} catch (Exception localException) {
+
+			}
+		}
 	}
 
 	/**

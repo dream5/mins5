@@ -25,7 +25,7 @@ public class UnlockLogProcess extends Thread {
 				}
 			}
 			try {
-				sleep(AccessControl.unlockSleepTime * 1000L);
+				sleep(AccessControl.sleepTime * 1000L);
 			} catch (Exception e) {
 			}
 		}
