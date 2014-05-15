@@ -2,6 +2,9 @@ package com.mins5.share.ip.util;
 
 import java.util.Enumeration;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 解锁日志进程
  * 
@@ -9,6 +12,8 @@ import java.util.Enumeration;
  * @since 2014年5月15日
  */
 public class UnlockLogProcess extends Thread {
+
+	private static final Log log = LogFactory.getLog(UnlockLogProcess.class);
 
 	public void run() {
 		while (true) {
@@ -21,7 +26,7 @@ public class UnlockLogProcess extends Thread {
 				}
 				if (now > denyLockTime) {
 					AccessControl.shortMonitoringDeny.remove(ip);
-					AccessControl.deny_log.debug(" [" + ip + "] 被自动解锁");
+					log.debug(" [" + ip + "] 被自动解锁");
 				}
 			}
 			try {

@@ -2,6 +2,9 @@ package com.mins5.share.ip.util;
 
 import java.util.Enumeration;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 访问日志进程
  * 
@@ -10,6 +13,8 @@ import java.util.Enumeration;
  */
 public class AccessLogProcess extends Thread {
 
+	private static final Log log = LogFactory.getLog(AccessLogProcess.class);
+
 	@SuppressWarnings("rawtypes")
 	public void run() {
 		while (true) {
@@ -17,7 +22,7 @@ public class AccessLogProcess extends Thread {
 			while (e.hasMoreElements()) {
 				String ip = (String) e.nextElement();
 				int accessTimes = Integer.parseInt((String) AccessControl.longMonitoringAccess.get(ip));
-				AccessControl.access_log.debug(" [" + ip + "] 在 " + AccessControl.longMonitoringTime + " 秒内，访问 [" + accessTimes + "] 次");
+				log.debug(" [" + ip + "] 在 " + AccessControl.longMonitoringTime + " 秒内，访问 [" + accessTimes + "] 次");
 			}
 			AccessControl.longMonitoringAccess.clear();
 			try {
