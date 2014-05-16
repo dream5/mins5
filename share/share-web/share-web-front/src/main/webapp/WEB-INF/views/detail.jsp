@@ -179,12 +179,16 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
   <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/jquery.LoadImage.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/zoomer.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.introduce li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false});
- 	
+ 	$(".main img").lazyload({
+		placeholder : "${context}/images/loading.gif",
+		effect      : "fadeIn"
+	});
 });
 </script>
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->

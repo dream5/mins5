@@ -155,6 +155,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
   <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="${context}/js/jquery.LoadImage.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/zoomer.js"></script>
 <script type="text/javascript">
@@ -167,6 +168,10 @@ $(document).ready(function(){
  	$(window).toTop({
 		showHeight : 100,//设置滚动高度时显示
 		speed : 500 //返回顶部的速度以毫秒为单位
+	});
+ 	$(".main img").lazyload({
+		placeholder : "${context}/images/loading.gif",
+		effect      : "fadeIn"
 	});
 });
 </script>

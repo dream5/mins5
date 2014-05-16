@@ -171,6 +171,7 @@
 </div>
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
+<script type="text/javascript" src="${context}/js/jquery.LoadImage.js"></script>
 <script src="${context}/js/jquery-ui-1.8.6.core.widget.js"></script>
 <script src="${context}/js/jqueryui.bannerize.js"></script>
 <script type="text/javascript">
@@ -179,7 +180,14 @@
 			shuffle: 1,
 			interval: "5"
 		});
+		
+		$(".main img").lazyload({
+			placeholder : "${context}/images/loading.gif",
+			effect      : "fadeIn"
+		});
+		
 	});
+	
 </script>
 </body>
 </html>
