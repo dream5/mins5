@@ -69,8 +69,8 @@ public class AccessControl extends Thread {
 	@SuppressWarnings("rawtypes")
 	public void run() {
 		isStart = true;
-		new AccessLogProcess().start();
-		new UnlockLogProcess().start();
+		// new AccessLogProcess().start();
+		// new UnlockLogProcess().start();
 		while (true) {
 			for (Enumeration e = shortMonitoringAccess.keys(); e.hasMoreElements();) {
 				String ip = (String) e.nextElement();
@@ -107,10 +107,12 @@ public class AccessControl extends Thread {
 		}
 		shortMonitoringAccess.put(clientIP, String.valueOf(accessTimesForShort + 1));
 
-		if (longMonitoringAccess.get(clientIP) != null) {
-			accessTimesForLong = Integer.parseInt((String) longMonitoringAccess.get(clientIP));
-		}
-		longMonitoringAccess.put(clientIP, String.valueOf(accessTimesForLong + 1));
+		/*
+		 * if (longMonitoringAccess.get(clientIP) != null) { accessTimesForLong
+		 * = Integer.parseInt((String) longMonitoringAccess.get(clientIP)); }
+		 * longMonitoringAccess.put(clientIP, String.valueOf(accessTimesForLong
+		 * + 1));
+		 */
 
 		// 黑名单操作
 		if (shortMonitoringDeny.containsKey(clientIP)) {
@@ -120,12 +122,10 @@ public class AccessControl extends Thread {
 		if ((accessTimesForLong > longMonitoringMaxTimes) && (longClientLockTime > denyLockTime)) {
 			shortMonitoringDeny.put(clientIP, String.valueOf(longClientLockTime));
 			longMonitoringDeny.put(clientIP, String.valueOf(longClientLockTime));
-			log.debug(" [" + clientIP + "] 被自动封锁" + longMonitoringLockTime + "秒； 在 " + longMonitoringTime + " 秒内，访问 " + accessTimesForLong
-					+ " 次");
+			log.debug(" [" + clientIP + "] 被自动封锁" + longMonitoringLockTime + "秒； 在 " + longMonitoringTime + " 秒内，访问 " + accessTimesForLong + " 次");
 		} else if ((accessTimesForShort > shortMonitoringMaxTimes) && (shortClientLockTime > denyLockTime)) {
 			shortMonitoringDeny.put(clientIP, String.valueOf(shortClientLockTime));
-			log.debug(" [" + clientIP + "] 被自动封锁" + longMonitoringLockTime + "秒； 在 " + shortMonitoringTime + " 秒内，访问 " + accessTimesForShort
-					+ " 次");
+			log.debug(" [" + clientIP + "] 被自动封锁" + longMonitoringLockTime + "秒； 在 " + shortMonitoringTime + " 秒内，访问 " + accessTimesForShort + " 次");
 		}
 		return isAccessibleIp(clientIP);
 	}
@@ -190,12 +190,19 @@ public class AccessControl extends Thread {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 0; i < 100; i++) {
-			int time_01 = 2, maxTimes_01 = 30, lockTime_01 = 180;
+		long s = System.currentTimeMillis();
+		for (int i = 0; i < 20; i++) {
+			int time_01 = 10, maxTimes_01 = 3, lockTime_01 = 180;
 			int time_02 = 900, maxTimes_02 = 200, lockTime_02 = 7200;
 			new AccessControl(time_01, maxTimes_01, lockTime_01, time_02, maxTimes_02, lockTime_02).start();
 			AccessControl.setAccessIp("127.0.0.1");
+			/*
+			 * if (!AccessControl.isAccessibleIp("127.0.0.1")) {
+			 * System.out.println("IP锁定！"); break; }
+			 */
 		}
+		long e = System.currentTimeMillis();
+		System.out.println("执行时间====" + (e - s));
 
 	}
 
