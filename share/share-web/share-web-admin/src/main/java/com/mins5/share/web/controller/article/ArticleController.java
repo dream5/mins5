@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mins5.share.business.article.domain.Article;
+import com.mins5.share.business.article.domain.Attachment;
 import com.mins5.share.business.article.enums.ARTICLE_STATUS;
 import com.mins5.share.business.article.service.ArticleService;
+import com.mins5.share.business.article.service.AttachmentService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
@@ -45,6 +47,10 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 
+	@Autowired
+	private AttachmentService attachmentService;
+
+	
 	/**
 	 * 文章列表
 	 * 
@@ -163,7 +169,7 @@ public class ArticleController {
 	 * @param article
 	 */
 	@RequestMapping(value = "/articleAdd")
-	public void articleAdd(HttpServletResponse response, Article article, String articleKind, String articleLabel) {
+	public void articleAdd(HttpServletResponse response, Article article, String articleKind, String articleLabel,String attachmentId) {
 
 		try {
 
@@ -185,7 +191,14 @@ public class ArticleController {
 			}
 
 			ReturnData<Article> returnData = articleService.saveArticle(article, articleKindIdList, articleLabelIdList);
-
+			//添加图片
+			if(!org.springframework.util.StringUtils.isEmpty(attachmentId)){
+				long articleId = returnData.getResultData().getArticleId();
+				Attachment attachment = new Attachment();
+				attachment.setArticleId((int)articleId);
+				attachment.setAttachmentId(Integer.parseInt(attachmentId));
+				attachmentService.updateAttachment(attachment);
+			}
 			String tip = "添加成功！";
 			if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
 				tip = "添加失败！";
