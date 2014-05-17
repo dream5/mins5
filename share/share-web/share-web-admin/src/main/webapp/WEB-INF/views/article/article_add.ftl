@@ -4,6 +4,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "common/common_js.ftl" />
+<link rel="stylesheet" type="text/css" href="${path}/js/uploadify/uploadSend.css">
+<script type="text/javascript" src="${path}/js/uploadify/swfobject.js"></script>
+<script type="text/javascript" src="${path}/js/uploadify/jquery.uploadify.v2.1.4.js"></script>
 <script type="text/javascript">
 	function submitForm() {
 		$('#articleFormId').form('submit', {
@@ -59,6 +62,7 @@
 		<div style="padding: 10px 0 10px 60px">
 			<form id="articleFormId" method="post"
 				action="${path}/article/articleAdd.mins">
+				<input type="hidden" name="attachmentId" value="" id="attachmentIds" />
 				<table>
 					<tr>
 						<td>标题:</td>
@@ -121,6 +125,30 @@
 						<td><textarea class="easyui-validatebox textarea-article"
 								name="articleContent" data-options="required:true" style="width: 800px;height: 500px;"></textarea></td>
 					</tr>
+					<tr>
+						<td>上传相关图片:</td>
+						<td>
+							<div style="padding: 10px 0 10px 60px">
+								<form id="articleFormId" method="post" action="">
+								   <input type="hidden" name="extname" id="extname" />
+								   <input type="file" name="uploadify" id="uploadify" />
+									<table id="upload">
+										<tr>
+											<td colspan="2">
+											<input type="button" class="but_bg" style="float: left;" onclick="javascript:exeUpload()" value="上传" />
+											<input type="button" class="but_bg" style="float: left;" onclick="javascript:jQuery('#uploadify').uploadifyClearQueue();"
+									value="撤销" /></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+													<div id="fileQueue"></div>
+											</td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</td>
+					</tr>
 				</table>
 			</form>
 		</div>
@@ -131,5 +159,54 @@
 		</div>
 	</div>
 	</div>
+	<script type="text/javascript">
+$(document).ready(function() {
+
+	//上传图片
+	var desc = '*.gif;*.jpg;*.jpeg;*.bmp;*.png';
+	var fileSize=3*1024*1024;
+	$("#uploadify").uploadify({
+		'uploader': '${path}/js/uploadify/uploadify.swf?t='+(new Date()).getTime(),
+		'cancelImg': '${path}/js/uploadify/cancel.png',
+		'script': '${path}/upload/beginUpload.mins',	
+		'method': 'get',
+		'fileDesc': '请选择要上传的文件',
+		'fileExt': desc,
+		//'folder': 'files',
+		'queueID': 'fileQueue',
+		'multi': false,
+		'auto':false,
+		'sizeLimit': fileSize,
+		'displayData': 'speed',
+		'wmode': 'transparent',
+		'buttonText': 'BROWSE',
+		'buttonImg':'${path}/js/uploadify/liulan_bg.gif',
+		'onError':function(event,queueID,fileObj,errorObj) { 
+			$.messager.alert('操作提示', '上传错误！');
+		},
+		'onSelect':function(event,queueID,fileObj) { 
+			$("#extname").val(fileObj.type);
+		},
+		'onComplete':function(event,queueID,fileObj,response) { 
+			$.mins.unmark();
+			var json = $.parseJSON(response);
+			$('#attachmentIds').val(json.attachmentId);
+			$.messager.alert('操作提示','文件:' + fileObj.name + '上传成功!');
+		}
+
+	});
+
+	
+});
+
+function exeUpload(){
+	$.mins.mark();
+	$('#uploadify').uploadifySettings('scriptData', {'filetype':$('#extname').val()});
+	jQuery('#uploadify').uploadifyUpload();
+}
+function trim(str){
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+</script>
 </body>
 </html>
