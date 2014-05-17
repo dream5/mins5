@@ -16,9 +16,9 @@
  * $.mins.formatSts(value);
  * 
  */
+var currentPage = 1;
+var onePageSize = 10;
 (function($) {
-	var currentPage = 1;
-	var onePageSize = 10;
 	var currentTime = new Date().getTime();
 	$.mins = {
 		init : function() {},
@@ -30,6 +30,7 @@
 				"onDblClickRow" : function(){},//双击函数
 				"currentPage":1,
 				"onePageSize":10,
+				"loadGrid":function(){}
 			};
 			var opts = $.extend(defaults, options);
 			
@@ -48,10 +49,11 @@
 			 			 } 
 					});
 				$('#'+opts.gridId).datagrid('getPager').pagination({
+					    
 						onSelectPage:function(pageNum, pageSize){
 						 currentPage = pageNum;
 						 onePageSize = pageSize;
-						 loadTable();//每个页面需要定义的方法
+						 eval(opts.loadGrid);
 					}
 				});
 				
