@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mins5.share.attachment.util.UploadUtil;
 import com.mins5.share.business.article.domain.Attachment;
 import com.mins5.share.business.article.service.AttachmentService;
+import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.DateUtils;
 import com.mins5.share.util.EasyUIUtils;
@@ -59,7 +60,9 @@ public class ImagesController {
 		attachment.setLarge(alist.get("large").toString());
 		attachment.setMidSize(alist.get("midSize").toString());
 		attachment.setSmall(alist.get("small").toString());
-		attachmentService.saveAttachment(attachment);
+		ReturnData<Attachment> attamentData = attachmentService.saveAttachment(attachment);
+		Attachment attachmentWithId = attamentData.getResultData();
+		alist.put("attachmentId", attachmentWithId.getAttachmentId());
 		JsonUtils.write(alist, response);
 	}
 
