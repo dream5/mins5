@@ -47,6 +47,8 @@
 		operation += '<a href="#" onclick="publishedArticle('+val+')">发布</>';
 		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="removedArticle('+val+')">下架</>';
+		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
+		operation += '<a href="#" onclick="recommendArticle('+val+')">推荐</>';
 		return operation;
 	}
 	function loadTable() {
@@ -168,6 +170,13 @@
 			});
 		});
 	}
+	
+	//推荐
+	function recommendArticle(articleId){
+		$('#rArticleId').val(articleId);
+		$('#recommendDiv').window('open');
+	}
+	
 	$(document).ready(function() {
 		buildDataGrid();
 		loadTable();
@@ -185,7 +194,7 @@
 				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
 				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
-				<th data-options="field:'articleId',width:300,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'articleId',width:500,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -233,6 +242,57 @@
 	         </div>
 		</div>
 	</div>
+		
+		
+	<!--推荐层-->
+	<div id="recommendDiv" class="easyui-window" title="推荐文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:300px;padding:10px;">
+		<div style="padding: 10px 0 10px 60px">
+			<div class="article">
+	         	<form action="" method="post" name="recommendFrm">
+	         		<input type="hidden" id="rArticleId" value=""/>
+	         		<table>
+	         			<tr>
+	         				<td>推荐位：
+	         				</td>
+	         				<td>
+	         					<select id="position" class="easyui-combobox" 	style="height: 1" name="position"
+							data-options="required:true,editable:false,panelHeight:'auto'">
+								<option value="1"  selected="selected">主页banner</option>
+								<option value="2">右侧板块</option>
+								<option value="3">详情页板块</option>
+						</select>
+	         				</td>
+	         			</tr>
+	         			<tr>
+	         				<td>推荐顺序：</td>
+	         				<td>
+	         					<select id="order" class="easyui-combobox" 	style="height: 1" name="order"
+							data-options="required:true,editable:false,panelHeight:'auto'">
+								<option value="1"  selected="selected">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+						</select>
+	         				
+	         				</td>
+	         			</tr>
+	         		
+	         		</table>
+	         		<div style="text-align: center; padding: 5px">
+						<a href="javascript:void(0)" class="easyui-linkbutton"
+							onclick="submitForm()">提交</a> <a href="javascript:void(0)"
+							class="easyui-linkbutton" onclick="clearForm()">重置</a>
+					</div>
+	         	</form>
+	         </div>
+		</div>
+	</div>
+			
+		
 		
 	</div>
 	
