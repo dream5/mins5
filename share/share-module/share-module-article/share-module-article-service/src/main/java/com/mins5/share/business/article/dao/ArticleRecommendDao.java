@@ -1,6 +1,7 @@
 package com.mins5.share.business.article.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -16,6 +17,7 @@ import com.mins5.share.common.dao.CrudDao;
  */
 public interface ArticleRecommendDao extends CrudDao<Long, ArticleRecommend> {
 
-	List<Article> findRecommendByPositionAndCount(
-			@Param("position") RECOMMEND_POSITION position, @Param("num") int num);
+	List<Article> findRecommendByPositionAndCount(@Param("position") RECOMMEND_POSITION position, @Param("num") int num);
+
+	ArticleRecommend checkRecommend(Map param);
 }
