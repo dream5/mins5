@@ -41,7 +41,7 @@ public interface ArticleRecommendService {
 	 * 
 	 * @author zhanglin
 	 * @since 2014年5月19日
-	 * @param articleKind
+	 * @param recomend
 	 * @return
 	 */
 	ReturnData<ArticleRecommend> saveArticleRecommend(ArticleRecommend recomend);
@@ -51,7 +51,7 @@ public interface ArticleRecommendService {
 	 * 
 	 * @author zhanglin
 	 * @since 2014年5月19日
-	 * @param articleKind
+	 * @param recomend
 	 * @return
 	 */
 	ReturnData<ArticleRecommend> updateArticleRecommend(ArticleRecommend recomend);
