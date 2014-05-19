@@ -31,7 +31,6 @@
 				<th data-options="field:'midSize',width:200,align:'center'">中尺寸图名称</th>
 				<th data-options="field:'small',width:200,align:'center'">小尺寸图名称</th>
 				<th data-options="field:'attachmenSts',width:100,align:'center', formatter:formatSts">状态</th>
-				<th data-options="field:'id',width:100,align:'center',formatter:formatOperation">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -89,11 +88,6 @@ function loadTable() {
 function formatSts(val,row) {
 	    var stsValue=['未发布','已发布'];
 		return $.mins.formatSts(val,stsValue);
-}
-
-function formatOperation(val,row) {
-	var operation = '<a href="#" onclick="articleDetail('+val+')">删除</>';
-	return operation;
 }
 </script>
 </body>
