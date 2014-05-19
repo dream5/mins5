@@ -82,8 +82,8 @@ public class ImagesController {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/searchUploadImages")
-	public void searchUploadImages(HttpServletResponse response, String articleTitle, String beginTime, String endTime, Integer currentPage,
-			Integer onePageSize) {
+	public void searchUploadImages(HttpServletRequest request, HttpServletResponse response, String articleTitle, String beginTime, String endTime,
+			Integer currentPage, Integer onePageSize) {
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
 		Map params = new HashMap();
@@ -105,6 +105,7 @@ public class ImagesController {
 				map.put("large", attachment.getLarge());
 				map.put("midSize", attachment.getMidSize());
 				map.put("small", attachment.getSmall());
+				map.put("path", FileUtils.getUploadPath(request));
 				attachmentsMapList.add(map);
 			}
 		}
