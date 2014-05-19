@@ -95,7 +95,7 @@ public class ImagesController {
 		if (attachments != null) {
 			for (Attachment attachment : attachments) {
 				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("attachmentId", attachment.getAttachmentId());
+				map.put("id", attachment.getAttachmentId());
 				map.put("attachmentOldName", attachment.getAttachmentOldName());
 				map.put("attachmentName", attachment.getAttachmentName());
 				map.put("attachmentType", attachment.getAttachmentType());
