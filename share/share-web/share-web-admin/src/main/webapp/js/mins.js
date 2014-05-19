@@ -30,6 +30,7 @@ var onePageSize = 10;
 				"onDblClickRow" : function(){},//双击函数
 				"currentPage":1,
 				"onePageSize":10,
+				"singleSelect":true,
 				"loadGrid":function(){}
 			};
 			var opts = $.extend(defaults, options);
@@ -39,7 +40,7 @@ var onePageSize = 10;
 				$('#'+opts.gridId).datagrid({
 						title:opts.panelTitle,
 						rownumbers:true,
-						singleSelect:true,
+						singleSelect:opts.singleSelect,
 						pagination:true,
 						pageList:[10, 20, 30, 40, 50],
 						pageSize:10,
