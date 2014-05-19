@@ -47,8 +47,8 @@ var onePageSize = 10;
 						pageList:[10, 20, 30, 40, 50],
 						pageSize:10,
 				 		toolbar:'#'+opts.toolbarId,
-						onDblClickRow :function(rowIndex,rowData){
-			  				 //opts.onDblClickRow;
+						onDblClickRow :function(i,r){
+			  				 eval(opts.onDblClickRow);
 			 			 } 
 					});
 				$('#'+opts.gridId).datagrid('getPager').pagination({
