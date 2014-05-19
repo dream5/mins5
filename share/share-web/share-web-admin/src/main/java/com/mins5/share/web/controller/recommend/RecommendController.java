@@ -50,7 +50,7 @@ public class RecommendController {
 		param.put("articleId", articleId);
 		param.put("position", position);
 		ReturnData<ArticleRecommend> returnData = recommendService.checkRecommend(param);
-		if (StringUtils.isEmpty(returnData.getResultData())) {
+		if (!StringUtils.isEmpty(returnData.getResultData())) {
 			JsonUtils.write("在推荐位上已存在此文章！", response);
 			return;
 		}
