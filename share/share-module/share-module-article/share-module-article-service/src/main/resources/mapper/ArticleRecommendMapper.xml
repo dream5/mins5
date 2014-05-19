@@ -19,6 +19,14 @@
 		<result property="kindPinYin"  column="kind_pinyin"/>
 	</resultMap>
 
+    <resultMap type="com.mins5.share.business.article.domain.ArticleRecommend" id="recommendMap">
+		<id property="recommend_id" column="recommend_id"/>
+		<result property="recommendPosition" column="recommend_position"/>
+		<result property="recommend_sort" column="recommend_sort"/>
+		<result property="article_id" column="article_id"/>
+	</resultMap>
+
+
 	
    <!-- 查询推荐文章 add by zhanglin 20140317 -->
 	<select id="findRecommendByPositionAndCount"  resultMap="ArticleMap">
@@ -34,5 +42,45 @@
 	    	 and r.recommend_position = #{position}
 		order by r.recommend_sort limit 0,#{num}
 	</select>
+	
+	<!-- 校验推荐文章 add by zhanglin 20140317 -->
+	<select id="checkRecommend" resultMap="recommendMap">
+		select * from article_recommend
+		where 1=1
+		<if test="articleId != null">and article_id = #{articleId}</if>
+		<if test="position != null">and recommend_position = #{position}</if>
+		<if test="recommendSort != null">and recommend_sort = #{recommendSort}</if>
+	</select>
+	
+	<!-- 新增 -->
+	<insert id="save"  parameterType="ArticleRecommend" useGeneratedKeys="true" keyProperty="recommendId">
+	    <![CDATA[
+	        INSERT INTO article_recommend (
+	        	recommend_id ,
+	        	recommend_position ,
+	        	recommend_sort ,
+	        	article_id 
+	        ) VALUES (
+	        	#{recommendId} ,
+	        	#{recommendPosition} ,
+	        	#{recommendSort} ,
+	        	#{articleId} 
+	        )
+	    ]]>
+	</insert>
+
+	<!-- 修改-->
+	<update id="update" parameterType="ArticleRecommend">
+	        UPDATE article_recommend 
+	         <set>
+				<if test="recommendPosition != null">recommend_position = #{recommendPosition},</if>
+				<if test="recommendSort != null"> recommend_sort = #{recommendSort},</if>
+				<if test="articleId != null">article_id = #{articleId}</if>
+			</set>	
+		        recommend_position = #{recommendPosition} ,
+		        recommend_sort = #{recommendSort} ,
+		        article_id = #{articleId} 
+	        WHERE  recommend_id = #{recommendId} 
+	</update>
 
 </mapper>
