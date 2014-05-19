@@ -31,6 +31,8 @@
 				<th data-options="field:'midSize',width:200,align:'center'">中尺寸图名称</th>
 				<th data-options="field:'small',width:200,align:'center'">小尺寸图名称</th>
 				<th data-options="field:'attachmenSts',width:100,align:'center', formatter:formatSts">状态</th>
+				<th data-options="field:'id',width:100,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'path',width:100,align:'center',hidden:'true'">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -45,13 +47,20 @@
 			<!--<a href="#" onclick="loadTable();"  class="easyui-linkbutton" iconCls="icon-search">查询</a>-->
 		</div>
 	</div>
+	<!--图片预览层-->
+	<div id="imagesWin" class="easyui-window" title="图片预览" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:300px;height:200px;padding:10px;">
+		<div>
+			<img id="preview" src="" />
+		</div>
+	</div>
+	
 	</div>
 
 <script type="text/javascript">
 $(document).ready(function() {
 
 	//初始化表格
-    $.mins.createDataGrid({gridId:'dg',panelTitle:'上传图片列表',singleSelect:false});
+    $.mins.createDataGrid({gridId:'dg',panelTitle:'上传图片列表',singleSelect:false,onDblClickRow:'showImages(i,r)'});
 	loadTable();
 	
 	//批量移除
@@ -89,6 +98,17 @@ function formatSts(val,row) {
 	    var stsValue=['未发布','已发布'];
 		return $.mins.formatSts(val,stsValue);
 }
+
+function formatOperation(val,row) {
+	var operation = '<a href="#" onclick="javascript:;">无</>';
+	return operation;
+}
+
+function showImages(index,row){
+	$('#preview').attr('src',row.path+row.midSize);
+	$('#imagesWin').window('open');
+}
+
 </script>
 </body>
 </html>
