@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mins5.share.attachment.util.FileUtils;
 import com.mins5.share.attachment.util.UploadUtil;
 import com.mins5.share.business.article.domain.Attachment;
 import com.mins5.share.business.article.service.AttachmentService;
@@ -83,7 +84,6 @@ public class ImagesController {
 	@RequestMapping(value = "/searchUploadImages")
 	public void searchUploadImages(HttpServletResponse response, String articleTitle, String beginTime, String endTime, Integer currentPage,
 			Integer onePageSize) {
-		log.info("查询上传图片...");
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
 		Map params = new HashMap();
@@ -111,4 +111,35 @@ public class ImagesController {
 		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), attachmentsMapList);
 		JsonUtils.write(data, response);
 	}
+
+	/**
+	 * 根据附件ID删除附件
+	 * 
+	 * @param response
+	 * @param attachmentId
+	 * @author zhanglin
+	 * @since 2014年5月19日
+	 */
+	@RequestMapping(value = "/deleteImagesById")
+	public void deleteImagesById(HttpServletRequest request, HttpServletResponse response, String attachmentId) {
+		String tip = "批量删除成功！";
+		try {
+			String[] ids = attachmentId.split(",");
+			for (int i = 0; i < ids.length; i++) {
+				ReturnData<Attachment> returnData = attachmentService.findAttachmentById(Long.valueOf(ids[i]));
+				String large = FileUtils.getUploadPath(request) + returnData.getResultData().getLarge();
+				String midsize = FileUtils.getUploadPath(request) + returnData.getResultData().getMidSize();
+				String small = FileUtils.getUploadPath(request) + returnData.getResultData().getSmall();
+				FileUtils.removeFile(large);
+				FileUtils.removeFile(midsize);
+				FileUtils.removeFile(small);
+				attachmentService.deleteAttachmentById(Long.valueOf(ids[i]));
+			}
+
+		} catch (Exception e) {
+			tip = "批量删除失败！";
+		}
+		JsonUtils.write(tip, response);
+	}
+
 }
