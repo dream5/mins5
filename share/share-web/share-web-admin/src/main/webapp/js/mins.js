@@ -14,6 +14,8 @@
  * $.mins.confirm({paramId:'articleId',action:'${path}/article/articleDelete.mins',dataId:数据ID,tip:'您确认删除此文章吗?'});
  * 4.格式化状态
  * $.mins.formatSts(value);
+ * 5.获取复选框ID字符串（注：现在行ID字段，只能是id）
+ * $.mins.getCheckBoxIds({gridId:'dg',tip:'请选择文章！'});
  * 
  */
 var currentPage = 1;
@@ -103,6 +105,28 @@ var onePageSize = 10;
 				
 			});
 			
+		},
+		getCheckBoxIds:function(options){//得到复选框ID字符串id1,id2,id3
+			var defaults = {
+					"gridId" : "dg",//Grid对应ID
+					"tip" : "请选择记录！",
+					"dataId":""
+				};
+				var opts = $.extend(defaults, options);
+				var ids= "";
+				$(this).each(function() {
+					var checkedItems = $('#'+opts.gridId).datagrid('getChecked');
+					var temp = [];
+		            $.each(checkedItems, function(index, item){
+		                	temp.push(item.id);//主键ID，必须是id,待修改成动态的
+					}); 
+					if(temp.length==0){
+						$.messager.alert('确认提示', opts.tip);
+						return;
+					}        
+			 	    ids = temp.join(",");
+				});
+				return ids;
 		},
 		confirm : function(options) {
 			var defaults = {
