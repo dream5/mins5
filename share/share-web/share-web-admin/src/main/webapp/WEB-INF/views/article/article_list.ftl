@@ -173,8 +173,25 @@
 	
 	//推荐
 	function recommendArticle(articleId){
+	
 		$('#rArticleId').val(articleId);
 		$('#recommendDiv').window('open');
+	}
+	
+	function submitRecommendForm(){
+		$('#recommendFrm').form('submit', {
+				onSubmit : function() {
+					var isValid = $(this).form('validate');
+					if (isValid) {
+					//	clearForm();
+					}
+					return isValid;
+				},
+				success : function(data) {
+					//clearForm();
+					$.messager.alert('操作提示', data);
+				}
+			});
 	}
 	
 	$(document).ready(function() {
@@ -199,7 +216,7 @@
 		</thead>
 	</table>
 	<div id="tb" style="padding:5px;height:auto">
-		<div style="margin-bottom:5px">
+		<div style="margin-bottom:15px">
 			<a href="${path}/article/toArticleAdd.mins" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加文章</a>
 		</div>
 		<div>
@@ -248,8 +265,8 @@
 	<div id="recommendDiv" class="easyui-window" title="推荐文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:300px;padding:10px;">
 		<div style="padding: 10px 0 10px 60px">
 			<div class="article">
-	         	<form action="" method="post" name="recommendFrm">
-	         		<input type="hidden" id="rArticleId" value=""/>
+	         	<form action="${path}/recommend/addRecommend.mins" method="post" id="recommendFrm" name="recommendFrm">
+	         		<input type="hidden" name="articleId" id="rArticleId" value=""/>
 	         		<table>
 	         			<tr>
 	         				<td>推荐位：
@@ -284,7 +301,7 @@
 	         		</table>
 	         		<div style="text-align: center; padding: 5px">
 						<a href="javascript:void(0)" class="easyui-linkbutton"
-							onclick="submitForm()">提交</a> <a href="javascript:void(0)"
+							onclick="submitRecommendForm()">提交</a> <a href="javascript:void(0)"
 							class="easyui-linkbutton" onclick="clearForm()">重置</a>
 					</div>
 	         	</form>
