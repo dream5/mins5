@@ -77,7 +77,7 @@ var onePageSize = 10;
 				if(fields.length = values.length){
 				var s="({";
 				
-				for(i=0;i<fields.length;i++){
+				for(var i=0;i<fields.length;i++){
 					if(i!=(fields.length-1)){
 						s+=fields[i]+":'"+values[i]+"',";
 					}else if(i==(fields.length-1)){
