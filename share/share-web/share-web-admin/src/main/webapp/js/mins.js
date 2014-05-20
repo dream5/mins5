@@ -118,7 +118,13 @@ var onePageSize = 10;
 					var checkedItems = $('#'+opts.gridId).datagrid('getChecked');
 					var temp = [];
 		            $.each(checkedItems, function(index, item){
-		                	temp.push(item.id);//主键ID，必须是id,待修改成动态的
+		            		
+		            	for(var attr in item)
+		            	{
+		            		if(attr.toString()==opts.dataId.toString()){
+		            			temp.push(item[attr]);
+		            		}
+		            	}
 					}); 
 					if(temp.length==0){
 						$.messager.alert('确认提示', opts.tip);
