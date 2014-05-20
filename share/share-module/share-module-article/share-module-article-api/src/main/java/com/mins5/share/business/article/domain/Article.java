@@ -16,9 +16,9 @@ public class Article extends DomainObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	// Fields
-	
+
 	private Long articleId;
 	private String articleTitle;
 	private String articleContent;
@@ -30,10 +30,38 @@ public class Article extends DomainObject {
 	private Date createTime;
 	private String isOriginal;
 	private String isValid;
-	
-	//扩展 add by zhanglin 20140416
-	private String kindPinYin;//分类拼音
-	
+
+	// 扩展 add by zhanglin 20140416
+	private String kindPinYin;// 分类拼音
+
+	private String large;// 大图--》bannner
+	private String midSize;
+	private String small;
+
+	public String getLarge() {
+		return large;
+	}
+
+	public void setLarge(String large) {
+		this.large = large;
+	}
+
+	public String getMidSize() {
+		return midSize;
+	}
+
+	public void setMidSize(String midSize) {
+		this.midSize = midSize;
+	}
+
+	public String getSmall() {
+		return small;
+	}
+
+	public void setSmall(String small) {
+		this.small = small;
+	}
+
 	// Constructors
 
 	public String getKindPinYin() {
@@ -49,10 +77,8 @@ public class Article extends DomainObject {
 	}
 
 	/** minimal constructor */
-	public Article(Long articleId, String articleTitle, String articleContent,
-			String articleUrl, String articleFrom, String articleAuthor,
-			ARTICLE_STATUS status, Date updateTime, Date createTime,
-			String isOriginal, String isValid) {
+	public Article(Long articleId, String articleTitle, String articleContent, String articleUrl, String articleFrom, String articleAuthor,
+			ARTICLE_STATUS status, Date updateTime, Date createTime, String isOriginal, String isValid) {
 		super();
 		this.articleId = articleId;
 		this.articleTitle = articleTitle;
@@ -157,12 +183,9 @@ public class Article extends DomainObject {
 
 	@Override
 	public String toString() {
-		return "Article [articleId=" + articleId + ", articleTitle="
-				+ articleTitle + ", articleContent=" + articleContent
-				+ ", articleUrl=" + articleUrl + ", articleFrom=" + articleFrom
-				+ ", articleAuthor=" + articleAuthor + ", status=" + status
-				+ ", updateTime=" + updateTime + ", createTime=" + createTime
-				+ ", isOriginal=" + isOriginal + ", isValid=" + isValid + "]";
+		return "Article [articleId=" + articleId + ", articleTitle=" + articleTitle + ", articleContent=" + articleContent + ", articleUrl="
+				+ articleUrl + ", articleFrom=" + articleFrom + ", articleAuthor=" + articleAuthor + ", status=" + status + ", updateTime="
+				+ updateTime + ", createTime=" + createTime + ", isOriginal=" + isOriginal + ", isValid=" + isValid + "]";
 	}
 
 }
