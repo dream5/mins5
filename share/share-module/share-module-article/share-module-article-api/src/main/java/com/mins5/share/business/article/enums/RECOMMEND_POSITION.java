@@ -8,7 +8,7 @@ package com.mins5.share.business.article.enums;
  */
 public enum RECOMMEND_POSITION {
 
-	INDEX_POSITION(1, "首页"), INDEX_POSITION_RIGHT(2, "首页"), DETAIL_POSITION(3, "详情页"), LIST_POSITION(4, "列表页");
+	INDEX_POSITION(1, "首页Banner"), INDEX_POSITION_RIGHT(2, "首页右侧"), DETAIL_POSITION(3, "详情页"), LIST_POSITION(4, "列表页");
 
 	private int code;
 
