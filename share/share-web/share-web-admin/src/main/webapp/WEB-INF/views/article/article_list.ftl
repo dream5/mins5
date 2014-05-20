@@ -47,8 +47,12 @@
 		operation += '<a href="#" onclick="publishedArticle('+val+')">发布</>';
 		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="removedArticle('+val+')">下架</>';
-		operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-		operation += '<a href="#" onclick="recommendArticle('+val+')">推荐</>';
+		
+		if(row.status=='已发布'){//只有已发布的文章才能进行推荐
+			operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
+			operation += '<a href="#" onclick="recommendArticle('+val+')">推荐</>';
+		}
+		
 		return operation;
 	}
 	function loadTable() {
@@ -174,8 +178,9 @@
 	//推荐
 	function recommendArticle(articleId){
 	
-		$('#rArticleId').val(articleId);
-		$('#recommendDiv').window('open');
+			$('#rArticleId').val(articleId);
+			$('#recommendDiv').window('open');
+		
 	}
 	
 	function submitRecommendForm(){
@@ -190,6 +195,7 @@
 				success : function(data) {
 					//clearForm();
 					$.messager.alert('操作提示', data);
+					$('#recommendDiv').window('close');
 				}
 			});
 	}
@@ -211,7 +217,7 @@
 				<th data-options="field:'status',width:80,align:'center'">文章状态</th>
 				<th data-options="field:'isOriginal',width:80,align:'center',formatter:formatIsOriginal">是否原创</th>
 				<th data-options="field:'createTime',width:150,align:'center'">创建时间</th>
-				<th data-options="field:'articleId',width:500,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'articleId',width:500,align:'center',formatter:formatOperation">操作<font  color="red">(只有已发布的文章才能进行推荐!)</font></th>
 			</tr>
 		</thead>
 	</table>
