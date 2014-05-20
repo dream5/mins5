@@ -105,7 +105,7 @@ function formatOperation(val,row) {
 }
 
 function showImages(index,row){
-	$('#preview').attr('src',row.path+row.midSize);
+	$('#preview').attr('src','${path}/upload/'+row.midSize);
 	$('#imagesWin').window('open');
 }
 
