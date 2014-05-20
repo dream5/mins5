@@ -31,7 +31,7 @@
 				<th data-options="field:'midSize',width:200,align:'center'">中尺寸图名称</th>
 				<th data-options="field:'small',width:200,align:'center'">小尺寸图名称</th>
 				<th data-options="field:'attachmenSts',width:100,align:'center', formatter:formatSts">状态</th>
-				<th data-options="field:'id',width:100,align:'center',formatter:formatOperation">操作</th>
+				<th data-options="field:'attachmentId',width:100,align:'center',formatter:formatOperation">操作</th>
 				<th data-options="field:'path',width:100,align:'center',hidden:'true'">操作</th>
 			</tr>
 		</thead>
@@ -65,7 +65,7 @@ $(document).ready(function() {
 	
 	//批量移除
 	     $('#batchRemove').click(function(){
-	          var ids = $.mins.getCheckBoxIds({gridId:'dg',tip:'请选择文章！',dataId:'articleId'});
+	          var ids = $.mins.getCheckBoxIds({gridId:'dg',tip:'请选择文章！',dataId:'attachmentId'});
 		 	  $.mins.confirm({paramId:'attachmentId',action:'${path}/upload/deleteImagesById.mins',dataId:ids,tip:'<font color=red>您确认要删除这些图片吗?</front>'});
 	     });
 	
