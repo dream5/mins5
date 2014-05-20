@@ -281,8 +281,9 @@
 	         					<select id="position" class="easyui-combobox" 	style="height: 1" name="position"
 							data-options="required:true,editable:false,panelHeight:'auto'">
 								<option value="1"  selected="selected">主页banner</option>
-								<option value="2">右侧板块</option>
+								<option value="2">首页右侧</option>
 								<option value="3">详情页板块</option>
+								<option value="4">列表页板块</option>
 						</select>
 	         				</td>
 	         			</tr>
