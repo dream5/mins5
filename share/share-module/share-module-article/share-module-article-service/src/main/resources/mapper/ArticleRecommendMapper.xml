@@ -42,7 +42,7 @@
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
 		left join attachment at on  a.article_id = at.article_id
 	    where
-	    	a.status =1 and akr.status=1 and ak.status = 1 and at.attachmen_sts=1
+	    	a.status =2 and akr.status=1 and ak.status = 1 and at.attachmen_sts=1
 	    	 and r.recommend_position = #{position}
 		order by r.recommend_sort limit 0,#{num}
 	</select>
