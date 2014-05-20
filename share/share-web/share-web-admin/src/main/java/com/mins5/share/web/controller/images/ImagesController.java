@@ -53,7 +53,7 @@ public class ImagesController {
 		Map alist = UploadUtil.singleFileUpload(request);
 		// 上传信息保存到数据库
 		Attachment attachment = new Attachment();
-		attachment.setAttachmenSts("0");
+		attachment.setAttachmenSts("1");// 图片没有审核，直接通过状态
 		attachment.setAttachmentName(alist.get("newName").toString());
 		attachment.setAttachmentOldName(alist.get("oldName").toString());
 		attachment.setAttachmentType(alist.get("type").toString());
