@@ -1,7 +1,6 @@
 package com.mins5.share.business.admin.serviceImpl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,10 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mins5.share.business.admin.dao.AdminDao;
 import com.mins5.share.business.admin.domain.Admin;
 import com.mins5.share.business.admin.service.AdminService;
-import com.mins5.share.business.article.domain.Attachment;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
-import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.common.service.VOID;
 
 /**
@@ -146,7 +143,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ReturnData<List<Admin>> findAdminByNum(int amount) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
