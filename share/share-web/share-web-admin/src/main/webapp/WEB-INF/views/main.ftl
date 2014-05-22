@@ -44,6 +44,13 @@
 								</a>
 							</div>
 						</li>
+						<li>
+							<div>
+								<a href="javascript:void(0);" src="${path}/admin/adminList.mins" class="cs-navi-tab">
+								<span class="leftIcons sys-label-edit"><em>管理员管理</em></span>
+								</a>
+							</div>
+						</li>
 					</ul>
 				</div>
 				<div title="推荐管理" data-options="iconCls:'sys-recommend'"> 
