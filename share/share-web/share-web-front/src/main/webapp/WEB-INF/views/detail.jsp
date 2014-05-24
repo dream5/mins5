@@ -34,7 +34,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
   <div class="cline"></div>
    <!--面包屑-->
   <div class="page-position">
-	当前位置：<a target="_parent" href="${context}">5分钟</a>&nbsp;&gt;&nbsp;<a target="_parent" href="${context}/${kind}/">心灵鸡汤</a>&nbsp;&gt;&nbsp;分类列表
+	当前位置：<a target="_parent" href="${context}">5分钟</a>&nbsp;&gt;&nbsp;<a target="_parent" href="${context}/${articleKind.kindPinyin}/">${articleKind.kindName}</a>&nbsp;&gt;&nbsp;${article.articleTitle}
   </div>
   <!--面包屑  -->
   <div class="content">
