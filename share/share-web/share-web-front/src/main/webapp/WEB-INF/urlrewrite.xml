@@ -23,7 +23,7 @@
     <!-- 标签页面跳转 -->
     <rule>  
           <from>^/label/(.*).html$</from>  
-          <to type="forward">%{context-path}/kind/goToKindList.mins?k=$1&amp;currentPage=1</to>
+          <to type="forward">%{context-path}/label/goToLabelList.mins?labelId=$1&amp;currentPage=1</to>
     </rule>    
     <!-- 分类页面跳转 -->
     <rule>  
