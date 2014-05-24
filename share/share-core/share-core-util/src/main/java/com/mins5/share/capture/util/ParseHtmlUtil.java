@@ -48,7 +48,7 @@ public class ParseHtmlUtil {
 			article.setArticleTitle(headHtml);
 			article.setArticleUrl(imgHtml);
 			article.setIsOriginal("0");
-			article.setStatus("1");
+			article.setStatus("0");
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			if ("无".equals(temp[0])) {
 				article.setCreateTime(new Date());
