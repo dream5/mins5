@@ -31,7 +31,6 @@ public class ArticleRecommendServiceImpl implements ArticleRecommendService {
 
 	@Override
 	public ReturnData<List<Article>> findRecommendByPositionAndCount(RECOMMEND_POSITION position, int num) {
-		log.info("查询推荐文章开始...");
 		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
 		try {
 			List<Article> Articles = recommendDao.findRecommendByPositionAndCount(position, num);
@@ -54,7 +53,6 @@ public class ArticleRecommendServiceImpl implements ArticleRecommendService {
 	 * @since 2014年5月19日
 	 */
 	public ReturnData<ArticleRecommend> checkRecommend(Map param) {
-		log.info("检查推荐文章开始...");
 		ReturnData<ArticleRecommend> returnData = new ReturnData<ArticleRecommend>();
 		try {
 			ArticleRecommend articleRecommend = recommendDao.checkRecommend(param);
