@@ -174,7 +174,7 @@ public interface ArticleDao extends CrudDao<Long, Article> {
 	 * @param labelName
 	 * @return
 	 */
-	int findArticlesCountByLabelName(@Param("labelName") String labelName);
+	int findArticlesCountByLabelName(@Param("labelId") String labelId,@Param("labelName") String labelName);
 	
 	/**
 	 * 
@@ -184,6 +184,6 @@ public interface ArticleDao extends CrudDao<Long, Article> {
 	 * @param onePageSize
 	 * @return
 	 */
-	List<Article> findArticlesByLabelName(@Param("labelName") String labelName, @Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
+	List<Article> findArticlesByLabelName(@Param("labelId") String labelId,@Param("labelName") String labelName, @Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
 
 }
