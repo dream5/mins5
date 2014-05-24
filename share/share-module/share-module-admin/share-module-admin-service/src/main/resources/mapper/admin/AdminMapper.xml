@@ -73,7 +73,7 @@
     </select>
     
     
-    <select id="findAdminListByModel" parameterType="Admin" resultMap="AdminMap">
+    <select id="findAdminListByModel" resultMap="AdminMap">
     	SELECT  <include refid="selectColumns" /> 
     	 FROM admin 
 		<where>
