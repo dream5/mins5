@@ -24,7 +24,7 @@ public class Admin extends DomainObject {
 	
 	private Date createTime;
 	
-//	private String status;
+	private String status;
 
 	public Long getAdminId() {
 		return adminId;
@@ -74,19 +74,19 @@ public class Admin extends DomainObject {
 		this.createTime = createTime;
 	}
 	
-//	public String getStatus() {
-//		return status;
-//	}
-//
-//	public void setStatus(String status) {
-//		this.status = status;
-//	}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", userName=" + userName
-				+ ", nickName=" + nickName + ", realName=" + realName
-				+ ", password=" + password + ", createTime=" + createTime + "]";
+		return "Admin [adminId=" + adminId + ", userName=" + userName + ", nickName=" + nickName + ", realName=" + realName + ", password="
+				+ password + ", createTime=" + createTime + ", status=" + status + "]";
 	}
+
 
 }
