@@ -4,7 +4,7 @@
 
 <mapper namespace="com.mins5.share.business.admin.dao.AdminDao">
 
-	<resultMap type="com.mins5.share.business.admin.domain.Admin" id="Admin">
+	<resultMap type="com.mins5.share.business.admin.domain.Admin" id="AdminMap">
 		<id property="adminId" column="admin_id"/>
 		<result property="userName" column="user_name"/>
 		<result property="nickName" column="nick_name"/>
@@ -33,12 +33,62 @@
 		where admin_id = #{adminId}
 	</update>
 	
-	<select id="findById" parameterType="long" resultMap="Admin">
+	<select id="findById" parameterType="long" resultMap="AdminMap">
 		select * from admin where admin_id = #{adminId}
 	</select>
 	
-	<select id="findByUserNameAndPassword" resultMap="Admin">
+	<select id="findByUserNameAndPassword" resultMap="AdminMap">
 		select * from admin where user_name = #{userName} and password = #{password}
 	</select>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="selectColumns">
+	    <![CDATA[
+		admin_id,user_name, nick_name, real_name, password,status, create_time
+	    ]]>
+	</sql>
+	
+	<!-- 查询条件列 -->
+	<sql id="sqlWhere">
+		FROM admin 
+		<where>
+			1 = 1
+			<!--<if test="userName != null">and user_name LIKE CONCAT('%', #{userName}, '%')  </if>
+			 <if test="nickName != null">and nick_name like concat('%', #{nickName}, '%')</if>
+			<if test="realName != null">and real_name = #{realName}</if>
+		    <if test="createTime != null">AND DATE_FORMAT(create_Time, '%Y-%m-%d') >= DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>
+		 -->
+		 </where>
+		<!--<trim prefix="where" prefixOverrides="and">
+			<if test="userName != null">
+				user_name LIKE CONCAT('%', #{userName}, '%')
+			</if>
+		</trim>-->
+	</sql>
+	
+    
+    <!-- 分页查询 begin -->
+    <select id="findAdminCountByModel" resultType="Long">
+    	SELECT COUNT(1) <include refid="sqlWhere"/>
+    </select>
+    
+    
+    <select id="findAdminListByModel" parameterType="Admin" resultMap="AdminMap">
+    	SELECT  <include refid="selectColumns" /> 
+    	 FROM admin 
+		<where>
+			1 = 1 
+			<!--<if test="realName != null">and real_name = #{realName}</if>
+			 <if test="userName != null">and user_name LIKE CONCAT('%', #{userName}, '%')  </if>
+			 <if test="nickName != null">and nick_name like concat('%', #{nickName}, '%')</if>
+			<if test="realName != null">and real_name = #{realName}</if>
+		    <if test="createTime != null">AND DATE_FORMAT(create_Time, '%Y-%m-%d') >= DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>-->
+		 </where>
+		ORDER BY  admin_id  DESC
+       	LIMIT #{startRow}, #{onePageSize}
+    </select>
+    
+   <!-- 分页查询  end --> 
+	
 
 </mapper>
