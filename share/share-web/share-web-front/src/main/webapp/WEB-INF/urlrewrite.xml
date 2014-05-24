@@ -20,6 +20,11 @@
           <to type="forward">%{context-path}/index/goToIndex.mins?currentPage=$1</to>
     </rule>  
     
+    <!-- 标签页面跳转 -->
+    <rule>  
+          <from>^/label/(.*).html$</from>  
+          <to type="forward">%{context-path}/kind/goToKindList.mins?k=$1&amp;currentPage=1</to>
+    </rule>    
     <!-- 分类页面跳转 -->
     <rule>  
           <from>^/([a-zA-Z]+)/$</from>  
