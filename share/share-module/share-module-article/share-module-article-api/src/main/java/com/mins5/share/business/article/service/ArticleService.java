@@ -80,6 +80,16 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<ArticleKind> findArticleKindById(Long articleKindId);
+	
+	/**
+	 * 根据拼音查询
+	 * 
+	 * @author zhanglin
+	 * @since 2014年5月24日
+	 * @param articleKindId
+	 * @return
+	 */
+	ReturnData<ArticleKind> findArticleKindByPinyin(String kind);
 
 	/**
 	 * 根据父ID查询文章类别列表
@@ -334,5 +344,15 @@ public interface ArticleService {
 	 * @return
 	 */
 	ReturnData<VOID> removedArticleFromTempTable(Long articleId);
+	
+	
+	/**
+	 * <p>根据标签搜索文章</p>
+	 * @param labelName 标签名称
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	ReturnPageData<List<Article>> findArticlesByLabelName(String labelId,String labelName, int currentPage, int pageSize);
 
 }
