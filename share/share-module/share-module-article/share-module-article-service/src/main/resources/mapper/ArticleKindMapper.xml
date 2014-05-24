@@ -56,5 +56,11 @@
 	<select id="findArticleKindByParentId" parameterType="long" resultMap="ArticleKindMap">
 		select * from article_kind where parent_kind_id = #{parentId} 
 	</select>
+	
+	<select id="findArticleKindByPinyin" parameterType="String" resultMap="ArticleKindMap">
+		select * from article_kind where kind_pinyin = #{kind}
+	</select>
+	
+
 
 </mapper>

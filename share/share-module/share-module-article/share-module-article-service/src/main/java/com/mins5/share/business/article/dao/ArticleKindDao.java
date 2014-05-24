@@ -34,5 +34,12 @@ public interface ArticleKindDao extends CrudDao<Long, ArticleKind>{
 	 * @return
 	 */
 	int deleteArticleKindByParentId(Long parentId);
+	
+	/**
+	 * <p>根据拼音查询文章分类</p>
+	 * @param kind 分类拼音
+	 * @return
+	 */
+	ArticleKind findArticleKindByPinyin(String kind);
 
 }

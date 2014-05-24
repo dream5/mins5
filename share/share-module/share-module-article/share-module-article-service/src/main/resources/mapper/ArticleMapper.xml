@@ -209,4 +209,25 @@
         delete from article_copy where article_id = #{articleId}  
     </delete>  
 	<!-- 后台 查询抓取文章列表 add by zhanglin 20140506 -->
+	
+	<!-- 根据标签名称查询文章  add by zhanglin 20140524 -->
+	<select id="findArticlesCountByLabelName" resultType="int">
+		select count(article_id) from article a 
+		left join article_label_rel alr on a.article_id = alr.article_id
+		left join article_label al on alr.label_id = al.label_id
+		where al.label.status = 1 and a.status =2 
+		      <if test="labelName != null">al.label_name like concat('%', #{labelName}, '%')</if>
+	</select>
+	
+	<select id="findArticlesByLabelName" resultMap="ArticleMap">
+		select  a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time,a.status
+	    from article a 
+		left join article_label_rel alr on a.article_id = alr.article_id
+		left join article_label al on alr.label_id = al.label_id
+		where al.label.status = 1 and a.status =2 
+		      <if test="labelName != null">al.label_name like concat('%', #{labelName}, '%')</if>
+		order by create_time desc
+		LIMIT #{startRow}, #{onePageSize}
+	</select>
+	<!-- 根据标签名称查询文章  add by zhanglin 20140524 -->
 </mapper>

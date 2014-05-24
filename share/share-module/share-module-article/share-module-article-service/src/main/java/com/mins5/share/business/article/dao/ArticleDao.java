@@ -166,5 +166,24 @@ public interface ArticleDao extends CrudDao<Long, Article> {
 	 * @return
 	 */
 	int deleteTempArticleById(@Param("articleId") long id);
+	
+	
+	/**
+	 * 
+	 * <p>根据标签名称查文章总数</p>
+	 * @param labelName
+	 * @return
+	 */
+	int findArticlesCountByLabelName(@Param("labelName") String labelName);
+	
+	/**
+	 * 
+	 * <p>根据标签名称查文章</p>
+	 * @param labelName
+	 * @param startRow
+	 * @param onePageSize
+	 * @return
+	 */
+	List<Article> findArticlesByLabelName(@Param("labelName") String labelName, @Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
 
 }

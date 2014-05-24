@@ -54,7 +54,6 @@ public class ArticleServiceImpl implements ArticleService {
 	private ArticleKindRelDao articleKindRelDao;
 
 	public ReturnData<List<ArticleKind>> findAllArticleKind() {
-		log.info("查询文字所有分类开始...");
 		ReturnData<List<ArticleKind>> returnData = new ReturnData<List<ArticleKind>>();
 		try {
 			List<ArticleKind> ArticleKinds = articleKindDao.findAllArticleKind();
@@ -368,7 +367,6 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public ReturnData<List<Article>> findRandomArticle(int amount) {
-		log.info("查询随机文章开始...");
 		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
 		try {
 			List<Article> Articles = articleDao.findRandomArticle(amount);
@@ -811,5 +809,64 @@ public class ArticleServiceImpl implements ArticleService {
 			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
 		}
 		return returnData;
+	}
+	
+	
+	/**
+	 * 根据拼音查询
+	 * 
+	 * @author zhanglin
+	 * @since 2014年5月24日
+	 * @param articleKindId
+	 * @return
+	 */
+	public ReturnData<ArticleKind> findArticleKindByPinyin(String kind){
+		ReturnData<ArticleKind> returnData = new ReturnData<ArticleKind>();
+		try {
+			if (kind == null) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			ArticleKind articleKind = articleKindDao.findArticleKindByPinyin(kind);
+			returnData.setResultData(articleKind);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+	
+	
+	/**
+	 * <p>根据标签搜索文章</p>
+	 * @param labelName 标签名称
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public ReturnPageData<List<Article>> findArticlesByLabelName(String labelName, int currentPage, int pageSize){
+		ReturnPageData<List<Article>> returnPageData = new ReturnPageData<List<Article>>(currentPage, pageSize);
+		try {
+			// 没有处理查询条件
+			int totalResults = articleDao.findArticlesCountByLabelName(labelName);
+			if (totalResults > 0) {
+				int startRow = returnPageData.getStartRow();
+				List<Article> articles = articleDao.findArticlesByLabelName(labelName,startRow, pageSize);
+				if (StringUtils.isEmpty(articles)) {
+					articles = Collections.emptyList();
+				}
+				returnPageData.setTotalResults(totalResults);
+				returnPageData.setResultData(articles);
+				returnPageData.setReturnCode(ReturnCode.SUCCESS.getCode());
+			}else{
+				returnPageData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+			}
+
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnPageData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnPageData;
 	}
 }
