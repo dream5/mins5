@@ -94,7 +94,7 @@
 		    dataType: "json",
 		    success: function (msg) {
 		    	$('#detail_articleTitle').text(msg.articleTitle);
-		    	$('#detail_articleUrl').attr("src",msg.articleUrl);
+		    	//$('#detail_articleUrl').attr("src",msg.articleUrl);
 		    	$('#detail_articleFrom').html(msg.articleFrom);
 		    	$('#detail_articleAuthor').text(msg.articleAuthor);
 		    	$('#detail_articleContent').html(msg.articleContent);
@@ -254,9 +254,7 @@
 		          <span>时间:&nbsp;</span>
 		          <span style="margin-left:25px;" >来源:&nbsp;<em id="detail_articleFrom"></em></span>
 		          <span style="margin-left:25px;">作者:&nbsp;<em id="detail_articleAuthor"></em></span>&nbsp;&nbsp;
-		                             浏览（18）
 	          	</p>
-	         	 <img id="detail_articleUrl" src="#" width="613" height="193" alt="" />
 	          <div class="cline"></div>
 	         	<div id="detail_articleContent"></div>
 	          <p class="links" id="detail_articleLabel"></p>
