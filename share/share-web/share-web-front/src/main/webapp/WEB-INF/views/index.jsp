@@ -152,7 +152,7 @@
           	 <div class="cline"></div>
 	          	<div class="taglist">
 	          		<c:forEach var="label" items="${hotLabelList }">
-            	 		<a href="#" target="_blank" title="${label.labelName}">${label.labelName}</a>
+            	 		<a href="${context}/label/${label.labelId}.html" target="_blank" title="${label.labelName}">${label.labelName}</a>
                     </c:forEach>
 				</div>
 	    </div>
