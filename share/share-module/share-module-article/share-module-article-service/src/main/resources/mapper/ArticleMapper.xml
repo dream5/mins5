@@ -212,11 +212,12 @@
 	
 	<!-- 根据标签名称查询文章  add by zhanglin 20140524 -->
 	<select id="findArticlesCountByLabelName" resultType="int">
-		select count(article_id) from article a 
+		select count(a.article_id) from article a 
 		left join article_label_rel alr on a.article_id = alr.article_id
 		left join article_label al on alr.label_id = al.label_id
-		where al.label.status = 1 and a.status =2 
-		      <if test="labelName != null">al.label_name like concat('%', #{labelName}, '%')</if>
+		where al.status = 1 and a.status =2 
+		      <if test="labelId != null"> and al.label_id =#{labelId}</if>
+		      <if test="labelName != null">and al.label_name like concat('%', #{labelName}, '%')</if>
 	</select>
 	
 	<select id="findArticlesByLabelName" resultMap="ArticleMap">
@@ -224,8 +225,9 @@
 	    from article a 
 		left join article_label_rel alr on a.article_id = alr.article_id
 		left join article_label al on alr.label_id = al.label_id
-		where al.label.status = 1 and a.status =2 
-		      <if test="labelName != null">al.label_name like concat('%', #{labelName}, '%')</if>
+		where al.status = 1 and a.status =2 
+		      <if test="labelId != null"> and al.label_id =#{labelId}</if>
+		      <if test="labelName != null">and al.label_name like concat('%', #{labelName}, '%')</if>
 		order by create_time desc
 		LIMIT #{startRow}, #{onePageSize}
 	</select>
