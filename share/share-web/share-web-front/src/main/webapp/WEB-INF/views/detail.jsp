@@ -48,7 +48,6 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 	          <span>时间:&nbsp;<fmt:formatDate value="${article.createTime}" pattern="yyyy年MM月dd日" /></span>
 	          <span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          <span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
-	                             浏览（18）
           	</p>
           <c:if test="${not empty article.articleUrl}">
          	 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
