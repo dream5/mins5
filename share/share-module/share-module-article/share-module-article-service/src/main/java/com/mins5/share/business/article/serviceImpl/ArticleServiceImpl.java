@@ -845,14 +845,14 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @param pageSize
 	 * @return
 	 */
-	public ReturnPageData<List<Article>> findArticlesByLabelName(String labelName, int currentPage, int pageSize){
+	public ReturnPageData<List<Article>> findArticlesByLabelName(String labelId,String labelName, int currentPage, int pageSize){
 		ReturnPageData<List<Article>> returnPageData = new ReturnPageData<List<Article>>(currentPage, pageSize);
 		try {
 			// 没有处理查询条件
-			int totalResults = articleDao.findArticlesCountByLabelName(labelName);
+			int totalResults = articleDao.findArticlesCountByLabelName(labelId,labelName);
 			if (totalResults > 0) {
 				int startRow = returnPageData.getStartRow();
-				List<Article> articles = articleDao.findArticlesByLabelName(labelName,startRow, pageSize);
+				List<Article> articles = articleDao.findArticlesByLabelName(labelId,labelName,startRow, pageSize);
 				if (StringUtils.isEmpty(articles)) {
 					articles = Collections.emptyList();
 				}
