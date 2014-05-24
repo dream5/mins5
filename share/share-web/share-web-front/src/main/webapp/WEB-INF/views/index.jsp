@@ -72,8 +72,6 @@
 	          		<span>时间:&nbsp;<fmt:formatDate value="${article.createTime}" pattern="yyyy年MM月dd日" /></span>
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
-	          		浏览（18）
-	          		
           		</p>
           		<c:if test="${not empty article.articleTitle}">
           			 <img src="${article.articleUrl}" width="613px" height="193px" alt="${article.articleTitle}" />
