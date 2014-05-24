@@ -42,10 +42,11 @@ public class LabelController extends BaseController {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		String labelName = request.getParameter("n");
+		String labelId = request.getParameter("labelId");
 		request.setAttribute("currentPage",currentPage);
 		request.setAttribute("pageSize",pageSize);
 		
-		ReturnPageData<List<Article>> returnData = articleService.findArticlesByLabelName(labelName, currentPage, pageSize);
+		ReturnPageData<List<Article>> returnData = articleService.findArticlesByLabelName(labelId,labelName, currentPage, pageSize);
 		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
 			request.setAttribute("totalArticleCount", returnData.getTotalResults());
 			request.setAttribute("articlesList", returnData.getResultData());
