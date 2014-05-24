@@ -55,7 +55,9 @@ public class DetailController extends BaseController {
 			if (article.getResultData()==null) {
 				return "error";
 			}
+			ReturnData<ArticleKind> articleKind = articleService.findArticleKindByPinyin(kind);
 			request.setAttribute("article", article.getResultData());
+			request.setAttribute("articleKind", articleKind.getResultData());
 		}
 		
 		//上一篇，下一篇
@@ -71,7 +73,7 @@ public class DetailController extends BaseController {
 		
 		// 热门推荐
 		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(
-						RECOMMEND_POSITION.INDEX_POSITION, 7);
+						RECOMMEND_POSITION.DETAIL_POSITION, 8);
 		if (recommendArticles.getReturnCode() == 200&& !StringUtils.isEmpty(recommendArticles.getResultData())) {
 			request.setAttribute("recommendArticlesList",recommendArticles.getResultData());
 		}
