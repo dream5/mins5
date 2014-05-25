@@ -29,12 +29,12 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div class="curPosition"><span class="sys-nav"><em>当前位置：新增文章标签</em></span></div>
+	<div class="curPosition"><span class="sys-nav"><em>当前位置：新增管理员</em></span></div>
 	<div class="content">
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
 	</div>
-	<div class="easyui-panel" title="添加文章标签" data-options="iconCls:'icon-add'">
+	<div class="easyui-panel" title="添加管理员" data-options="iconCls:'icon-add'">
 		<div style="padding: 10px 0 10px 60px">
 			<form id="articleLabelFormId" method="post"
 				action="${path}/article/articleLabelAdd.mins">
