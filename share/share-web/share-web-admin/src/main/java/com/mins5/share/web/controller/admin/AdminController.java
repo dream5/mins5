@@ -91,7 +91,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/toAdminAdd")
 	public String toAdminAdd() {
-		return "admin/admin_label_add";
+		return "admin/admin_add";
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class AdminController {
 		ReturnData<Admin> returnData = adminService.findAdminById(labelId);
 		Admin admin = returnData.getResultData();
 		mv.addObject("admin", admin);
-		mv.setViewName("admin/admin_label_edit");
+		mv.setViewName("admin/admin_edit");
 		return mv;
 	}
 	
