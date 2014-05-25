@@ -1,7 +1,9 @@
 package com.mins5.share.business.admin.serviceImpl;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -114,9 +116,7 @@ public class AdminServiceImpl implements AdminService {
 				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnData;
 			}
-			System.out.println(AdminId  + "---------------");
 			Admin Admin = adminDao.findById(AdminId);
-			System.out.println(Admin  + "---------------");
 			returnData.setResultData(Admin);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch (Exception e) {
@@ -138,12 +138,18 @@ public class AdminServiceImpl implements AdminService {
 		try {
 			long count = adminDao.findAdminCountByModel(admin);
 			if (count > 0) {
+				Map<String,Object> paramMap = new HashMap<String,Object>();
 				int startRow = returnData.getStartRow();
-				System.out.println(admin+ "......");
-				System.out.println(admin.getUserName()+ "......");
+				paramMap.put("startRow", startRow);
+				paramMap.put("onePageSize", onePageSize);
 
-				List<Admin> adminList = adminDao.findAdminListByModel(admin, startRow, onePageSize);
-				System.out.println(adminList+ "......");
+				paramMap.put("userName", admin.getUserName());
+				paramMap.put("nickName", admin.getNickName());
+				paramMap.put("status", admin.getStatus());
+				paramMap.put("createTime", admin.getCreateTime());
+				
+				List<Admin> adminList = adminDao.findAdminListByModel(paramMap);
+				System.out.println(adminList + "..........................");
 				returnData.setTotalResults(count);
 				if (StringUtils.isEmpty(adminList)) {
 					adminList = Collections.emptyList();
