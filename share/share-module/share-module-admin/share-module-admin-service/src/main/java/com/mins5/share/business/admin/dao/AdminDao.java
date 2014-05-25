@@ -1,8 +1,8 @@
 package com.mins5.share.business.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.admin.domain.Admin;
@@ -38,6 +38,5 @@ public interface AdminDao extends CrudDao<Long, Admin> {
 	 * @param onePageSize 每行行数
 	 * @return
 	 */
-	List<Admin> findAdminListByModel(Admin admin,
-			@Param("startRow") int startRow, @Param("onePageSize") int onePageSize);
+	List<Admin> findAdminListByModel(Map map);
 }
