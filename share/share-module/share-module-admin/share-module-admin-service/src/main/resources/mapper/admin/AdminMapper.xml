@@ -50,40 +50,30 @@
 	
 	<!-- 查询条件列 -->
 	<sql id="sqlWhere">
-		FROM admin 
+		FROM admin 			 
 		<where>
-			1 = 1
-			<!--<if test="userName != null">and user_name LIKE CONCAT('%', #{userName}, '%')  </if>
-			 <if test="nickName != null">and nick_name like concat('%', #{nickName}, '%')</if>
-			<if test="realName != null">and real_name = #{realName}</if>
+			<if test="userName != null">lower(user_name) LIKE CONCAT('%', lower(#{userName}), '%')  </if>
+			<if test="nickName != null">and lower(nick_name) like concat('%', lower(#{nickName}), '%')</if>
+			<if test="realName != null">and (real_name) like concat('%', lower(#{realName}), '%')</if>
 		    <if test="createTime != null">AND DATE_FORMAT(create_Time, '%Y-%m-%d') >= DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>
-		 -->
 		 </where>
-		<!--<trim prefix="where" prefixOverrides="and">
-			<if test="userName != null">
-				user_name LIKE CONCAT('%', #{userName}, '%')
-			</if>
-		</trim>-->
+		 <!--<trim prefix="where" prefixOverrides="and">
+			<if test="userName != null">user_name LIKE CONCAT('%', #{userName}, '%')</if>
+			<if test="nickName != null">nick_name like concat('%', #{nickName}, '%')</if>
+			<if test="realName != null">real_name = #{realName}</if>
+		    <if test="createTime != null">DATE_FORMAT(create_Time, '%Y-%m-%d') >= DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>
+		</trim>--> 
 	</sql>
-	
     
     <!-- 分页查询 begin -->
     <select id="findAdminCountByModel" resultType="Long">
     	SELECT COUNT(1) <include refid="sqlWhere"/>
     </select>
     
-    
-    <select id="findAdminListByModel" resultMap="AdminMap">
-    	SELECT  <include refid="selectColumns" /> 
-    	 FROM admin 
-		<where>
-			1 = 1 
-			<!--<if test="realName != null">and real_name = #{realName}</if>
-			 <if test="userName != null">and user_name LIKE CONCAT('%', #{userName}, '%')  </if>
-			 <if test="nickName != null">and nick_name like concat('%', #{nickName}, '%')</if>
-			<if test="realName != null">and real_name = #{realName}</if>
-		    <if test="createTime != null">AND DATE_FORMAT(create_Time, '%Y-%m-%d') >= DATE_FORMAT(#{createTime}, '%Y-%m-%d') </if>-->
-		 </where>
+    <select id="findAdminListByModel" parameterType="map" resultMap="AdminMap">
+    	SELECT  
+    	<include refid="selectColumns" /> 
+		<include refid="sqlWhere"/>
 		ORDER BY  admin_id  DESC
        	LIMIT #{startRow}, #{onePageSize}
     </select>
