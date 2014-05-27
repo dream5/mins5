@@ -22,7 +22,7 @@ import com.mins5.share.spring.util.SpringContextUtil;
  */
 
 @Service
-public class BaseServiceImpl<T extends DomainObject, C extends CrudDao> implements BaseService<T> {
+public class BaseServiceImpl<T extends DomainObject> implements BaseService<T> {
 
 	private static final Log log = LogFactory.getLog(BaseServiceImpl.class);
 
