@@ -31,7 +31,7 @@ import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.DateUtils;
 import com.mins5.share.util.EasyUIUtils;
 import com.mins5.share.util.JsonUtils;
-import com.mins5.share.util.StringUtils;
+import com.mins5.share.util.MyStringUtils;
 
 /**
  * @author zhoutian
@@ -86,8 +86,8 @@ public class ArticleController {
 		currentPage = currentPage == null ? 1 : currentPage;
 
 		ReturnPageData<List<Article>> returnData = articleService.findArticlesByArticleTitleAndStatusAndCreateTimeAndIsOriginal(
-				StringUtils.parseNull(articleTitle), StringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
-				DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), StringUtils.parseNull(isOriginal), currentPage, onePageSize);
+				MyStringUtils.parseNull(articleTitle), MyStringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT),
+				DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), MyStringUtils.parseNull(isOriginal), currentPage, onePageSize);
 
 		List<Article> articleList = returnData.getResultData();
 		List<Map<String, Object>> articleMapList = new ArrayList<Map<String, Object>>();
@@ -126,7 +126,7 @@ public class ArticleController {
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
 
-		ReturnPageData<List<Article>> returnData = articleService.findAllCaptureArticlesByCondition(StringUtils.parseNull(articleTitle),
+		ReturnPageData<List<Article>> returnData = articleService.findAllCaptureArticlesByCondition(MyStringUtils.parseNull(articleTitle),
 				DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT), DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), currentPage, onePageSize);
 
 		List<Article> articleList = returnData.getResultData();
