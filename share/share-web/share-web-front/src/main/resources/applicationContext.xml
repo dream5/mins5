@@ -33,5 +33,7 @@
 		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
 		<property name="idleConnectionTestPeriod" value="60"/>
   	</bean>
-	
+  	
+  	<!-- 获取spring context -->
+  	<bean id="SpringApplicationContext" class="com.mins5.share.spring.util.SpringContextUtil"></bean>  
 </beans>
