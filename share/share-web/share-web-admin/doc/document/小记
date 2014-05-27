@@ -1,0 +1,3 @@
+struts1 actionForm
+struts2 模型驱动
+springmvc 能封装表单参数的CommondController(采用反射机制注入)
