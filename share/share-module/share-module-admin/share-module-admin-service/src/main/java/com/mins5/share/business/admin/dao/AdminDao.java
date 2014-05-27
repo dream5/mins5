@@ -3,6 +3,7 @@ package com.mins5.share.business.admin.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.mins5.share.business.admin.domain.Admin;
@@ -15,10 +16,10 @@ import com.mins5.share.common.dao.CrudDao;
 @Service
 public interface AdminDao extends CrudDao<Long, Admin> {
 
-	
-	Admin findByUserNameAndPassword(String username ,String password);
-	
-	
+	Admin findByUserNameAndPassword(@Param("userName") String userMame, @Param("password") String password);
+
+	int checkUserName(String userMame);
+
 	/**
 	 * 根据Admin对象查询
 	 * 
@@ -28,9 +29,10 @@ public interface AdminDao extends CrudDao<Long, Admin> {
 	 * @return
 	 */
 	Long findAdminCountByModel(Admin admin);
-	
+
 	/**
 	 * 分页查询管理员列表
+	 * 
 	 * @author chenry
 	 * @since 2014年3月22日
 	 * @param admin 查询参数
