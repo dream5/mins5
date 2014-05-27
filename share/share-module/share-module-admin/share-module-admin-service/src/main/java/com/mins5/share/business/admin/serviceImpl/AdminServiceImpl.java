@@ -27,12 +27,12 @@ import com.mins5.share.common.service.VOID;
  */
 @Service
 public class AdminServiceImpl implements AdminService {
-	
+
 	private static final Log log = LogFactory.getLog(AdminServiceImpl.class);
 
 	@Autowired
 	private AdminDao adminDao;
-	
+
 	@Override
 	@Transactional
 	public ReturnData<Admin> saveAdmin(Admin Admin) {
@@ -133,12 +133,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ReturnPageData<List<Admin>> findAdminListByModel(Admin admin, int currentPage, int onePageSize) {
-		
+
 		ReturnPageData<List<Admin>> returnData = new ReturnPageData<List<Admin>>(currentPage, onePageSize);
 		try {
 			long count = adminDao.findAdminCountByModel(admin);
 			if (count > 0) {
-				Map<String,Object> paramMap = new HashMap<String,Object>();
+				Map<String, Object> paramMap = new HashMap<String, Object>();
 				int startRow = returnData.getStartRow();
 				paramMap.put("startRow", startRow);
 				paramMap.put("onePageSize", onePageSize);
@@ -147,9 +147,8 @@ public class AdminServiceImpl implements AdminService {
 				paramMap.put("nickName", admin.getNickName());
 				paramMap.put("status", admin.getStatus());
 				paramMap.put("createTime", admin.getCreateTime());
-				
+
 				List<Admin> adminList = adminDao.findAdminListByModel(paramMap);
-				System.out.println(adminList + "..........................");
 				returnData.setTotalResults(count);
 				if (StringUtils.isEmpty(adminList)) {
 					adminList = Collections.emptyList();
@@ -162,8 +161,30 @@ public class AdminServiceImpl implements AdminService {
 			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
 		}
 		return returnData;
-		
+
 	}
 
-	
+	@Override
+	public ReturnData<Admin> findByUserNameAndPassword(String username, String password) {
+		ReturnData<Admin> returnData = new ReturnData<Admin>();
+		try {
+			if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			Admin Admin = adminDao.findByUserNameAndPassword(username, password);
+			returnData.setResultData(Admin);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
+	public int checkUserName(String userMame) {
+		return adminDao.checkUserName(userMame);
+	}
+
 }
