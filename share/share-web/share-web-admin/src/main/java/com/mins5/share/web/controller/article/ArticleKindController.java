@@ -24,7 +24,7 @@ import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.util.EasyUITreeModule;
 import com.mins5.share.util.JsonUtils;
-import com.mins5.share.util.StringUtils;
+import com.mins5.share.util.MyStringUtils;
 
 /**
  * @author zhoutian
@@ -119,7 +119,7 @@ public class ArticleKindController {
 	@RequestMapping(value = "/articleKindAdd")
 	public void articleKindAdd(HttpServletResponse response, ArticleKind articleKind) {
 		Date currentDate = new Date();
-		articleKind.setKindPinyin(StringUtils.trimBlank(articleKind.getKindPinyin()).toLowerCase());
+		articleKind.setKindPinyin(MyStringUtils.trimBlank(articleKind.getKindPinyin()).toLowerCase());
 		articleKind.setAdminId(0L);
 		articleKind.setCreateTime(currentDate);
 		articleKind.setUpdateTime(currentDate);
@@ -209,8 +209,8 @@ public class ArticleKindController {
 	public void  articleLabelEdit(HttpServletResponse response, Long articleKindId, String kindName, String kindPinyin, String status, Long parentKindId) {
 		ArticleKind articleKind = new ArticleKind();
 		articleKind.setArticleKindId(articleKindId);
-		articleKind.setKindName(StringUtils.trimBlank(kindName));
-		articleKind.setKindPinyin(StringUtils.trimBlank(kindPinyin).toLowerCase());
+		articleKind.setKindName(MyStringUtils.trimBlank(kindName));
+		articleKind.setKindPinyin(MyStringUtils.trimBlank(kindPinyin).toLowerCase());
 		articleKind.setStatus(status);
 		articleKind.setUpdateTime(new Date());
 		if(parentKindId == null) {

@@ -22,7 +22,7 @@ import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.DateUtils;
 import com.mins5.share.util.EasyUIUtils;
 import com.mins5.share.util.JsonUtils;
-import com.mins5.share.util.StringUtils;
+import com.mins5.share.util.MyStringUtils;
 
 /**
  * @author zhoutian
@@ -66,8 +66,8 @@ public class ArticleLabelController {
 		currentPage = currentPage == null ? 1 : currentPage;
 		
 		ReturnPageData<List<ArticleLabel>> returnData = articleLabelService
-				.findArticleLabelByLabelNameAndStatusAndCreateTime(StringUtils.parseNull(labelName),
-						StringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT), DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), currentPage, onePageSize);
+				.findArticleLabelByLabelNameAndStatusAndCreateTime(MyStringUtils.parseNull(labelName),
+						MyStringUtils.parseNull(status), DateUtils.parseDate(beginTime, DateUtils.DATE_FORMAT), DateUtils.parseDate(endTime, DateUtils.DATE_FORMAT), currentPage, onePageSize);
 		
 		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), returnData.getResultData());
 		JsonUtils.write(data, response);
@@ -137,7 +137,7 @@ public class ArticleLabelController {
 	public void  articleLabelEdit(HttpServletResponse response, Long labelId, String labelName, String status) {
 		ArticleLabel articleLabel = new ArticleLabel();
 		articleLabel.setLabelId(labelId);
-		articleLabel.setLabelName(StringUtils.trimBlank(labelName));
+		articleLabel.setLabelName(MyStringUtils.trimBlank(labelName));
 		articleLabel.setStatus(status);
 		ReturnData<ArticleLabel> returnData = articleLabelService.updateArticleLabel(articleLabel);
 		String tip = "修改成功！";
