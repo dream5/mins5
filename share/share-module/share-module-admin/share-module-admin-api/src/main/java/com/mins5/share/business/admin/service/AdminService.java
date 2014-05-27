@@ -1,7 +1,6 @@
 package com.mins5.share.business.admin.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.mins5.share.business.admin.domain.Admin;
 import com.mins5.share.common.service.ReturnData;
@@ -15,7 +14,6 @@ import com.mins5.share.common.service.VOID;
  */
 public interface AdminService {
 
-	
 	/**
 	 * 新增
 	 * 
@@ -55,7 +53,7 @@ public interface AdminService {
 	 * @return
 	 */
 	ReturnData<Admin> findAdminById(Long adminId);
-	
+
 	/**
 	 * 根据Admin对象查询
 	 * 
@@ -65,9 +63,10 @@ public interface AdminService {
 	 * @return
 	 */
 	Long findAdminCountByModel(Admin admin);
-	
+
 	/**
 	 * 分页查询管理员列表
+	 * 
 	 * @author chenry
 	 * @since 2014年3月22日
 	 * @param admin 查询参数
@@ -75,7 +74,10 @@ public interface AdminService {
 	 * @param onePageSize 每行行数
 	 * @return
 	 */
-	ReturnPageData<List<Admin>> findAdminListByModel(Admin admin,
-			int currentPage, int onePageSize);
+	ReturnPageData<List<Admin>> findAdminListByModel(Admin admin, int currentPage, int onePageSize);
+
+	ReturnData<Admin> findByUserNameAndPassword(String username, String password);
+
+	int checkUserName(String userMame);
 
 }
