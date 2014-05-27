@@ -123,6 +123,7 @@ public class BaseServiceImpl<T extends DomainObject> implements BaseService<T> {
 		return returnData;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ReturnData<T> update(T t) {
 		ReturnData<T> returnData = new ReturnData<T>();
