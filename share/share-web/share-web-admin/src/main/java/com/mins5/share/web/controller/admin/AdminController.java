@@ -40,7 +40,6 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	
 	/**
 	 * 管理员列表
 	 * 
@@ -51,9 +50,10 @@ public class AdminController {
 	public String adminList() {
 		return "admin/admin_list";
 	}
-	
+
 	/**
 	 * ajax查询文章标签
+	 * 
 	 * @author chenry
 	 * @since 2014年3月29日
 	 * @param response
@@ -62,26 +62,26 @@ public class AdminController {
 	 * @param beginTime
 	 * @param endTime
 	 * @param currentPage
-	 * @param articleLabelService 
+	 * @param articleLabelService
 	 */
 	@RequestMapping(value = "/searchAdmin")
-	public void searchAdmin(HttpServletResponse response, String userName, String nickName,String status,
-			 String createTime, Integer currentPage, Integer onePageSize, Object articleLabelService) {
-		
+	public void searchAdmin(HttpServletResponse response, String userName, String nickName, String status, String createTime, Integer currentPage,
+			Integer onePageSize, Object articleLabelService) {
+
 		Admin admin = new Admin();
 		admin.setUserName(userName);
 		admin.setNickName(nickName);
 		//admin.set(createTime)
 		admin.setCreateTime(DateUtils.parseDate(createTime, DateUtils.DATE_FORMAT));
-		
+
 		onePageSize = onePageSize == null ? 10 : onePageSize;
 		currentPage = currentPage == null ? 1 : currentPage;
-		
+
 		ReturnPageData<List<Admin>> returnData = adminService.findAdminListByModel(admin, currentPage, onePageSize);
 		String data = EasyUIUtils.parseDataGrid(returnData.getTotalResults(), returnData.getResultData());
 		JsonUtils.write(data, response);
 	}
-	
+
 	/**
 	 * 跳转到添加管理员页面
 	 * 
@@ -103,21 +103,20 @@ public class AdminController {
 	 * @param admin
 	 */
 	@RequestMapping(value = "/adminAdd")
-	public void adminAdd(HttpServletResponse response,
-			Admin admin) {
+	public void adminAdd(HttpServletResponse response, Admin admin) {
 		Date currentDate = new Date();
 		admin.setCreateTime(currentDate);
-		ReturnData<Admin> returnData = adminService
-				.saveAdmin(admin);
+		ReturnData<Admin> returnData = adminService.saveAdmin(admin);
 		String tip = "添加成功！";
 		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
 			tip = "添加失败！";
 		}
 		JsonUtils.write(tip, response);
 	}
-	
+
 	/**
-	 * 跳转到标签编辑页面
+	 * 跳转到管理员编辑页面
+	 * 
 	 * @author chenry
 	 * @since 2014年3月31日
 	 * @param labelId
@@ -132,9 +131,10 @@ public class AdminController {
 		mv.setViewName("admin/admin_edit");
 		return mv;
 	}
-	
+
 	/**
-	 * 修改文章标签
+	 * 修改管理员
+	 * 
 	 * @author chenry
 	 * @since 2014年3月31日
 	 * @param response
@@ -143,11 +143,7 @@ public class AdminController {
 	 * @param status
 	 */
 	@RequestMapping(value = "/adminEdit")
-	public void  adminEdit(HttpServletResponse response, Long labelId, String labelName, String status) {
-		Admin admin = new Admin();
-//		admin.setLabelId(labelId);
-//		admin.setLabelName(StringUtils.trimBlank(labelName));
-//		admin.setStatus(status);
+	public void adminEdit(HttpServletResponse response, Admin admin) {
 		ReturnData<Admin> returnData = adminService.updateAdmin(admin);
 		String tip = "修改成功！";
 		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
@@ -155,25 +151,24 @@ public class AdminController {
 		}
 		JsonUtils.write(tip, response);
 	}
-	
+
 	/**
-	 * 删除文章标签
+	 * 删除管理员
+	 * 
 	 * @author chenry
 	 * @since 2014年3月31日
 	 * @param response
 	 * @param labelId
 	 */
 	@RequestMapping(value = "/adminDelete")
-	public void adminLableDelete(HttpServletResponse response, Long labelId) {
+	public void adminLableDelete(HttpServletResponse response, Long adminId) {
 		String tip = "删除成功！";
-//		try {
-//			adminService.deleteAdminAndAdminRelByLabelId(labelId);
-//		} catch(Exception e) {
-//			tip = "删除失败！";
-//		}
-//		JsonUtils.write(tip, response);
+		try {
+			adminService.deleteAdminById(adminId);
+		} catch (Exception e) {
+			tip = "删除失败！";
+		}
+		JsonUtils.write(tip, response);
 	}
-	
-
 
 }
