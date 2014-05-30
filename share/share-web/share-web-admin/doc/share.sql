@@ -57,7 +57,7 @@ create table article
    article_id           int not null auto_increment,
    article_title        varchar(200) not null,
    article_content      text not null,
-   article_url          varchar(200),
+   article_url          varchar(200) comment '文章顶部导图URL',
    article_from         varchar(100),
    article_author       varchar(100) not null,
    status               char(1) not null comment '0待审核；1 审核通过 ；2已发布；3下架',
