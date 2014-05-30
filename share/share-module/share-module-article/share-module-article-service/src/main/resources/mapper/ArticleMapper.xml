@@ -56,7 +56,7 @@
 		from article a 
 		left join article_kind_rel akr on a.article_id = akr.article_id
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
-		where a.status =1 and akr.status=1 and ak.status = 1  
+		where a.status =2 and akr.status=1 and ak.status = 1  
 		order by rand() limit 0,#{amount}
 	</select>
 	
@@ -69,7 +69,7 @@
 	<select id="findArticleByCondition"  resultMap="ArticleMap">
 		select 
 			article_id,article_title,article_content,article_from,article_url,article_author, update_time, create_time
-        from article where status=1  order by article_id desc limit #{startRow},#{onePageSize} 
+        from article where status=2  order by article_id desc limit #{startRow},#{onePageSize} 
 	</select>
 	
 	<!-- 根据分类拼音查询文章总数 add by zhanglin 20140321 -->
@@ -77,7 +77,7 @@
 		select count(a.article_id) from article a 
 		left join article_kind_rel akr on a.article_id = akr.article_id
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
-		where a.status =1 and akr.status=1 and ak.status = 1
+		where a.status =2 and akr.status=1 and ak.status = 1
 		 <if test="kindPinyin != null">  
 	       and ak.kind_pinyin =#{kindPinyin}  
 	     </if>  
@@ -90,7 +90,7 @@
 		from article a 
 		left join article_kind_rel akr on a.article_id = akr.article_id
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
-		where a.status =1 and akr.status=1 and ak.status = 1
+		where a.status =2 and akr.status=1 and ak.status = 1
 		 <if test="kindPinyin != null">  
 	       and ak.kind_pinyin =#{kindPinyin}  
 	     </if>  
@@ -107,7 +107,7 @@
 	<!-- 根据文本标题查询文章总数 add by zhanglin 20140328 -->
 	<select id="findArticlesCountByTitle"  resultType="int">
 		select count(a.article_id) from article a 
-		where a.status =1 
+		where a.status =2 
 		 <if test="title != null">  
 	       and a.article_title like CONCAT('%',#{title},'%')
 	     </if>  
@@ -117,7 +117,7 @@
 	<select id="findArticlesByTitle"  resultMap="ArticleMap">
 		select a.article_id,a.article_title,a.article_content,a.article_from,a.article_url,a.article_author,a.update_time,a.create_time
 		from article a 
-		where a.status =1 
+		where a.status =2 
 		 <if test="title != null">  
 	       and a.article_title like CONCAT('%',#{title},'%')
 	     </if>  
@@ -160,7 +160,7 @@
 		from article a 
 		left join article_kind_rel akr on a.article_id = akr.article_id
 		left join  article_kind ak on akr.article_kind_id  = ak.article_kind_id
-		where a.status =1 and akr.status=1 and ak.status = 1 and a.article_id!=#{articleId}
+		where a.status =2 and akr.status=1 and ak.status = 1 and a.article_id!=#{articleId}
 		 <if test="pinyin != null">  
 	      	 and ak.kind_pinyin =#{pinyin}  
 	     </if>  
