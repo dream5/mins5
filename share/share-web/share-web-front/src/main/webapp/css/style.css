@@ -32,7 +32,7 @@ html, .main {
 h1 {
 	margin: 0;
 	padding: 5px 0;
-	width: 300px;
+	width: 320px;
 	color: #2aabfc;
 	font: normal 46px/1.2em Arial, Helvetica, sans-serif;
 	letter-spacing: -2px;
@@ -47,7 +47,6 @@ h1 span {
 h1 small {
 	text-align: right;
 	float: right;
-	width: 120px;
 	color: #a5a4a4;
 	display: block;
 	padding: 0 0 0 10px;
