@@ -33,12 +33,12 @@ h1 {
 	margin: 0;
 	padding: 5px 0;
 	width: 320px;
-	color: #2aabfc;
+	color: #0F67A1;
 	font: normal 46px/1.2em Arial, Helvetica, sans-serif;
 	letter-spacing: -2px;
 }
 h1 a, h1 a:hover {
-	color: #2aabfc;
+	color: #0F67A1;
 	text-decoration: none;
 }
 h1 span {
@@ -68,7 +68,7 @@ p.spec {
 	text-align: right;
 }
 a {
-	color: #2cadff;
+	color: #0F67A1;
 	text-decoration: none;
 }
 a:hover {
@@ -305,7 +305,7 @@ ul.sb_menu li a, ul.ex_menu li a {
 	background: url(/images/li_a_hover.gif) left no-repeat;
 }
 ul.sb_menu li a:hover, ul.ex_menu li a:hover {
-	color: #2cadff;
+	color: #0F67A1;
 	text-decoration: underline;
 	background: url(/images/li_a.gif) left no-repeat;
 }
@@ -434,7 +434,7 @@ ol li .send {
 }
 
 .taglist a:hover {
-	background: none repeat scroll 0 0 #2CADFF;
+	background: none repeat scroll 0 0 #0F67A1;
 	color: #FFFFFF;
 }
 
@@ -600,13 +600,13 @@ div.mypage  span.next {
 }
 .Paginator a:hover {
 	color: #fff;
-	background: #06c;
+	background: #0F67A1;
 }
 .Paginator .thisPage {
 	padding: 2px 6px;
 	font-weight: bold;
 	vertical-align: top;
-	background: #06c;
+	background: #0F67A1;
 	color: #fff;
 }
 .Paginator .Prev {
