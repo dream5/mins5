@@ -155,7 +155,7 @@ create table article_label_rel
    article_label_rel_id int not null auto_increment,
    article_id           int not null,
    label_id             int not null,
-   carete_time          datetime not null,
+   create_time          datetime not null,
    primary key (article_label_rel_id)
 )
 engine=innodb default charset=utf8;
