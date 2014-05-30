@@ -2,7 +2,7 @@
 <div class="header">
     <div class="header_resize">
       <div class="logo">
-        <h1><a href="${context}"><span> Mins  </span> five </a><small></small></h1>
+        <h1><a href="${context}"><span> Mins  </span> five </a><small>关注最前沿的互联网热点资讯</small></h1>
       </div>
       <div class="cline"></div>
       <div id="navi">
@@ -21,7 +21,7 @@
 			          </span>
 			        </form>
 			      </div>
-		</div><!-- close menu -->
+		</div>
 	<br />
 </div>
       <div class="cline"></div>
