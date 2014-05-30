@@ -52,7 +52,7 @@
 							name="articleTitle" data-options="required:true" value="${article.articleTitle }"></input></td>
 					</tr>
 					<tr>
-						<td>来源url:</td>
+						<td>文章顶部导图地址:</td>
 						<td><input class="easyui-validatebox input-long" type="text"
 							name="articleUrl" value='${article.articleUrl }'></input></td>
 					</tr>
