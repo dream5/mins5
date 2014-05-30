@@ -79,6 +79,7 @@ public class IndexController extends BaseController {
 			request.setAttribute("randomReadList", randomArticles.getResultData());
 		}
 		// 热门标签
+		amount = 30;
 		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(amount);
 		if (articleLabels.getReturnCode() == 200 && !StringUtils.isEmpty(articleLabels.getResultData())) {
 			request.setAttribute("hotLabelList", articleLabels.getResultData());
