@@ -15,9 +15,9 @@
 		<result property="parentKindId" column="parent_kind_id"/>
 	</resultMap>
 	
-	<!-- 查询所有有效分类 -->
+	<!-- 查询所有有效分类  目前菜单只支持显示5个 -->
 	<select id="findAllArticleKind"  resultMap="ArticleKindMap">
-		select article_kind_id,kind_name,status,parent_kind_id,kind_pinyin from article_kind where status = 1 
+		select article_kind_id,kind_name,status,parent_kind_id,kind_pinyin from article_kind where status = 1 limit 0,4
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="articleKindId">
