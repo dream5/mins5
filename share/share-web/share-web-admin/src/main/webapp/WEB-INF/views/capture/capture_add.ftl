@@ -203,7 +203,7 @@
 						<tr>
 							<td>URL:</td>
 							<td><textarea class="easyui-validatebox textarea-article"
-									name="captureUrl" data-options="required:true,validType:'url'" style="width: 600px;height: 100px;"></textarea>
+									name="captureUrl" data-options="required:true" style="width: 600px;height: 100px;"></textarea>
 							</td>
 							<td>
 								<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">开始抓取</a>
