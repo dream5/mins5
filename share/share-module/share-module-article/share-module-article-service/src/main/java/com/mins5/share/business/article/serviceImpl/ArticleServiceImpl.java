@@ -785,36 +785,39 @@ public class ArticleServiceImpl implements ArticleService {
 			articleDao.save(article);
 			articleDao.updateCaptureArticleSts(id, 1);
 
-			Date currentTime = new Date();
-			// 保存文章种类及标签信息
-			List<ArticleKindRel> articleKindRelList = new ArrayList<ArticleKindRel>();
-			String[] articleKindIdArray = articleKind.split(",");
-			for (int i = 0; i < articleKindIdArray.length; i++) {
-				ArticleKindRel articleKindRel = new ArticleKindRel();
-				articleKindRel.setAdminId(0L);
-				articleKindRel.setArticleId(id);
-				articleKindRel.setCreateTime(currentTime);
-				articleKindRel.setStatus("1");
-				articleKindRel.setUpdateTime(currentTime);
-				articleKindRel.setArticleKindId(Long.valueOf(articleKindIdArray[i]));
-				articleKindRelList.add(articleKindRel);
-			}
-			if (!CollectionUtils.isEmpty(articleKindRelList)) {
-				articleKindRelDao.batchSaveArticleKindRel(articleKindRelList);
-			}
+			if (article.getArticleId() > 0) {
+				Date currentTime = new Date();
+				// 保存文章种类及标签信息
+				List<ArticleKindRel> articleKindRelList = new ArrayList<ArticleKindRel>();
+				String[] articleKindIdArray = articleKind.split(",");
+				for (int i = 0; i < articleKindIdArray.length; i++) {
+					ArticleKindRel articleKindRel = new ArticleKindRel();
+					articleKindRel.setAdminId(0L);
+					articleKindRel.setArticleId(article.getArticleId());
+					articleKindRel.setCreateTime(currentTime);
+					articleKindRel.setStatus("1");
+					articleKindRel.setUpdateTime(currentTime);
+					articleKindRel.setArticleKindId(Long.valueOf(articleKindIdArray[i]));
+					articleKindRelList.add(articleKindRel);
+				}
+				if (!CollectionUtils.isEmpty(articleKindRelList)) {
+					articleKindRelDao.batchSaveArticleKindRel(articleKindRelList);
+				}
 
-			String[] articleLabelIdArray = articleLabel.split(",");
-			List<ArticleLabelRel> articleLabelRelList = new ArrayList<ArticleLabelRel>();
+				String[] articleLabelIdArray = articleLabel.split(",");
+				List<ArticleLabelRel> articleLabelRelList = new ArrayList<ArticleLabelRel>();
 
-			for (int j = 0; j < articleLabelIdArray.length; j++) {
-				ArticleLabelRel articleLabelRel = new ArticleLabelRel();
-				articleLabelRel.setArticleId(id);
-				articleLabelRel.setLabelId(Long.valueOf(articleLabelIdArray[j]));
-				articleLabelRel.setCreateTime(currentTime);
-				articleLabelRelList.add(articleLabelRel);
-			}
-			if (!CollectionUtils.isEmpty(articleLabelRelList)) {
-				articleLabelRelDao.batchSaveArticleLabelRel(articleLabelRelList);
+				for (int j = 0; j < articleLabelIdArray.length; j++) {
+					ArticleLabelRel articleLabelRel = new ArticleLabelRel();
+					articleLabelRel.setArticleId(article.getArticleId());
+					articleLabelRel.setLabelId(Long.valueOf(articleLabelIdArray[j]));
+					articleLabelRel.setCreateTime(currentTime);
+					articleLabelRelList.add(articleLabelRel);
+				}
+				if (!CollectionUtils.isEmpty(articleLabelRelList)) {
+					articleLabelRelDao.batchSaveArticleLabelRel(articleLabelRelList);
+				}
+
 			}
 
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
