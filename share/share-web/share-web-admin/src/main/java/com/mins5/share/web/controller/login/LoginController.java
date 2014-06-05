@@ -29,8 +29,9 @@ import com.mins5.share.web.filter.ApplicationManager;
 import com.mins5.share.web.util.WebUtils;
 
 /**
- * @author zhoutian
- * @since 2014年3月11日
+ * 
+ * @author chenry
+ * @since 2014年6月5日
  */
 @Controller
 @Scope("prototype")
