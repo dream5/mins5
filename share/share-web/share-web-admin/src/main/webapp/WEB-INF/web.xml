@@ -17,6 +17,17 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<listener>
+		<listener-class>
+			com.mins5.share.web.filter.WebApplicationLisener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			com.mins5.share.web.filter.WebSessionListener
+		</listener-class>
+	</listener>
+	
 	<filter>
    		<filter-name>encodingFilter</filter-name>
    		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -26,11 +37,56 @@
    		</init-param>
 	</filter>
 	
+	<filter>
+		<filter-name>actionFilter</filter-name>
+		<filter-class>com.mins5.share.web.filter.SessionFilter</filter-class>
+		<init-param>
+			<param-name>obviablePath</param-name>
+			<param-value>
+				/index.mins,/login.mins,/index.jsp,/pwdRestoreAction.go
+			</param-value>
+		</init-param>
+	</filter>
+	
 	<filter-mapping>
    		<filter-name>encodingFilter</filter-name >
    		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+
+	<filter-mapping>
+		<filter-name>actionFilter</filter-name>
+		<url-pattern>*.mins</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>actionFilter</filter-name>
+		<url-pattern>/index.jsp</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>randomSevlet</servlet-name>
+		<servlet-class>
+			com.mins5.share.web.common.RandomServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>RandomImage</servlet-name>
+		<servlet-class>
+			com.mins5.share.web.common.RandomImage
+		</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>randomSevlet</servlet-name>
+		<url-pattern>*.random</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>RandomImage</servlet-name>
+		<url-pattern>/randomImage</url-pattern>
+	</servlet-mapping>
+	
+	
 	<servlet>
 		<servlet-name>share</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
