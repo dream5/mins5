@@ -186,6 +186,20 @@ var onePageSize = 10;
 		},
 		unmark:function(){
 			$.messager.progress('close');
+		},
+		loadCombogrid:function(options){
+			$(this).each(function() {
+				$('#'+options.id).combogrid({
+					url: options.url
+			    });
+			});
+		},
+		loadCombotree:function(options){
+			$(this).each(function() {
+				$('#'+options.id).combotree({
+					url: options.url
+			    });
+			});
 		}
 
 	};
