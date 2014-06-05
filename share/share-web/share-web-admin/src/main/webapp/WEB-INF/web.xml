@@ -62,27 +62,16 @@
 		<filter-name>actionFilter</filter-name>
 		<url-pattern>/index.jsp</url-pattern>
 	</filter-mapping>
-	<servlet>
-		<servlet-name>randomSevlet</servlet-name>
-		<servlet-class>
-			com.mins5.share.web.common.RandomServlet
-		</servlet-class>
-	</servlet>
 
 	<servlet>
-		<servlet-name>RandomImage</servlet-name>
+		<servlet-name>randomImageSevlet</servlet-name>
 		<servlet-class>
-			com.mins5.share.web.common.RandomImage
+			com.mins5.share.web.common.RandomImageServlet
 		</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>randomSevlet</servlet-name>
-		<url-pattern>*.random</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>RandomImage</servlet-name>
+		<servlet-name>randomImageSevlet</servlet-name>
 		<url-pattern>/randomImage</url-pattern>
 	</servlet-mapping>
 	
