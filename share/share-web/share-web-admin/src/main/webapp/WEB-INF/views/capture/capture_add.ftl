@@ -122,10 +122,7 @@
 			var articleId = $('#articleId').val();
 			var articleLabel =$('#articleLabel').combogrid('getValue');
 			var articleKind  = $('#articleKind').combotree('getValue');
-			alert('articleLabel='+articleLabel);
-			alert('articleId='+articleId);
-			alert('articleKind='+articleKind);
-			if(articleId==''||articleLabel==''||articleKind==''){
+			if(articleId==''||typeof(articleLabel) == 'undefined' ||articleLabel==''||typeof(articleKind)=='undefined'||articleKind==''){
 				$.messager.alert('操作提示', '请选择文章分类及标签！');
 				return;
 			
