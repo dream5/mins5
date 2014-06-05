@@ -21,6 +21,7 @@ function window.onload() {
 }
 
 function submitForm(){
+			alert(11);
 			if($.trim($("#userName").val())=='') {
 	    		alert("请输入用户名");
 	    	}else if($("#password").val()=='') {
@@ -44,7 +45,7 @@ function submitForm(){
 
 <body bgcolor="#ffffff" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" scroll="no" >
 <form id="loginForm" name="loginForm" method="post" action="${path}/login/login.mins">
-<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" background="${path}/images/login_bg.jpg" >
+<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" background="${path}/images/login_bg2.jpg" >
 			  <tr>
 				<td width="494">&nbsp;</td>
 				<td width="260">
@@ -57,7 +58,7 @@ function submitForm(){
 					</td>
 				  </tr>
 				  <tr>
-					<td align="right" style="font-size:9pt">&nbsp;密&nbsp;&nbsp;&nbsp;码：</td>
+					<td align="right" style="font-size:9pt">&nbsp;密&nbsp;&nbsp;码：</td>
 					<td width="176" height="30">
 					     <input type="password" id="password"  name="password"  onkeypress="if(event.keyCode == 13){loginForm.random.focus();}" style="BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; BORDER-BOTTOM: #999999 1px solid" maxLength="10">
 					</td>
