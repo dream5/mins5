@@ -7,9 +7,9 @@
 <%@ page language="java"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MINS Five</title>
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="js/css/style.css" rel="stylesheet" type="text/css">
 <style>body{overflow-y:auto;}</style>
 <#include "common/common_js.ftl" />
 <script language="javascript">
