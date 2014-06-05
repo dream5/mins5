@@ -32,17 +32,19 @@ function submitForm(){
 	    	}
 }
 </script>
-<c:if test="${msg != null && msg !='' }">
 <script type="text/javascript">
 	var msg = '${msg}';
-	alert(msg.length());
+	function window.onload() {
+		if(msg != null && msg !=''){
+			alert(msg.length());
+		}
+	}
 </script>
-</c:if>
 </head>
 
 <body bgcolor="#ffffff" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" scroll="no" >
 <form id="loginForm" name="loginForm" method="post" action="${path}/login/login.mins">
-<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" background="${path}/images2/login_bg.jpg" >
+<table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0" background="${path}/images/login_bg.jpg" >
 			  <tr>
 				<td width="494">&nbsp;</td>
 				<td width="260">
