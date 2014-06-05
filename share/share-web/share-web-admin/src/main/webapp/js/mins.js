@@ -23,120 +23,121 @@ var onePageSize = 10;
 (function($) {
 	var currentTime = new Date().getTime();
 	$.mins = {
-		init : function() {},
-		createDataGrid:function(options){
+		init : function() {
+		},
+		createDataGrid : function(options) {
 			var defaults = {
-				"gridId" : "dg",//Grid对应ID
-				"toolbarId" : "tb",//搜索工具条对应ID
-				"panelTitle" : "列表",//panel栏名称
-				"onDblClickRow" : function(){},//双击函数
-				"currentPage":1,
-				"onePageSize":10,
-				"singleSelect":true,
-				"loadGrid":function(){}
+				"gridId" : "dg", //Grid对应ID
+				"toolbarId" : "tb", //搜索工具条对应ID
+				"panelTitle" : "列表", //panel栏名称
+				"onDblClickRow" : function() {
+				}, //双击函数
+				"currentPage" : 1,
+				"onePageSize" : 10,
+				"singleSelect" : true,
+				"loadGrid" : function() {
+				}
 			};
 			var opts = $.extend(defaults, options);
-			
+
 			$(this).each(function() {
-				
-				$('#'+opts.gridId).datagrid({
-						title:opts.panelTitle,
-						rownumbers:true,
-						singleSelect:opts.singleSelect,
-						pagination:true,
-						pageList:[10, 20, 30, 40, 50],
-						pageSize:10,
-				 		toolbar:'#'+opts.toolbarId,
-						onDblClickRow :function(i,r){
-			  				 eval(opts.onDblClickRow);
-			 			 } 
-					});
-				$('#'+opts.gridId).datagrid('getPager').pagination({
-					    
-						onSelectPage:function(pageNum, pageSize){
-						 currentPage = pageNum;
-						 onePageSize = pageSize;
-						 eval(opts.loadGrid);
+
+				$('#' + opts.gridId).datagrid({
+					title : opts.panelTitle,
+					rownumbers : true,
+					singleSelect : opts.singleSelect,
+					pagination : true,
+					pageList : [10, 20, 30, 40, 50],
+					pageSize : 10,
+					toolbar : '#' + opts.toolbarId,
+					onDblClickRow : function(i, r) {
+						eval(opts.onDblClickRow);
 					}
 				});
-				
+				$('#' + opts.gridId).datagrid('getPager').pagination({
+
+					onSelectPage : function(pageNum, pageSize) {
+						currentPage = pageNum;
+						onePageSize = pageSize;
+						eval(opts.loadGrid);
+					}
+				});
+
 			});
-			
-			
+
 		},
-		loadGridData:function(fields,values,options){
-			
+		loadGridData : function(fields, values, options) {
+
 			var defaults = {
-				"gridId" : "dg",//Grid对应ID
+				"gridId" : "dg", //Grid对应ID
 				"url" : "",//请求URL
 			};
-			
+
 			var opts = $.extend(defaults, options);
-			
+
 			$(this).each(function() {
-				if(fields.length = values.length){
-				var s="({";
-				
-				for(var i=0;i<fields.length;i++){
-					if(i!=(fields.length-1)){
-						s+=fields[i]+":'"+values[i]+"',";
-					}else if(i==(fields.length-1)){
-						s+=fields[i]+":'"+values[i]+"',";
-						//追加分页参数到最后
-						s+="currentPage:"+currentPage+",";
-						s+="onePageSize:"+onePageSize+",";
-						s+="currentTime:"+currentTime+"})";
+				if (fields.length = values.length) {
+					var s = "({";
+
+					for (var i = 0; i < fields.length; i++) {
+						if (i != (fields.length - 1)) {
+							s += fields[i] + ":'" + values[i] + "',";
+						} else if (i == (fields.length - 1)) {
+							s += fields[i] + ":'" + values[i] + "',";
+							//追加分页参数到最后
+							s += "currentPage:" + currentPage + ",";
+							s += "onePageSize:" + onePageSize + ",";
+							s += "currentTime:" + currentTime + "})";
+						}
 					}
+					var p = eval(s);
+					$.ajax({
+						url : opts.url,
+						data : p,
+						type : "POST",
+						dataType : "json",
+						success : function(msg) {
+							$('#' + opts.gridId).datagrid('loadData', msg);
+						}
+					});
+
+				} else {
+					$.messager.alert('提示', '参数错误！');
 				}
-				var p=eval(s);
-				$.ajax({
-				    url: opts.url,
-				    data: p,
-				    type: "POST",
-				    dataType: "json",
-				    success: function (msg) {
-				    	$('#'+opts.gridId).datagrid('loadData', msg);
-				    }
-				});
-				
-			}else{
-				$.messager.alert('提示', '参数错误！');
-			}
-				
+
 			});
-			
+
 		},
-		getCheckBoxIds:function(options){//得到复选框ID字符串id1,id2,id3
+		getCheckBoxIds : function(options) {//得到复选框ID字符串id1,id2,id3
 			var defaults = {
-					"gridId" : "dg",//Grid对应ID
-					"tip" : "请选择记录！",
-					"dataId":""
-				};
-				var opts = $.extend(defaults, options);
-				var ids= "";
-				$(this).each(function() {
-					var checkedItems = $('#'+opts.gridId).datagrid('getChecked');
-					var temp = [];
-		            $.each(checkedItems, function(index, item){
-		            		
-		            	for(var attr in item)
-		            	{
-		            		if(attr.toString()==opts.dataId.toString()){
-		            			temp.push(item[attr]);
-		            		}
-		            	}
-					}); 
-					if(temp.length==0){
-						$.messager.alert('确认提示', opts.tip);
-						return;
-					}        
-			 	    ids = temp.join(",");
+				"gridId" : "dg", //Grid对应ID
+				"tip" : "请选择记录！",
+				"dataId" : ""
+			};
+			var opts = $.extend(defaults, options);
+			var ids = "";
+			$(this).each(function() {
+				var checkedItems = $('#' + opts.gridId).datagrid('getChecked');
+				var temp = [];
+				$.each(checkedItems, function(index, item) {
+
+					for (var attr in item) {
+						if (attr.toString() == opts.dataId.toString()) {
+							temp.push(item[attr]);
+						}
+					}
 				});
-				return ids;
+				if (temp.length == 0) {
+					$.messager.alert('确认提示', opts.tip);
+					return;
+				}
+				ids = temp.join(",");
+			});
+			return ids;
 		},
 		confirm : function(options) {
 			var defaults = {
-				"paramId" : "id",//action中参数名
+				"paramId" : "id", //action中参数名
 				"dataId" : "",
 				"tip" : "你确认要删除此项记录吗？",
 				"action" : ""
@@ -151,56 +152,58 @@ var onePageSize = 10;
 					var queryParams = {};
 					queryParams[opts.paramId] = opts.dataId;
 
-						$.ajax({
-							url : opts.action,
-							data : queryParams,
-							type : "POST",
-							dataType : "text",
-							success : function(msg) {
-								$.messager.alert('确认提示', msg);
-								loadTable();
-							},
-							error : function() {
-								$.messager.alert('确认提示', '操作失败！');
-							}
-						});
+					$.ajax({
+						url : opts.action,
+						data : queryParams,
+						type : "POST",
+						dataType : "text",
+						success : function(msg) {
+							$.messager.alert('确认提示', msg);
+							loadTable();
+						},
+						error : function() {
+							$.messager.alert('确认提示', '操作失败！');
+						}
+					});
 
 				});
 
 			});
 		},
-		formatSts : function(v,args) {//args,为1或0值代表的中文意思，如['未发布','已发布'];
+		formatSts : function(v, args) {//args,为1或0值代表的中文意思，如['未发布','已发布'];
 			if (v == 'WAITING_CHECK') {
-				return '<span style="color:red;">'+args[0]+'</span>';
+				return '<span style="color:red;">' + args[0] + '</span>';
 			} else {
-				return '<span style="color:green;">'+args[1]+'</span>';
+				return '<span style="color:green;">' + args[1] + '</span>';
 			}
-		},//v为值，r为行对象，args操作对象args
-		formatOperation:function(v,row,args){
-			 $.each(args, function(i, item) {
-            	alert(item.name);
-       	 });
+		}, //v为值，r为行对象，args操作对象args
+		formatOperation : function(v, row, args) {
+			$.each(args, function(i, item) {
+				alert(item.name);
+			});
 		},
-		mark:function(){
-			$.messager.progress({title:'请稍后',msg:'正在处理中...'}); 
+		mark : function() {
+			$.messager.progress({
+				title : '请稍后',
+				msg : '正在处理中...'
+			});
 		},
-		unmark:function(){
+		unmark : function() {
 			$.messager.progress('close');
 		},
-		loadCombogrid:function(options){
+		loadCombogrid : function(options) {
 			$(this).each(function() {
-				$('#'+options.id).combogrid({
-					url: options.url
-			    });
+				$('#' + options.id).combogrid({
+					url : options.url
+				});
 			});
 		},
-		loadCombotree:function(options){
+		loadCombotree : function(options) {
 			$(this).each(function() {
-				$('#'+options.id).combotree({
-					url: options.url
-			    });
+				$('#' + options.id).combotree({
+					url : options.url
+				});
 			});
 		}
-
 	};
 })(jQuery);
