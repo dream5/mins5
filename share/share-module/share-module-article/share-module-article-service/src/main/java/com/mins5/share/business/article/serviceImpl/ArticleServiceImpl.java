@@ -53,6 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleKindRelDao articleKindRelDao;
 
+	@Override
 	public ReturnData<List<ArticleKind>> findAllArticleKind() {
 		ReturnData<List<ArticleKind>> returnData = new ReturnData<List<ArticleKind>>();
 		try {
@@ -701,6 +702,7 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @param onePageSize 每页行数
 	 * @return
 	 */
+	@Override
 	public ReturnPageData<List<Article>> findAllCaptureArticlesByCondition(String articleTitle, Date beginTime, Date endTime, int currentPage,
 			int onePageSize) {
 		ReturnPageData<List<Article>> returnData = new ReturnPageData<List<Article>>(currentPage, onePageSize);
@@ -768,9 +770,11 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @param id
 	 * @author zhanglin
 	 * @since 2014年5月13日
+	 * @update 增加种类及标签处理 20140605
 	 */
+	@Override
 	@Transactional
-	public ReturnData<VOID> publishedArticleToTable(Long id) {
+	public ReturnData<VOID> publishedArticleToTable(Long id, String articleKind, String articleLabel) {
 		ReturnData<VOID> returnData = new ReturnData<VOID>();
 		try {
 			Article article = articleDao.findCaptureById(id);
@@ -780,6 +784,39 @@ public class ArticleServiceImpl implements ArticleService {
 			}
 			articleDao.save(article);
 			articleDao.updateCaptureArticleSts(id, 1);
+
+			Date currentTime = new Date();
+			// 保存文章种类及标签信息
+			List<ArticleKindRel> articleKindRelList = new ArrayList<ArticleKindRel>();
+			String[] articleKindIdArray = articleKind.split(",");
+			for (int i = 0; i < articleKindIdArray.length; i++) {
+				ArticleKindRel articleKindRel = new ArticleKindRel();
+				articleKindRel.setAdminId(0L);
+				articleKindRel.setArticleId(id);
+				articleKindRel.setCreateTime(currentTime);
+				articleKindRel.setStatus("1");
+				articleKindRel.setUpdateTime(currentTime);
+				articleKindRel.setArticleKindId(Long.valueOf(articleKindIdArray[i]));
+				articleKindRelList.add(articleKindRel);
+			}
+			if (!CollectionUtils.isEmpty(articleKindRelList)) {
+				articleKindRelDao.batchSaveArticleKindRel(articleKindRelList);
+			}
+
+			String[] articleLabelIdArray = articleLabel.split(",");
+			List<ArticleLabelRel> articleLabelRelList = new ArrayList<ArticleLabelRel>();
+
+			for (int j = 0; j < articleLabelIdArray.length; j++) {
+				ArticleLabelRel articleLabelRel = new ArticleLabelRel();
+				articleLabelRel.setArticleId(id);
+				articleLabelRel.setLabelId(Long.valueOf(articleLabelIdArray[j]));
+				articleLabelRel.setCreateTime(currentTime);
+				articleLabelRelList.add(articleLabelRel);
+			}
+			if (!CollectionUtils.isEmpty(articleLabelRelList)) {
+				articleLabelRelDao.batchSaveArticleLabelRel(articleLabelRelList);
+			}
+
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch (TransactionException e) {
 			log.error("service exception", e);
@@ -787,15 +824,17 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return returnData;
 	}
-	
+
 	/**
 	 * 将临时表数据删除
+	 * 
 	 * @param id
 	 * @author zhanglin
 	 * @since 2014年5月13日
 	 */
+	@Override
 	@Transactional
-	public ReturnData<VOID> removedArticleFromTempTable(Long articleId){
+	public ReturnData<VOID> removedArticleFromTempTable(Long articleId) {
 		ReturnData<VOID> returnData = new ReturnData<VOID>();
 		try {
 			if (articleId == null) {
@@ -810,8 +849,7 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return returnData;
 	}
-	
-	
+
 	/**
 	 * 根据拼音查询
 	 * 
@@ -820,7 +858,8 @@ public class ArticleServiceImpl implements ArticleService {
 	 * @param articleKindId
 	 * @return
 	 */
-	public ReturnData<ArticleKind> findArticleKindByPinyin(String kind){
+	@Override
+	public ReturnData<ArticleKind> findArticleKindByPinyin(String kind) {
 		ReturnData<ArticleKind> returnData = new ReturnData<ArticleKind>();
 		try {
 			if (kind == null) {
@@ -836,30 +875,33 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return returnData;
 	}
-	
-	
+
 	/**
-	 * <p>根据标签搜索文章</p>
+	 * <p>
+	 * 根据标签搜索文章
+	 * </p>
+	 * 
 	 * @param labelName 标签名称
 	 * @param currentPage
 	 * @param pageSize
 	 * @return
 	 */
-	public ReturnPageData<List<Article>> findArticlesByLabelName(String labelId,String labelName, int currentPage, int pageSize){
+	@Override
+	public ReturnPageData<List<Article>> findArticlesByLabelName(String labelId, String labelName, int currentPage, int pageSize) {
 		ReturnPageData<List<Article>> returnPageData = new ReturnPageData<List<Article>>(currentPage, pageSize);
 		try {
 			// 没有处理查询条件
-			int totalResults = articleDao.findArticlesCountByLabelName(labelId,labelName);
+			int totalResults = articleDao.findArticlesCountByLabelName(labelId, labelName);
 			if (totalResults > 0) {
 				int startRow = returnPageData.getStartRow();
-				List<Article> articles = articleDao.findArticlesByLabelName(labelId,labelName,startRow, pageSize);
+				List<Article> articles = articleDao.findArticlesByLabelName(labelId, labelName, startRow, pageSize);
 				if (StringUtils.isEmpty(articles)) {
 					articles = Collections.emptyList();
 				}
 				returnPageData.setTotalResults(totalResults);
 				returnPageData.setResultData(articles);
 				returnPageData.setReturnCode(ReturnCode.SUCCESS.getCode());
-			}else{
+			} else {
 				returnPageData.setReturnCode(ReturnCode.EXCEPTION.getCode());
 			}
 
@@ -869,4 +911,5 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return returnPageData;
 	}
+
 }
