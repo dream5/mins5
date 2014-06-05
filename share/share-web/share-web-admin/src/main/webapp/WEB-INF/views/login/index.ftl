@@ -21,7 +21,6 @@ function window.onload() {
 }
 
 function submitForm(){
-			alert(11);
 			if($.trim($("#userName").val())=='') {
 	    		alert("请输入用户名");
 	    	}else if($("#password").val()=='') {
