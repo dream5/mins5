@@ -9,13 +9,13 @@ import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
-
 /**
- * @author plh
+ * 
+ * @author chenry
+ * @since 2014年6月5日
  */
 public class WebUtils {
-	private static final Logger logger = Logger.getLogger(WebUtils.class);
+
 	public static SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat formatStr = new SimpleDateFormat("yyyyMMdd");
 
