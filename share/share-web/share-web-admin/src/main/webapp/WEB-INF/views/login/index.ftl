@@ -1,15 +1,9 @@
 <#include "common/common.ftl" />
-<%
-	response.setHeader("Cache-Control","no-store");
-	response.setDateHeader("Expires",0);
-%>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page language="java"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MINS Five</title>
-<link href="js/css/style.css" rel="stylesheet" type="text/css">
+<link href="${path}/js/css/style.css" rel="stylesheet" type="text/css">
 <style>body{overflow-y:auto;}</style>
 <#include "common/common_js.ftl" />
 <script language="javascript">
