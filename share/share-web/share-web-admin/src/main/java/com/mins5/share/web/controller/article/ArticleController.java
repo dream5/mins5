@@ -50,7 +50,6 @@ public class ArticleController {
 	@Autowired
 	private AttachmentService attachmentService;
 
-	
 	/**
 	 * 文章列表
 	 * 
@@ -169,7 +168,7 @@ public class ArticleController {
 	 * @param article
 	 */
 	@RequestMapping(value = "/articleAdd")
-	public void articleAdd(HttpServletResponse response, Article article, String articleKind, String articleLabel,String attachmentId) {
+	public void articleAdd(HttpServletResponse response, Article article, String articleKind, String articleLabel, String attachmentId) {
 
 		try {
 
@@ -191,11 +190,11 @@ public class ArticleController {
 			}
 
 			ReturnData<Article> returnData = articleService.saveArticle(article, articleKindIdList, articleLabelIdList);
-			//添加图片
-			if(!org.springframework.util.StringUtils.isEmpty(attachmentId)){
+			// 添加图片
+			if (!org.springframework.util.StringUtils.isEmpty(attachmentId)) {
 				long articleId = returnData.getResultData().getArticleId();
 				Attachment attachment = new Attachment();
-				attachment.setArticleId((int)articleId);
+				attachment.setArticleId((int) articleId);
 				attachment.setAttachmentId(Integer.parseInt(attachmentId));
 				attachmentService.updateAttachment(attachment);
 			}
@@ -295,10 +294,10 @@ public class ArticleController {
 	 * @since 2014年5月13日
 	 */
 	@RequestMapping(value = "/publishedArticleToTable")
-	public void publishedArticleToTable(HttpServletResponse response, Long articleId) {
+	public void publishedArticleToTable(HttpServletResponse response, Long articleId, String articleKind, String articleLabel) {
 		String tip = "发布成功！";
 		try {
-			articleService.publishedArticleToTable(articleId);
+			articleService.publishedArticleToTable(articleId, articleKind, articleLabel);
 		} catch (Exception e) {
 			tip = "发布失败！";
 		}
@@ -321,7 +320,7 @@ public class ArticleController {
 		try {
 			String[] ids = articleIds.split(",");
 			for (int i = 0; i < ids.length; i++) {
-				articleService.publishedArticleToTable(Long.valueOf(ids[i]));
+				articleService.publishedArticleToTable(Long.valueOf(ids[i]), null, null);
 			}
 
 		} catch (Exception e) {
@@ -329,10 +328,13 @@ public class ArticleController {
 		}
 		JsonUtils.write(tip, response);
 	}
-	
+
 	/**
 	 * 
-	 * <p>批量从临时表中清除数据</p>
+	 * <p>
+	 * 批量从临时表中清除数据
+	 * </p>
+	 * 
 	 * @param response
 	 * @param articleIds
 	 */
@@ -350,7 +352,6 @@ public class ArticleController {
 		}
 		JsonUtils.write(tip, response);
 	}
-	
 
 	/**
 	 * 下架文章
