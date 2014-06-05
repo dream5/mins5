@@ -1,12 +1,9 @@
-/**
- * 
- */
 package com.mins5.share.web.common;
 
 /**
- * 常量类
  * 
- * @author plh
+ * @author chenry
+ * @since 2014年6月5日
  */
 public final class Constants {
 	/**
