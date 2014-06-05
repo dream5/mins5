@@ -37,14 +37,17 @@ public class ActionFilter implements Filter {
 	}
 
 	private boolean isObviable(String servletPath) {
-		/*
-		 * if (errorPage.equals(servletPath) ||
-		 * errorPageCrm.equals(servletPath)) { return true; }
-		 * 
-		 * if (obviablePath == null) return false; for (int i = 0; i <
-		 * obviablePath.length; i++) { if (servletPath.indexOf(obviablePath[i])
-		 * != -1) { return true; } }
-		 */
+//		if (errorPage.equals(servletPath) ||
+//				errorPageCrm.equals(servletPath)) { return true; }
+
+		if (obviablePath == null)
+			return false;
+		for (int i = 0; i < obviablePath.length; i++) {
+			if (servletPath.indexOf(obviablePath[i]) != -1) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
