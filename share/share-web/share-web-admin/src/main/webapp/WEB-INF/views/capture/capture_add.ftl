@@ -58,7 +58,7 @@
 		var operation = '<a href="#" onclick="articleDetail('+val+')">查看</>';
 		if(row.articleSts!='PASSED_CHECK'){
 			operation += '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;';
-			operation += '<a href="#" onclick="publishedArticle('+val+')">发布到正式表</>';
+			operation += '<a href="#" onclick="publishedArticleInit('+val+')">发布到正式表</>';
 		}
 		return operation;
 	}
@@ -106,12 +106,31 @@
 		});
 	}
 	
-	function publishedArticle(articleId){
+	function publishedArticleInit(articleId){
+	
+		$('#articleId').val(articleId);
+		$('#kindAndLabel').window('open');
+	}
+	
+	function publishedArticle(){
+	
+	
 		$.messager.confirm('提示', '您确认发布此文章吗?', function(r){
 			if(!r) {
 				return;
 			}
-			var queryParams = {"articleId":articleId};
+			var articleId = $('#articleId').val();
+			var articleLabel =$('#articleLabel').combogrid('getValue');
+			var articleKind  = $('#articleKind').combotree('getValue');
+			alert('articleLabel='+articleLabel);
+			alert('articleId='+articleId);
+			alert('articleKind='+articleKind);
+			if(articleId==''||articleLabel==''||articleKind==''){
+				$.messager.alert('操作提示', '请选择文章分类及标签！');
+				return;
+			
+			}
+			var queryParams = {"articleId":articleId,"articleKind":articleKind,"articleLabel":articleLabel};
 			jQuery.ajax({
 			    url: '${path}/article/publishedArticleToTable.mins',
 			    data: queryParams,
@@ -126,6 +145,16 @@
 			    }
 			});
 		});
+	
+	}	
+		
+	
+	function formatLabelStatus(val,row) {
+		if (val == 0) {
+			return '<span style="color:red;">未启用</span>';
+		} else {
+			return '<span style="color:green;">启用</span>';
+		}
 	}
 	
 	$(document).ready(function() {
@@ -183,6 +212,13 @@
 		 		$.mins.confirm({paramId:'articleIds',action:'${path}/article/removeArticlesFromTable.mins',dataId:ids,tip:'<font color=red>您确认要从临时表批量删除这些文章吗?</front>'});
 	     
 	     });
+	    
+	    //加载文章标签
+	    $.mins.loadCombogrid({id:'articleLabel',url:'${path}/article/searchArticleLabel.mins?currentPage=0&onePageSize=100'});
+	    //加载文章文类
+	    $.mins.loadCombotree({id:'articleKind',url:'${path}/article/getArticleKind.mins'});
+	    
+	    
 	    
 	    
 	    
@@ -244,7 +280,7 @@
 	</div>
 		
 		</div>
-		<!--预览层-->
+   <!--预览层-->
 	<div id="articleDetail" class="easyui-window" title="查看文章" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:800px;height:500px;padding:10px;">
 		<div style="padding: 10px 0 10px 60px">
 			<div class="article">
@@ -259,6 +295,46 @@
 	         	<div id="detail_articleContent"></div>
 	          <p class="links" id="detail_articleLabel"></p>
 	         </div>
+		</div>
+	</div>
+	
+	<!--分类及标签层-->
+	<div id="kindAndLabel" class="easyui-window" title="选择文章分类及所属标签" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:600px;height:300px;padding:10px;">
+		<div style="padding: 10px 0 10px 60px">
+				<table>
+					<tr>
+						<td>文章标签:</td>
+						<td>
+							<select id="articleLabel" name="articleLabel" class="easyui-combogrid" style="width:200px" data-options="
+									panelWidth: 350,
+									multiple: true,
+									idField: 'labelId',
+									textField: 'labelName',
+									columns: [[
+										{field:'labelId',checkbox:true},
+										{field:'labelName',title:'标签名称',width:100},
+										{field:'status',title:'标签状态',width:80,align:'center',formatter:formatLabelStatus},
+										{field:'createTime',title:'标签生成时间',width:150,align:'center'},
+									]],
+									fitColumns: true,
+									editable:false,
+									required:true
+								">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>文章类别:</td>
+						<td>
+							<input id="articleKind" name="articleKind" class="easyui-combotree" data-options="editable:false, required:true" multiple style="width:200px;">
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="articleId" value="" id="articleId"/>
+				<div style="text-align: center; padding: 5px">
+		  	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="publishedArticle()">发布到正式表</a> <a href="javascript:void(0)"
+				class="easyui-linkbutton" onclick="$('#kindAndLabel').window('close');">关闭</a>
+		</div>
 		</div>
 	</div>
 	</div>
