@@ -1,8 +1,3 @@
-/* 
- * Copyright 2006 AsiaInfo Holdings, Inc
- * All right reserved.
- * Created on Aug 24, 2006
- */
 package com.mins5.share.web.filter;
 
 import java.util.HashMap;
