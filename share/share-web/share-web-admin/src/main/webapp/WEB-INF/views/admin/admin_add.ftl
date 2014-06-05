@@ -4,9 +4,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "common/common_js.ftl" />
+<script type="text/javascript" src="${path}/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function submitForm() {
-		$('#articleLabelFormId').form('submit', {
+		$('#adminFormId').form('submit', {
 			//	url:...,
 			onSubmit : function() {
 				var isValid = $(this).form('validate');
@@ -23,7 +24,6 @@
 	}
 	function clearForm() {
 		$('#articleLabelFormId').form('clear');
-		$('#status').combobox('setValue', '0');
 	}
 </script>
 <title>Mins5后台管理</title>
@@ -34,30 +34,58 @@
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
 	</div>
-	<div class="easyui-panel" title="添加管理员" data-options="iconCls:'icon-add'">
+	<div class="easyui-panel" title="juery" data-options="iconCls:'icon-add'" width="600px">
 		<div style="padding: 10px 0 10px 60px">
-			<form id="articleLabelFormId" method="post"
-				action="${path}/article/articleLabelAdd.mins">
+			<form id="adminFormId" method="post"
+				action="${path}/admin/adminAdd.mins">
 				<table>
-					<tr>
-						<td>标签名称:</td>
-						<td><input class="easyui-validatebox input-short" type="text"
-							name="labelName" data-options="required:true"></input></td>
-					</tr>
-					<tr>
-	    				<td>标签状态:</td>
-		    			<td>
-		    				<select class="easyui-combobox" id="status" name="status">
-		    					<option value="0">未启用</option>
-		    					<option value="1">启用</option>
-		    				</select>
-	    				</td>
-	    			</tr>
+						<tr>
+							<td align="right">
+								用户名:
+							</td>
+							<td>
+								<input type="text" name="userName"  class="easyui-validatebox input-short"  data-options="required:true">
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								密&nbsp;&nbsp;码:
+							</td>
+							<td>
+								<input type="password" name="password"  class="easyui-validatebox input-short"  data-options="required:true">
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								昵 &nbsp;&nbsp;称:
+							</td>
+							<td>
+								<input type="text" name="nickName"  class="easyui-validatebox input-short" data-options="required:true">
+							</td>
+						</tr>
+						<tr>
+							<td &nbsp;>
+								真实姓名:
+							</td>
+							<td>
+								<input type="text" name="realName"  class="easyui-validatebox input-short"  data-options="required:true">
+							</td>
+						</tr>
+						<!--<tr>
+							<td>
+								创建时间:
+							</td>
+							<td>
+								<input class="easyui-validatebox input-short"  data-options="required:true" type="text" name="createTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+							</td>
+						</tr>-->
 				</table>
 			</form>
 		</div>
-		<div style="text-align: center; padding: 5px">
-			<a href="javascript:void(0)" class="easyui-linkbutton"
+		<div style="align: left; padding: 5px">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton"
 				onclick="submitForm()">提交</a> <a href="javascript:void(0)"
 				class="easyui-linkbutton" onclick="clearForm()">重置</a>
 		</div>

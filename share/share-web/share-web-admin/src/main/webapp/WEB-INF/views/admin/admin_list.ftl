@@ -34,7 +34,7 @@
 		}
 	}
 	function formatOperation(val,row) {
-		var operation = '<a href="${path}/admin/toAdminEdit.mins?labelId='+val+'">修改</>';
+		var operation = '<a href="${path}/admin/toAdminEdit.mins?adminId='+val+'">修改</>';
 		operation += '&nbsp;&nbsp;&nbsp;';
 		operation += '<a href="#" onclick="deleteConfirm('+val+')">删除</>';
 		return operation;
@@ -67,14 +67,14 @@
 		    }
 		});
 	};
-	function deleteConfirm(labelId){
+	function deleteConfirm(adminId){
 		$.messager.confirm('删除提示', '您确认删除此管理员吗?', function(r){
 			if(!r) {
 				return;
 			}
-			var queryParams = {"labelId":labelId};
+			var queryParams = {"adminId":adminId};
 			jQuery.ajax({
-			    url: '${path}/admin/adminLabelDelete.mins',
+			    url: '${path}/admin/adminDelete.mins',
 			    data: queryParams,
 			    type: "POST",
 			    dataType: "text",
@@ -89,7 +89,7 @@
 		});
 	}
 </script>
-<title>Mins5</title>
+<title>Mins5后台管理</title>
 </head>
 <body>
 	<div class="curPosition"><span class="sys-nav"><em>当前位置：管理员管理</em></span></div>
