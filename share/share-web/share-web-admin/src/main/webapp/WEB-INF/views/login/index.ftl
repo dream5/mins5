@@ -7,17 +7,9 @@
 <style>body{overflow-y:auto;}</style>
 <#include "common/common_js.ftl" />
 <script language="javascript">
-function window.onload() {
-	if( document.location.search.indexOf("monkey")>0 ) {
-		loginForm.userName.value = "dev11";
-		document.all.random.value = document.getElementById('tmp').innerHTML;
-		document.all.password.value = "000000";
-		document.all.monkey.value = "Y";
-		loginForm.submit();
-	}
+function onload() {
 	loginForm.userName.select();
 	loginForm.userName.focus();
-	
 }
 
 function submitForm(){
@@ -34,9 +26,9 @@ function submitForm(){
 </script>
 <script type="text/javascript">
 	var msg = '${msg}';
-	function window.onload() {
+	function onload() {
 		if(msg != null && msg !=''){
-			alert(msg.length());
+			alert(msg);
 		}
 	}
 </script>
