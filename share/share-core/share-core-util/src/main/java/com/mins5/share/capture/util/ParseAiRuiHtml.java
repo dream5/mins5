@@ -2,6 +2,7 @@ package com.mins5.share.capture.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,24 +26,17 @@ public class ParseAiRuiHtml extends BaseParseUtil {
 		article.setArticleAuthor(author[1].trim());
 		article.setArticleFrom(author[0].trim());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		System.out.println(author[2]);
 		if (!StringUtils.isEmpty(author[2])) {
 			try {
 				article.setCreateTime(sdf.parse(author[2].trim()));
 			} catch (ParseException e) {
+				article.setCreateTime(new Date());
 				log.error("解析发表时间异常：[" + e.toString() + "]");
 			}
 		}
+		article.setIsOriginal("0");
+		article.setStatus("0");
 		article.setArticleContent(getAiruiArticleContent(html));
-
-		System.out.println("###################################");
-		System.out.println("title:" + article.getArticleTitle());
-		System.out.println("author:" + article.getArticleAuthor());
-		System.out.println("from:" + article.getArticleFrom()); //
-		System.out.println("createTime:" + article.getCreateTime().toLocaleString());
-		System.out.println("content:" + article.getArticleContent());
-		System.out.println("###################################");
-
 		return article;
 
 	}
