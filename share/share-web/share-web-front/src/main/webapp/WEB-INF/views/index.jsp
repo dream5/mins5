@@ -73,7 +73,7 @@
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
           		</p>
-          		<c:if test="${not empty article.articleTitle}">
+          		<c:if test="${not empty article.articleUrl}">
           			 <img src="${article.articleUrl}" width="613px" height="193px" alt="${article.articleTitle}" />
           		</c:if>
          		<div class="cline"></div>
