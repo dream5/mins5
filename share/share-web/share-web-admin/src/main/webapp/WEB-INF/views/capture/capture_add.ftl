@@ -233,6 +233,13 @@
 			<div style="padding: 10px 0 10px 60px">
 				<form id="captureForm" method="post" action="${path}/capture/beginCapture.mins">
 					<table>
+						<!--<tr>
+							<td>模板:</td>
+							<td>
+								<input type="radio" name="template" value="yixieshi"/>一些事
+								<input type="radio" name="template" value="airui"/>艾瑞
+							</td>
+						</tr>-->
 						<tr>
 							<td>URL:</td>
 							<td><textarea class="easyui-validatebox textarea-article"
