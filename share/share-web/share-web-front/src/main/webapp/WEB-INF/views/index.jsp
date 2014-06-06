@@ -178,6 +178,7 @@
 		});
 		
 		$(".main img").lazyload({
+			placeholder : "${context}/images/loading.gif",
 			effect      : "fadeIn"
 		});
 		
