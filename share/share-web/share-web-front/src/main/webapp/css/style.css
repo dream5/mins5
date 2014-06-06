@@ -280,6 +280,7 @@ a.rm, a.com {
 .content p.links {
 	background: url(/images/li_a.gif) left no-repeat;
 	padding: 0 0 0 15px;
+	float: right;
 }
 ul.sb_menu, ul.ex_menu {
 	margin: 0;
