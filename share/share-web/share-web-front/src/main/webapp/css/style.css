@@ -38,7 +38,7 @@ h1 {
 	letter-spacing: -2px;
 }
 h1 a, h1 a:hover {
-	color: #0F67A1;
+	color: #2AABFC;
 	text-decoration: none;
 }
 h1 span {
@@ -62,7 +62,7 @@ h2 {
 p {
 	margin: 8px 0;
 	padding: 0 0 8px 0;
-	font: normal 12px/1.8em Arial, Helvetica, sans-serif;
+	font: normal 15px/1.8em Arial, Helvetica, sans-serif;
 }
 p.spec {
 	text-align: right;
