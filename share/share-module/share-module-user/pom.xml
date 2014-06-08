@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.mins5</groupId>
-    <artifactId>share-module</artifactId>
+    <artifactId>share-parent</artifactId>
     <version>1.0</version>
   </parent>
   <artifactId>share-module-user</artifactId>
