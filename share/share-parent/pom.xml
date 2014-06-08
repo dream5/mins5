@@ -17,8 +17,8 @@
   		<id>dev</id>
   		<properties>
   			<jdbc.url>jdbc:mysql://localhost:3306/share</jdbc.url>
-		  	<jdbc.user>dreamfive4321</jdbc.user>
-		  	<jdbc.password>123456</jdbc.password>
+		  	<jdbc.user>root</jdbc.user>
+		  	<jdbc.password>dreamfive4321</jdbc.password>
 		  	<share.project.version>1.0</share.project.version>
   		</properties>
   	</profile>
