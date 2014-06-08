@@ -3,11 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.mins5</groupId>
-    <artifactId>share</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>share-parent</artifactId>
+    <version>1.0</version>
   </parent>
   <artifactId>share-module</artifactId>
   <packaging>pom</packaging>
+  <version>${share.project.version}</version>
+  
   <modules>
   	<module>share-module-admin</module>
   	<module>share-module-user</module>

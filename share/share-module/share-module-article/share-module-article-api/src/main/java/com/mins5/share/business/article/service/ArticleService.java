@@ -114,6 +114,17 @@ public interface ArticleService {
 	ReturnData<Article> saveArticle(Article article, List<Long> articleKindIdList, List<Long> articleLabelIdList);
 
 	/**
+	 * 修改文章
+	 * 
+	 * @param article
+	 * @return
+	 * 
+	 * @author zhoutian
+	 * @since 2014年6月8日
+	 */
+	ReturnData<Article> updateArticle(Article article);
+
+	/**
 	 * 根据id删除文章（逻辑删除）
 	 * 
 	 * @author zhoutian

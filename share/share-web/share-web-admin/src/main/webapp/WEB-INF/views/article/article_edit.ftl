@@ -4,8 +4,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <#include "common/common_js.ftl" />
+<script type="text/javascript" src="${path}/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" src="${path}/js/kindeditor/lang/zh_CN.js"></script>
 <script type="text/javascript">
 	function submitForm() {
+		
+		// 取得HTML内容
+		var articleContent = editor.html();
+		articleContent = $.trim(articleContent);
+		if(articleContent == "") {
+			$.messager.alert('提示','文章内容不能为空!','warning');
+			return;
+		}
+		
+		// 同步数据后可以直接取得textarea的value
+		window.editor.sync();
+	
 		$('#articleFormId').form('submit', {
 			//	url:...,
 			onSubmit : function() {
@@ -16,7 +30,7 @@
 				return isValid;
 			},
 			success : function(data) {
-				clearForm();
+				// clearForm();
 				$("#tip").html(data);
 			}
 		});
@@ -31,6 +45,21 @@
 	}
 	$(document).ready(function() {
 		init();
+		
+		KindEditor.ready(function(K) {
+        	window.editor = K.create('#editor_id', {
+    			items : [
+					'source', '|', 'undo', 'redo', '|', 'preview', /*'print', 'template', 'code',*/ 'cut', 'copy', 'paste',
+					'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+					'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+					'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+					'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', /*'image', 'multiimage',*/
+					/*'flash', 'media',*/ 'insertfile', 'table', 'hr', /*'emoticons', 'baidumap', 'pagebreak',*/
+					'anchor', 'link', 'unlink'/*, '|', 'about'*/
+				]
+			});
+        });
 	});
 </script>
 <title>Mins5后台管理</title>
@@ -43,8 +72,8 @@
 	</div>
 	<div class="easyui-panel" title="修改文章" data-options="iconCls:'icon-edit'">
 		<div style="padding: 10px 0 10px 60px">
-			<form id="articleFormId" method="post"
-				action="${path}/article/articleEdit.mins">
+			<form id="articleFormId" method="post" action="${path}/article/articleEdit.mins">
+			<input type="hidden" name="articleId" value="${article.articleId }" />
 				<table>
 					<tr>
 						<td>标题:</td>
@@ -77,8 +106,9 @@
 					</tr>
 					<tr>
 						<td>内容:</td>
-						<td><textarea class="easyui-validatebox textarea-article"
-								name="articleContent" data-options="required:true" style="width: 800px;height: 500px;">${article.articleContent }</textarea></td>
+						<td>
+							<textarea id="editor_id" name="articleContent" style="width: 800px;height: 500px;">${article.articleContent }</textarea>
+						</td>
 					</tr>
 				</table>
 			</form>

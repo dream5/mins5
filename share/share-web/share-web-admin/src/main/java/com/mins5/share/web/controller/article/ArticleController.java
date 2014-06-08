@@ -241,8 +241,32 @@ public class ArticleController {
 		return mv;
 	}
 
-	public void articleEdit() {
+	/**
+	 * 修改文章
+	 * 
+	 * @param response
+	 * @param article
+	 * 
+	 * @author zhoutian
+	 * @since 2014年6月8日
+	 */
+	@RequestMapping(value = "/articleEdit")
+	public void articleEdit(HttpServletResponse response, Article article) {
+		try {
+			Date currentDate = new Date();
+			article.setUpdateTime(currentDate);
 
+			ReturnData<Article> returnData = articleService.updateArticle(article);
+
+			String tip = "修改成功！";
+			if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
+				tip = "修改失败！";
+			}
+			JsonUtils.write(tip, response);
+		} catch (Exception e) {
+			log.error("修改失败！", e);
+			JsonUtils.write("修改失败！", response);
+		}
 	}
 
 	/**

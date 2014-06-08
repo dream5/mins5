@@ -367,6 +367,27 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
+	public ReturnData<Article> updateArticle(Article article) {
+		ReturnData<Article> returnData = new ReturnData<Article>();
+
+		if (article == null || article.getArticleId() == null) {
+			returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+			return returnData;
+		}
+
+		try {
+			articleDao.update(article);
+			returnData.setResultData(article);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+			return returnData;
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
+	}
+
+	@Override
 	public ReturnData<List<Article>> findRandomArticle(int amount) {
 		ReturnData<List<Article>> returnData = new ReturnData<List<Article>>();
 		try {

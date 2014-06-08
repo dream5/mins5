@@ -7,8 +7,22 @@
 <link rel="stylesheet" type="text/css" href="${path}/js/uploadify/uploadSend.css">
 <script type="text/javascript" src="${path}/js/uploadify/swfobject.js"></script>
 <script type="text/javascript" src="${path}/js/uploadify/jquery.uploadify.v2.1.4.js"></script>
+<script type="text/javascript" src="${path}/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" src="${path}/js/kindeditor/lang/zh_CN.js"></script>
 <script type="text/javascript">
 	function submitForm() {
+	
+		// 取得HTML内容
+		var articleContent = editor.html();
+		articleContent = $.trim(articleContent);
+		if(articleContent == "") {
+			$.messager.alert('提示','文章内容不能为空!','warning');
+			return;
+		}
+		
+		// 同步数据后可以直接取得textarea的value
+		window.editor.sync();
+	
 		$('#articleFormId').form('submit', {
 			//	url:...,
 			onSubmit : function() {
@@ -48,6 +62,21 @@
 	$(document).ready(function() {
 		initArticleLabel();
 		initArticleKind();
+		
+		KindEditor.ready(function(K) {
+        	window.editor = K.create('#editor_id', {
+    			items : [
+					'source', '|', 'undo', 'redo', '|', 'preview', /*'print', 'template', 'code',*/ 'cut', 'copy', 'paste',
+					'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+					'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+					'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+					'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', /*'image', 'multiimage',*/
+					/*'flash', 'media',*/ 'insertfile', 'table', 'hr', /*'emoticons', 'baidumap', 'pagebreak',*/
+					'anchor', 'link', 'unlink'/*, '|', 'about'*/
+				]
+			});
+        });
 	});
 </script>
 <title>Mins5后台管理</title>
@@ -122,8 +151,9 @@
 					</tr>
 					<tr>
 						<td>内容:</td>
-						<td><textarea class="easyui-validatebox textarea-article"
-								name="articleContent" data-options="required:true" style="width: 800px;height: 500px;"></textarea></td>
+						<td>
+							<textarea id="editor_id" name="articleContent" style="width: 800px;height: 500px;"></textarea>
+						</td>
 					</tr>
 					<tr>
 						<td>上传相关图片:</td>
@@ -159,7 +189,7 @@
 		</div>
 	</div>
 	</div>
-	<script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
 
 	//上传图片
