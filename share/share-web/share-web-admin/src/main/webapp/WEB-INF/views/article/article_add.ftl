@@ -82,7 +82,7 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div class="curPosition"><span class="sys-nav"><em>当前位置：新增文章</em></span></div>
+	<div class="curPosition"><span class="sys-nav"><em>当前位置：新增文章</em></span><span style="float:right;"><a href="javascript:history.go(-1);">返回上一步</a></span></div>
 	<div class="content">
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
