@@ -147,7 +147,7 @@
 			<if test="isOriginal != null">AND is_original = #{isOriginal}</if>
 			<!-- <if test="true">AND is_valid = 1</if> -->
 		</where>
-		order by create_time desc
+		order by article_id desc
 		LIMIT #{startRow}, #{onePageSize}
 	</select>
 	
