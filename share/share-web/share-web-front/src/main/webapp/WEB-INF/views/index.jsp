@@ -4,8 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>互联网资讯</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Window-Target" content="_top"/>
+<meta name="robots" content="all"/>
+<meta name="author" content="mins five"/>
+<meta name="copyright" content="mins five"/>
+<meta name="Description" content="全面关注国内外互联网的最前沿资讯，分享互联网创业、移动互联网、互联网金融、微信营销、网站产品运营等海量资讯。" />
+<meta name="Keywords" content="互联网，移动互联网，互联网金融，微信营销，手游资讯"/>
+<title>关注国内外互联网的最前沿资讯—Mins Five</title>
 <link href="${context}/css/style.css" rel="stylesheet" type="text/css" />
 <link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="bookmark" type="image/x-icon" /> 
 <link href="${context}/favicon.ico" mce_href="${context}/favicon.ico" rel="icon" type="image/x-icon" /> 
