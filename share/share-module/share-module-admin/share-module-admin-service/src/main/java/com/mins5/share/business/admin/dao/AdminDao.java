@@ -16,12 +16,14 @@ import com.mins5.share.common.dao.CrudDao;
 @Service
 public interface AdminDao extends CrudDao<Long, Admin> {
 
-	Admin findByUserNameAndPassword(@Param("userName") String userMame, @Param("password") String password);
+	Admin findByUserName(@Param("userName") String userName);
 
 	int checkUserName(String userMame);
 
+	int updateAdminPassword(@Param("adminId") long adminId, @Param("password") String password);
+
 	/**
-	 * 根据Admin对象查询
+	 * 根据admin对象查询
 	 * 
 	 * @author chenry
 	 * @since 2014年3月13日
