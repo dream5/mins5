@@ -37,8 +37,20 @@
 		select * from admin where admin_id = #{adminId}
 	</select>
 	
-	<select id="findByUserNameAndPassword" resultMap="AdminMap">
-		select * from admin where user_name = #{userName} and password = #{password}
+	<update id="updateAdminPassword">
+        UPDATE admin 
+        <set>
+            <if test="password''">password= #{password}</if>
+        </set>
+        WHERE admin_id = #{adminId}
+    </update>
+	
+	<select id="checkUserName" parameterType="string" resultType="int">
+		select count(1) from admin where user_name = #{userName} 
+	</select>
+	
+	<select id="findByUserName" resultMap="AdminMap">
+		select * from admin where user_name = #{userName} 
 	</select>
 	
 	<!-- 用于select查询公用抽取的列 -->

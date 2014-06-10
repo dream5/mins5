@@ -165,14 +165,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ReturnData<Admin> findByUserNameAndPassword(String username, String password) {
+	public ReturnData<Admin> findByUserName(String username) {
 		ReturnData<Admin> returnData = new ReturnData<Admin>();
 		try {
-			if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+			if (StringUtils.isEmpty(username)) {
 				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
 				return returnData;
 			}
-			Admin Admin = adminDao.findByUserNameAndPassword(username, password);
+			Admin Admin = adminDao.findByUserName(username);
 			returnData.setResultData(Admin);
 			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
 		} catch (Exception e) {
@@ -183,8 +183,21 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int checkUserName(String userMame) {
-		return adminDao.checkUserName(userMame);
+	public ReturnData<Boolean> checkUserName(String userName) {
+		ReturnData<Boolean> returnData = new ReturnData<Boolean>();
+		try {
+			if (StringUtils.isEmpty(userName)) {
+				returnData.setReturnCode(ReturnCode.PARAM_ERROR.getCode());
+				return returnData;
+			}
+			int result = adminDao.checkUserName(userName);
+			returnData.setResultData(result > 0 ? true : false);
+			returnData.setReturnCode(ReturnCode.SUCCESS.getCode());
+		} catch (Exception e) {
+			log.error("service exception", e);
+			returnData.setReturnCode(ReturnCode.EXCEPTION.getCode());
+		}
+		return returnData;
 	}
 
 }
