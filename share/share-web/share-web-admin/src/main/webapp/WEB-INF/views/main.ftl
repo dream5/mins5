@@ -7,18 +7,7 @@
 <title></title>
 </head>
 <body class="easyui-layout">
-	<div region="north" border="true" class="cs-north">
-		<div class="cs-north-bg">
-		<div class="cs-north-logo"><!--Mins5 后台管理系统--></div>
-		<ul class="ui-skin-nav">				
-			<li class="li-skinitem" title="gray"><span class="gray" rel="gray"></span></li>
-			<li class="li-skinitem" title="default"><span class="default" rel="default"></span></li>
-			<li class="li-skinitem" title="bootstrap"><span class="bootstrap" rel="bootstrap"></span></li>
-			<li class="li-skinitem" title="black"><span class="black" rel="black"></span></li>
-			<li class="li-skinitem" title="metro"><span class="metro" rel="metro"></span></li>
-		</ul>	
-		</div>
-	</div>
+<#include "frame/top.ftl" />
 	<div region="west" border="true" split="true" title="Navigation" class="cs-west">
 		<div class="easyui-accordion" fit="true" border="false">
 				<div title="基础管理" data-options="iconCls:'sys-article'">
@@ -312,7 +301,7 @@
         </div>
 	</div>
 
-	<div region="south" border="false" id="south"><center>Made in Mins5</center></div>
+<#include "frame/footer.ftl" />
 	
 	<div id="mm" class="easyui-menu cs-tab-menu">
 		<div id="mm-tabupdate">刷新</div>
