@@ -18,13 +18,18 @@ jQuery(document).ready(function($) {
 		$('.theme-popover').slideUp(200);
 	})
 
-})
-</script>
-<script language="javascript">
-function onload() {
 	loginForm.userName.select();
 	loginForm.userName.focus();
-}
+	
+	//验证码事件绑定
+	var picSrc = "${path}/randomImage";
+	$("#imgCode").attr("title", "点击重新获得验证码!");
+	$("#imgCode").attr("src", picSrc);
+	//点击验证码图片
+	$("#imgCode").click(function(){
+		$(this).attr("src", picSrc + "?r=" + Math.random());
+	});
+})
 
 function submitForm(){
 			if($.trim($("#userName").val())=='') {
@@ -101,9 +106,9 @@ function submitForm(){
                      <li><strong>用户名：</strong><input class="ipt" type="text" id="userName" name="userName" maxlength="10" size="20" value="admin" onkeypress="if(event.keyCode == 13){loginForm.querypwd.focus();}"></li>
                      <li><strong>密码：</strong><input class="ipt" type="password" id="password"  name="password"  onkeypress="if(event.keyCode == 13){loginForm.random.focus();}"></li>
                      <li><strong>随机码：</strong> <input id="random" class="ipt" name="random" onkeypress="if(event.keyCode == 13){submitForm();}" style="width:30%;" maxLength="4" size="20"  value="">	
-	                   <img src="${path}/randomImage"> 
+	                   <img src="${path}/randomImage" id="imgCode"> 
 	                 </li>
-                     <li><input class="btn btn-primary" type="submit" name="submit" value=" 登 录 " onClick="submitForm();"/></li>
+                     <li><input class="btn btn-primary" type="submit" name="submit" value=" 登 录 " onClick="submitForm();" style="height:40px;"/></li>
                 </ol>
            </form>
      </div>
