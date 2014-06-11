@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
  * @since 2014年6月10日
  */
 public class MD5 {
+
 	/**
 	 * MD5转换成16进制字符串需要的基础数据。
 	 */
@@ -50,7 +51,7 @@ public class MD5 {
 	 * @throws NoSuchAlgorithmException 函数抛出的错误，表示不支持该种算法。
 	 * @return String 转换结果字符串
 	 */
-	public String encode(String oriStr) {
+	public static String encode(String oriStr) {
 		String tarStr = null;
 		try {
 			MessageDigest md = null;
