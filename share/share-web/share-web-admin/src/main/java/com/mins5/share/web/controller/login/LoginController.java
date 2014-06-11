@@ -23,10 +23,10 @@ import com.mins5.share.business.admin.domain.Admin;
 import com.mins5.share.business.admin.service.AdminService;
 import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
+import com.mins5.share.util.MD5;
 import com.mins5.share.web.common.Configger;
 import com.mins5.share.web.common.Constants;
 import com.mins5.share.web.filter.ApplicationManager;
-import com.mins5.share.web.util.WebUtils;
 
 /**
  * 
@@ -49,11 +49,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login")
-	public ModelAndView login(HttpServletRequest request, String username, String password) {
-		String userName = WebUtils.getParameter(request, "userName");
-		String pwd = WebUtils.getParameter(request, "password");
-		String randm = WebUtils.getParameter(request, "random");
-
+	public ModelAndView login(HttpServletRequest request, String userName, String password, String random) {
 		Admin admin = new Admin();
 		admin.setUserName(userName);
 		admin.setPassword(password);
@@ -61,11 +57,28 @@ public class LoginController {
 		ModelAndView view = new ModelAndView("redirect:main.mins");
 		view.addObject("systemLongUrl", Configger.getString("system.login.url"));
 
+		ReturnData<Admin> returnData = adminService.findByUserName(userName);
+		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
+			view = new ModelAndView("login/index");
+			view.addObject("msg", "查询出错!");
+			//commonResult.setHrefUrl(ConstantsWeb.webUrl + "/manager");
+			return view;
+		}
+
+		// 判断登陆密码
+		String adminPassword = returnData.getResultData().getPassword();
+		if (!MD5.encode(password).equals(adminPassword)) {
+			view = new ModelAndView("login/index");
+			view.addObject("msg", "登录失败,您输入的登陆密码错误!");
+			view.addObject(admin);
+			return view;
+		}
+
 		// 判断随机码 begin
 		HttpSession session = request.getSession();
-		String random = (String) session.getAttribute(Constants.RANDOM_TOKEN);
+		String randomToken = (String) session.getAttribute(Constants.RANDOM_TOKEN);
 		session.removeAttribute(Constants.RANDOM_TOKEN);
-		if (!randm.equals(random)) {
+		if (!randomToken.equals(random)) {
 			view = new ModelAndView("login/index");
 			view.addObject("msg", "登录失败,您输入的随机码错误!");
 			view.addObject(admin);
@@ -79,21 +92,24 @@ public class LoginController {
 //		String hostIPPort = hostIP + ":" + hostPort;
 //		log.info("IPPORT:" + hostIPPort);
 
-		ReturnData<Admin> returnData = adminService.findByUserNameAndPassword(userName, pwd);
-		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
-			view = new ModelAndView("login/index");
-			view.addObject("msg", "查询错误!");
-			//commonResult.setHrefUrl(ConstantsWeb.webUrl + "/manager");
-			return view;
-		}
 		log.info(userName + "登陆成功!");
+		session.setAttribute("loginUserName", userName);
 		ApplicationManager.put(userName, request.getSession().getId());
+		return view;
+	}
+
+	@RequestMapping(value = "/logout")
+	public ModelAndView logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		log.info(session.getAttribute("loginUserName") + "退出!");
+		session.removeAttribute("loginUserName");
+		ApplicationManager.remove2(session);
+		ModelAndView view = new ModelAndView("login/index");
 		return view;
 	}
 
 	@RequestMapping(value = "/main")
 	public ModelAndView main(HttpServletRequest request) {
-		adminService.findAdminById(1L);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		return mav;
@@ -108,7 +124,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "login/checkUserName", method = RequestMethod.POST)
 	public void checkUserName(HttpServletResponse response, String userName) {
-		//String result = unionRegisterService.checkUserName(userName) ? userName : "0";
+		boolean isHave = (adminService.checkUserName(userName)).getResultData();
 		String result = "";
 		PrintWriter out = null;
 		try {
