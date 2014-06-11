@@ -122,7 +122,7 @@ public class LoginController {
 	 * @param userName
 	 * @return
 	 */
-	@RequestMapping(value = "login/checkUserName", method = RequestMethod.POST)
+	@RequestMapping(value = "/checkUserName", method = RequestMethod.POST)
 	public void checkUserName(HttpServletResponse response, String userName) {
 		boolean isHave = (adminService.checkUserName(userName)).getResultData();
 		String result = "";
