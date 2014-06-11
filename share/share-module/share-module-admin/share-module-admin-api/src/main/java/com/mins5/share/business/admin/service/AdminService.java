@@ -76,8 +76,8 @@ public interface AdminService {
 	 */
 	ReturnPageData<List<Admin>> findAdminListByModel(Admin admin, int currentPage, int onePageSize);
 
-	ReturnData<Admin> findByUserNameAndPassword(String username, String password);
+	ReturnData<Admin> findByUserName(String username);
 
-	int checkUserName(String userMame);
+	ReturnData<Boolean> checkUserName(String userMame);
 
 }
