@@ -24,6 +24,7 @@ import com.mins5.share.common.service.ReturnPageData;
 import com.mins5.share.util.DateUtils;
 import com.mins5.share.util.EasyUIUtils;
 import com.mins5.share.util.JsonUtils;
+import com.mins5.share.util.MD5;
 
 /**
  * 
@@ -106,6 +107,7 @@ public class AdminController {
 	public void adminAdd(HttpServletResponse response, Admin admin) {
 		Date currentDate = new Date();
 		admin.setCreateTime(currentDate);
+		admin.setPassword(MD5.encode(admin.getPassword()));
 		ReturnData<Admin> returnData = adminService.saveAdmin(admin);
 		String tip = "添加成功！";
 		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
@@ -144,6 +146,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/adminEdit")
 	public void adminEdit(HttpServletResponse response, Admin admin) {
+		admin.setPassword(MD5.encode(admin.getPassword()));
 		ReturnData<Admin> returnData = adminService.updateAdmin(admin);
 		String tip = "修改成功！";
 		if (returnData.getReturnCode() != ReturnCode.SUCCESS.getCode()) {
