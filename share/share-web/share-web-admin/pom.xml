@@ -42,6 +42,14 @@
   		<groupId>com.mins5</groupId>
   		<artifactId>share-module-article-service</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>com.mins5</groupId>
+  		<artifactId>share-UI</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.mins5</groupId>
+  		<artifactId>share-ehcache</artifactId>
+  	</dependency>
 	
 	<dependency>
   		<groupId>javax.servlet</groupId>
@@ -65,7 +73,6 @@
   		<groupId>org.freemarker</groupId>
   		<artifactId>freemarker</artifactId>
 	</dependency>
-	
   </dependencies>
  
 </project>
