@@ -10,17 +10,17 @@
 		<jdbc.url>jdbc:mysql://localhost:3306/share</jdbc.url>
 		<jdbc.user>root</jdbc.user>
 		<jdbc.password>123456</jdbc.password>
-		<com.mins5.version>1.0</com.mins5.version>
+		<share.project.version>1.0</share.project.version>
 
 		<!-- 公告说明 chenry -->
 		<!-- 所有引用依赖版本号，约定优先配置，一出引用，多出使用，所有按约定来！！！ -->
 		<!-- 添加jar时，写上标注！！！ -->
-		
+
 		<!-- ehcache緩存 -->
 		<net.sf.ehcache.version>2.7.4</net.sf.ehcache.version>
-		
+
 		<org.springframework.version>3.2.5.RELEASE</org.springframework.version>
-		<javax.servlet.version>javax.servlet.jsp.version2.5</javax.servlet.version>
+		<javax.servlet.version>2.5</javax.servlet.version>
 		<javax.servlet.jsp.version>2.0</javax.servlet.jsp.version>
 		<junit.version>4.9</junit.version>
 		<org.aspectj.verion>1.7.4</org.aspectj.verion>
@@ -65,59 +65,65 @@
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-core-common</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-core-util</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-module-admin-api</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-module-admin-service</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-module-user-api</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-module-user-service</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-module-article-api</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-module-article-service</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-UI</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.mins5</groupId>
 				<artifactId>share-ehcache</artifactId>
-				<version>${com.mins5.version}</version>
+				<version>${share.project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
 				<version>${javax.servlet.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet.jsp</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>${javax.servlet.jsp.version}</version>
 			</dependency>
 
 			<dependency>
@@ -285,22 +291,22 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
-				<version>${org.apache.httpcomponents}</version>
+				<version>${org.apache.httpcomponents.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient-cache</artifactId>
-				<version>${org.apache.httpcomponents}</version>
+				<version>${org.apache.httpcomponents.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpmime</artifactId>
-				<version>${org.apache.httpcomponents}</version>
+				<version>${org.apache.httpcomponents.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>fluent-hc</artifactId>
-				<version>${org.apache.httpcomponents}</version>
+				<version>${org.apache.httpcomponents.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
