@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd" default-autowire="byName">
+	
+	<bean id="myDbUtils" class="com.mins5.share.common.util.MyDbUtils">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	    	
+  	<!-- 缓存使用 -->
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation">
+            <value>classpath:ehcache.xml</value>
+        </property>
+     </bean>
+	 
+	  <bean id="cacheManager" class="com.mins5.ehcache.EHCacheManager" destroy-method="shutdown" init-method="initialize" lazy-init="false">
+        <property name="ehCacheManager" ref="ehCacheManager"/>
+        <property name="dbUtils" ref="myDbUtils"></property>
+		<property name="configuration">
+			<list>
+				<!-- V_DOMAIN表的缓存，缓存id-list -->
+				<bean class="com.mins5.ehcache.TableCacheConfig">
+					<property name="cacheName" value="table.cache.idlist.vdomain" />
+					<property name="sql" value="SELECT * FROM V_DOMAIN" />
+					<property name="cacheType" value="ID_LIST" />
+					<property name="entityClass" value="com.mins5.ehcache.entity" />
+					<property name="keyProperty" value="tableName columnName" />
+					<property name="configuration">
+						<bean class="net.sf.ehcache.config.CacheConfiguration">
+							<property name="maxElementsInMemory" value="10000" />
+							<property name="eternal" value="false" />
+							<property name="overflowToDisk" value="false" />
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	 
+</beans>
