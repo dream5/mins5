@@ -9,7 +9,7 @@
   </parent>
   <groupId>com.mins5</groupId>
   <artifactId>share-UI</artifactId>
-    <version>${share.project.version}</version>
+   <version>${share.project.version}</version>
 
   <name>share-UI</name>
   <url>http://maven.apache.org</url>
@@ -20,6 +20,10 @@
   <dependency>
   		<groupId>com.mins5</groupId>
   		<artifactId>share-core-common</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.mins5</groupId>
+  		<artifactId>share-ehcache</artifactId>
   	</dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -34,6 +38,7 @@
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
