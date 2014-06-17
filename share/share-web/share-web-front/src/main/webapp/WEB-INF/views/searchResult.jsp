@@ -138,7 +138,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           	 <div class="cline"></div>
 	          	<div class="taglist">
 	          		<c:forEach var="label" items="${hotLabelList }">
-            	 		<a href="#" target="_blank" title="${label.labelName}">${label.labelName}</a>
+            	 		<a href="${context}/label/${label.labelId}.html" target="_blank" title="${label.labelName}">${label.labelName}</a>
                     </c:forEach>
 				</div>
 	    </div>
