@@ -212,6 +212,14 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+/* 更新表结构 zhanglin 20140617 */
+alter table attachment change article_id article_id int null;
+
+
+
+
 /*Data for the table `user` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
