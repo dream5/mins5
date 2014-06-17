@@ -54,7 +54,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           </c:if>
           <div class="cline"></div>
          	${article.articleContent}
-          <p class="links"><a href="#" target="_blank">标签</a>,<a href="#" target="_blank">标签</a></p>
+         <!--  <p class="links"><a href="#" target="_blank">标签</a>,<a href="#" target="_blank">标签</a></p> -->
           <c:if test="${not empty preArticle and not empty nextArticle}">
 	          <div class="nextContent">
 		          <p>
@@ -81,16 +81,6 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 				  </p>
 			  </div>
 		  </c:if>
-		  <!-- baidu share begin-->
-			  <div class="bdsharebuttonbox" style="float:right;">
-				<a href="#" class="bds_more" data-cmd="more"></a>
-				<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-				<a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-				<a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-				<a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
-				<a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-			 </div>
-		 <!-- baidu share end-->
         </div>
          <!-- 多说评论框 start -->
          <div class="article">
@@ -118,10 +108,13 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 							<c:set var="recommendtitle" value="${recommendArticles.articleTitle}"></c:set>	
 					</c:otherwise>
 				</c:choose>
-	          		  <li><a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank">
-	          			  <img src="${context}/images/robots.jpg" alt="${recommendtitle}" />
-	          		  </a>
-	          		  </li>
+				      <c:if test="${not empty recommendArticles.small}">
+					      <li>
+						      <a href="${context}/${recommendArticles.kindPinYin}/${recommendArticles.articleId}.html" target="_blank">
+			          			  <img src="${context}/upload/${recommendArticles.small}" alt="${recommendtitle}" />
+			          		  </a>
+		          		  </li>
+				      </c:if>
 	          	</c:forEach>
     		</ul>
     		</div>
@@ -153,23 +146,25 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
           </ul>
         </div>
         </c:if>
-        <!-- 百度广告位置1 -->
+        <!-- 百度广告位置1
         <div class="rightbox" style="background-image:url(${context}/images/baidu.jpg);height:250px;">
         </div>
+         -->
          <c:if test="${not empty hotLabelList}">
         <div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
           	 <div class="cline"></div>
 	          	<div class="taglist">
 					<c:forEach var="label" items="${hotLabelList }">
-            	 		<a href="#" target="_blank" title="${label.labelName}">${label.labelName}</a>
+            	 		<a href="${context}/label/${label.labelId}.html" target="_blank" title="${label.labelName}">${label.labelName}</a>
                     </c:forEach>
 				</div>
 	          </div>
 	          </c:if>
-	       <!-- 百度广告位置2 -->
+	       <!-- 百度广告位置2 
         <div class="rightbox" style="background-image:url(${context}/images/baidu2.jpg);height:250px;">
-        </div>     
+        </div>
+      	  -->
       </div>
       <div class="cline"></div>
     </div>
