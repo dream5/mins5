@@ -60,7 +60,7 @@
 		<init-param>
 			<param-name>obviablePath</param-name>
 			<param-value>
-				/index.mins,/login.mins,/index.jsp,/pwdRestoreAction.go
+				/index.mins,/login.mins,/index.jsp,/pwdRestoreAction.go,/upload/beginUpload.mins
 			</param-value>
 		</init-param>
 	</filter>
