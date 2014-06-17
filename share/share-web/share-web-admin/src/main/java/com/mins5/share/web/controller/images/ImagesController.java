@@ -52,18 +52,22 @@ public class ImagesController {
 	public void BeginUpload(HttpServletRequest request, HttpServletResponse response) {
 		Map alist = UploadUtil.singleFileUpload(request);
 		// 上传信息保存到数据库
-		Attachment attachment = new Attachment();
-		attachment.setAttachmenSts("1");// 图片没有审核，直接通过状态
-		attachment.setAttachmentName(alist.get("newName").toString());
-		attachment.setAttachmentOldName(alist.get("oldName").toString());
-		attachment.setAttachmentType(alist.get("type").toString());
-		attachment.setCreateDate(new Date());
-		attachment.setLarge(alist.get("large").toString());
-		attachment.setMidSize(alist.get("midSize").toString());
-		attachment.setSmall(alist.get("small").toString());
-		ReturnData<Attachment> attamentData = attachmentService.saveAttachment(attachment);
-		Attachment attachmentWithId = attamentData.getResultData();
-		alist.put("attachmentId", attachmentWithId.getAttachmentId());
+		try {
+			Attachment attachment = new Attachment();
+			attachment.setAttachmenSts("1");// 图片没有审核，直接通过状态
+			attachment.setAttachmentName(alist.get("newName").toString());
+			attachment.setAttachmentOldName(alist.get("oldName").toString());
+			attachment.setAttachmentType(alist.get("type").toString());
+			attachment.setCreateDate(new Date());
+			attachment.setLarge(alist.get("large").toString());
+			attachment.setMidSize(alist.get("midSize").toString());
+			attachment.setSmall(alist.get("small").toString());
+			ReturnData<Attachment> attamentData = attachmentService.saveAttachment(attachment);
+			Attachment attachmentWithId = attamentData.getResultData();
+			alist.put("attachmentId", attachmentWithId.getAttachmentId());
+		} catch (Exception e) {
+			log.error("保存附件信息异常:[" + e.toString() + "]");
+		}
 		JsonUtils.write(alist, response);
 	}
 
