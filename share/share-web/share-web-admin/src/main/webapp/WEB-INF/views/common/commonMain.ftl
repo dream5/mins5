@@ -1,4 +1,6 @@
-<#include "common/common.ftl" />
+<#include "common/head.ftl"><#--模板head部分  -->
+<#import "common/commonMacro.ftl" as layout><#--引用宏 -->
+
 <script type="text/javascript">
 	var currentPage = 1;
 	var onePageSize = 10;
@@ -84,23 +86,33 @@
 		});
 	}
 </script>
-	<div class="curPosition"><span class="sys-nav"><em>当前位置：管理员管理</em></span></div>
-	<div class="content">
-	<table id="dg" class="gridHead">
-		<thead>
-			<tr>
-				<th data-options="field:'userName',width:300,align:'center'">管理员名称</th>
-				<th data-options="field:'nickName',width:100,align:'center'">管理员昵称</th>
-				<!--<th data-options="field:'status',width:100,align:'center'">管理员实际姓名</th>-->
-				<th data-options="field:'createTime',width:240,align:'center'">管理员创建时间</th>
-				<th data-options="field:'adminId',width:300,align:'center',formatter:formatOperation">操作</th>
-			</tr>
-		</thead>
-	</table>
+	<@layout.titleFuncMacro titleContent="${titleContent!} "/>
 	<div id="tb" style="padding:5px;height:auto">
 		<div style="margin-bottom:5px">
 			<a href="${path}/admin/toAdminAdd.mins" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加管理员</a>
 		</div>
+		
+		<table cellpadding="0" cellspacing="0" border="0" style="width:100%;height:100%;overflow:hidden">
+    	<tr style="height:${((qryDataList?size/rowNum + 0.5)?int) * 16}px;overflow:hidden">
+        <form method="post" id="frm">
+        <td>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabTD-content">
+                <#-- 模板查询项部分 -->
+	            <@layout.qryContentMacro qryDataList=qryDataList! rowNum=rowNum!/>
+            </table>
+        </td>
+        </form>
+    </tr>
+    <tr style="height:20px;overflow:hidden">
+        <td valign="middle" align="center">
+            <#-- 模板按钮部分 -->
+            <@layout.buttonItemMacro params=buttonParams! style=style!"text-align: center" />
+        </td>
+    </tr>
+		</table>
+		
+		
+		
 		<div>
 			用户名: <input id="userName" type="text" style="width:150px">
 			昵称: <input id="nickName" type="text" style="width:150px">
@@ -115,4 +127,18 @@
 			<a href="#" onclick="loadTable();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</div>
 	</div>
-	</div>
+	<div class="content">
+		<table id="dg" class="gridHead">
+			<thead>
+				<tr>
+					<th data-options="field:'userName',width:300,align:'center'">管理员名称</th>
+					<th data-options="field:'nickName',width:100,align:'center'">管理员昵称</th>
+					<!--<th data-options="field:'status',width:100,align:'center'">管理员实际姓名</th>-->
+					<th data-options="field:'createTime',width:240,align:'center'">管理员创建时间</th>
+					<th data-options="field:'adminId',width:300,align:'center',formatter:formatOperation">操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>  
+</body>
+</html>

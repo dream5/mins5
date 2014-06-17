@@ -35,5 +35,11 @@
 		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
 		<property name="idleConnectionTestPeriod" value="60"/>
   	</bean>
+	
+	<bean id="myDbUtils" class="com.mins5.share.common.util.MyDbUtils">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	 <!-- cacheDataUtil -->
+    <bean id="cacheDataUtil" class="com.mins5.ehcache.CacheDataUtilManager"/>
 	 
 </beans>

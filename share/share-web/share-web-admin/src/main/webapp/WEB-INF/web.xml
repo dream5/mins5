@@ -3,6 +3,14 @@
   
   	<display-name>share-web-admin</display-name>
 
+<!-- 注册JSTL函数 -->
+  <jsp-config>
+    <taglib>
+        <taglib-uri>/tld</taglib-uri>
+        <taglib-location>/WEB-INF/tld/webPagetag.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -12,11 +20,17 @@
 			,classpath*:applicationContext-article.xml
 		</param-value>
 	</context-param>
-	
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	
+	 
+	  <!-- Spring的ApplicationContext载入 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Spring刷新Introspector防止内存泄露 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+	 
 	<listener>
 		<listener-class>
 			com.mins5.share.web.filter.WebApplicationLisener
@@ -27,6 +41,9 @@
 			com.mins5.share.web.filter.WebSessionListener
 		</listener-class>
 	</listener>
+	<listener>  
+		<listener-class>freemarker.ext.jsp.EventForwarding</listener-class>  
+	</listener> 
 	
 	<filter>
    		<filter-name>encodingFilter</filter-name>
@@ -81,7 +98,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 	  		<param-name>contextConfigLocation</param-name>
-	  		<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+	  		<param-value>/WEB-INF/spring-mvc/dispatcher-servlet.xml</param-value>
     	</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

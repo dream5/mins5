@@ -1,4 +1,9 @@
 <#include "common/common.ftl" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<#include "common/common_js.ftl" />
 <script type="text/javascript" src="${path}/js/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function submitForm() {
@@ -24,7 +29,7 @@
 <title>Mins5后台管理</title>
 </head>
 <body>
-	<div class="curPosition"><span class="sys-nav"><em>当前位置：新增管理员</em></span></div>
+	<div class="curPosition"><span class="sys-nav"><em>当前位置：修改管理员</em></span></div>
 	<div class="content">
 	<div style="margin: 10px 0;">
 		<span id="tip" style="color: red"></span>
@@ -33,13 +38,14 @@
 		<div style="padding: 10px 0 10px 60px">
 			<form id="adminFormId" method="post"
 				action="${path}/admin/adminAdd.mins">
+				<input name="adminId" type="hidden" value="${admin.adminId }">
 				<table>
 						<tr>
 							<td align="right">
 								用户名:
 							</td>
 							<td>
-								<input type="text" name="userName"  class="easyui-validatebox input-short"  data-options="required:true">
+								<input type="text" name="userName"  value="${admin.userName }" class="easyui-validatebox input-short"  data-options="required:true">
 							</td>
 						</tr>
 						<tr>
@@ -47,7 +53,7 @@
 								密&nbsp;&nbsp;码:
 							</td>
 							<td>
-								<input type="password" name="password"  class="easyui-validatebox input-short"  data-options="required:true">
+								<input type="password" name="password" value="${admin.password }" class="easyui-validatebox input-short"  data-options="required:true">
 							</td>
 						</tr>
 						<tr>
@@ -55,7 +61,7 @@
 								昵 &nbsp;&nbsp;称:
 							</td>
 							<td>
-								<input type="text" name="nickName"  class="easyui-validatebox input-short" data-options="required:true">
+								<input type="text" name="nickName"  value="${admin.nickName }" class="easyui-validatebox input-short" data-options="required:true">
 							</td>
 						</tr>
 						<tr>
@@ -63,7 +69,7 @@
 								真实姓名:
 							</td>
 							<td>
-								<input type="text" name="realName"  class="easyui-validatebox input-short"  data-options="required:true">
+								<input type="text" name="realName" value="${admin.realName }" class="easyui-validatebox input-short"  data-options="required:true">
 							</td>
 						</tr>
 						<!--<tr>
