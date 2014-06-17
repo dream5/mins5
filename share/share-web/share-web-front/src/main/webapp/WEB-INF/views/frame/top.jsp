@@ -14,7 +14,7 @@
 				</c:forEach>	
 			</ul>
 			<div class="search">
-			        <form id="sform" name="form" method="post" action="${context}/s?">
+			        <form id="sform" name="form" method="get" action="${context}/s?">
 			          <span>
 				           <input name="k" type="text" class="keywords" id="sContent" maxlength="50" value="搜索你感兴趣的文章..." />
 			          	   <input name="searchbtn" type="image" src="${context}/images/search_btn.gif" class="sbtn" />
