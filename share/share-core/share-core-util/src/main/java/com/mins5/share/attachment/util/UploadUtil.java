@@ -37,7 +37,7 @@ public class UploadUtil {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map singleFileUpload(HttpServletRequest request) {
 
-		log.info("单独文件上传开始...");
+		System.out.println("单独文件上传开始...");
 		String fileType = request.getParameter("filetype");
 		if (fileType == null || fileType.trim().length() == 0) {
 			fileType = ".unknown";
@@ -55,7 +55,7 @@ public class UploadUtil {
 		try {
 			uploadlist = upload.parseRequest(request);
 		} catch (FileUploadException e) {
-			log.error("上传文件异常：[" + e.toString() + "]");
+			System.out.println("上传文件异常：[" + e.toString() + "]");
 			factory = null;
 			upload = null;
 			uploadlist = null;
@@ -82,7 +82,7 @@ public class UploadUtil {
 				item.delete();
 			}
 		} catch (Exception e) {
-			log.error("上传图片异常：[" + e.toString() + "]");
+			System.out.println("上传图片异常：[" + e.toString() + "]");
 			actualFileSize = null;
 		} finally {
 			factory = null;
@@ -91,7 +91,7 @@ public class UploadUtil {
 		}
 
 		String fullName = saveFilePath + newFileName;
-		log.info("生成文件的完整路径：" + fullName);
+		System.out.println("生成文件的完整路径：" + fullName);
 		String large = System.currentTimeMillis() + "_730x260.png";
 		String midSize = System.currentTimeMillis() + "_613x193.png";
 		String small = System.currentTimeMillis() + "_212x212.png";
@@ -100,15 +100,18 @@ public class UploadUtil {
 		ImageUtils.scale2(fullName, saveFilePath + midSize, 193, 613, true);
 		ImageUtils.scale2(fullName, saveFilePath + small, 212, 212, true);
 
-		log.info("####################################################");
-		log.info("############## newName:" + newFileName);
-		log.info("############## oldName:" + oldFileName);
-		log.info("############## type:" + fileType);
-		log.info("############## path:" + saveFilePath);
-		log.info("############## large:" + large);
-		log.info("############## midSize:" + midSize);
-		log.info("############## small:" + small);
-		log.info("####################################################");
+		/*
+		 * System.out.println("####################################################"
+		 * ); System.out.println("############## newName:" + newFileName);
+		 * System.out.println("############## oldName:" + oldFileName);
+		 * System.out.println("############## type:" + fileType);
+		 * System.out.println("############## path:" + saveFilePath);
+		 * System.out.println("############## large:" + large);
+		 * System.out.println("############## midSize:" + midSize);
+		 * System.out.println("############## small:" + small);
+		 * System.out.println
+		 * ("####################################################");
+		 */
 
 		Map rtnMap = new HashMap();
 		rtnMap.put("newName", newFileName);
