@@ -17,12 +17,14 @@ import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
+import com.mins5.share.web.constant.SystemConstant;
 import com.mins5.share.web.controller.base.BaseController;
-import com.mins5.share.web.controller.list.KindListController;
+
 /**
  * <p>
  * 标签页面页控制器
  * </p>
+ * 
  * @author zhanglin
  * @since 20140524
  */
@@ -30,48 +32,44 @@ import com.mins5.share.web.controller.list.KindListController;
 @Scope("prototype")
 @RequestMapping(value = "/label")
 public class LabelController extends BaseController {
-	
+
 	private static final Log log = LogFactory.getLog(LabelController.class);
 
 	@RequestMapping(value = "/goToLabelList")
-	public String goToLabelList(HttpServletRequest request,
-			HttpServletResponse response) {
+	public String goToLabelList(HttpServletRequest request, HttpServletResponse response) {
+
 		initMenu(request, response);
-		
-		if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
+
+		if (!StringUtils.isEmpty(request.getParameter("currentPage"))) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		String labelName = request.getParameter("n");
 		String labelId = request.getParameter("labelId");
-		request.setAttribute("currentPage",currentPage);
-		request.setAttribute("pageSize",pageSize);
-		
-		ReturnPageData<List<Article>> returnData = articleService.findArticlesByLabelName(labelId,labelName, currentPage, pageSize);
-		if (returnData.getReturnCode()==200&&!StringUtils.isEmpty(returnData.getResultData())) {
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("pageSize", pageSize);
+
+		ReturnPageData<List<Article>> returnData = articleService.findArticlesByLabelName(labelId, labelName, currentPage, pageSize);
+		if (checkQueryDataExist(returnData.getReturnCode(), returnData.getResultData())) {
 			request.setAttribute("totalArticleCount", returnData.getTotalResults());
 			request.setAttribute("articlesList", returnData.getResultData());
 		}
 
 		// 猜你喜欢
-		int amount = 6;
-		ReturnData<List<Article>> randomArticles = articleService
-				.findRandomArticle(amount);
-		if (randomArticles.getReturnCode() == 200
-				&& !StringUtils.isEmpty(randomArticles.getResultData())) {
-			request.setAttribute("randomReadList",
-					randomArticles.getResultData());
+		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(SystemConstant.GUESS_LIKE_QUERY_COUNT);
+		if (checkQueryDataExist(randomArticles.getReturnCode(), randomArticles.getResultData())) {
+			request.setAttribute("randomReadList", randomArticles.getResultData());
 		}
-		
-		//热门推荐
-		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION, 10);
-		if (recommendArticles.getReturnCode()==200&&!StringUtils.isEmpty(recommendArticles.getResultData())) {
+
+		// 热门推荐
+		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION,
+				SystemConstant.HOT_RECOMMEND_QUERY_COUNT);
+		if (checkQueryDataExist(recommendArticles.getReturnCode(), recommendArticles.getResultData())) {
 			request.setAttribute("recommendArticlesList", recommendArticles.getResultData());
 		}
-		
 
 		// 热门标签
-		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(amount);
-		if (articleLabels.getReturnCode() == 200&& !StringUtils.isEmpty(articleLabels.getResultData())) {
+		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(SystemConstant.HOT_RECOMMEND_QUERY_COUNT);
+		if (checkQueryDataExist(articleLabels.getReturnCode(), articleLabels.getResultData())) {
 			request.setAttribute("hotLabelList", articleLabels.getResultData());
 		}
 
