@@ -15,6 +15,7 @@ import com.mins5.share.business.article.service.ArticleLabelService;
 import com.mins5.share.business.article.service.ArticleRecommendService;
 import com.mins5.share.business.article.service.ArticleService;
 import com.mins5.share.business.article.service.SearchService;
+import com.mins5.share.common.service.ReturnCode;
 import com.mins5.share.common.service.ReturnData;
 
 /**
@@ -70,4 +71,22 @@ public class BaseController {
 			request.setAttribute("articleKinds", articleKinds.getResultData());
 		}
 	}
+
+	/**
+	 * 检查查询结果是否存在
+	 * 
+	 * @param code
+	 * @param obj
+	 * @author zhanglin
+	 * @since 2014年6月20日
+	 */
+	protected boolean checkQueryDataExist(int code, Object obj) {
+		if (code == ReturnCode.SUCCESS.getCode() && !StringUtils.isEmpty(obj)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 }
