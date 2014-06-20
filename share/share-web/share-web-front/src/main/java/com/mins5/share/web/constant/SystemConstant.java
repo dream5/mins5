@@ -16,4 +16,8 @@ public class SystemConstant {
 
 	public final static int HOT_RECOMMEND_QUERY_COUNT = 10;
 
+	public final static int DETAIL_HOT_RECOMMEND_QUERY_COUNT = 10;
+
+	public final static int GUESS_LIKE_QUERY_COUNT = 10;
+
 }
