@@ -74,7 +74,7 @@ public class DetailController extends BaseController {
 			request.setAttribute("randomReadList", randomArticles.getResultData());
 		}
 		// 热门标签
-		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(SystemConstant.HOT_RECOMMEND_QUERY_COUNT);
+		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(SystemConstant.LABEL_QUERY_COUNT);
 		if (checkQueryDataExist(articleLabels.getReturnCode(), articleLabels.getResultData())) {
 			request.setAttribute("hotLabelList", articleLabels.getResultData());
 		}
