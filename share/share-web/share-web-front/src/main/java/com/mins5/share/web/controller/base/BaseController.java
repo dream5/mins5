@@ -67,7 +67,7 @@ public class BaseController {
 	protected void initMenu(HttpServletRequest request, HttpServletResponse response) {
 		// 初始化菜单
 		ReturnData<List<ArticleKind>> articleKinds = articleService.findAllArticleKind();
-		if (articleKinds.getReturnCode() == 200 && !StringUtils.isEmpty(articleKinds.getResultData())) {
+		if (checkQueryDataExist(articleKinds.getReturnCode(), articleKinds.getResultData())) {
 			request.setAttribute("articleKinds", articleKinds.getResultData());
 		}
 	}
