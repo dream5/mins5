@@ -72,7 +72,7 @@ public class IndexController extends BaseController {
 			request.setAttribute("recommendArticlesList", recommendArticles.getResultData());
 		}
 		// 随机阅读
-		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(SystemConstant.RONDOM_READING_QUERY_COUNT);
+		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(SystemConstant.RANDOM_READING_QUERY_COUNT);
 		if (checkQueryDataExist(randomArticles.getReturnCode(), randomArticles.getResultData())) {
 			request.setAttribute("randomReadList", randomArticles.getResultData());
 		}
