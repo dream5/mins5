@@ -17,6 +17,7 @@ import com.mins5.share.business.article.domain.ArticleLabel;
 import com.mins5.share.business.article.enums.RECOMMEND_POSITION;
 import com.mins5.share.common.service.ReturnData;
 import com.mins5.share.common.service.ReturnPageData;
+import com.mins5.share.web.constant.SystemConstant;
 import com.mins5.share.web.controller.base.BaseController;
 
 /**
@@ -51,36 +52,35 @@ public class IndexController extends BaseController {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageSize", pageSize);
 
-		ReturnPageData<List<Article>> returnData = articleService.findArticlesByKindPinyin(null, currentPage, pageSize);
-		if (returnData.getReturnCode() == 200 && !StringUtils.isEmpty(returnData.getResultData())) {
-			request.setAttribute("totalArticleCount", returnData.getTotalResults());
-			request.setAttribute("articlesList", returnData.getResultData());
+		ReturnPageData<List<Article>> articleData = articleService.findArticlesByKindPinyin(null, currentPage, pageSize);
+		if (checkQueryDataExist(articleData.getReturnCode(), articleData.getResultData())) {
+			request.setAttribute("totalArticleCount", articleData.getTotalResults());
+			request.setAttribute("articlesList", articleData.getResultData());
 		}
 
 		// banner
-		ReturnData<List<Article>> banner = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION, 8);
-		if (banner.getReturnCode() == 200 && !StringUtils.isEmpty(banner.getResultData())) {
+		ReturnData<List<Article>> banner = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION,
+				SystemConstant.BANNER_QUERY_COUNT);
+		if (checkQueryDataExist(banner.getReturnCode(), banner.getResultData())) {
 			request.setAttribute("bannerList", banner.getResultData());
 		}
 
 		// 热门推荐
-		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION_RIGHT, 8);
-		if (recommendArticles.getReturnCode() == 200 && !StringUtils.isEmpty(recommendArticles.getResultData())) {
+		ReturnData<List<Article>> recommendArticles = recommendService.findRecommendByPositionAndCount(RECOMMEND_POSITION.INDEX_POSITION_RIGHT,
+				SystemConstant.HOT_RECOMMEND_QUERY_COUNT);
+		if (checkQueryDataExist(recommendArticles.getReturnCode(), recommendArticles.getResultData())) {
 			request.setAttribute("recommendArticlesList", recommendArticles.getResultData());
 		}
 		// 随机阅读
-		int amount = 8;
-		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(amount);
-		if (randomArticles.getReturnCode() == 200 && !StringUtils.isEmpty(randomArticles.getResultData())) {
+		ReturnData<List<Article>> randomArticles = articleService.findRandomArticle(SystemConstant.RONDOM_READING_QUERY_COUNT);
+		if (checkQueryDataExist(randomArticles.getReturnCode(), randomArticles.getResultData())) {
 			request.setAttribute("randomReadList", randomArticles.getResultData());
 		}
 		// 热门标签
-		amount = 30;
-		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(amount);
-		if (articleLabels.getReturnCode() == 200 && !StringUtils.isEmpty(articleLabels.getResultData())) {
+		ReturnData<List<ArticleLabel>> articleLabels = articleLabelService.findArticleLabelByNum(SystemConstant.LABEL_QUERY_COUNT);
+		if (checkQueryDataExist(articleLabels.getReturnCode(), articleLabels.getResultData())) {
 			request.setAttribute("hotLabelList", articleLabels.getResultData());
 		}
-
 		return "index";
 	}
 
