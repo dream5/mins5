@@ -1,1 +1,1 @@
-<#assign path = "/share-web-admin" />
+<#include "common/head.ftl">
