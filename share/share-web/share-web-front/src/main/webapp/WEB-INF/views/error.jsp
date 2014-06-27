@@ -27,7 +27,7 @@
 	}
 	
 	function turnIndex(){
-		window.location.href='/index/goToIndex.mins';
+		window.location.href='${context}/index/goToIndex.mins';
 	}
 	
 </script>
