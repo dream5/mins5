@@ -272,7 +272,7 @@ a.rm, a.com {
 }
 .content .sidebar .rightbox {
 	margin: 0 0 20px 0;
-	padding: 30px 20px;
+	padding: 10px 25px;
 	width: 230px;
 	border: 1px dashed #ddd;
 	background: none repeat scroll 0 0 #F8F8F8;
@@ -503,7 +503,7 @@ p {
 
 .paperclip {
 	float: left;
-	margin: -57px 0 -46px -40px;
+	margin: -33px 0 -46px -50px;
 	position: relative;
 	vertical-align: middle;
 	z-index: 0;
@@ -744,3 +744,47 @@ div.mypage  span.next {
 .ui-banner .ui-banner-arrow.ui-banner-arrow-next{left:630px;top:100px;background:transparent url("/images/hero-slider-arrow-right.png") no-repeat 0 0;}
 .ui-banner .ui-banner-arrow.ui-banner-arrow-next img{left:-15px;}
 .ui-banner .ui-banner-overlay{bottom:0;height:10px;position:absolute;right:0;width:173px;}
+
+
+
+.rightbox .special_text_img {
+    height: auto;
+    overflow: hidden;
+    width: 252px;
+    margin-left:-10px;
+}
+
+.special_text_img .text_img_left {
+    float: left;
+    height: 80px;
+    width: 80px;
+}
+
+
+.special_text_img .text_img_left .text_img_leftImg {
+    border: 1px solid #e4e4e4;
+    height: 72px;
+    width: 76px;
+}
+.rightbox h4{
+	font-size:14px;
+	margin-top:0;
+}
+
+.special_text_img .text_img_right {
+    float: left;
+    overflow: hidden;
+    width: 155px;
+}
+.text_img_right p{
+	font-size:12px;
+	margin-top:-20px;
+}
+
+
+
+
+
+
+
+
