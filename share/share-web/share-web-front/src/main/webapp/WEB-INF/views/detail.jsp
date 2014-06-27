@@ -150,6 +150,46 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
         <div class="rightbox" style="background-image:url(${context}/images/baidu.jpg);height:250px;">
         </div>
          -->
+         <c:if test="${not empty  randomReadList}">
+      <div class="rightbox">
+      		 <h2><span>精彩图文</span></h2>
+      		  <c:forEach var="imgArticle" items="${randomReadList }" begin="3" end="5">
+      		   <c:choose>
+					<c:when test="${fn:length(imgArticle.articleTitle) > 20}">
+						<c:set var="imgtitle" value="${fn:substring(imgArticle.articleTitle, 0,20)}..."></c:set>	
+					</c:when>
+					<c:otherwise>
+							<c:set var="imgtitle" value="${imgArticle.articleTitle}"></c:set>	
+					</c:otherwise>
+				</c:choose>
+	      	<div class="special_text_img">
+				<div class="text_img_left">
+					<div class="text_img_leftImg">
+						<a target="_blank" title="${imgArticle.articleTitle}" href="${context}/${imgArticle.kindPinYin}/${imgArticle.articleId}.html">
+							<img src="${imgArticle.articleUrl}" width="72px" height="72px"/>
+						</a>
+					</div>
+				</div>
+				<div class="text_img_right">
+					<h4>
+						<a target="_blank" title="${imgArticle.articleTitle}" href="${context}/${imgArticle.kindPinYin}/${imgArticle.articleId}.html">${imgtitle}</a>
+					</h4>
+					<p>
+						  <c:choose>
+							<c:when test="${fn:length(imgArticle.articleContent) > 20}">
+								${fn:substring(imgArticle.articleContent, 0,20)}...
+							</c:when>
+							<c:otherwise>
+								${imgArticle.articleContent}
+							</c:otherwise>
+						</c:choose>
+					
+					</p>
+				</div>
+			</div>
+			</c:forEach>
+      </div>
+      </c:if>
          <c:if test="${not empty hotLabelList}">
         <div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
