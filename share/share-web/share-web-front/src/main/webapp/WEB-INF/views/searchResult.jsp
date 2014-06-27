@@ -36,10 +36,10 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
          		 <h2>
          		 	<c:choose>
 						<c:when test="${fn:length(article.articleTitle) > 20}">
-							<c:out value="${fn:substring(article.articleTitle, 0,20)}..." />
+							<a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank"><c:out value="${fn:substring(article.articleTitle, 0,20)}..." /></a>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${article.articleTitle}" />
+							<a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank"><c:out value="${article.articleTitle}" /></a>
 						</c:otherwise>
 					</c:choose>
          		</h2>
@@ -49,10 +49,10 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
           		</p>
+          		<p>
           		<c:if test="${not empty article.articleTitle}">
-          			 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
+          			 <img src="${article.articleUrl}" width="300" height="180" alt="${article.articleTitle}" />
           		</c:if>
-         		<div class="cline"></div>
 		         <c:choose>
 					<c:when test="${fn:length(article.articleContent) > 200}">
 						${fn:substring(article.articleContent, 0,200)}...
@@ -61,17 +61,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 						${article.articleContent}"
 					</c:otherwise>
 				</c:choose>
-	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
-			  <!-- baidu share begin-->
-				  <div class="bdsharebuttonbox" style="float:right;">
-					<a href="#" class="bds_more" data-cmd="more"></a>
-					<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-					<a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-					<a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-					<a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
-					<a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-				 </div>
-			 <!-- baidu share end-->
+				</p>
 	        </div>
         	</c:forEach>
       	 </c:if>
@@ -117,14 +107,14 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
           <ul class="ex_menu">
           <c:forEach var="randomArticle" items="${randomReadList }">
              <c:choose>
-					<c:when test="${fn:length(randomArticle.articleTitle) > 30}">
-						<c:set var="randomtitle" value="${fn:substring(randomArticle.articleTitle, 0,30)}..."></c:set>	
+					<c:when test="${fn:length(randomArticle.articleTitle) > 16}">
+						<c:set var="randomtitle" value="${fn:substring(randomArticle.articleTitle, 0,16)}..."></c:set>	
 					</c:when>
 					<c:otherwise>
 							<c:set var="randomtitle" value="${randomArticle.articleTitle}"></c:set>	
 					</c:otherwise>
 				</c:choose>
-            	 <li><a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomtitle}">${randomtitle}</a></li>
+            	 <li><a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">${randomtitle}</a></li>
             </c:forEach>
           </ul>
         </div>
