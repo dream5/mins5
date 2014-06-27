@@ -209,7 +209,7 @@ a.rm, a.com {
 	background-color: #fff;
 }
 .content .mainbar .article {
-	margin: 0 0 20px 0;
+	margin: 0 0 15px 0;
 	padding: 25px 20px;
 	width: 640px;
 	border: 1px dashed #ddd;
@@ -296,7 +296,7 @@ ul.sb_menu li {
 	width: 220px;
 }
 ul.ex_menu li {
-	padding: 4px 0 8px 15px;
+	padding: 4px 0 4px 15px;
 }
 ul.sb_menu li a, ul.ex_menu li a {
 	color: #959595;
