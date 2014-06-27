@@ -114,15 +114,15 @@
           <ul class="sb_menu">
             <c:forEach var="recommendArticle" items="${recommendArticlesList }">
             	 <c:choose>
-					<c:when test="${fn:length(recommendArticle.articleTitle) > 30}">
-						<c:set var="recommendtitle" value="${fn:substring(recommendArticle.articleTitle, 0,30)}..."></c:set>	
+					<c:when test="${fn:length(recommendArticle.articleTitle) > 16}">
+						<c:set var="recommendtitle" value="${fn:substring(recommendArticle.articleTitle, 0,16)}..."></c:set>	
 					</c:when>
 					<c:otherwise>
 							<c:set var="recommendtitle" value="${recommendArticle.articleTitle}"></c:set>	
 					</c:otherwise>
 				</c:choose>
             	 <li>
-	            	 <a href="${context}/${recommendArticle.kindPinYin}/${recommendArticle.articleId}.html" target="_blank" title="${recommendtitle}">${recommendtitle}</a>
+	            	 <a href="${context}/${recommendArticle.kindPinYin}/${recommendArticle.articleId}.html" target="_blank" title="${recommendArticle.articleTitle}">${recommendtitle}</a>
             	 </li>
             </c:forEach>
           </ul>
@@ -136,14 +136,14 @@
           <ul class="ex_menu">
             <c:forEach var="randomArticle" items="${randomReadList }">
              <c:choose>
-					<c:when test="${fn:length(randomArticle.articleTitle) > 30}">
-						<c:set var="randomtitle" value="${fn:substring(randomArticle.articleTitle, 0,30)}..."></c:set>	
+					<c:when test="${fn:length(randomArticle.articleTitle) > 16}">
+						<c:set var="randomtitle" value="${fn:substring(randomArticle.articleTitle, 0,16)}..."></c:set>	
 					</c:when>
 					<c:otherwise>
 							<c:set var="randomtitle" value="${randomArticle.articleTitle}"></c:set>	
 					</c:otherwise>
 				</c:choose>
-            	 <li><a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomtitle}">${randomtitle}</a></li>
+            	 <li><a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">${randomtitle}</a></li>
             </c:forEach>
           </ul>
         </div>
