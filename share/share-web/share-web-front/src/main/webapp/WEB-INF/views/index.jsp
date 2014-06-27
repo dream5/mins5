@@ -66,10 +66,10 @@
          		 <h2>
          		 	<c:choose>
 						<c:when test="${fn:length(article.articleTitle) > 28}">
-							<c:out value="${fn:substring(article.articleTitle, 0,28)}..." />
+							<a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank"><c:out value="${fn:substring(article.articleTitle, 0,28)}..." /></a>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${article.articleTitle}" />
+							<a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank"><c:out value="${article.articleTitle}" /></a>
 						</c:otherwise>
 					</c:choose>
          		</h2>
@@ -92,7 +92,7 @@
 					</c:otherwise>
 				</c:choose>
 			  </br>	
-	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
+	        <%--   <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p> --%>
 	        </div>
         	</c:forEach>
       	 </c:if>
@@ -171,6 +171,8 @@
      <%@ include file="/WEB-INF/views/frame/footer.jsp" %>
      
 </div>
+
+
 <script type="text/javascript" src="${context}/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${context}/js/common.js"></script>
 <script type="text/javascript" src="${context}/js/jquery.LoadImage.js"></script>
