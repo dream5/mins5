@@ -57,8 +57,8 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
          <!--  <p class="links"><a href="#" target="_blank">标签</a>,<a href="#" target="_blank">标签</a></p> -->
           <c:if test="${not empty preArticle and not empty nextArticle}">
 	          <div class="nextContent">
-		          <p>
-		          	   <b>上一篇:</b><a href="${context}/${preArticle.kindPinYin}/${preArticle.articleId}.html" target="_blank">
+		          <p style="font-size:12px;">
+		          	   <b>上一篇:</b><a title="${preArticle.articleTitle}" href="${context}/${preArticle.kindPinYin}/${preArticle.articleId}.html" target="_blank">
 		          	    <c:choose>
 							<c:when test="${fn:length(preArticle.articleTitle) > 20}">
 								${fn:substring(preArticle.articleTitle, 0,20)}...
@@ -68,7 +68,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 							</c:otherwise>
 						</c:choose>
 		          	   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					   <b>下一篇:</b><a href="${context}/${nextArticle.kindPinYin}/${nextArticle.articleId}.html" target="_blank">
+					   <b>下一篇:</b><a title="${nextArticle.articleTitle}" href="${context}/${nextArticle.kindPinYin}/${nextArticle.articleId}.html" target="_blank">
 					  	 <c:choose>
 							<c:when test="${fn:length(nextArticle.articleTitle) > 20}">
 								${fn:substring(nextArticle.articleTitle, 0,20)}...
@@ -132,14 +132,14 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 	  			 <li>
 	  			 	<a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">
 	  				 	 <c:choose>
-							<c:when test="${fn:length(randomArticle.articleTitle) > 15}">
-								${fn:substring(randomArticle.articleTitle, 0,15)}...
+							<c:when test="${fn:length(randomArticle.articleTitle) > 16}">
+								${fn:substring(randomArticle.articleTitle, 0,16)}...
 							</c:when>
 							<c:otherwise>
 								${randomArticle.articleTitle}
 							</c:otherwise>
 						</c:choose>
-	  			 	</a><br />
+	  			 	</a>
 					<%--  <span>作者：${randomArticle.articleAuthor}</span> <span style="float:right">来源：${randomArticle.articleFrom}</span>   --%>            
 				</li>         
 		   </c:forEach>
