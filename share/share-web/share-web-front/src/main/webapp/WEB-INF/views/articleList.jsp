@@ -37,10 +37,10 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
          		 <h2>
          		 	<c:choose>
 						<c:when test="${fn:length(article.articleTitle) > 40}">
-							<c:out value="${fn:substring(article.articleTitle, 0,40)}..." />
+							<a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank"><c:out value="${fn:substring(article.articleTitle, 0,40)}..." /></a>
 						</c:when>
 						<c:otherwise>
-							<c:out value="${article.articleTitle}" />
+							<a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank"><c:out value="${article.articleTitle}" /></a>
 						</c:otherwise>
 					</c:choose>
          		</h2>
@@ -50,19 +50,19 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
           		</p>
-          		<c:if test="${not empty article.articleTitle}">
-          			 <img src="${article.articleUrl}" width="613" height="193" alt="${article.articleTitle}" />
-          		</c:if>
-         		<div class="cline"></div>
-		         <c:choose>
-					<c:when test="${fn:length(article.articleContent) > 200}">
-						${fn:substring(article.articleContent, 0,200)}...
-					</c:when>
-					<c:otherwise>
-						${article.articleContent}"
-					</c:otherwise>
-				</c:choose>
-	          <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p>
+          		<p>
+	          		<c:if test="${not empty article.articleTitle}">
+	          			 <img src="${article.articleUrl}" width="300" height="180" alt="${article.articleTitle}" />
+	          		</c:if>
+			         <c:choose>
+						<c:when test="${fn:length(article.articleContent) > 200}">
+							${fn:substring(article.articleContent, 0,200)}...
+						</c:when>
+						<c:otherwise>
+							${article.articleContent}
+						</c:otherwise>
+					</c:choose>
+				</p>
 	        </div>
         	</c:forEach>
       	 </c:if>
@@ -99,8 +99,8 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 	  			 <li>
 	  			 	<a href="${context}/${randomArticle.kindPinYin}/${randomArticle.articleId}.html" target="_blank" title="${randomArticle.articleTitle}">
 	  				 	 <c:choose>
-							<c:when test="${fn:length(randomArticle.articleTitle) > 15}">
-								${fn:substring(randomArticle.articleTitle, 0,15)}...
+							<c:when test="${fn:length(randomArticle.articleTitle) > 16}">
+								${fn:substring(randomArticle.articleTitle, 0,16)}...
 							</c:when>
 							<c:otherwise>
 								${randomArticle.articleTitle}
