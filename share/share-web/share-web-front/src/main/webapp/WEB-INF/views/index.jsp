@@ -79,10 +79,10 @@
 	          		<span style="margin-left:25px;">来源:&nbsp;${article.articleFrom}</span>
 	          		<span style="margin-left:25px;">作者:&nbsp;${article.articleAuthor}</span>&nbsp;&nbsp;
           		</p>
+          		<p>
           		<c:if test="${not empty article.articleUrl}">
-          			 <img src="${article.articleUrl}" width="613px" height="193px" alt="${article.articleTitle}" />
+          			 <img src="${article.articleUrl}" width="300px" height="180px" alt="${article.articleTitle}" />
           		</c:if>
-         		<div class="cline"></div>
 		         <c:choose>
 					<c:when test="${fn:length(article.articleContent) > 200}">
 						${fn:substring(article.articleContent, 0,200)}...
@@ -91,7 +91,7 @@
 						${article.articleContent}"
 					</c:otherwise>
 				</c:choose>
-			  </br>	
+				</p>
 	        <%--   <p class="links"><a href="${contex}/${article.kindPinYin}/${article.articleId}.html" target="_blank">继续阅读</a></p> --%>
 	        </div>
         	</c:forEach>
