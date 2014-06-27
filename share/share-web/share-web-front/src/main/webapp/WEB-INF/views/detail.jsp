@@ -90,7 +90,7 @@ ul.thumb li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:900;b
 		 <!-- 多说评论框 end -->
        </c:if>
        <c:if test="${ empty article }">
-     	  <div class="article"><span>对不起，没有查询出数据！<span></div>
+     	  <div class="article"><span>对不起，没有查询出数据！</span></div>
        </c:if>
         
        <c:if test="${not empty recommendArticlesList }">
