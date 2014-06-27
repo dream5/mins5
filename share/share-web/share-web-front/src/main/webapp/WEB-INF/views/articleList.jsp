@@ -67,7 +67,7 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
         	</c:forEach>
       	 </c:if>
       	 <c:if test="${ empty articlesList}">
-      	 	<div class="articlelist"><span>对不起，没有查询出数据！<span></div>
+      	 	<div class="articlelist"><span>对不起，没有查询出数据！</span></div>
       	 </c:if>
         
        <%--分页标签开始 --%>
