@@ -107,60 +107,46 @@
       </div>
       <div class="sidebar">
       
+      <c:if test="${not empty  randomReadList}">
       <div class="rightbox">
       		 <h2><span>精彩图文</span></h2>
+      		  <c:forEach var="imgArticle" items="${randomReadList }" begin="3" end="5">
+      		   <c:choose>
+					<c:when test="${fn:length(imgArticle.articleTitle) > 20}">
+						<c:set var="imgtitle" value="${fn:substring(imgArticle.articleTitle, 0,20)}..."></c:set>	
+					</c:when>
+					<c:otherwise>
+							<c:set var="imgtitle" value="${imgArticle.articleTitle}"></c:set>	
+					</c:otherwise>
+				</c:choose>
 	      	<div class="special_text_img">
 				<div class="text_img_left">
 					<div class="text_img_leftImg">
-						<a target="_blank" href="http://news.iresearch.cn/zt/233053.shtml">
-							<img src="http://pic.iresearch.cn/news/201406/635392859620937500.jpg" width="72px" height="72px"/>
+						<a target="_blank" title="${imgArticle.articleTitle}" href="${context}/${imgArticle.kindPinYin}/${imgArticle.articleId}.html">
+							<img src="${imgArticle.articleUrl}" width="72px" height="72px"/>
 						</a>
 					</div>
 				</div>
 				<div class="text_img_right">
 					<h4>
-						<a target="_blank" href="http://news.iresearch.cn/zt/233053.shtml">匿名社交来袭 谁的狂欢</a>
+						<a target="_blank" title="${imgArticle.articleTitle}" href="${context}/${imgArticle.kindPinYin}/${imgArticle.articleId}.html">${imgtitle}</a>
 					</h4>
-					<p>当人人被逐渐遗忘，当QQ上全是同事领导的消息，当你爸妈也开始加你微信好友的时候...</p>
+					<p>
+						  <c:choose>
+							<c:when test="${fn:length(imgArticle.articleContent) > 20}">
+								${fn:substring(imgArticle.articleContent, 0,20)}...
+							</c:when>
+							<c:otherwise>
+								${imgArticle.articleContent}
+							</c:otherwise>
+						</c:choose>
+					
+					</p>
 				</div>
 			</div>
-			<div class="special_text_img">
-				<div class="text_img_left">
-					<div class="text_img_leftImg">
-						<a target="_blank" href="http://news.iresearch.cn/zt/233053.shtml">
-							<img src="http://pic.iresearch.cn/news/201406/635382693172656250.jpg" width="72px" height="72px"/>
-						</a>
-					</div>
-				</div>
-				<div class="text_img_right">
-					<h4>
-						<a target="_blank" href="http://news.iresearch.cn/zt/233053.shtml">匿名社交来袭 谁的狂欢</a>
-					</h4>
-					<p>当人人被逐渐遗忘，当QQ上全是同事领导的消息，当你爸妈也开始加你微信好友的时候...</p>
-				</div>
-			</div>
-			<div class="special_text_img">
-				<div class="text_img_left">
-					<div class="text_img_leftImg">
-						<a target="_blank" href="http://news.iresearch.cn/zt/233053.shtml">
-							<img src="http://pic.iresearch.cn/news/201406/635386209480156250.jpg" width="72px" height="72px"/>
-						</a>
-					</div>
-				</div>
-				<div class="text_img_right">
-					<h4>
-						<a target="_blank" href="http://news.iresearch.cn/zt/233053.shtml">匿名社交来袭 谁的狂欢</a>
-					</h4>
-					<p>当人人被逐渐遗忘，当QQ上全是同事领导的消息，当你爸妈也开始加你微信好友的时候...</p>
-				</div>
-			</div>
+			</c:forEach>
       </div>
-      
-      
-      
-      
-      
-      
+      </c:if>
       <c:if test="${not empty  recommendArticlesList}">
         <div class="rightbox">
           <img class="paperclip" alt="paperclip" src="${context}/images/paperclip.png"/>
