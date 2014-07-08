@@ -120,8 +120,6 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
         </div>
         </c:if>
         <!-- 百度广告位置1 -->
-        <div class="rightbox" style="background-image:url(${context}/images/baidu.jpg);height:250px;">
-        </div>
         <c:if test="${not empty hotLabelList}">
 		<div class="rightbox">
 		  	 <h2><span>热门标签</span></h2>
@@ -134,8 +132,6 @@ ul.introduce li .title{color:#fff;width:185px;height:50px;margin:0;font-weight:9
 	    </div>
 	      </c:if>
 	     <!-- 百度广告位置2 -->
-        <div class="rightbox" style="background-image:url(${context}/images/baidu2.jpg);height:250px;">
-        </div>     
       </div>
       <div class="cline"></div>
     </div>
